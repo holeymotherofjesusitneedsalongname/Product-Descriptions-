@@ -1,0 +1,624 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DXMP Series Constant Current Power Supply - Dexing Magnet Tech. Co., Ltd</title>
+    <style>
+    /* ==========================================================================
+    GENERIC STYLING FOR DEXINMAG DOCUMENT PAGES
+    Based on DXMP Manual / Axial Probe Styles
+    Version: 1.0
+    * Provides a consistent layout, color scheme, typography.
+    * Styles common elements like sections, tables, lists, images.
+    * Includes styles for collapsible sections.
+    * Includes responsive adjustments for different screen sizes.
+    * Includes print-specific styles for better output.
+    * HEADER AND FOOTER specific styling has been REMOVED.
+    ========================================================================== */
+    /* --- Base Styles & Color Theme --- */
+    :root {
+        --primary-color: #00447C; /* Dark Blue */
+        --secondary-color: #4A90E2; /* Lighter Blue */
+        --bg-light: #f8f9fa; /* Very light grey */
+        --bg-medium: #e9ecef; /* Light grey */
+        --border-color: #dee2e6; /* Grey border */
+        --text-color: #343a40; /* Dark grey text */
+        /* --header-bg: #343a40; */ /* Header styles removed */
+        /* --header-text: #ffffff; */ /* Header styles removed */
+        /* --footer-bg: #f1f1f1; */ /* Footer styles removed */
+        /* --footer-text: #555; */ /* Footer styles removed */
+        --hover-bg: #e8f4fd; /* Light blue for hover */
+        --warning-color: #dc3545; /* Red for warnings */
+        --warning-bg: #f8d7da;
+        --attention-color: #ffc107; /* Yellow for attention */
+        --attention-bg: #fff3cd;
+    }
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+    body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        background-color: #f4f4f4; /* Light grey background for the page */
+        color: var(--text-color);
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+    /* --- Main Content Container --- */
+    .container {
+        max-width: 1100px;
+        margin: 20px auto;
+        padding: 25px;
+        background-color: #fff; /* White background for content */
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        flex-grow: 1; /* Allows footer (if added back) to stick to bottom */
+    }
+    /* --- Typography --- */
+    h1, h2, h3 {
+        color: var(--primary-color);
+        line-height: 1.3;
+        margin-top: 1em;
+        margin-bottom: 0.75em;
+    }
+    h1:first-child, h2:first-child, h3:first-child {
+        margin-top: 0;
+    }
+    /* Styles the main title within the container */
+    .container > h1 {
+        font-size: 1.8em;
+        text-align: center;
+        border-bottom: 2px solid var(--secondary-color);
+        padding-bottom: 0.5em;
+        margin-bottom: 1em; /* Add more space below main title */
+    }
+    /* Styles section titles */
+    section > h2 {
+        font-size: 1.5em;
+        border-bottom: 1px solid var(--border-color);
+        padding-bottom: 0.3em;
+        color: var(--primary-color);
+    }
+    /* Base style for H3, often used for sub-sections or collapsible headers */
+    section > h3 {
+        font-size: 1.2em;
+        color: var(--primary-color); /* Changed from #555 for consistency */
+        padding-bottom: 0.3em;
+        font-weight: bold; /* Made bold for emphasis */
+        margin-top: 1.2em; /* Added margin top */
+    }
+    p {
+        margin-bottom: 1em;
+    }
+    ul {
+        list-style: disc;
+        margin: 0 0 1em 25px;
+    }
+    li {
+        margin-bottom: 0.5em;
+    }
+    /* --- Content Sections --- */
+    section {
+        margin-bottom: 2em;
+        padding-bottom: 1em;
+        border-bottom: 1px solid var(--bg-medium); /* Subtle separator */
+    }
+    section:last-of-type {
+        border-bottom: none;
+        margin-bottom: 0;
+        padding-bottom: 0;
+    }
+    /* --- Tables --- */
+    .table-container {
+        overflow-x: auto; /* Enable horizontal scroll on screen */
+        margin-top: 1em;
+        margin-bottom: 1.5em;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.95em;
+        min-width: 600px; /* Prevent excessive squishing on screen */
+    }
+    th, td {
+        border: 1px solid var(--border-color);
+        padding: 10px 12px;
+        text-align: left;
+        vertical-align: top;
+    }
+    thead th {
+        background-color: var(--bg-medium);
+        font-weight: bold;
+        color: var(--primary-color);
+        position: sticky; /* Keep header visible on scroll */
+        top: 0;
+        z-index: 1;
+        border-bottom-width: 2px; /* Stronger line below header */
+        border-bottom-color: var(--border-color);
+    }
+    /* Style for the first column cells in tbody */
+    tbody td:first-child {
+        font-weight: 600;
+        background-color: var(--bg-light);
+        min-width: 200px; /* Keep from original */
+        white-space: nowrap; /* Keep from original */
+    }
+    /* Zebra striping for table rows */
+    tbody tr:nth-child(even) {
+        background-color: var(--bg-light);
+    }
+    /* Zebra striping for first cell on even rows */
+    tbody tr:nth-child(even) td:first-child {
+         background-color: #f0f3f5; /* Slightly different from bg-light for visual distinction */
+    }
+    /* Hover effect for table rows */
+    tbody tr:hover {
+        background-color: var(--hover-bg);
+    }
+    /* Hover effect for first cell */
+    tbody tr:hover td:first-child {
+        background-color: #eaf6ff; /* Consistent hover effect */
+    }
+    /* --- Image Gallery Styling --- */
+    .image-gallery {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+        margin-top: 1em;
+        margin-bottom: 1.5em;
+        padding: 15px;
+        background-color: var(--bg-light);
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+    }
+    .image-gallery figure {
+        margin: 0;
+        text-align: center;
+        flex-basis: calc(50% - 20px); /* Aim for 2 columns */
+        max-width: 400px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .image-gallery img {
+        max-width: 100%;
+        height: auto;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        margin-bottom: 8px;
+        background-color: #fff;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .image-gallery figcaption {
+        font-size: 0.9em;
+        color: #666;
+        margin-top: auto; /* Push caption down */
+    }
+    /* --- Alert Boxes --- */
+    .safety-warning, .attention {
+        border-left-width: 5px;
+        border-left-style: solid;
+        padding: 10px 15px;
+        margin: 1em 0;
+        border-radius: 4px;
+    }
+    .safety-warning {
+        border-left-color: var(--warning-color);
+        background-color: var(--warning-bg);
+        color: #721c24;
+    }
+    .attention {
+        border-left-color: var(--attention-color);
+        background-color: var(--attention-bg);
+        color: #856404;
+    }
+    .safety-warning strong, .attention strong {
+        font-weight: bold;
+    }
+    /* --- Collapsible Section Styling --- */
+    /* Apply this class to the H3 (or other element) that triggers the collapse */
+    section h3.collapsible-header {
+        cursor: pointer;
+        position: relative;
+        padding-right: 25px; /* Space for indicator */
+        margin-bottom: 0; /* Connects header visually to content below */
+        border-bottom: 1px solid var(--border-color); /* Separator line */
+        padding-bottom: 10px; /* Spacing above the line */
+    }
+    section h3.collapsible-header::after {
+        content: '▼'; /* Down arrow indicator */
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 0.8em;
+        color: var(--primary-color);
+        transition: transform 0.3s ease;
+    }
+    section h3.collapsible-header.collapsed::after {
+        content: '►'; /* Right arrow indicator when collapsed */
+    }
+    /* The content DIV immediately following the collapsible-header */
+    .collapsible-content {
+        overflow: hidden;
+        max-height: 5000px; /* Allow ample height when open */
+        transition: max-height 0.5s ease-in-out, padding 0.3s ease, margin 0.3s ease, border 0.3s ease, opacity 0.3s ease;
+        padding-top: 15px; /* Space below header when open */
+        margin-top: 0;
+        border-top: 1px solid var(--bg-light); /* Subtle line separating from header */
+        opacity: 1;
+    }
+    .collapsible-content.collapsed {
+        max-height: 0;
+        padding-top: 0;
+        padding-bottom: 0;
+        margin-top: 0;
+        border-top: none; /* Hide border when collapsed */
+        opacity: 0;
+    }
+    /* ==========================================================================
+    RESPONSIVE ADJUSTMENTS
+    ========================================================================== */
+    @media (max-width: 768px) {
+        .container {
+            padding: 15px;
+            margin: 10px; /* Reduce margin on smaller screens */
+        }
+        .container > h1 { font-size: 1.6em; }
+        section > h2 { font-size: 1.3em; }
+        section > h3 { font-size: 1.1em; } /* Includes collapsible */
+
+        table { font-size: 0.9em; min-width: 0; } /* Allow table to shrink */
+        th, td { padding: 8px 10px; }
+        tbody td:first-child { white-space: normal; } /* Allow wrapping */
+
+        .image-gallery figure {
+             flex-basis: calc(50% - 15px); /* Keep 2 columns */
+             max-width: 45%;
+        }
+    }
+    @media (max-width: 480px) {
+        .container > h1 { font-size: 1.4em; }
+        section > h2 { font-size: 1.15em; }
+        section > h3 { font-size: 1.0em; } /* Includes collapsible */
+
+        th, td { padding: 6px 8px; font-size: 0.85em; }
+        ul { margin-left: 20px; }
+
+        .image-gallery figure {
+             flex-basis: 100%; /* Stack to single column */
+             max-width: 90%;
+        }
+    }
+    /* ==========================================================================
+    PRINT SPECIFIC STYLES
+    * Optimizes layout for printing.
+    * Hides header and footer elements (though HTML is removed).
+    * Forces display of collapsible content.
+    * Adjusts fonts, colors, and spacing for paper.
+    ========================================================================== */
+    @media print {
+        body {
+            background-color: #fff !important; /* Force white background */
+            color: #000 !important; /* Force black text */
+            font-size: 10pt;
+            -webkit-print-color-adjust: exact !important; /* Try to force color printing */
+            print-color-adjust: exact !important;
+        }
+        .container {
+            max-width: 100% !important; margin: 0 !important; padding: 1cm !important; /* Use more page width */
+            box-shadow: none !important; border-radius: 0 !important; border: none !important;
+        }
+
+        /* Ensure colors defined in :root are used where applicable if forced by !important */
+        :root {
+             /* Re-declare potentially needed colors for print context if needed, */
+             /* but relying on exact color adjust */
+             --primary-color-print: #00447C;
+             --secondary-color-print: #4A90E2;
+             --bg-light-print: #f8f9fa;
+             --bg-medium-print: #e9ecef;
+             --border-color-print: #dee2e6;
+             --warning-bg-print: #f8d7da;
+             --attention-bg-print: #fff3cd;
+        }
+
+        h1, h2, h3 {
+            color: var(--primary-color-print) !important;
+            page-break-after: avoid;
+        }
+        .container > h1 {
+            color: var(--primary-color-print) !important;
+            border-bottom: 2px solid var(--secondary-color-print) !important;
+        }
+        section > h2 {
+            color: var(--primary-color-print) !important;
+            border-bottom: 1px solid #666 !important; /* Use a darker grey for print clarity */
+        }
+         section > h3 {
+            color: var(--primary-color-print) !important; /* Ensure H3 color prints */
+            border-bottom: 1px solid #999 !important; /* Add subtle border for print */
+         }
+
+        section { border: none; margin-bottom: 1.5em; page-break-inside: auto; } /* Allow sections to break */
+        p, ul, li { page-break-inside: auto; } /* Allow breaks within these elements if needed */
+
+        .table-container { overflow: visible !important; }
+        table { width: 100% !important; border-collapse: collapse !important; font-size: 9pt; min-width: 0; page-break-inside: auto; } /* Allow table to break */
+        th, td { border: 1px solid #999 !important; padding: 5px 7px; }
+        thead th {
+            background-color: var(--bg-medium-print) !important;
+            color: var(--primary-color-print) !important;
+            -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important;
+            white-space: normal !important;
+            border-bottom-color: #666 !important; /* Match H2 border */
+        }
+        tr { page-break-inside: avoid !important; } /* Avoid breaking INSIDE a single row */
+        tbody td:first-child {
+            background-color: var(--bg-light-print) !important; /* Lighter grey */
+            color: #000 !important; white-space: normal !important;
+            -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important;
+            font-weight: bold; /* Ensure boldness prints */
+        }
+        tbody tr:nth-child(even) {
+            background-color: #f0f3f5 !important; /* Slightly different grey for striping */
+            -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important;
+        }
+         /* Style for first cell on even rows */
+         tbody tr:nth-child(even) td:first-child {
+            background-color: #e9ecef !important; /* Match header grey for consistency */
+            -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important;
+        }
+        tbody tr:hover, tbody tr:hover td:first-child { background-color: transparent !important; } /* Disable hover */
+
+        .image-gallery {
+            background-color: var(--bg-light-print) !important; border: 1px solid #ccc !important; justify-content: flex-start; gap: 10mm; page-break-inside: auto; /* Allow breaking */
+            -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important;
+        }
+        /* Adjust print layout for 2 columns */
+        .image-gallery figure { flex-basis: calc(50% - 10mm); max-width: 45%; page-break-inside: avoid !important; } /* Avoid breaking a figure */
+        .image-gallery img { border: 1px solid #999 !important; box-shadow: none !important; }
+
+        .safety-warning, .attention {
+            border: 1px solid #000 !important; /* Simple border */
+            color: #000 !important; /* Black text */
+            background-color: #fff !important; /* Default to white BG for less ink */
+             /* Attempt to keep colored border */
+            -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important;
+             page-break-inside: avoid; /* Keep warning boxes together */
+             border-left-width: 5px !important; /* Retain left border thickness */
+         }
+         .safety-warning { border-left-color: var(--warning-color) !important; }
+         .attention { border-left-color: var(--attention-color) !important; }
+
+         /* Force collapsible content to be visible */
+         section h3.collapsible-header::after { content: "" !important; /* Hide arrow */ }
+         .collapsible-content { max-height: none !important; opacity: 1 !important; padding-top: 10px !important; border-top: 1px solid #eee !important; }
+         .collapsible-content.collapsed { max-height: none !important; opacity: 1 !important; /* Override collapsed styles */ }
+
+
+        a { text-decoration: none !important; color: #000 !important; }
+        a[href^="mailto:"]::after, a[href^="http"]::after { content: "" !important; /* Don't show URLs */ }
+    }
+    </style>
+</head>
+<body>
+
+    <!-- Removed Header -->
+
+    <div class="container">
+        <h1>DXMP Series Constant Current Power Supply</h1>
+
+        <section id="overview">
+            <h2>Overview</h2>
+            <p>This DXMP series power supply features high performance, digital control, and bipolar constant current output. It is widely used for the excitation of electromagnets and Helmholtz coils to generate smooth, steady, and precisely controlled magnetic fields.</p>
+            <p>The unit utilizes four-quadrant operation suitable for inductive loads and incorporates various protection functions for robust operation.</p>
+        </section>
+
+        <section id="key-features">
+             <h2>Key Features</h2>
+             <ul>
+                 <li>Bipolar constant current output (Four-quadrant operation).</li>
+                 <li>Digital control interface.</li>
+                 <li>Smooth zero-crossing point via non-output switch reversing.</li>
+                 <li>Maximum current change rate up to 50 A/s (model dependent, see specs).</li>
+                 <li>Multiple control modes: Local (Keyboard) and Remote (RS232/RS485).</li>
+                 <li>Multiple output modes: Current Mode and Magnetic Field Mode (requires optional Gauss meter).</li>
+                 <li>Comprehensive protection functions with LCD indication.</li>
+                 <li>Optional high stability (10 ppm/h) current output.</li>
+                 <li>Optional power ranges from 0.5 kW to 15 kW.</li>
+                 <li>Optional current ranges from 10 A to 120 A.</li>
+             </ul>
+        </section>
+
+        <section id="image-gallery">
+            <h2>Product Images &amp; Screens</h2>
+            <div class="image-gallery">
+                 <figure>
+                      <!-- User specified page 22 for 'overall view' - Shows Parameter Menu -->
+                      <img src="User+Manual+of+DXMP+series+Current+Source_page-022.jpg" alt="DXMP Series Parameter Setting Menu">
+                      <figcaption>Product - Front View</figcaption>
+                 </figure>
+                 
+                 <figure>
+                      <!-- User specified page 33 for 'connection diagram' - Shows Fault Display -->
+                      <img src="User+Manual+of+DXMP+series+Current+Source_page-033.png" alt="DXMP Series Fault Display Screen">
+                      <figcaption>Product Block Diagram&nbsp;</figcaption>
+                 </figure>
+                 
+            </div>
+        </section>
+
+        <section id="specifications">
+            <h2>Specifications (Model P9060 Example)</h2>
+            <div class="attention">
+                <strong>Note:</strong> These specifications are based on the example table (likely Model P9060) in the manual. Refer to specific model documentation for exact parameters. Optional features (stability, power, current) vary.
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Parameter Category</th>
+                            <th>Specification</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Input -->
+                        <tr><td>Input Voltage</td><td>Three-phase AC 220V (Phase voltage: 220V ± 10%)</td></tr>
+                        <tr><td>Input Frequency</td><td>50/60 Hz</td></tr>
+                        <tr><td>Source Effect</td><td>2 × 10⁻⁵ (for 10% input voltage fluctuation)</td></tr>
+                        <tr><td>Input Line Diameter</td><td>&gt; 4 mm² per core</td></tr>
+                        <tr><td>Rated Input Line Current</td><td>&gt; 10 A per phase</td></tr>
+
+                        <!-- Output (Single Dimension Example) -->
+                        <tr><td>Output Mode</td><td>Bipolar Constant Current</td></tr>
+                        <tr><td>Max Output Current</td><td>90 A</td></tr>
+                        <tr><td>Max Output Voltage</td><td>60 V</td></tr>
+                        <tr><td>Setting Resolution</td><td>2 × 19 bit</td></tr>
+                        <tr><td>Current Stability (Standard)</td><td>50 ppm/h (after ≥30 min warm-up, 1hr @ full load)</td></tr>
+                        <tr><td>Current Stability (Optional)</td><td>10 ppm/h available</td></tr>
+                        <tr><td>Load Effect</td><td>2 × 10⁻⁵ (for 50% slow load change @ full output)</td></tr>
+                        <tr><td>Current Accuracy</td><td>0.02% of reading ± 2 mA</td></tr>
+                        <tr><td>Output Ripple Wave</td><td>5 × 10⁻⁵ ± 0.5 mA (RMS @ full load)</td></tr>
+                        <tr><td>Rate of Change (Resistive)</td><td>15 A/s (Max speed for this model)</td></tr>
+                        <tr><td>Output Line Diameter</td><td>≥ 25 mm²</td></tr>
+
+                        <!-- Operational -->
+                        <tr><td>Preheating Time</td><td>≥ 30 minutes</td></tr>
+                        <tr><td>Working Temperature</td><td>0 °C to 35 °C</td></tr>
+                        <tr><td>Storage Temperature</td><td>-10 °C to 50 °C</td></tr>
+                        <tr><td>Working Humidity</td><td>&lt; 80% (non-condensing)</td></tr>
+
+                        <!-- Built-in Gauss Meter (Optional) -->
+                        <tr><td>Functionality</td><td>Enables Magnetic Field control mode</td></tr>
+                        <tr><td>Measurement Scope</td><td>0 to ± 30000 Gs</td></tr>
+                        <tr><td>Probe Connection</td><td>Rear Panel (HALLPROBE DB15 Female)</td></tr>
+                        <tr><td>Requirement</td><td>Must use Dexing Magnet supplied probe</td></tr>
+
+                        <!-- Physical -->
+                        <tr><td>Cooling Method</td><td>Water Cooling (Requires external chiller)</td></tr>
+                        <tr><td>Outline Dimensions (W×D×H)</td><td>600 mm × 700 mm × 1330 mm</td></tr>
+                        <tr><td>Weight</td><td>115 Kg</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="control-modes">
+            <h2>Control &amp; Output Modes</h2>
+            <h3>Control Modes</h3>
+            <ul>
+                <li><strong>Local (KEY):</strong> Operation via front panel keyboard and LCD.</li>
+                <li><strong>Remote (RS232/RS485):</strong> Control via computer using text-based commands.</li>
+            </ul>
+            <h3>Output Modes</h3>
+            <ul>
+                <li><strong>Current Mode (CURRENT):</strong> Directly set the desired output current value (Amperes).</li>
+                <li><strong>Magnetic Field Mode (FIELD):</strong> Directly set the target magnetic field strength (Gauss). Requires the optional integrated Gauss meter and probe.</li>
+            </ul>
+            <div class="attention">
+                <strong>Field Mode Warning:</strong> This mode is only valid when the optional Gauss meter is integrated and the probe is connected and correctly placed within the electromagnet. Setting field values without the probe correctly positioned can lead to excessive output current and potential equipment damage. Allow ~30 seconds for field/current direction calibration when switching to this mode.
+            </div>
+        </section>
+
+        <section id="protection">
+            <h2>Protection Functions</h2>
+            <p>The power supply features comprehensive protection mechanisms, indicated on the LCD during faults:</p>
+            <ul>
+                <li><strong>Input Power Down Protection:</strong> Manages energy from inductive loads during shutdown.</li>
+                <li><strong>Internal Overheating (HEAT/OH):</strong> Protects internal components and power modules from excessive temperature.</li>
+                <li><strong>Module Overcurrent (OVER CURRENT/OC):</strong> Detects excessive output current, attempts reduction, and shuts down if needed.</li>
+                <li><strong>Module Overpower (OP):</strong> Restricts output if power limits are exceeded.</li>
+                <li><strong>External Protection (HEAT fault):</strong> Monitors external magnet temperature sensor.</li>
+                <li><strong>Internal Condensation (DEW):</strong> Warns of potential condensation risk.</li>
+                <li><strong>Cooling Water Flow (COOL):</strong> Ensures adequate flow for water-cooled models.</li>
+            </ul>
+            <div class="attention">
+                <strong>Fault Recovery:</strong> If a fault causes automatic shutdown, the unit typically requires a full power cycle (using the rear panel switch after front panel shutdown) with a wait of &gt;10 seconds for internal circuits to reset completely.
+            </div>
+        </section>
+
+        <section id="interfaces">
+            <h2>Connections &amp; Interfaces</h2>
+            <ul>
+                <li><strong>AC Input:</strong> Rear panel terminal block (L1, L2, L3, Ground).</li>
+                <li><strong>DC Output:</strong> Rear panel heavy-duty terminals (DC OUT: Red/Black).</li>
+                <li><strong>Cooling Water:</strong> Rear panel IN/OUT ports (for water-cooled models).</li>
+                <li><strong>RS-232:</strong> DB9 Female connector (Standard).</li>
+                <li><strong>RS-485:</strong> RJ45 connector (Optional).</li>
+                <li><strong>Hall Probe Input:</strong> DB15 Female connector (Optional, for Field Mode).</li>
+                <li><strong>External Protection Input:</strong> Connector for external temperature sensor.</li>
+                <li><strong>Front Panel:</strong> LCD, Status LED (Red/Blue/Green), Keyboard.</li>
+                <li><strong>Main Power Switch:</strong> Rear panel circuit breaker.</li>
+            </ul>
+        </section>
+
+        <section id="communication">
+            <h2>Remote Communication</h2>
+            <p>Remote control is possible via RS232 (standard) or RS485 (optional) using text-based commands.</p>
+            <ul>
+                <li><strong>Protocol:</strong> 8 data bits, 1 odd parity bit, 1 stop bit.</li>
+                <li><strong>Baud Rate:</strong> 9600 (default), 19200, 38400, 57600 bps.</li>
+                <li><strong>Terminator:</strong> CRLF (default), configurable.</li>
+                <li><strong>Timing:</strong> &gt; 100 ms between commands.</li>
+                <li><strong>Case:</strong> Insensitive.</li>
+                <li><strong>RS485 Addressing:</strong> Requires unique address setting (`@[Addr]_+[CMD]`).</li>
+                <li><strong>Key Commands:</strong> `POWER ON/OFF`, `CHC?/[X|Y|Z]`, `CURR?/[value]`, `MODE?/[CURR|FIELD]`, `FIELD?/[value]`, `GM:ZERO`, `DMA [N] 90 [H]` (Set Rate), etc. (Refer to manual section 7.2 for full list).</li>
+            </ul>
+             <div class="attention">
+                <strong>RS485 Attention:</strong> When using RS485 with multiple power supplies on the same bus, ensure each unit is configured with a unique address via the menu (2. Communicate Address). Failure to do so can cause communication errors or interface damage.
+            </div>
+        </section>
+
+        <section id="safety">
+            <h2>Safety Warnings</h2>
+            <div class="safety-warning">
+                <strong>High-Intensity Magnetic Field:</strong>
+                <ul>
+                    <li>Keep magnetically sensitive instruments and materials (&gt;1m distance recommended) away.</li>
+                    <li>Personnel with pacemakers, ferromagnetic implants, or artificial limbs are strictly prohibited from operating or being near the equipment.</li>
+                    <li>Mobile phones, electronic devices, bank cards, and magnetic storage media can be affected or damaged. Do not carry these items during operation.</li>
+                    <li>Ensure the area is properly marked and only trained personnel operate the system.</li>
+                </ul>
+            </div>
+            <div class="safety-warning">
+                <strong>Electrical Safety:</strong>
+                <ul>
+                    <li>Only experienced personnel should operate the equipment.</li>
+                    <li>Verify input voltage and current ratings match supply.</li>
+                    <li>Ensure all power and load connections are correct, secure, and rated appropriately before applying power. Incorrect connections can cause damage or injury. Loose output connections can severely damage the power supply.</li>
+                    <li>Do not touch any input, output, or control terminals during operation.</li>
+                    <li>Before connecting/disconnecting any cables (power, load, control) or adjusting internal circuits (prohibited unless authorized), shut down the power supply using the front panel, turn off the rear main switch, and wait 10-20 seconds for internal capacitors to discharge fully.</li>
+                    <li>Do not open the equipment cabinet for adjustment or repair yourself. Contact Dexing Magnet support.</li>
+                </ul>
+            </div>
+             <div class="attention">
+                <strong>Operational Cautions:</strong>
+                <ul>
+                    <li>Ensure proper cooling (airflow path clear for air-cooled, correct flow/temperature for water-cooled). Water temperature should be close to ambient to avoid condensation.</li>
+                    <li>Use only Dexing Magnet Gauss meter probes with the Field Mode option. Follow probe handling guidelines carefully.</li>
+                    <li>Input/Output cables must have sufficient current-carrying capacity to prevent overheating and fire hazards.</li>
+                 </ul>
+             </div>
+        </section>
+
+        <section id="warranty">
+            <h2>Warranty Information</h2>
+            <p>Dexing Magnet Tech. Co., Limited provides a one-year limited quality assurance warranty period.</p>
+            <ul>
+                <li>Covers free repair or replacement for faults (excluding specific conditions) within the warranty period.</li>
+                <li>Repaired/replaced parts have a 90-day or remaining original warranty, whichever is longer.</li>
+                <li>Warranty start date is based on delivery or commissioning date (with a 30-day grace period for client-caused delays).</li>
+                <li><strong>Exclusions:</strong> Improper maintenance/repair/calibration; consumables (protective tubes, batteries); non-Dexing software/interfaces/parts; unauthorized modifications or misuse; improper site preparation or environment.</li>
+            </ul>
+        </section>
+
+    </div>
+
+    <!-- Removed Footer -->
+
+
+</body></html>

@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liquid Nitrogen Cryostat | Dexinmag</title>
+    <style>
+        /* --- General Styles --- */
+        :root {
+            --primary-color: #003366; /* Dark Blue */
+            --secondary-color: #6699CC; /* Lighter Blue */
+            --bg-light: #f8f9fa;
+            --bg-medium: #e9ecef;
+            --border-color: #dee2e6;
+            --text-color: #333;
+            --header-bg: #f1f1f1;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #fff;
+            color: var(--text-color);
+            padding-bottom: 50px; /* Space for potential footer */
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+        }
+
+        /* --- Header --- */
+        header.page-header {
+            background-color: var(--header-bg);
+            padding: 15px 20px;
+            margin-bottom: 25px;
+            border-bottom: 2px solid var(--primary-color);
+            text-align: center;
+        }
+
+        header.page-header h1 {
+            color: var(--primary-color);
+            font-size: 2em;
+            margin-bottom: 0.2em;
+        }
+         header.page-header .subtitle {
+             font-size: 1.1em;
+             color: #555;
+             margin-top: 0.5em;
+         }
+
+
+        /* --- Sections --- */
+        section {
+            margin-bottom: 2.5em;
+            padding-bottom: 1.5em;
+            border-bottom: 1px dashed var(--border-color);
+        }
+         section:last-of-type {
+             border-bottom: none;
+             margin-bottom: 0;
+             padding-bottom: 0;
+         }
+
+        h2 {
+            font-size: 1.6em;
+            color: var(--primary-color);
+            margin-bottom: 0.8em;
+            border-bottom: 1px solid var(--secondary-color);
+            padding-bottom: 0.3em;
+        }
+         h2:first-of-type {
+             margin-top: 0;
+         }
+
+
+        p {
+            margin-bottom: 1em;
+        }
+
+        ul {
+            list-style: disc;
+            margin: 0 0 1em 25px;
+        }
+
+        li {
+            margin-bottom: 0.6em;
+        }
+
+        /* --- Table Styling --- */
+        .table-container {
+            overflow-x: auto; /* Enable horizontal scrolling on small screens */
+            margin-top: 1em;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1.5em;
+            font-size: 0.95em;
+            min-width: 650px; /* Minimum width before scrolling */
+        }
+
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 10px 12px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        thead th {
+            background-color: var(--bg-medium);
+            font-weight: bold;
+            color: var(--primary-color);
+            position: sticky;
+            top: 0;
+            z-index: 1;
+            text-align: center; /* Center align header text */
+        }
+
+        tbody td:first-child { /* Style for the "No." column */
+            font-weight: bold;
+            background-color: var(--bg-light);
+            text-align: left;
+            min-width: 180px;
+            white-space: nowrap;
+        }
+
+         tbody td:not(:first-child) { /* Styles for DXNC15, DXNC20, DXNC30 columns */
+             font-weight: normal;
+             background-color: #fff;
+             min-width: auto;
+             white-space: normal;
+             text-align: center;
+         }
+
+        tbody tr:nth-child(even) {
+            background-color: var(--bg-light);
+        }
+         tbody tr:nth-child(even) td:first-child {
+             background-color: #f0f3f5;
+         }
+         tbody tr:nth-child(even) td:not(:first-child) {
+             background-color: var(--bg-light);
+         }
+
+        tbody tr:hover {
+            background-color: #e8f4fd;
+        }
+         tbody tr:hover td:first-child {
+             background-color: #e0f0fc;
+         }
+         tbody tr:hover td:not(:first-child) {
+             background-color: #e8f4fd;
+         }
+
+
+         .value-unit {
+             font-style: italic;
+             color: #444;
+         }
+         .note {
+             font-size: 0.9em;
+             color: #666;
+             display: block;
+             margin-top: 4px;
+         }
+
+        /* --- Image Row/Column Styles (Default is 3 Columns) --- */
+        .image-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .image-column {
+            flex: 0 1 calc(33.333% - 10px); /* Default: 3 columns */
+            max-width: calc(33.333% - 10px); /* Default: 3 columns */
+            box-sizing: border-box;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .image-column figure {
+            margin: 0;
+        }
+
+        .image-column img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 5px;
+            background-color: #fff;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .image-column figcaption {
+            font-size: 0.9em;
+            color: #555;
+            font-style: italic;
+            line-height: 1.3;
+        }
+
+        /* Style for single, wide image (Usage Scenario) */
+        .single-image-container {
+             text-align: center;
+             margin-bottom: 15px;
+        }
+        .single-image-container figure {
+             display: inline-block;
+             max-width: 100%;
+             margin: 0;
+        }
+         .single-image-container img {
+             max-width: 100%;
+             height: auto;
+             border: 1px solid #ccc;
+             border-radius: 4px;
+             margin-bottom: 5px;
+             background-color: #fff;
+         }
+         .single-image-container figcaption {
+            font-size: 0.9em;
+            color: #555;
+            font-style: italic;
+            line-height: 1.3;
+         }
+        /* --- End of Image Styles --- */
+
+
+        /* --- Responsive Adjustments --- */
+        @media (max-width: 768px) { /* Medium screens: 2 columns */
+            .container {
+                padding: 15px;
+            }
+            header.page-header h1 { font-size: 1.7em; }
+            h2 { font-size: 1.4em; }
+
+            table { font-size: 0.9em; min-width: 0; }
+            th, td { padding: 8px 10px; }
+            tbody td:first-child { white-space: normal; }
+
+            .image-column {
+                flex-basis: calc(50% - 8px); /* Change to 2 columns */
+                max-width: calc(50% - 8px);
+            }
+        }
+
+        @media (max-width: 480px) { /* Small screens: 1 column */
+            header.page-header h1 { font-size: 1.5em; }
+            h2 { font-size: 1.2em; }
+            th, td { padding: 6px 8px; font-size: 0.85em; }
+            ul { margin-left: 20px; }
+
+            .image-column {
+                flex-basis: 100%; /* Change to 1 column */
+                max-width: 100%;
+            }
+        }
+
+        /* --- Print specific styles --- */
+        @media print {
+            body {
+                background-color: #fff !important;
+                color: #000 !important;
+                font-size: 10pt;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            .container {
+                max-width: 100% !important;
+                margin: 0 !important;
+                padding: 1cm !important;
+                box-shadow: none !important;
+                border: none !important;
+            }
+            header.page-header {
+                background-color: #fff !important;
+                border-bottom: 2px solid #000 !important;
+                text-align: left;
+                padding: 10px 0;
+                margin-bottom: 1.5em;
+            }
+             header.page-header h1 {
+                 color: #000 !important;
+                 font-size: 1.5em;
+            }
+             header.page-header .subtitle {
+                 color: #000 !important;
+                 font-size: 1em;
+            }
+
+            h2 {
+                color: #000 !important;
+                border-bottom: 1px solid #999 !important;
+                page-break-after: avoid;
+                font-size: 1.3em;
+                margin-bottom: 0.6em;
+            }
+
+            section { border: none; margin-bottom: 1.5em; page-break-inside: avoid;}
+
+            .table-container { overflow: visible !important; }
+            table { width: 100% !important; border-collapse: collapse !important; font-size: 9pt; min-width: 0; page-break-inside: auto; }
+            th, td { border: 1px solid #999 !important; padding: 4px 6px; }
+            thead th {
+                background-color: #eee !important;
+                color: #000 !important;
+                white-space: normal !important;
+                text-align: center !important;
+                 -webkit-print-color-adjust: exact !important;
+                 print-color-adjust: exact !important;
+            }
+             tr { page-break-inside: avoid !important; }
+
+            tbody td:first-child {
+                background-color: #f5f5f5 !important;
+                color: #000 !important;
+                 white-space: normal !important;
+                 text-align: left !important;
+                 -webkit-print-color-adjust: exact !important;
+                 print-color-adjust: exact !important;
+            }
+             tbody td:not(:first-child) {
+                 background-color: #fff !important;
+                 text-align: center !important;
+             }
+            tbody tr:nth-child(even) {
+                 background-color: #fafafa !important;
+                 -webkit-print-color-adjust: exact !important;
+                 print-color-adjust: exact !important;
+            }
+             tbody tr:nth-child(even) td:first-child {
+                 background-color: #f0f0f0 !important;
+                  -webkit-print-color-adjust: exact !important;
+                  print-color-adjust: exact !important;
+             }
+              tbody tr:nth-child(even) td:not(:first-child) {
+                  background-color: #fafafa !important;
+                  -webkit-print-color-adjust: exact !important;
+                  print-color-adjust: exact !important;
+              }
+             tbody tr:hover, tbody tr:hover td:first-child { background-color: transparent !important; }
+
+             /* --- Image Print Styles (Now 3 columns) --- */
+             .image-column img, .single-image-container img {
+                  border: 1px solid #aaa !important;
+                  box-shadow: none !important;
+             }
+             .image-column figcaption, .single-image-container figcaption {
+                 font-size: 8pt !important;
+                 font-style: normal !important;
+                 color: #000 !important;
+                 line-height: 1.2;
+             }
+             .image-row {
+                 gap: 10px !important;
+                 margin-bottom: 10px !important;
+             }
+              /* Print layout for standard image columns (3 columns) */
+              .image-column {
+                 flex-basis: calc(33.333% - 7px) !important; /* Ensure 3 columns */
+                 max-width: calc(33.333% - 7px) !important;
+                 margin-bottom: 10px !important;
+                 page-break-inside: avoid !important;
+              }
+
+             figure {
+                  page-break-inside: avoid !important;
+             }
+             /* Styles for single banner image container */
+             .single-image-container {
+                 page-break-inside: avoid !important;
+             }
+             #usage-scenario { /* Section containing single image */
+                 page-break-inside: avoid !important;
+             }
+             #usage-scenario .single-image-container img {
+                 max-width: 100% !important;
+             }
+             #usage-scenario p { /* Hide text caption for banner */
+                 display: none !important;
+             }
+
+        }
+    </style>
+</head>
+<body>
+
+    <header class="page-header">
+        <h1>Liquid Nitrogen Cryostat</h1>
+        <div class="subtitle">Low-Temperature Thermostat based on Steady-State Bubble Principle</div>
+    </header>
+
+    <div class="container">
+
+        <section id="overview">
+            <h2>Overview</h2>
+            <p>Dexinmag Liquid Nitrogen Cryostat has the advantages of wide temperature range(65K~800K), high efficiency, fast cooling speed, stable environment, and many options. It has become the preferred low-temperature acquisition equipment for many scientific research experiments.</p>
+
+             <!-- Images will now flow naturally into 3 columns -->
+             <div aria-label="Product Types and Setup Examples" class="image-row">
+                <div class="image-column">
+                    <figure>
+                        <img src="Liquid Nitrogen Cyostat_page-000.jpg" alt="Liquid Nitrogen Cryostat - Electricity and Optics Types">
+                        <figcaption>Electricity Type & Optics Type</figcaption>
+                    </figure>
+                </div>
+                 <div class="image-column">
+                    <figure>
+                        <img src="Liquid Nitrogen Cyostat_page-001.jpg" alt="Liquid Nitrogen Cryostat Setup in Laboratory">
+                        <figcaption>Laboratory Setup Example</figcaption>
+                    </figure>
+                </div>
+                 <div class="image-column">
+                     <figure>
+                         <img src="Liquid Nitrogen Cyostat_page-002.jpg" alt="Close-up of Sample Holder Window Area">
+                         <figcaption>Sample Holder Window Detail</figcaption>
+                     </figure>
+                 </div>
+                 <div class="image-column"> <!-- This will wrap to the next line -->
+                      <figure>
+                          <img src="Liquid Nitrogen Cyostat_page-003.jpg" alt="Close-up of Internal Wiring/PCB">
+                          <figcaption>Internal Wiring Detail</figcaption>
+                      </figure>
+                 </div>
+            </div>
+
+             <p>The Liquid Nitrogen Cryostat developed by Dexing Magnet is a low-temperature thermostat based on the steady-state bubble principle. Liquid nitrogen contains in the liquid nitrogen tank. By adjusting the cone air plug clearance and changing the boiling condition of the gas-liquid interface, the heat leakage of the constant temperature block is approximately stabilized at a certain value. Then the heating power can be adjusted by the temperature control instrument to make the sample seat change the temperature between 65K-800K rapidly and balance exactly on the set temperature.</p>
+
+        </section>
+
+        <section id="features">
+            <h2>Performance and characteristics</h2>
+            <ul>
+                <li>Wide temperature range (65K - 800K), high efficiency and fast cooling speed;</li>
+                <li>The sample has an ideal stable environment in a vacuum;</li>
+                <li>A low-temperature adsorbent is arranged in the vacuum interlayer, so that the vacuum can be kept for a long time, and the use time of the liquid nitrogen is prolonged;</li>
+                <li>Selection of PT100 Platinum Resistor with good Stability and repeatability for temperature Sensor;</li>
+                <li>A variety of options to meet different test requirements;</li>
+                <li>Convenient use, perfusion and secondary injection of liquid nitrogen; no need for equipment such as pumps and compressors, saving laboratory space, continuous operation of the system without maintenance;</li>
+                <li>The optical sample holder can install the sample quickly. The electrical sample holder has beautiful and easy-to-use wiring terminal;</li>
+                <li>Different sizes, different requirements of liquid nitrogen thermostat can be designed according to customer requirements. (optical, electrical, magnetic, thermal experiments).</li>
+            </ul>
+        </section>
+
+        <section id="technical-parameters">
+            <h2>Parameters of Dexinmag series Liquid Nitrogen Cryostat</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>DXNC15</th>
+                            <th>DXNC20</th>
+                            <th>DXNC30</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Liquid nitrogen storage capacity</td>
+                            <td>400 ml</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Ultimate vacuum</td>
+                            <td>10<sup>-4</sup> Pa</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Optical window</td>
+                            <td>No</td>
+                            <td>No</td>
+                            <td>2-5, Ø40mm*3mm</td>
+                        </tr>
+                        <tr>
+                            <td>Test sample quantity at the same time</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>2</td>
+                        </tr>
+                        <tr>
+                            <td>Temperature range</td>
+                            <td colspan="3">65K-500K (Temperature zone can be added to 800K)</td>
+                        </tr>
+                        <tr>
+                            <td>Temperature Accuracy</td>
+                            <td colspan="3">±0.1K</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="customization-options">
+             <h2>Customization & Options</h2>
+             <ul>
+                 <li>Number of measurement leads: 8 (can be added);</li>
+                 <li>Lead material: four-color phosphor bronze low-temperature wire (low-temperature coaxial wire optional);</li>
+                 <li>Sample size: standard 30mm*30mm or less (sample stage can be customized);</li>
+                 <li>Test connector: 8-core aviation plug (optional BNC, SMA connector, etc.);</li>
+                 <li>Window material: fused quartz or other band materials, such as ZnSe, KBr, TPX and other materials are optional;</li>
+                 <li>The installation of the vacuum cover adopts the latest quick-tightening clamp mode, which not only improves the convenience of replacing samples, but also avoids the impact on the normal use of the equipment due to repeated disassembly and assembly;</li>
+                 <li>Sample holder: standard electrical, standard optical, probe type, plug-in type, etc. optional (can be customized);</li>
+                 <li>Main applications: variable temperature testing, variable temperature + magnetic field, variable temperature + magnetic field + optics, and cooperation with various spectrometers;</li>
+                 <li>Other special types: atmosphere type, continuous flow type;</li>
+                 <li>Other non-standard customization is acceptable.</li>
+             </ul>
+        </section>
+
+         <section id="sample-holders">
+             <h2>Sample Holders & Customization Examples</h2>
+              <!-- Will now default to 3 columns, showing 2 images -->
+              <div aria-label="Custom Cryostat and Sample Holders" class="image-row">
+                  <div class="image-column">
+                       <figure>
+                            <img src="Liquid Nitrogen Cyostat_page-004.jpg" alt="Customized Liquid Nitrogen Cryostat Examples">
+                           <figcaption>Customized Cryostat Examples</figcaption>
+                       </figure>
+                  </div>
+                  <div class="image-column">
+                      <figure>
+                           <img src="Liquid Nitrogen Cyostat_page-005.jpg" alt="Various Sample Holder Types">
+                           <figcaption>Various Sample Holder Options</figcaption>
+                      </figure>
+                  </div>
+                  <!-- Third column space is available if another image were added -->
+              </div>
+         </section>
+
+         <section id="usage-scenario">
+              <h2>Usage Scenario</h2>
+               <!-- Still uses single image container for the banner -->
+               <div class="single-image-container" aria-label="Usage Scenario of Liquid Nitrogen Cryostat">
+                    <figure>
+                         <img src="Liquid Nitrogen Cyostat_page-006.jpg" alt="Liquid Nitrogen Cryostat in Various Laboratory Setups">
+                         <!-- Caption provided by the separate <p> tag -->
+                    </figure>
+               </div>
+               <p style="text-align:center; font-style: italic; margin-top: 5px; font-size: 0.9em; color: #555;">Usage scenario of Liquid Nitrogen Cryostat</p>
+         </section>
+
+
+    </div> <!-- /container -->
+
+    <!-- Optional Footer -->
+    <!--
+    <footer class="main-footer">
+        <p>© 2023 Dexinmag. All rights reserved.</p>
+    </footer>
+    -->
+
+</body>
+</html>

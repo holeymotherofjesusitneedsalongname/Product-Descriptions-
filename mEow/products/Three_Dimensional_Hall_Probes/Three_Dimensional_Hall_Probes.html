@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Product Title Retained -->
+    <title>Three Dimensional Hall Probes - Xiamen Dexing Magnet Tech. Co., Ltd</title>
+    <style>
+        /* --- General Styles --- */
+        :root {
+            --primary-color: #00447C; /* Dexin Blue (approximated) */
+            --secondary-color: #DC143C; /* Dexin Red (approximated) */
+            --bg-light: #f8f9fa;
+            --bg-medium: #e9ecef;
+            --border-color: #dee2e6;
+            --text-color: #343a40;
+            --header-bg: #ffffff; /* Retained for potential future use, though header removed */
+            --header-text: #333; /* Retained */
+            --footer-bg: #f1f1f1; /* Retained */
+            --footer-text: #555; /* Retained */
+            --hover-bg: #e8f4fd;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 25px;
+            background-color: #fff;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            flex-grow: 1;
+        }
+
+        /* --- Removed Header Styles as header element is removed --- */
+
+        /* --- Headings & Text --- */
+        h1, h2 {
+            color: var(--primary-color);
+            margin-bottom: 0.75em;
+            line-height: 1.3;
+        }
+
+        h1 { /* Product Title Style */
+            font-size: 1.8em;
+            text-align: center;
+            margin-bottom: 1em;
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 0.5em;
+            /* Ensure H1 is not forced to a new page unnecessarily */
+            page-break-before: auto;
+            page-break-after: avoid; /* Try to keep content below H1 together */
+        }
+
+        h2 {
+            font-size: 1.5em;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.3em;
+            margin-top: 1.8em;
+            /* Try to keep H2 with the content that follows it */
+            page-break-after: avoid;
+            page-break-before: auto;
+        }
+         h2:first-of-type {
+            margin-top: 0;
+         }
+
+        p {
+            margin-bottom: 1em;
+            /* Allow paragraphs to break across pages */
+            page-break-inside: auto;
+        }
+        .customization-notes {
+            background-color: var(--bg-light);
+            padding: 10px 15px;
+            border-left: 4px solid var(--secondary-color);
+            margin: 1.5em 0;
+            font-style: italic;
+            color: #555;
+            border-radius: 0 4px 4px 0;
+            page-break-inside: avoid; /* Try keep notes box together */
+        }
+
+
+        /* --- Probe Image --- */
+        .probe-image-section {
+            text-align: center;
+            margin-bottom: 2em;
+            background-color: var(--bg-light);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            /* Try keep image section together */
+            page-break-inside: avoid;
+        }
+
+        .probe-image-section figure {
+            margin: 0;
+        }
+
+        .probe-image-section img {
+            max-width: 100%;
+            height: auto;
+            max-height: 300px; /* Limit image height */
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            background-color: #fff; /* White background behind image */
+        }
+
+        .probe-image-section figcaption {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        /* --- Table Styling --- */
+        .table-container {
+            overflow-x: auto; /* Enable horizontal scrolling on screen */
+            margin-top: 1em;
+             page-break-inside: auto; /* Allow container to break */
+        }
+
+        table.spec-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1.5em;
+            font-size: 0.9em; /* Slightly smaller font for tables */
+            min-width: 900px; /* Min width before scrolling activates */
+            /* Allow table to break between rows */
+            page-break-inside: auto;
+        }
+
+        .spec-table th, .spec-table td {
+            border: 1px solid var(--border-color);
+            padding: 8px 10px;
+            text-align: center; /* Center align table content */
+            vertical-align: middle;
+            page-break-inside: avoid; /* Try to keep cell content together */
+        }
+         .spec-table td:first-child, .spec-table th:first-child {
+             text-align: left; /* Left align the model number */
+             font-weight: bold;
+         }
+
+        .spec-table thead th {
+            background-color: var(--bg-medium);
+            font-weight: bold;
+            position: sticky; /* Sticky for screen scrolling */
+            top: 0; /* Stick header to top when scrolling */
+            z-index: 1;
+            white-space: nowrap; /* Prevent headers wrapping on screen */
+        }
+
+        .spec-table tbody tr {
+             /* Allow breaks between rows */
+            page-break-inside: avoid;
+            page-break-after: auto;
+        }
+
+        .spec-table tbody tr:nth-child(even) {
+            background-color: var(--bg-light);
+        }
+
+        .spec-table tbody tr:hover {
+            background-color: var(--hover-bg);
+        }
+
+        /* --- Removed Footer Styles as footer element is removed --- */
+
+        /* --- Responsive Adjustments --- */
+        @media (max-width: 992px) {
+             .spec-table { font-size: 0.85em; min-width: 800px;}
+             .spec-table th, .spec-table td { padding: 6px 8px; }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+                margin: 10px;
+            }
+            /* Removed header responsive styles */
+            h1 { font-size: 1.6em; }
+            h2 { font-size: 1.3em; }
+            .spec-table { font-size: 0.8em; min-width: 0; } /* Allow table to shrink, rely on scroll */
+             .spec-table th, .spec-table td { padding: 5px 6px; white-space: normal; } /* Allow wrapping in cells */
+             .probe-image-section img { max-height: 200px; }
+        }
+         @media (max-width: 480px) {
+             h1 { font-size: 1.4em; }
+             h2 { font-size: 1.15em; }
+             .spec-table { font-size: 0.75em; }
+             .spec-table th, .spec-table td { padding: 4px 5px; }
+             /* Removed footer responsive styles */
+         }
+
+        /* --- Print specific styles --- */
+        @media print {
+            body {
+                background-color: #fff !important;
+                color: #000 !important;
+                font-size: 9pt;
+                -webkit-print-color-adjust: exact !important; /* FORCE COLORS */
+                print-color-adjust: exact !important;         /* FORCE COLORS */
+            }
+            .container {
+                max-width: 100% !important;
+                margin: 0 !important;
+                padding: 1cm !important; /* Adjust print margins */
+                box-shadow: none !important;
+                border-radius: 0 !important;
+                border: none !important;
+            }
+            /* Removed print styles for header as it's removed */
+
+            h1 {
+                color: #000 !important;
+                border-bottom: 2px solid #000 !important;
+                background-color: transparent !important; /* Ensure no background color */
+                page-break-before: avoid !important; /* Try not to start page with H1 */
+                page-break-after: avoid !important; /* Try keep H1 with next content */
+            }
+            h2 {
+                color: #000 !important;
+                border-bottom: 1px solid #666 !important;
+                margin-top: 1.5em;
+                background-color: transparent !important; /* Ensure no background color */
+                 page-break-after: avoid !important; /* Keep H2 with following content */
+                 page-break-before: auto !important;
+            }
+
+             p {
+                 orphans: 3; /* Minimum lines at bottom of page */
+                 widows: 3; /* Minimum lines at top of page */
+                 page-break-inside: auto !important; /* Explicitly allow paragraphs to break */
+             }
+
+            .probe-image-section {
+                 background-color: #fff !important;
+                 border: 1px solid #ccc !important;
+                 padding: 10px;
+                 page-break-inside: avoid !important; /* Keep image section on one page if possible */
+            }
+            .probe-image-section img {
+                 border: 1px solid #999 !important;
+                 max-height: 150px; /* Smaller image for print */
+                 background-color: #fff !important;
+            }
+            .customization-notes {
+                /* Keep customization notes visible for print, but allow breaking if needed */
+                display: block !important;
+                page-break-inside: avoid !important; /* Try to keep it together */
+                background-color: #f8f9fa !important; /* Retain light background */
+                border-left: 4px solid #DC143C !important; /* Retain red border */
+                color: #555 !important;
+                 -webkit-print-color-adjust: exact !important;
+                 print-color-adjust: exact !important;
+            }
+
+            .table-container {
+                 overflow: visible !important; /* Remove scrollbars for print */
+                 page-break-inside: auto !important; /* Allow container to break */
+            }
+            table.spec-table {
+                width: 100% !important;
+                border-collapse: collapse !important;
+                font-size: 8pt;
+                min-width: 0;
+                page-break-inside: auto !important; /* Allow table rows to split across pages */
+            }
+            .spec-table th, .spec-table td {
+                 border: 1px solid #999 !important;
+                 padding: 4px 5px;
+                 text-align: center;
+                 word-wrap: break-word; /* Allow long words to break if needed */
+                 page-break-inside: avoid !important; /* Try to keep cell content together */
+            }
+             .spec-table td:first-child, .spec-table th:first-child {
+                 text-align: left !important;
+             }
+             .spec-table thead th {
+                 background-color: #e9ecef !important; /* Light grey header */
+                 color: #000 !important;
+                 position: static !important; /* Remove sticky header for print */
+                 white-space: normal !important; /* Allow headers to wrap in print */
+                 -webkit-print-color-adjust: exact !important; /* FORCE COLORS */
+                 print-color-adjust: exact !important;         /* FORCE COLORS */
+             }
+             .spec-table tbody tr {
+                 page-break-inside: avoid !important; /* Try to keep rows together */
+                 page-break-after: auto !important;   /* Allow breaks between rows */
+             }
+             .spec-table tbody tr:nth-child(even) {
+                 background-color: #f8f9fa !important; /* Very light grey stripping */
+                 -webkit-print-color-adjust: exact !important; /* FORCE COLORS */
+                 print-color-adjust: exact !important;         /* FORCE COLORS */
+             }
+
+
+            /* Removed print styles for footer as it's removed */
+            a { text-decoration: none !important; color: #000 !important; }
+            a[href^="mailto:"]::after, a[href^="http"]::after, a[href^="www"]::after { content: "" !important; } /* Hide URLs */
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Removed -->
+
+    <div class="container">
+        <h1>Three Dimensional Hall Probes</h1>
+
+        <section class="probe-image-section">
+             <figure>
+                 <!-- Use the provided image path, simplified to just filename -->
+                 <img src="Three-dimensional+Hall+Probe_page-017.jpg" alt="Three Dimensional Hall Probe with Active Area Diagrams">
+                 <figcaption>Probe with Top and Side View of Hall Device Active Area (Bx, By, Bz)</figcaption>
+             </figure>
+        </section>
+
+        <p class="customization-notes">
+            Note: Probe length can be customized; Array probe can be customized; Can add a temperature sensor inside the probe.
+        </p>
+
+
+        <!-- Section for Conventional Probes (Page 2) -->
+        <section id="conventional">
+            <h2>Conventional 3D Hall Probes</h2>
+            <div class="table-container">
+                <table class="spec-table">
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>L (cm)</th>
+                            <th>D (mm)</th>
+                            <th>Active Area Dia. (mm)</th>
+                            <th>Frequency Range</th>
+                            <th>Full Range</th>
+                            <th>Accuracy (Linearity)</th>
+                            <th>Working Temp. Zone</th>
+                            <th>Temp. Coefficient (max)</th>
+                            <th>Packaging Materials</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>3ADX801F</td>
+                            <td>10/25/50</td>
+                            <td>5.0</td>
+                            <td>0.15</td>
+                            <td>DC-100kHz</td>
+                            <td>300kG</td>
+                            <td>±0.10% ~ 30kG</td>
+                            <td>-10℃ ~ +75℃</td>
+                            <td>±0.03%/℃</td>
+                            <td>Round brass</td>
+                        </tr>
+                        <tr>
+                            <td>3ADX802F</td>
+                            <td>10/25/50</td>
+                            <td>3.0</td>
+                            <td>0.15</td>
+                            <td>DC-100kHz</td>
+                            <td>300kG</td>
+                            <td>±0.10% ~ 30kG</td>
+                            <td>-10℃ ~ +75℃</td>
+                            <td>±0.03%/℃</td>
+                            <td>Round brass</td>
+                        </tr>
+                        <tr>
+                            <td>3ADX803F</td>
+                            <td>10/25/50</td>
+                            <td>2.0</td>
+                            <td>0.10</td>
+                            <td>DC-100kHz</td>
+                            <td>300kG</td>
+                            <td>±0.50% ~ 30kG</td>
+                            <td>-10℃ ~ +75℃</td>
+                            <td>±0.03%/℃</td>
+                            <td>Round brass</td>
+                        </tr>
+                        <tr>
+                            <td>3ADX804F</td>
+                            <td>10/25/50</td>
+                            <td>1.5</td>
+                            <td>0.10</td>
+                            <td>DC-100kHz</td>
+                            <td>300kG</td>
+                            <td>±0.50% ~ 30kG</td>
+                            <td>-10℃ ~ +75℃</td>
+                            <td>±0.03%/℃</td>
+                            <td>Round brass</td>
+                        </tr>
+                        <tr>
+                            <td>3ADX805F</td>
+                            <td>10/25/50</td>
+                            <td>1.2</td>
+                            <td>0.10</td>
+                            <td>DC-100kHz</td>
+                            <td>300kG</td>
+                            <td>±0.50% ~ 30kG</td>
+                            <td>-10℃ ~ +75℃</td>
+                            <td>±0.03%/℃</td>
+                            <td>Round brass</td>
+                        </tr>
+                        <tr>
+                            <td>3ADX806F Square</td>
+                            <td>10/25/50</td>
+                            <td>4.0</td>
+                            <td>0.15</td>
+                            <td>DC-100kHz</td>
+                            <td>300kG</td>
+                            <td>±0.10% ~ 30kG</td>
+                            <td>-10℃ ~ +75℃</td>
+                            <td>±0.03%/℃</td>
+                            <td>Square brass</td>
+                        </tr>
+                        <tr>
+                            <td>3ADX807F Square</td>
+                            <td>10/25/50</td>
+                            <td>2.5</td>
+                            <td>0.15</td>
+                            <td>DC-100kHz</td>
+                            <td>300kG</td>
+                            <td>±0.10% ~ 30kG</td>
+                            <td>-10℃ ~ +75℃</td>
+                            <td>±0.03%/℃</td>
+                            <td>Square brass</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Section for Temperature Compensated Probes (Page 3) -->
+        <section id="temp-compensated">
+            <h2>Temperature Compensated 3D Probes</h2>
+             <div class="table-container">
+                <table class="spec-table">
+                     <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>L (cm)</th>
+                            <th>D (mm)</th>
+                            <th>Active Area Dia. (mm)</th>
+                            <th>Frequency Range</th>
+                            <th>Full Range</th>
+                            <th>Accuracy (Linearity)</th>
+                            <th>Working Temp. Zone</th>
+                            <th>Temp. Coefficient (max)</th>
+                            <th>Packaging Materials</th>
+                        </tr>
+                    </thead>
+                     <tbody>
+                        <tr>
+                            <td>3ADX801FT</td>
+                            <td>10/25/50</td>
+                            <td>5.0</td>
+                            <td>0.15</td>
+                            <td>DC-100kHz</td>
+                            <td>300kG</td>
+                            <td>±0.10% ~ 30kG</td>
+                            <td>-10℃ ~ +75℃</td>
+                            <td>±0.015%/℃</td>
+                            <td>Round brass</td>
+                        </tr>
+                        <tr>
+                            <td>3ADX802FT</td>
+                            <td>10/25/50</td>
+                            <td>3.0</td>
+                            <td>0.15</td>
+                            <td>DC-100kHz</td>
+                            <td>300kG</td>
+                            <td>±0.10% ~ 30kG</td>
+                            <td>-10℃ ~ +75℃</td>
+                            <td>±0.015%/℃</td>
+                            <td>Round brass</td>
+                        </tr>
+                        <tr>
+                            <td>3ADX803FT</td>
+                            <td>10/25/50</td>
+                            <td>2.0</td>
+                            <td>0.10</td>
+                            <td>DC-100kHz</td>
+                            <td>300kG</td>
+                            <td>±0.50% ~ 30kG</td>
+                            <td>-10℃ ~ +75℃</td>
+                            <td>±0.015%/℃</td>
+                            <td>Round brass</td>
+                        </tr>
+                        <tr>
+                            <td>3ADX804FT</td>
+                            <td>10/25/50</td>
+                            <td>1.5</td>
+                            <td>0.10</td>
+                            <td>DC-100kHz</td>
+                            <td>300kG</td>
+                            <td>±0.50% ~ 30kG</td>
+                            <td>-10℃ ~ +75℃</td>
+                            <td>±0.015%/℃</td>
+                            <td>Round brass</td>
+                        </tr>
+                         <tr>
+                             <td>3ADX805FT</td>
+                             <td>10/25/50</td>
+                             <td>1.2</td>
+                             <td>0.10</td>
+                             <td>DC-100kHz</td>
+                             <td>300kG</td>
+                             <td>±0.50% ~ 30kG</td>
+                             <td>-10℃ ~ +75℃</td>
+                             <td>±0.015%/℃</td>
+                             <td>Round brass</td>
+                         </tr>
+                        <tr>
+                            <td>3ADX806FT Square</td>
+                            <td>10/20</td>
+                            <td>4.0</td>
+                            <td>0.15</td>
+                            <td>DC-100kHz</td>
+                            <td>300kG</td>
+                            <td>±0.10% ~ 30kG</td>
+                            <td>-10℃ ~ +75℃</td>
+                            <td>±0.015%/℃</td>
+                            <td>Square brass</td>
+                        </tr>
+                        <tr>
+                            <td>3ADX807FT Square</td>
+                            <td>10/20</td>
+                            <td>2.5</td>
+                            <td>0.15</td>
+                            <td>DC-100kHz</td>
+                            <td>300kG</td>
+                            <td>±0.10% ~ 30kG</td>
+                            <td>-10℃ ~ +75℃</td>
+                            <td>±0.015%/℃</td>
+                            <td>Square brass</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Section for High Temperature Compensated Probes (Page 4) -->
+        <section id="high-temp">
+            <h2>High Temperature Compensated 3D Probes</h2>
+             <div class="table-container">
+                <table class="spec-table">
+                     <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>L (cm)</th>
+                            <th>D (mm)</th>
+                            <th>Active Area Dia. (mm)</th>
+                            <th>Frequency Range</th>
+                            <th>Full Range</th>
+                            <th>Accuracy (Linearity)</th>
+                            <th>Working Temp. Zone</th>
+                            <th>Temp. Coefficient (max)</th>
+                            <th>Packaging Materials</th>
+                        </tr>
+                    </thead>
+                     <tbody>
+                        <tr>
+                            <td>3ADX801HT</td>
+                            <td>10/25/50</td>
+                            <td>5.0</td>
+                            <td>0.15</td>
+                            <td>DC-100kHz</td>
+                            <td>300kG</td>
+                            <td>±0.10% ~ 30kG</td>
+                            <td>-20℃ ~ +200℃</td>
+                            <td>±0.015%/℃</td>
+                            <td>Round brass</td>
+                        </tr>
+                        <tr>
+                            <td>3ADX802HT</td>
+                            <td>10/25/50</td>
+                            <td>3.0</td>
+                            <td>0.15</td>
+                            <td>DC-100kHz</td>
+                            <td>300kG</td>
+                            <td>±0.10% ~ 30kG</td>
+                            <td>-20℃ ~ +200℃</td>
+                            <td>±0.015%/℃</td>
+                            <td>Round brass</td>
+                        </tr>
+                        <tr>
+                            <td>3ADX803HT</td>
+                            <td>10/25/50</td>
+                            <td>2.0</td>
+                            <td>0.10</td>
+                            <td>DC-100kHz</td>
+                            <td>300kG</td>
+                            <td>±0.50% ~ 30kG</td>
+                            <td>-20℃ ~ +200℃</td>
+                            <td>±0.015%/℃</td>
+                            <td>Round brass</td>
+                        </tr>
+                        <tr>
+                            <td>3ADX804HT</td>
+                            <td>10/25/50</td>
+                            <td>1.5</td>
+                            <td>0.10</td>
+                            <td>DC-100kHz</td>
+                            <td>300kG</td>
+                            <td>±0.50% ~ 30kG</td>
+                            <td>-20℃ ~ +200℃</td>
+                            <td>±0.015%/℃</td>
+                            <td>Round brass</td>
+                        </tr>
+                        <tr>
+                            <td>3ADX805HT</td>
+                            <td>10/25/50</td>
+                            <td>1.2</td>
+                            <td>0.10</td>
+                            <td>DC-100kHz</td>
+                            <td>300kG</td>
+                            <td>±0.50% ~ 30kG</td>
+                            <td>-20℃ ~ +200℃</td>
+                            <td>±0.015%/℃</td>
+                            <td>Round brass</td>
+                        </tr>
+                        <tr>
+                            <td>3ADX806HT Square</td>
+                            <td>10/20</td>
+                            <td>4.0</td>
+                            <td>0.15</td>
+                            <td>DC-100kHz</td>
+                            <td>300kG</td>
+                            <td>±0.10% ~ 30kG</td>
+                            <td>-20℃ ~ +200℃</td>
+                            <td>±0.015%/℃</td>
+                            <td>Square brass</td>
+                        </tr>
+                        <tr>
+                            <td>3ADX807HT Square</td>
+                            <td>10/20</td>
+                            <td>2.5</td>
+                            <td>0.15</td>
+                            <td>DC-100kHz</td>
+                            <td>300kG</td>
+                            <td>±0.10% ~ 30kG</td>
+                            <td>-20℃ ~ +200℃</td>
+                            <td>±0.015%/℃</td>
+                            <td>Square brass</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+         <!-- Section for Low Temperature Compensated Probes (Page 5) -->
+         <section id="low-temp">
+            <h2>Low Temperature Compensated 3D Probes</h2>
+             <div class="table-container">
+                <table class="spec-table">
+                     <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>L (cm)</th>
+                            <th>D (mm)</th>
+                            <th>Active Area Dia. (mm)</th>
+                            <th>Frequency Range</th>
+                            <th>Full Range</th>
+                            <th>Accuracy (Linearity)</th>
+                            <th>Working Temp. Zone</th>
+                            <th>Temp. Coefficient (max)</th>
+                            <th>Packaging Materials</th>
+                        </tr>
+                    </thead>
+                     <tbody>
+                        <tr>
+                            <td>3ADX801LT</td>
+                            <td>10/25/50</td>
+                            <td>5.0</td>
+                            <td>0.15</td>
+                            <td>DC-100kHz</td>
+                            <td>300kG</td>
+                            <td>±0.10% ~ 30kG</td>
+                            <td>-269℃ ~ +75℃</td>
+                            <td>±0.015%/℃</td>
+                            <td>Round brass</td>
+                        </tr>
+                        <tr>
+                            <td>3ADX802LT</td>
+                            <td>10/25/50</td>
+                            <td>3.0</td>
+                            <td>0.15</td>
+                            <td>DC-100kHz</td>
+                            <td>300kG</td>
+                            <td>±0.10% ~ 30kG</td>
+                            <td>-269℃ ~ +75℃</td>
+                            <td>±0.015%/℃</td>
+                            <td>Round brass</td>
+                        </tr>
+                        <tr>
+                            <td>3ADX803LT</td>
+                            <td>10/25/50</td>
+                            <td>2.0</td>
+                            <td>0.10</td>
+                            <td>DC-100kHz</td>
+                            <td>300kG</td>
+                            <td>±0.50% ~ 30kG</td>
+                            <td>-269℃ ~ +75℃</td>
+                            <td>±0.015%/℃</td>
+                            <td>Round brass</td>
+                        </tr>
+                        <tr>
+                            <td>3ADX804LT</td>
+                            <td>10/25/50</td>
+                            <td>1.5</td>
+                            <td>0.10</td>
+                            <td>DC-100kHz</td>
+                            <td>300kG</td>
+                            <td>±0.50% ~ 30kG</td>
+                            <td>-269℃ ~ +75℃</td>
+                            <td>±0.015%/℃</td>
+                            <td>Round brass</td>
+                        </tr>
+                        <tr>
+                            <td>3ADX805LT</td>
+                            <td>10/25/50</td>
+                            <td>1.2</td>
+                            <td>0.10</td>
+                            <td>DC-100kHz</td>
+                            <td>300kG</td>
+                            <td>±0.50% ~ 30kG</td>
+                            <td>-269℃ ~ +75℃</td>
+                            <td>±0.015%/℃</td>
+                            <td>Round brass</td>
+                        </tr>
+                        <!-- Square models not listed on page 5 -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Section for High & Low Temperature Compensated Probes (Page 6) -->
+        <section id="high-low-temp">
+            <h2>High & Low Temperature Compensated 3D Probes</h2>
+             <div class="table-container">
+                <table class="spec-table">
+                     <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>L (cm)</th>
+                            <th>D (mm)</th>
+                            <th>Active Area Dia. (mm)</th>
+                            <th>Frequency Range</th>
+                            <th>Full Range</th>
+                            <th>Accuracy (Linearity)</th>
+                            <th>Working Temp. Zone</th>
+                            <th>Temp. Coefficient (max)</th>
+                            <th>Packaging Materials</th>
+                        </tr>
+                    </thead>
+                     <tbody>
+                        <tr>
+                            <td>3ADX801HLT</td>
+                            <td>10/25/50</td>
+                            <td>5.0</td>
+                            <td>0.15</td>
+                            <td>DC-100kHz</td>
+                            <td>300kG</td>
+                            <td>±0.10% ~ 30kG</td>
+                            <td>-269℃ ~ +120℃</td>
+                            <td>±0.015%/℃</td>
+                            <td>Round brass</td>
+                        </tr>
+                        <tr>
+                            <td>3ADX802HLT</td>
+                            <td>10/25/50</td>
+                            <td>3.0</td>
+                            <td>0.15</td>
+                            <td>DC-100kHz</td>
+                            <td>300kG</td>
+                            <td>±0.10% ~ 30kG</td>
+                            <td>-269℃ ~ +120℃</td>
+                            <td>±0.015%/℃</td>
+                            <td>Round brass</td>
+                        </tr>
+                        <tr>
+                            <td>3ADX803HLT</td>
+                            <td>10/25/50</td>
+                            <td>2.0</td>
+                            <td>0.10</td>
+                            <td>DC-100kHz</td>
+                            <td>300kG</td>
+                            <td>±0.50% ~ 30kG</td>
+                            <td>-269℃ ~ +120℃</td>
+                            <td>±0.015%/℃</td>
+                            <td>Round brass</td>
+                        </tr>
+                        <tr>
+                            <td>3ADX804HLT</td>
+                            <td>10/25/50</td>
+                            <td>1.5</td>
+                            <td>0.10</td>
+                            <td>DC-100kHz</td>
+                            <td>300kG</td>
+                            <td>±0.50% ~ 30kG</td>
+                            <td>-269℃ ~ +120℃</td>
+                            <td>±0.015%/℃</td>
+                            <td>Round brass</td>
+                        </tr>
+                        <tr>
+                            <td>3ADX805HLT</td>
+                            <td>10/25/50</td>
+                            <td>1.2</td>
+                            <td>0.10</td>
+                            <td>DC-100kHz</td>
+                            <td>300kG</td>
+                            <td>±0.50% ~ 30kG</td>
+                            <td>-269℃ ~ +150℃</td> <!-- Note temp difference here -->
+                            <td>±0.015%/℃</td>
+                            <td>Round brass</td>
+                        </tr>
+                        <tr>
+                            <td>3ADX806HLT Square</td>
+                            <td>10/20</td>
+                            <td>4.0</td>
+                            <td>0.15</td>
+                            <td>DC-100kHz</td>
+                            <td>300kG</td>
+                            <td>±0.10% ~ 30kG</td>
+                            <td>-269℃ ~ +120℃</td>
+                            <td>±0.015%/℃</td>
+                            <td>Square brass</td>
+                        </tr>
+                        <tr>
+                            <td>3ADX807HLT Square</td>
+                            <td>10/20</td>
+                            <td>2.5</td>
+                            <td>0.15</td>
+                            <td>DC-100kHz</td>
+                            <td>300kG</td>
+                            <td>±0.10% ~ 30kG</td>
+                            <td>-269℃ ~ +120℃</td>
+                            <td>±0.015%/℃</td>
+                            <td>Square brass</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </div> <!-- end container -->
+
+    <!-- Footer Removed -->
+
+</body>
+</html>

@@ -1,0 +1,1756 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transverse Probes - Xiamen Dexing Magnet Tech. Co., Ltd</title>
+    <style>
+        /* ==========================================================================
+        GENERIC STYLING FOR DEXINMAG DOCUMENT PAGES
+        Based on DXMP Manual / Axial Probe Styles
+        Version: 1.0
+        * Provides a consistent layout, color scheme, typography.
+        * Styles common elements like sections, tables, lists, images.
+        * Includes styles for collapsible sections.
+        * Includes responsive adjustments for different screen sizes.
+        * Includes print-specific styles for better output.
+        * HEADER AND FOOTER specific styling has been REMOVED.
+        ========================================================================== */
+        /* --- Base Styles & Color Theme --- */
+        :root {
+        --primary-color: #00447C; /* Dark Blue */
+        --secondary-color: #4A90E2; /* Lighter Blue */
+        --dexing-red: #D32F2F; /* Approx Dexing Red from original */
+        --bg-light: #f8f9fa; /* Very light grey */
+        --bg-medium: #e9ecef; /* Light grey */
+        --border-color: #dee2e6; /* Grey border */
+        --text-color: #343a40; /* Dark grey text */
+        /* --header-bg: #343a40; */ /* Header styles removed */
+        /* --header-text: #ffffff; */ /* Header styles removed */
+        /* --footer-bg: #f1f1f1; */ /* Footer styles removed */
+        /* --footer-text: #555; */ /* Footer styles removed */
+        --hover-bg: #e8f4fd; /* Light blue for hover */
+        --warning-color: #dc3545; /* Red for warnings */
+        --warning-bg: #f8d7da;
+        --attention-color: #ffc107; /* Yellow for attention */
+        --attention-bg: #fff3cd;
+        }
+
+        * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        }
+
+        body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        background-color: #f4f4f4; /* Light grey background for the page */
+        color: var(--text-color);
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        }
+
+        /* --- Main Content Container --- */
+        .container {
+        max-width: 1100px;
+        margin: 20px auto;
+        padding: 25px;
+        background-color: #fff; /* White background for content */
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        flex-grow: 1; /* Allows footer (if added back) to stick to bottom */
+        }
+
+        /* --- Typography --- */
+        h1, h2, h3 {
+        color: var(--primary-color);
+        line-height: 1.3;
+        margin-top: 1em;
+        margin-bottom: 0.75em;
+        }
+        h1:first-child, h2:first-child, h3:first-child {
+        margin-top: 0;
+        }
+
+        /* Styles the main title within the container */
+        .container > h1 {
+        font-size: 1.8em;
+        text-align: center;
+        border-bottom: 2px solid var(--secondary-color);
+        padding-bottom: 0.5em;
+        margin-bottom: 1em; /* Add more space below main title */
+        }
+
+        /* Styles section titles */
+        section > h2 {
+        font-size: 1.5em;
+        border-bottom: 1px solid var(--border-color);
+        padding-bottom: 0.3em;
+        color: var(--primary-color);
+        }
+
+        /* Base style for H3, often used for sub-sections or collapsible headers */
+        section > h3 {
+        font-size: 1.2em;
+        color: var(--primary-color);
+        padding-bottom: 0.3em;
+        font-weight: bold;
+        }
+
+        p {
+        margin-bottom: 1em;
+        }
+
+        ul {
+        list-style: disc;
+        margin: 0 0 1em 25px;
+        }
+
+        li {
+        margin-bottom: 0.5em;
+        }
+
+        /* --- Content Sections --- */
+        section {
+        margin-bottom: 2em;
+        padding-bottom: 1em;
+        border-bottom: 1px solid var(--bg-medium); /* Subtle separator */
+        }
+        section:last-of-type {
+        border-bottom: none;
+        margin-bottom: 0;
+        padding-bottom: 0;
+        }
+
+        /* --- Tables --- */
+        .table-container {
+        overflow-x: auto; /* Enable horizontal scroll on screen */
+        margin-top: 1em;
+        margin-bottom: 1.5em;
+        }
+
+        table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.95em;
+        min-width: 600px; /* Prevent excessive squishing on screen */
+        }
+
+        th, td {
+        border: 1px solid var(--border-color);
+        padding: 10px 12px;
+        text-align: left; /* Default left align based on new CSS */
+        vertical-align: top; /* Changed from middle */
+        }
+
+        /* Center align specific columns as needed (applied to table body for override) */
+        tbody td:not(:first-child):not(:last-child), /* Center all except first and last */
+        thead th:not(:first-child):not(:last-child)  /* Center corresponding headers */
+         {
+            text-align: center;
+        }
+         tbody td:nth-child(2) { /* Center L(cm) */
+             text-align: center;
+         }
+
+        thead th {
+        background-color: var(--bg-medium);
+        font-weight: bold;
+        color: var(--primary-color);
+        position: sticky; /* Keep header visible on scroll */
+        top: 0;
+        z-index: 1;
+        border-bottom-width: 2px; /* Stronger line below header */
+        border-bottom-color: var(--border-color);
+        white-space: nowrap; /* Keep headers from wrapping based on original style */
+        vertical-align: middle; /* Keep header content centered vertically */
+        }
+
+        tbody td:first-child { /* Model number column from original */
+            font-weight: bold;
+            background-color: var(--bg-light);
+            text-align: left;
+            white-space: nowrap;
+        }
+        tbody td:last-child { /* Packaging materials column from original */
+             text-align: left;
+        }
+
+        /* Zebra striping for table rows */
+        tbody tr:nth-child(even) {
+        background-color: var(--bg-light);
+        }
+         /* Match original even row first cell color */
+         tbody tr:nth-child(even) td:first-child {
+             background-color: #f0f3f5;
+         }
+
+        /* Hover effect for table rows */
+        tbody tr:hover {
+        background-color: var(--hover-bg);
+        }
+         /* Match original hover effect */
+         tbody tr:hover td:first-child {
+             background-color: #eaf6ff;
+         }
+
+        /* --- Image Styling (Adapted from original figure styling) --- */
+        figure {
+            margin: 1em 0 1.5em 0;
+            text-align: center;
+            background-color: var(--bg-light);
+            padding: 15px;
+            border-radius: 4px;
+            min-height: 100px; /* Ensure figure takes some space even if image fails */
+            border: 1px solid var(--border-color); /* Added border to match original */
+        }
+
+        figure img {
+            max-width: 100%;
+            height: auto;
+            max-height: 350px; /* Limit diagram height */
+            border: 1px solid var(--border-color);
+            background-color: white;
+            display: block; /* Prevents extra space below image */
+            margin: 0 auto; /* Center image */
+        }
+        figure img[src=""] {
+            display: none; /* Hide image tag if src is empty */
+        }
+
+        figure.intro-figure img {
+             max-height: 450px; /* Allow intro image to be larger */
+        }
+
+        figure figcaption {
+             font-size: 0.9em;
+             color: #666;
+             margin-top: 8px; /* Space above caption */
+        }
+
+        /* --- Notes Styling (Adapted from original) --- */
+         .notes {
+             font-size: 0.9em;
+             color: #555;
+             background-color: var(--bg-light);
+             padding: 10px;
+             border-radius: 4px;
+             border-left: 3px solid var(--dexing-red); /* Use Dexing Red */
+             margin-bottom: 1.5em;
+         }
+         .notes p {
+             margin-bottom: 0.5em; /* Tighter spacing inside notes */
+         }
+         .notes p:last-child {
+              margin-bottom: 0;
+         }
+
+        /* --- Alert Boxes --- (from new CSS - may not be used) */
+        .safety-warning, .attention {
+        border-left-width: 5px;
+        border-left-style: solid;
+        padding: 10px 15px;
+        margin: 1em 0;
+        border-radius: 4px;
+        }
+        .safety-warning {
+        border-left-color: var(--warning-color);
+        background-color: var(--warning-bg);
+        color: #721c24;
+        }
+        .attention {
+        border-left-color: var(--attention-color);
+        background-color: var(--attention-bg);
+        color: #856404;
+        }
+        .safety-warning strong, .attention strong {
+        font-weight: bold;
+        }
+
+        /* --- Collapsible Section Styling --- (from new CSS - may not be used) */
+        /* Apply this class to the H3 (or other element) that triggers the collapse */
+        section h3.collapsible-header {
+        cursor: pointer;
+        position: relative;
+        padding-right: 25px; /* Space for indicator */
+        margin-bottom: 0; /* Connects header visually to content below */
+        border-bottom: 1px solid var(--border-color); /* Separator line */
+        padding-bottom: 10px; /* Spacing above the line */
+        }
+
+        section h3.collapsible-header::after {
+        content: '▼'; /* Down arrow indicator */
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 0.8em;
+        color: var(--primary-color);
+        transition: transform 0.3s ease;
+        }
+
+        section h3.collapsible-header.collapsed::after {
+        content: '►'; /* Right arrow indicator when collapsed */
+        }
+
+        /* The content DIV immediately following the collapsible-header */
+        .collapsible-content {
+        overflow: hidden;
+        max-height: 5000px; /* Allow ample height when open */
+        transition: max-height 0.5s ease-in-out, padding 0.3s ease, margin 0.3s ease, border 0.3s ease, opacity 0.3s ease;
+        padding-top: 15px; /* Space below header when open */
+        margin-top: 0;
+        border-top: 1px solid var(--bg-light); /* Subtle line separating from header */
+        opacity: 1;
+        }
+
+        .collapsible-content.collapsed {
+        max-height: 0;
+        padding-top: 0;
+        padding-bottom: 0;
+        margin-top: 0;
+        border-top: none; /* Hide border when collapsed */
+        opacity: 0;
+        }
+
+        /* ==========================================================================
+        RESPONSIVE ADJUSTMENTS (Combined & adapted from original and new)
+        ========================================================================== */
+        @media (max-width: 992px) {
+            .container {
+                max-width: 95%;
+                padding: 20px;
+            }
+            table { font-size: 0.90em; min-width: 800px; } /* Adjusted from original */
+            th, td { padding: 8px 10px; } /* Adjusted from new */
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+                margin: 10px; /* Reduce margin on smaller screens */
+            }
+            .container > h1 { font-size: 1.6em; }
+            section > h2 { font-size: 1.3em; }
+            section > h3 { font-size: 1.1em; } /* Includes collapsible */
+
+            table { font-size: 0.85em; min-width: 0; } /* Allow table to shrink */
+            thead th { white-space: normal; } /* Allow headers to wrap */
+            tbody td:first-child { white-space: normal; } /* Allow wrapping */
+            th, td { padding: 8px 10px; }
+
+            /* Image gallery styling from new CSS (not used here currently) */
+            .image-gallery figure {
+                flex-basis: calc(50% - 15px);
+                max-width: 45%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container > h1 { font-size: 1.4em; }
+            section > h2 { font-size: 1.15em; }
+            section > h3 { font-size: 1.0em; } /* Includes collapsible */
+            .container { padding: 15px; }
+
+            th, td { padding: 6px 8px; font-size: 0.85em; }
+            ul { margin-left: 20px; }
+
+             /* Image gallery styling from new CSS (not used here currently) */
+            .image-gallery figure {
+                 flex-basis: 100%;
+                 max-width: 90%;
+            }
+        }
+
+        /* ==========================================================================
+        PRINT SPECIFIC STYLES (Adapted from original, integrated with new variables/structure)
+        * Optimizes layout for printing.
+        * Ensures colors are printed where possible.
+        * Allows content splitting across pages as requested.
+        ========================================================================== */
+        @media print {
+            body {
+                background-color: #fff !important; /* Force white background */
+                color: #000 !important; /* Force black text */
+                font-size: 9pt;
+                -webkit-print-color-adjust: exact !important; /* Try to force color printing */
+                print-color-adjust: exact !important;
+            }
+            .container {
+                max-width: 100% !important;
+                width: 100% !important;
+                margin: 0 !important;
+                padding: 1cm !important; /* Add print margins */
+                box-shadow: none !important;
+                border-radius: 0 !important;
+                border: none !important;
+            }
+
+            h1, h2, h3 {
+                color: #000 !important; /* Black headings for print */
+                border-color: #999 !important;
+            }
+             /* Main title */
+             .container > h1 {
+                font-size: 14pt;
+                text-align: center;
+                border-bottom: 2px solid #666 !important; /* Darker border for print */
+                padding-bottom: 0.5em;
+                margin-bottom: 1em;
+             }
+             /* Section titles */
+            section > h2 {
+                 font-size: 12pt;
+                 margin-top: 1.5em;
+                 border-bottom: 1px solid #999 !important;
+            }
+             section > h3 {
+                 font-size: 11pt;
+             }
+
+            section {
+                border: none !important;
+                margin-bottom: 1.5em;
+                page-break-inside: auto; /* Allow sections to split */
+                padding-bottom: 0;
+            }
+
+            figure {
+                background-color: #f0f0f0 !important;
+                border: 1px solid #ccc !important;
+                page-break-inside: avoid; /* Try to keep figures intact */
+                min-height: 50px;
+            }
+            figure img {
+                border: 1px solid #999 !important;
+                max-height: 200px;
+                 background-color: white !important;
+            }
+             figure img[src=""] {
+                display: none !important;
+             }
+             figure figcaption {
+                 color: #333 !important;
+             }
+
+
+            .table-container {
+                 overflow: visible !important;
+                 margin-top: 1em;
+                 margin-bottom: 1em;
+            }
+            table {
+                width: 100% !important;
+                border-collapse: collapse !important;
+                font-size: 8pt;
+                min-width: 0;
+                page-break-inside: auto; /* Allow tables to break */
+            }
+            th, td {
+                border: 1px solid #999 !important;
+                padding: 4px 5px;
+                white-space: normal !important; /* Allow content wrapping */
+                text-align: left; /* Reset text-align for print consistency */
+                vertical-align: top;
+            }
+            /* Re-apply center alignment where needed */
+            tbody td:not(:first-child):not(:last-child),
+            thead th:not(:first-child):not(:last-child) {
+                text-align: center !important;
+            }
+             tbody td:nth-child(2) { /* Center L(cm) */
+                 text-align: center !important;
+             }
+
+            thead th {
+                background-color: #ddd !important;
+                color: #000 !important;
+                font-weight: bold;
+                 vertical-align: middle !important;
+                 border-bottom-width: 1px !important; /* Reduce border width for print */
+            }
+            tbody td:first-child {
+                background-color: #eee !important;
+                color: #000 !important;
+                font-weight: bold;
+                white-space: normal !important; /* Allow model numbers to wrap if long */
+            }
+             tbody td:last-child {
+                  text-align: left !important;
+             }
+
+            tbody tr {
+                 page-break-inside: auto !important; /* ALLOW rows to split across pages */
+             }
+            tbody tr:nth-child(even) {
+                 background-color: #f9f9f9 !important;
+            }
+            tbody tr:nth-child(even) td:first-child {
+                 background-color: #f0f0f0 !important;
+            }
+            tbody tr:hover, tbody tr:hover td:first-child {
+                background-color: transparent !important; /* Disable hover effect */
+            }
+
+
+            .notes {
+                background-color: #f0f0f0 !important;
+                border-left: 3px solid #aaa !important;
+                color: #000 !important;
+                page-break-inside: avoid; /* Keep notes blocks together */
+            }
+            a {
+                text-decoration: none !important;
+                color: #000 !important;
+            }
+            a[href^="mailto:"]::after, a[href^="http"]::after {
+                content: "" !important; /* Remove visual indicators for links */
+            }
+
+             /* Hide elements not intended for print */
+            .collapsible-header::after { content: "" !important; } /* Hide collapsible indicators */
+            .collapsible-content.collapsed { /* Force display of collapsed content */
+                 max-height: none !important;
+                 opacity: 1 !important;
+                 padding-top: 15px !important; /* Restore padding */
+                 border-top: 1px solid #f0f0f0 !important;
+            }
+
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Removed as per instructions -->
+
+    <main class="container">
+
+        <h1>Transverse Probes Catalog</h1>
+
+        <!-- Section for Page 1 - Intro Image -->
+        <section id="intro">
+             <h2>Probe Overview</h2>
+             <figure class="intro-figure">
+                 <!-- Empty src as requested -->
+                 <img src="/Users/Roach/Desktop/ pOCCOS/Product-Descriptions-/mEow/products/Transverse_Hall_Probes/Transverse+Probe+2024_page-002.jpg">
+                 <figcaption>Dexinmag Transverse Probe for Magnetic Field Measurement</figcaption>
+             </figure>
+             <p>This document details the various types of transverse Hall probes offered by Xiamen Dexing Magnet Tech. Co., Ltd., suitable for a range of magnetic field measurement applications.</p>
+        </section>
+
+        <!-- Section for Page 2 - Ordinary Transverse Probe -->
+        <section id="ordinary">
+            <h2>Ordinary Transverse Probe</h2>
+            <figure>
+                <!-- Image specified by user -->
+                <img src="/Users/Roach/Desktop/ pOCCOS/Product-Descriptions-/mEow/products/Transverse_Hall_Probes/Transverse+Probe+2024_page-005.jpg">
+                <figcaption>Diagram of Ordinary Transverse Probe</figcaption>
+            </figure>
+            <div class="notes">
+                <p>Probe length can be customized; Array probe can be customized; Can add a temperature sensor inside the probe; Recommend: DX-130 gaussmeter, etc.</p>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>NO.</th>
+                            <th>L(cm)</th>
+                            <th>T(mm) max</th>
+                            <th>W(mm)</th>
+                            <th>A(mm)</th>
+                            <th>Dia. of active area(mm)</th>
+                            <th>Frequency range</th>
+                            <th>Full range</th>
+                            <th>Accuracy (linearity)</th>
+                            <th>Working temp. zone</th>
+                            <th>Zero field temp. coefficient (max)</th>
+                            <th>Temp. coefficient (max)</th>
+                            <th>Packaging materials</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>CDX800F</td>
+                            <td>6/8/10</td>
+                            <td>1.00</td>
+                            <td>2.6</td>
+                            <td>1±0.1</td>
+                            <td>0.15</td>
+                            <td>DC-1kHz</td>
+                            <td>30kGs</td>
+                            <td>±0.50% ~20kGs</td>
+                            <td>-10°C ~ +75°C</td>
+                            <td>±0.11 G/°C</td>
+                            <td>±0.015%/°C</td>
+                            <td>Brass</td>
+                        </tr>
+                        <tr>
+                            <td>CDX801F</td>
+                            <td>6/8/10</td>
+                            <td>0.80</td>
+                            <td>2.2</td>
+                            <td>1±0.1</td>
+                            <td>0.15</td>
+                            <td>DC-1kHz</td>
+                            <td>30kGs</td>
+                            <td>±0.50% ~20kGs</td>
+                            <td>-10°C ~ +75°C</td>
+                            <td>±0.11 G/°C</td>
+                            <td>±0.015%/°C</td>
+                            <td>Brass</td>
+                        </tr>
+                        <tr>
+                            <td>CDX802F</td>
+                            <td>6/8/10</td>
+                            <td>0.60</td>
+                            <td>1.7</td>
+                            <td>1±0.1</td>
+                            <td>0.15</td>
+                            <td>DC-1kHz</td>
+                            <td>30kGs</td>
+                            <td>±0.50% ~20kGs</td>
+                            <td>-10°C ~ +75°C</td>
+                            <td>±0.11 G/°C</td>
+                            <td>±0.015%/°C</td>
+                            <td>Brass</td>
+                        </tr>
+                        <tr>
+                            <td>MDX801F</td>
+                            <td>6/8/10</td>
+                            <td>0.50</td>
+                            <td>1.6</td>
+                            <td>1±0.1</td>
+                            <td>0.15</td>
+                            <td>DC-1kHz</td>
+                            <td>30kGs</td>
+                            <td>±0.50% ~20kGs</td>
+                            <td>-10°C ~ +75°C</td>
+                            <td>±0.11 G/°C</td>
+                            <td>±0.015%/°C</td>
+                            <td>Brass</td>
+                        </tr>
+                        <tr>
+                            <td>MDX802F</td>
+                            <td>6/8/10</td>
+                            <td>0.50</td>
+                            <td>1.2</td>
+                            <td>1±0.1</td>
+                            <td>0.15</td>
+                            <td>DC-1kHz</td>
+                            <td>30kGs</td>
+                            <td>±0.50% ~20kGs</td>
+                            <td>-10°C ~ +75°C</td>
+                            <td>±0.11 G/°C</td>
+                            <td>±0.015%/°C</td>
+                            <td>Brass</td>
+                        </tr>
+                        <tr>
+                            <td>MDX803F (Flexible)</td>
+                            <td>6/8/10</td>
+                            <td>0.35</td>
+                            <td>1.2/0.8</td>
+                            <td>0.2±0.05</td>
+                            <td>0.15</td>
+                            <td>DC-50kHz</td>
+                            <td>30kGs</td>
+                            <td>±0.20% ~20kGs</td>
+                            <td>-10°C ~ +75°C</td>
+                            <td>±0.11 G/°C</td>
+                            <td>±0.015%/°C</td>
+                            <td>Synthetic fat</td>
+                        </tr>
+                        <tr>
+                            <td>MMDX804F (Flexible)</td>
+                            <td>6/8/10</td>
+                            <td>0.25</td>
+                            <td>1.2</td>
+                            <td>0.2±0.05</td>
+                            <td>0.10</td>
+                            <td>DC-50kHz</td>
+                            <td>30kGs</td>
+                            <td>±0.20% ~20kGs</td>
+                            <td>-10°C ~ +75°C</td>
+                            <td>±0.11 G/°C</td>
+                            <td>±0.015%/°C</td>
+                            <td>Synthetic fat</td>
+                        </tr>
+                        <tr>
+                            <td>MMDX805F (Flexible)</td>
+                            <td>6/8/10</td>
+                            <td>0.25</td>
+                            <td>0.8</td>
+                            <td>0.2±0.05</td>
+                            <td>0.05</td>
+                            <td>DC-50kHz</td>
+                            <td>30kGs</td>
+                            <td>±0.20% ~20kGs</td>
+                            <td>-10°C ~ +75°C</td>
+                            <td>±0.11 G/°C</td>
+                            <td>±0.015%/°C</td>
+                            <td>Synthetic fat</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Section for Page 3 - High precision transverse probe -->
+        <section id="high-precision">
+            <h2>High Precision Transverse Probe</h2>
+             
+             <div class="notes">
+                 <p>Probe length can be customized; Array probe can be customized; Can add a temperature sensor inside the probe; Recommend: DX-150, DX-160 gaussmeter</p>
+             </div>
+             <div class="table-container">
+                 <table>
+                     <thead>
+                        <tr>
+                            <th>NO.</th>
+                            <th>L(cm)</th>
+                            <th>T(mm) max</th>
+                            <th>W(mm)</th>
+                            <th>A(mm)</th>
+                            <th>Dia. of active area(mm)</th>
+                            <th>Frequency range</th>
+                            <th>Full range</th>
+                            <th>Accuracy (linearity)</th>
+                            <th>Working temp. zone</th>
+                            <th>Zero field temp. coefficient (max)</th>
+                            <th>Temp. coefficient (max)</th>
+                            <th>Packaging materials</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                            <td>MCDX800F</td>
+                            <td>6/8/10</td>
+                            <td>1.00</td>
+                            <td>2.6</td>
+                            <td>1±0.1</td>
+                            <td>0.15</td>
+                            <td>DC-1kHz</td>
+                            <td>300kGs</td>
+                            <td>±0.2% ~ 30kGs</td>
+                            <td>-10°C ~ +75°C</td>
+                            <td>±0.08 G/°C</td>
+                            <td>±0.015%/°C</td>
+                            <td>Brass</td>
+                        </tr>
+                        <tr>
+                            <td>MCDX801F</td>
+                            <td>6/8/10</td>
+                            <td>0.80</td>
+                            <td>2.2</td>
+                            <td>1±0.1</td>
+                            <td>0.15</td>
+                            <td>DC-1kHz</td>
+                            <td>300kGs</td>
+                            <td>±0.2% ~ 30kGs</td>
+                            <td>-10°C ~ +75°C</td>
+                            <td>±0.08 G/°C</td>
+                            <td>±0.015%/°C</td>
+                            <td>Brass</td>
+                        </tr>
+                        <tr>
+                            <td>MCDX802F</td>
+                            <td>6/8/10</td>
+                            <td>0.60</td>
+                            <td>1.7</td>
+                            <td>1±0.1</td>
+                            <td>0.15</td>
+                            <td>DC-1kHz</td>
+                            <td>300kGs</td>
+                            <td>±0.2% ~ 30kGs</td>
+                            <td>-10°C ~ +75°C</td>
+                            <td>±0.08 G/°C</td>
+                            <td>±0.015%/°C</td>
+                            <td>Brass</td>
+                        </tr>
+                        <tr>
+                            <td>MMDX801F</td>
+                            <td>6/8/10</td>
+                            <td>0.50</td>
+                            <td>1.6</td>
+                            <td>1±0.1</td>
+                            <td>0.15</td>
+                            <td>DC-1kHz</td>
+                            <td>300kGs</td>
+                            <td>±0.2% ~ 30kGs</td>
+                            <td>-10°C ~ +75°C</td>
+                            <td>±0.08 G/°C</td>
+                            <td>±0.015%/°C</td>
+                            <td>Brass</td>
+                        </tr>
+                        <tr>
+                            <td>MMDX802F</td>
+                            <td>6/8/10</td>
+                            <td>0.50</td>
+                            <td>1.2</td>
+                            <td>1±0.1</td>
+                            <td>0.15</td>
+                            <td>DC-1kHz</td>
+                            <td>300kGs</td>
+                            <td>±0.2% ~ 30kGs</td>
+                            <td>-10°C ~ +75°C</td>
+                            <td>±0.08 G/°C</td>
+                            <td>±0.015%/°C</td>
+                            <td>Brass</td>
+                        </tr>
+                        <tr>
+                            <td>MMDX803F (Flexible)</td>
+                            <td>6/8/10</td>
+                            <td>0.35</td>
+                            <td>1.2/0.8</td>
+                            <td>0.2±0.05</td>
+                            <td>0.15</td>
+                            <td>DC-50kHz</td>
+                            <td>300kGs</td>
+                            <td>±0.2% ~ 30kGs</td>
+                            <td>-10°C ~ +75°C</td>
+                            <td>±0.08 G/°C</td>
+                            <td>±0.015%/°C</td>
+                            <td>Synthetic fat</td>
+                        </tr>
+                        <tr>
+                            <td>MMDX804F (Flexible)</td>
+                            <td>6/8/10</td>
+                            <td>0.25</td>
+                            <td>1.2</td>
+                            <td>0.2±0.05</td>
+                            <td>0.10</td>
+                            <td>DC-50kHz</td>
+                            <td>300kGs</td>
+                            <td>±0.2% ~ 30kGs</td>
+                            <td>-10°C ~ +75°C</td>
+                            <td>±0.08 G/°C</td>
+                            <td>±0.015%/°C</td>
+                            <td>Synthetic fat</td>
+                        </tr>
+                        <tr>
+                            <td>MMDX805F (Flexible)</td>
+                            <td>6/8/10</td>
+                            <td>0.25</td>
+                            <td>0.8</td>
+                            <td>0.2±0.05</td>
+                            <td>0.05</td>
+                            <td>DC-50kHz</td>
+                            <td>300kGs</td>
+                            <td>±0.2% ~ 20kGs</td> <!-- Note: Range changed here vs others -->
+                            <td>-10°C ~ +75°C</td>
+                            <td>±0.11 G/°C</td> <!-- Note: Coeff changed here vs others -->
+                            <td>±0.015%/°C</td>
+                            <td>Synthetic fat</td>
+                        </tr>
+                     </tbody>
+                 </table>
+             </div>
+        </section>
+
+        <!-- Section for Page 4 - Ultra High Precision Transverse Probe -->
+        <section id="ultra-high-precision">
+            <h2>Ultra High Precision Transverse Probe</h2>
+             
+             <div class="notes">
+                 <p>Probe length can be customized; Array probe can be customized; Can add a temperature sensor inside the probe; Recommend: DX-180, DX-210, DX-360 gaussmeter</p>
+             </div>
+             <div class="table-container">
+                 <table>
+                     <thead>
+                        <tr>
+                            <th>NO.</th>
+                            <th>L(cm)</th>
+                            <th>T(mm) max</th>
+                            <th>W(mm)</th>
+                            <th>A(mm)</th>
+                            <th>Dia. of active area(mm)</th>
+                            <th>Frequency range</th>
+                            <th>Full range</th>
+                            <th>Accuracy (linearity)</th>
+                            <th>Working temp. zone</th>
+                            <th>Zero field temp. coefficient (max)</th>
+                            <th>Temp. coefficient (max)</th>
+                            <th>Packaging materials</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                            <td>HCDX800F</td>
+                            <td>6/8/10</td>
+                            <td>1.00</td>
+                            <td>2.6</td>
+                            <td>1±0.1</td>
+                            <td>0.15</td>
+                            <td>DC-1kHz</td>
+                            <td>300kGs</td>
+                            <td>±0.05% ~ 30kGs</td>
+                            <td>-10°C ~ +100°C</td>
+                            <td>±0.06 G/°C</td>
+                            <td>±0.007%/°C</td>
+                            <td>Brass</td>
+                        </tr>
+                        <tr>
+                            <td>HCDX801F</td>
+                            <td>6/8/10</td>
+                            <td>0.80</td>
+                            <td>2.2</td>
+                            <td>1±0.1</td>
+                            <td>0.15</td>
+                            <td>DC-1kHz</td>
+                            <td>300kGs</td>
+                            <td>±0.05% ~ 30kGs</td>
+                            <td>-10°C ~ +100°C</td>
+                            <td>±0.06 G/°C</td>
+                            <td>±0.007%/°C</td>
+                            <td>Brass</td>
+                        </tr>
+                        <tr>
+                            <td>HCDX802F</td>
+                            <td>6/8/10</td>
+                            <td>0.60</td>
+                            <td>1.7</td>
+                            <td>1±0.1</td>
+                            <td>0.15</td>
+                            <td>DC-1kHz</td>
+                            <td>300kGs</td>
+                            <td>±0.05% ~ 30kGs</td>
+                            <td>-10°C ~ +100°C</td>
+                            <td>±0.06 G/°C</td>
+                            <td>±0.007%/°C</td>
+                            <td>Brass</td>
+                        </tr>
+                        <tr>
+                            <td>HMDX801F</td>
+                            <td>6/8/10</td>
+                            <td>0.50</td>
+                            <td>1.6</td>
+                            <td>1±0.1</td>
+                            <td>0.15</td>
+                            <td>DC-1kHz</td>
+                            <td>300kGs</td>
+                            <td>±0.05% ~ 30kGs</td>
+                            <td>-10°C ~ +100°C</td>
+                            <td>±0.06 G/°C</td>
+                            <td>±0.007%/°C</td>
+                            <td>Brass</td>
+                        </tr>
+                        <tr>
+                            <td>HMDX802F</td>
+                            <td>6/8/10</td>
+                            <td>0.50</td>
+                            <td>1.2</td>
+                            <td>1±0.1</td>
+                            <td>0.15</td>
+                            <td>DC-1kHz</td>
+                            <td>300kGs</td>
+                            <td>±0.05% ~ 30kGs</td>
+                            <td>-10°C ~ +100°C</td>
+                            <td>±0.06 G/°C</td>
+                            <td>±0.007%/°C</td>
+                            <td>Brass</td>
+                        </tr>
+                        <tr>
+                            <td>HMDX803F (Flexible)</td>
+                            <td>6/8/10</td>
+                            <td>0.35</td>
+                            <td>1.2/0.8</td>
+                            <td>0.2±0.05</td>
+                            <td>0.15</td>
+                            <td>DC-50kHz</td>
+                            <td>300kGs</td>
+                            <td>±0.05% ~ 30kGs</td>
+                            <td>-10°C ~ +100°C</td>
+                            <td>±0.08 G/°C</td>
+                            <td>±0.007%/°C</td>
+                            <td>Synthetic fat</td>
+                        </tr>
+                        <tr>
+                            <td>HMDX804F (Flexible)</td>
+                            <td>6/8/10</td>
+                            <td>0.25</td>
+                            <td>1.2</td>
+                            <td>0.2±0.05</td>
+                            <td>0.10</td>
+                            <td>DC-50kHz</td>
+                            <td>300kGs</td>
+                            <td>±0.05% ~ 30kGs</td>
+                            <td>-10°C ~ +100°C</td>
+                            <td>±0.08 G/°C</td>
+                            <td>±0.007%/°C</td>
+                            <td>Synthetic fat</td>
+                        </tr>
+                        <tr>
+                            <td>HMDX805F (Flexible)</td>
+                            <td>6/8/10</td>
+                            <td>0.25</td>
+                            <td>0.8</td>
+                            <td>0.2±0.05</td>
+                            <td>0.05</td>
+                            <td>DC-50kHz</td>
+                            <td>300kGs</td>
+                            <td>±0.05% ~ 30kGs</td>
+                            <td>-10°C ~ +100°C</td>
+                            <td>±0.11 G/°C</td>
+                            <td>±0.007%/°C</td>
+                            <td>Synthetic fat</td>
+                        </tr>
+                     </tbody>
+                 </table>
+             </div>
+        </section>
+
+        <!-- Section for Page 5 - Flexible high-precision transverse probe -->
+        <section id="flexible-high-precision">
+             <h2>Flexible High-Precision Transverse Probe</h2>
+             <figure>
+                 <!-- Image specified by user -->
+                 <img src="Transverse+Probe+2024_page-014.jpg" alt="Flexible High-Precision Transverse Probe Diagram">
+                 <figcaption>Diagram of Flexible High-Precision Transverse Probe (Max bending angle 45°, Do not bend top chip position)</figcaption>
+             </figure>
+             <div class="notes">
+                 <p>Suitable for special environment or high frequency.</p>
+                 <p>Probe length can be customized; Array probe can be customized; Can add a temperature sensor inside the probe.</p>
+             </div>
+             <div class="table-container">
+                 <table>
+                     <thead>
+                        <tr>
+                            <th>NO.</th>
+                            <th>L(cm)</th>
+                            <th>T(mm) max</th>
+                            <th>W(mm)</th>
+                            <th>A(mm)</th>
+                            <th>Dia. of active area(mm)</th>
+                            <th>Frequency range</th>
+                            <th>Full range</th>
+                            <th>Accuracy (linearity)</th>
+                            <th>Working temp. zone</th>
+                            <th>Zero field temp. coefficient (max)</th>
+                            <th>Temp. coefficient (max)</th>
+                            <th>Packaging materials</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                            <td>MCDX800F-R</td>
+                            <td>6/8/10</td>
+                            <td>1.50</td>
+                            <td>2.4</td>
+                            <td>1±0.1</td>
+                            <td>0.15</td>
+                            <td>DC-50kHz</td>
+                            <td>300kGs</td>
+                            <td>±0.2% ~ 30kGs</td>
+                            <td>-10°C ~ +60°C</td>
+                            <td>±0.08 G/°C</td>
+                            <td>±0.015%/°C</td>
+                            <td>Plastic</td>
+                        </tr>
+                        <tr>
+                            <td>MCDX801F-R</td>
+                            <td>6/8/10</td>
+                            <td>1.00</td>
+                            <td>2.6</td>
+                            <td>1±0.1</td>
+                            <td>0.15</td>
+                            <td>DC-50kHz</td>
+                            <td>300kGs</td>
+                            <td>±0.2% ~ 30kGs</td>
+                            <td>-10°C ~ +60°C</td>
+                            <td>±0.08 G/°C</td>
+                            <td>±0.015%/°C</td>
+                            <td>Plastic</td>
+                        </tr>
+                        <tr>
+                            <td>MCDX802F-R</td>
+                            <td>6/8/10</td>
+                            <td>0.80</td>
+                            <td>2.2</td>
+                            <td>1±0.1</td>
+                            <td>0.15</td>
+                            <td>DC-50kHz</td>
+                            <td>300kGs</td>
+                            <td>±0.2% ~ 30kGs</td>
+                            <td>-10°C ~ +60°C</td>
+                            <td>±0.08 G/°C</td>
+                            <td>±0.015%/°C</td>
+                            <td>Plastic</td>
+                        </tr>
+                        <tr>
+                            <td>MCDX803F-R</td>
+                            <td>6/8/10</td>
+                            <td>0.50</td>
+                            <td>1.6</td>
+                            <td>1±0.1</td>
+                            <td>0.15</td>
+                            <td>DC-50kHz</td>
+                            <td>300kGs</td>
+                            <td>±0.2% ~ 30kGs</td>
+                            <td>-10°C ~ +60°C</td>
+                            <td>±0.08 G/°C</td>
+                            <td>±0.015%/°C</td>
+                            <td>Plastic</td>
+                        </tr>
+                     </tbody>
+                 </table>
+             </div>
+        </section>
+
+        <!-- Section for Page 6 - High-precision temperature-compensated Hall probe -->
+        <section id="temp-compensated">
+             <h2>High-Precision Temperature-Compensated Hall Probe (Built-in Temperature Sensor)</h2>
+             
+              <div class="notes">
+                   <p>Probe length can be customized; Array probe can be customized.</p>
+              </div>
+             <div class="table-container">
+                 <table>
+                     <thead>
+                        <tr>
+                            <th>NO.</th>
+                            <th>L(cm)</th>
+                            <th>T(mm) max</th>
+                            <th>W(mm)</th>
+                            <th>A(mm)</th>
+                            <th>Dia. of active area(mm)</th>
+                            <th>Frequency range</th>
+                            <th>Full range</th>
+                            <th>Accuracy (linearity)</th>
+                            <th>Working temp. zone</th>
+                            <th>Zero field temp. coefficient (max)</th>
+                            <th>Temp. coefficient (max)</th>
+                            <th>Packaging materials</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                            <td>MCDX800F-T</td>
+                            <td>6/8/10</td>
+                            <td>1.00</td>
+                            <td>2.6</td>
+                            <td>1±0.1</td>
+                            <td>0.15</td>
+                            <td>DC-1kHz</td>
+                            <td>300kGs</td>
+                            <td>±0.2% ~ 30kGs</td>
+                            <td>-10°C ~ +100°C</td>
+                            <td>±0.08G/°C</td>
+                            <td>±0.01%/°C</td>
+                            <td>Brass</td>
+                        </tr>
+                        <tr>
+                            <td>MCDX801F-T</td>
+                            <td>6/8/10</td>
+                            <td>0.80</td>
+                            <td>2.2</td>
+                            <td>1±0.1</td>
+                            <td>0.15</td>
+                            <td>DC-1kHz</td>
+                            <td>300kGs</td>
+                            <td>±0.2% ~ 30kGs</td>
+                            <td>-10°C ~ +100°C</td>
+                            <td>±0.08 G/°C</td>
+                            <td>±0.01%/°C</td>
+                            <td>Brass</td>
+                        </tr>
+                        <tr>
+                            <td>HCDX800F-T</td>
+                            <td>6/8/10</td>
+                            <td>1.00</td>
+                            <td>2.6</td>
+                            <td>1±0.1</td>
+                            <td>0.15</td>
+                            <td>DC-1kHz</td>
+                            <td>300kGs</td>
+                            <td>±0.05% ~30kGs</td>
+                            <td>-10°C ~ +100°C</td>
+                            <td>±0.08G/°C</td>
+                            <td>±0.01%/°C</td>
+                            <td>Brass</td>
+                        </tr>
+                        <tr>
+                            <td>HCDX801F-T</td>
+                            <td>6/8/10</td>
+                            <td>0.80</td>
+                            <td>2.2</td>
+                            <td>1±0.1</td>
+                            <td>0.15</td>
+                            <td>DC-1kHz</td>
+                            <td>300kGs</td>
+                            <td>±0.05% ~30kGs</td>
+                            <td>-10°C ~ +100°C</td>
+                            <td>±0.08 G/°C</td>
+                            <td>±0.01%/°C</td>
+                            <td>Brass</td>
+                        </tr>
+                     </tbody>
+                 </table>
+             </div>
+        </section>
+
+        <!-- Section for Page 7 - High precision and high magnetic field Hall probe -->
+        <section id="high-field">
+             <h2>High Precision and High Magnetic Field Hall Probe</h2>
+             
+              <div class="notes">
+                   <p>Probe length can be customized; Array probe can be customized; Can add a temperature sensor inside the probe.</p>
+              </div>
+             <div class="table-container">
+                 <table>
+                     <thead>
+                        <tr>
+                            <th>NO.</th>
+                            <th>L(cm)</th>
+                            <th>T(mm) max</th>
+                            <th>W(mm)</th>
+                            <th>A(mm)</th>
+                            <th>Dia. of active area(mm)</th>
+                            <th>Frequency range</th>
+                            <th>Full range</th>
+                            <th>Accuracy (linearity)</th>
+                            <th>Working temp. zone</th>
+                            <th>Zero field temp. coefficient (max)</th>
+                            <th>Temp. coefficient (max)</th>
+                            <th>Packaging materials</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                            <td>HCDX800F-H</td>
+                            <td>6/8/10</td>
+                            <td>1.00</td>
+                            <td>2.6</td>
+                            <td>1±0.1</td>
+                            <td>0.15</td>
+                            <td>DC-1kHz</td>
+                            <td>300kGs</td>
+                            <td style="text-align: left; white-space: pre-line;">±0.05% ~ 30kGs
+                                ±0.8% ~ 50kGs
+                                ±1.5% ~ 100kGs
+                                ±5% ~ 300kGs</td>
+                            <td>-10°C ~ +100°C</td>
+                            <td>±0.08G/°C</td>
+                            <td>±0.01%/°C</td>
+                            <td>Brass</td>
+                        </tr>
+                        <tr>
+                            <td>HCDX801F-H</td>
+                            <td>6/8/10</td>
+                            <td>0.80</td>
+                            <td>2.2</td>
+                            <td>1±0.1</td>
+                            <td>0.15</td>
+                            <td>DC-1kHz</td>
+                            <td>300kGs</td>
+                             <td style="text-align: left; white-space: pre-line;">±0.05% ~ 30kGs
+                                 ±0.8% ~ 50kGs
+                                 ±1.5% ~ 100kGs
+                                 ±5% ~ 300kGs</td>
+                            <td>-10°C ~ +100°C</td>
+                            <td>±0.08 G/°C</td>
+                            <td>±0.01%/°C</td>
+                            <td>Brass</td>
+                        </tr>
+                     </tbody>
+                 </table>
+             </div>
+        </section>
+
+        <!-- Section for Page 8 - High precision low magnetic field probe -->
+        <section id="low-field">
+             <h2>High Precision Low Magnetic Field Probe</h2>
+              
+               <div class="notes">
+                    <p>Probe length can be customized; Array probe can be customized; Can add a temperature sensor inside the probe.</p>
+               </div>
+              <div class="table-container">
+                  <table>
+                      <thead>
+                         <tr>
+                             <th>NO.</th>
+                             <th>L(cm)</th>
+                             <th>T(mm) max</th>
+                             <th>W(mm)</th>
+                             <th>A(mm)</th>
+                             <th>Resolution</th>
+                             <th>Full range</th>
+                             <th>Accuracy (linearity)</th>
+                             <th>Working temp. zone</th>
+                             <th>Zero field temp. coefficient (max)</th>
+                             <th>Temp. coefficient (max)</th>
+                             <th>Packaging materials</th>
+                         </tr>
+                      </thead>
+                      <tbody>
+                         <tr>
+                             <td>LDX801F</td>
+                             <td>7</td>
+                             <td>2.8</td>
+                             <td>7.2</td>
+                             <td>2±0.1</td>
+                             <td>0.01uT</td>
+                             <td>600uT</td>
+                             <td style="text-align: left; white-space: pre-line;">±0.2% ~ 100µT
+                                 ±0.4% ~ 600µT</td>
+                             <td>-10°C ~ +75°C</td>
+                             <td>±0.0008 G/°C</td>
+                             <td>±0.05%/°C</td>
+                             <td>Fiber</td>
+                         </tr>
+                      </tbody>
+                  </table>
+              </div>
+        </section>
+
+        <!-- Section for Page 9 - High-precision high-temperature-resistant temp-compensated probe -->
+        <section id="high-temp-compensated">
+             <h2>High-Precision High-Temperature-Resistant Temperature-Compensated Hall Probe (with Temperature Sensor)</h2>
+              
+               <div class="notes">
+                    <p>Probe length can be customized; Array probe can be customized.</p>
+               </div>
+              <div class="table-container">
+                  <table>
+                      <thead>
+                         <tr>
+                            <th>NO.</th>
+                            <th>L(cm)</th>
+                            <th>T(mm) max</th>
+                            <th>W(mm)</th>
+                            <th>A(mm)</th>
+                            <th>Dia. of active area(mm)</th>
+                            <th>Frequency range</th>
+                            <th>Full range</th>
+                            <th>Accuracy (linearity)</th>
+                            <th>Working temp. zone</th>
+                            <th>Zero field temp. coefficient (max)</th>
+                            <th>Temp. coefficient (max)</th>
+                            <th>Packaging materials</th>
+                         </tr>
+                      </thead>
+                      <tbody>
+                         <tr>
+                             <td>CDX800F-HT</td>
+                             <td>6/8/10</td>
+                             <td>1.00</td>
+                             <td>2.6</td>
+                             <td>1±0.1</td>
+                             <td>0.15</td>
+                             <td>DC-1kHz</td>
+                             <td>300kGs</td>
+                             <td>±0.1% ~ 30kGs</td>
+                             <td>-10°C ~ +195°C</td>
+                             <td>±0.08 G/°C</td>
+                             <td>±0.007%/°C</td>
+                             <td>Brass</td>
+                         </tr>
+                         <tr>
+                             <td>CDX801F-HT</td>
+                             <td>6/8/10</td>
+                             <td>0.80</td>
+                             <td>2.2</td>
+                             <td>1±0.1</td>
+                             <td>0.15</td>
+                             <td>DC-1kHz</td>
+                             <td>300kGs</td>
+                             <td>±0.1% ~ 30kGs</td>
+                             <td>-10°C ~ +195°C</td>
+                             <td>±0.08 G/°C</td>
+                             <td>±0.007%/°C</td>
+                             <td>Brass</td>
+                         </tr>
+                         <tr>
+                             <td>CDX802F-HT</td>
+                             <td>6/8/10</td>
+                             <td>0.60</td>
+                             <td>1.7</td>
+                             <td>1±0.1</td>
+                             <td>0.15</td>
+                             <td>DC-1kHz</td>
+                             <td>300kGs</td>
+                             <td>±0.1% ~ 30kGs</td>
+                             <td>-10°C ~ +195°C</td>
+                             <td>±0.08 G/°C</td>
+                             <td>±0.007%/°C</td>
+                             <td>Brass</td>
+                         </tr>
+                         <tr>
+                             <td>MDX801F-HT</td>
+                             <td>6/8/10</td>
+                             <td>0.50</td>
+                             <td>1.6</td>
+                             <td>1±0.1</td>
+                             <td>0.15</td>
+                             <td>DC-1kHz</td>
+                             <td>300kGs</td>
+                             <td>±0.1% ~ 30kGs</td>
+                             <td>-10°C ~ +195°C</td>
+                             <td>±0.08 G/°C</td>
+                             <td>±0.007%/°C</td>
+                             <td>Brass</td>
+                         </tr>
+                         <tr>
+                             <td>MDX802F-HT</td>
+                             <td>6/8/10</td>
+                             <td>0.50</td>
+                             <td>1.2</td>
+                             <td>1±0.1</td>
+                             <td>0.15</td>
+                             <td>DC-1kHz</td>
+                             <td>300kGs</td>
+                             <td>±0.1% ~ 30kGs</td>
+                             <td>-10°C ~ +195°C</td>
+                             <td>±0.08 G/°C</td>
+                             <td>±0.007%/°C</td>
+                             <td>Brass</td>
+                         </tr>
+                         <tr>
+                             <td>MDX803F-HT</td>
+                             <td>6/8/10</td>
+                             <td>0.35</td>
+                             <td>1.2/0.8</td>
+                             <td>0.2±0.05</td>
+                             <td>0.15</td>
+                             <td>DC-50kHz</td>
+                             <td>300kGs</td>
+                             <td>±0.1% ~ 30kGs</td>
+                             <td>-10°C ~ +195°C</td>
+                             <td>±0.08 G/°C</td>
+                             <td>±0.015%/°C</td>
+                             <td>Synthetic fat</td>
+                         </tr>
+                      </tbody>
+                  </table>
+              </div>
+        </section>
+
+        <!-- Section for Page 10 - High-precision low-temperature-resistant temp-compensated probe -->
+        <section id="low-temp-compensated">
+             <h2>High-Precision Low-Temperature-Resistant Temperature-Compensated Hall Probe (with Temperature Sensor)</h2>
+              
+               <div class="notes">
+                    <p>Probe length can be customized; Array probe can be customized.</p>
+               </div>
+              <div class="table-container">
+                  <table>
+                      <thead>
+                         <tr>
+                            <th>NO.</th>
+                            <th>L(cm)</th>
+                            <th>T(mm) max</th>
+                            <th>W(mm)</th>
+                            <th>A(mm)</th>
+                            <th>Dia. of active area(mm)</th>
+                            <th>Frequency range</th>
+                            <th>Full range</th>
+                            <th>Accuracy (linearity)</th>
+                            <th>Working temp. zone</th>
+                            <th>Zero field temp. coefficient (max)</th>
+                            <th>Temp. coefficient (max)</th>
+                            <th>Packaging materials</th>
+                         </tr>
+                      </thead>
+                      <tbody>
+                         <tr>
+                             <td>MCDX800F-LT</td>
+                             <td>6/8/10</td>
+                             <td>1.00</td>
+                             <td>2.6</td>
+                             <td>1±0.1</td>
+                             <td>0.15</td>
+                             <td>DC-1kHz</td>
+                             <td>300kGs</td>
+                             <td>±0.2% ~ 20kGs</td>
+                             <td>-269°C ~ +75°C</td>
+                             <td>±0.08 G/°C</td>
+                             <td>±0.007%/°C</td>
+                             <td>Brass</td>
+                         </tr>
+                         <tr>
+                             <td>MCDX801F-LT</td>
+                             <td>6/8/10</td>
+                             <td>0.80</td>
+                             <td>2.2</td>
+                             <td>1±0.1</td>
+                             <td>0.15</td>
+                             <td>DC-1kHz</td>
+                             <td>300kGs</td>
+                             <td>±0.2% ~ 20kGs</td>
+                             <td>-269°C ~ +75°C</td>
+                             <td>±0.08 G/°C</td>
+                             <td>±0.007%/°C</td>
+                             <td>Brass</td>
+                         </tr>
+                         <tr>
+                             <td>MMDX801F-LT</td>
+                             <td>6/8/10</td>
+                             <td>0.50</td>
+                             <td>1.6</td>
+                             <td>1±0.1</td>
+                             <td>0.15</td>
+                             <td>DC-1kHz</td>
+                             <td>300kGs</td>
+                             <td>±0.2% ~ 20kGs</td>
+                             <td>-269°C ~ +75°C</td>
+                             <td>±0.08 G/°C</td>
+                             <td>±0.007%/°C</td>
+                             <td>Brass</td>
+                         </tr>
+                         <tr>
+                             <td>MMDX802F-LT</td>
+                             <td>6/8/10</td>
+                             <td>0.50</td>
+                             <td>1.2</td>
+                             <td>1±0.1</td>
+                             <td>0.15</td>
+                             <td>DC-1kHz</td>
+                             <td>300kGs</td>
+                             <td>±0.2% ~ 20kGs</td>
+                             <td>-269°C ~ +75°C</td>
+                             <td>±0.08 G/°C</td>
+                             <td>±0.007%/°C</td>
+                             <td>Brass</td>
+                         </tr>
+                      </tbody>
+                  </table>
+              </div>
+        </section>
+
+        <!-- Section for Page 11 - Ultra-high-precision low-temperature-resistant temp-compensated probe -->
+        <section id="ultra-low-temp-compensated">
+             <h2>Ultra-High-Precision Low-Temperature-Resistant Temperature-Compensated Hall Probe (with Temperature Sensor)</h2>
+              
+               <div class="notes">
+                    <p>Probe length can be customized; Array probe can be customized.</p>
+               </div>
+              <div class="table-container">
+                  <table>
+                      <thead>
+                         <tr>
+                            <th>NO.</th>
+                            <th>L(cm)</th>
+                            <th>T(mm) max</th>
+                            <th>W(mm)</th>
+                            <th>A(mm)</th>
+                            <th>Dia. of active area(mm)</th>
+                            <th>Frequency range</th>
+                            <th>Full range</th>
+                            <th>Accuracy (linearity)</th>
+                            <th>Working temp. zone</th>
+                            <th>Zero field temp. coefficient (max)</th>
+                            <th>Temp. coefficient (max)</th>
+                            <th>Packaging materials</th>
+                         </tr>
+                      </thead>
+                      <tbody>
+                         <tr>
+                             <td>HCDX800F-LT</td>
+                             <td>6/8/10</td>
+                             <td>1.00</td>
+                             <td>2.6</td>
+                             <td>1±0.1</td>
+                             <td>0.15</td>
+                             <td>DC-1kHz</td>
+                             <td>300kGs</td>
+                             <td>±0.05% ~ 20kGs</td>
+                             <td>-269°C ~ +75°C</td>
+                             <td>±0.08 G/°C</td>
+                             <td>±0.007%/°C</td>
+                             <td>Brass</td>
+                         </tr>
+                         <tr>
+                             <td>HCDX801F-LT</td>
+                             <td>6/8/10</td>
+                             <td>0.80</td>
+                             <td>2.2</td>
+                             <td>1±0.1</td>
+                             <td>0.15</td>
+                             <td>DC-1kHz</td>
+                             <td>300kGs</td>
+                             <td>±0.05% ~ 20kGs</td>
+                             <td>-269°C ~ +75°C</td>
+                             <td>±0.08 G/°C</td>
+                             <td>±0.007%/°C</td>
+                             <td>Brass</td>
+                         </tr>
+                         <tr>
+                             <td>HMDX801F-LT</td>
+                             <td>6/8/10</td>
+                             <td>0.50</td>
+                             <td>1.6</td>
+                             <td>1±0.1</td>
+                             <td>0.15</td>
+                             <td>DC-1kHz</td>
+                             <td>300kGs</td>
+                             <td>±0.05% ~ 20kGs</td>
+                             <td>-269°C ~ +75°C</td>
+                             <td>±0.08 G/°C</td>
+                             <td>±0.007%/°C</td>
+                             <td>Brass</td>
+                         </tr>
+                         <tr>
+                             <td>HMDX802F-LT</td>
+                             <td>6/8/10</td>
+                             <td>0.50</td>
+                             <td>1.2</td>
+                             <td>1±0.1</td>
+                             <td>0.15</td>
+                             <td>DC-1kHz</td>
+                             <td>300kGs</td>
+                             <td>±0.05% ~ 20kGs</td>
+                             <td>-269°C ~ +75°C</td>
+                             <td>±0.08 G/°C</td>
+                             <td>±0.007%/°C</td>
+                             <td>Brass</td>
+                         </tr>
+                      </tbody>
+                  </table>
+              </div>
+        </section>
+
+        <!-- Section for Page 12 - High-precision high and low temperature resistant temp-compensated probe -->
+        <section id="high-low-temp-compensated">
+             <h2>High-Precision High and Low Temperature Resistant Temperature-Compensated Hall Probe (with Temperature Sensor)</h2>
+              
+               <div class="notes">
+                    <p>Probe length can be customized; Array probe can be customized.</p>
+               </div>
+              <div class="table-container">
+                  <table>
+                      <thead>
+                         <tr>
+                            <th>NO.</th>
+                            <th>L(cm)</th>
+                            <th>T(mm) max</th>
+                            <th>W(mm)</th>
+                            <th>A(mm)</th>
+                            <th>Dia. of active area(mm)</th>
+                            <th>Frequency range</th>
+                            <th>Full range</th>
+                            <th>Accuracy (linearity)</th>
+                            <th>Working temp. zone</th>
+                            <th>Zero field temp. coefficient (max)</th>
+                            <th>Temp. coefficient (max)</th>
+                            <th>Packaging materials</th>
+                         </tr>
+                      </thead>
+                      <tbody>
+                         <tr>
+                             <td>HCDX800F-HL</td>
+                             <td>6/8/10</td>
+                             <td>1.00</td>
+                             <td>2.6</td>
+                             <td>1±0.1</td>
+                             <td>0.15</td>
+                             <td>DC-1kHz</td>
+                             <td>300kGs</td>
+                             <td>±0.1% ~ 20kGs</td>
+                             <td>-269°C ~ +200°C</td>
+                             <td>±0.08 G/°C</td>
+                             <td>±0.007%/°C</td>
+                             <td>Brass</td>
+                         </tr>
+                         <tr>
+                             <td>HCDX801F-HL</td>
+                             <td>6/8/10</td>
+                             <td>0.80</td>
+                             <td>2.2</td>
+                             <td>1±0.1</td>
+                             <td>0.15</td>
+                             <td>DC-1kHz</td>
+                             <td>300kGs</td>
+                             <td>±0.1% ~ 20kGs</td>
+                             <td>-269°C ~ +200°C</td>
+                             <td>±0.08 G/°C</td>
+                             <td>±0.007%/°C</td>
+                             <td>Brass</td>
+                         </tr>
+                         <tr>
+                             <td>HMDX801F-HL</td>
+                             <td>6/8/10</td>
+                             <td>0.50</td>
+                             <td>1.6</td>
+                             <td>1±0.1</td>
+                             <td>0.15</td>
+                             <td>DC-1kHz</td>
+                             <td>300kGs</td>
+                             <td>±0.1% ~ 20kGs</td>
+                             <td>-269°C ~ +200°C</td>
+                             <td>±0.08 G/°C</td>
+                             <td>±0.007%/°C</td>
+                             <td>Brass</td>
+                         </tr>
+                         <tr>
+                             <td>HMDX802F-HL</td>
+                             <td>6/8/10</td>
+                             <td>0.50</td>
+                             <td>1.2</td>
+                             <td>1±0.1</td>
+                             <td>0.15</td>
+                             <td>DC-1kHz</td>
+                             <td>300kGs</td>
+                             <td>±0.1% ~ 20kGs</td>
+                             <td>-269°C ~ +200°C</td>
+                             <td>±0.08 G/°C</td>
+                             <td>±0.007%/°C</td>
+                             <td>Brass</td>
+                         </tr>
+                      </tbody>
+                  </table>
+              </div>
+        </section>
+
+        <!-- Section for Page 13 - Microspaced aluminum transverse probe -->
+        <section id="microspaced-aluminum">
+             <h2>Microspaced Aluminum Transverse Probe</h2>
+              <figure>
+                  <!-- Image specified by user -->
+                  <img src="Transverse+Probe+2024_page-038.jpg" alt="Microspaced Aluminum Transverse Probe Diagram">
+                  <figcaption>Diagram of Microspaced Aluminum Transverse Probe</figcaption>
+              </figure>
+               <div class="notes">
+                    <p>The sensing layer of the X-axis sensor is only <strong>0.1mm</strong> away from the outer packaging surface of the probe. Customizable length.</p>
+               </div>
+              <div class="table-container">
+                  <table>
+                      <thead>
+                         <tr>
+                            <th>NO.</th>
+                            <th>L(cm)</th>
+                            <th>T(mm) max</th>
+                            <th>W(mm)</th>
+                            <th>A(mm)</th>
+                            <th>Dia. of active area(mm)</th>
+                            <th>Frequency range</th>
+                            <th>Full range</th>
+                            <th>Accuracy (linearity)</th>
+                            <th>Working temp. zone</th>
+                            <th>Zero field temp. coefficient (max)</th>
+                            <th>Temp. coefficient (max)</th>
+                            <th>Packaging materials</th>
+                         </tr>
+                      </thead>
+                      <tbody>
+                         <tr>
+                             <td>MCDX802FG</td>
+                             <td>55</td> <!-- Note: Length is fixed here -->
+                             <td>1.5</td>
+                             <td>2.5</td>
+                             <td>1±0.1</td>
+                             <td>0.15</td>
+                             <td>DC-1kHz</td>
+                             <td>300kGs</td>
+                             <td>±0.2% ~ 30kGs</td>
+                             <td>-10°C ~ +100°C</td>
+                             <td>±0.08 G/°C</td>
+                             <td>±0.007%/°C</td>
+                             <td>Aluminum</td>
+                         </tr>
+                      </tbody>
+                  </table>
+              </div>
+        </section>
+
+    </main>
+
+    <!-- Footer Removed as per instructions -->
+
+</body></html>

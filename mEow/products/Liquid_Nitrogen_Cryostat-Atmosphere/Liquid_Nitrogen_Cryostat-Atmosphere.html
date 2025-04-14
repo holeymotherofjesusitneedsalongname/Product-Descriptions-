@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liquid Nitrogen Cryostat - Atmosphere Type</title>
+    <style>
+        /* ==========================================================================
+        GENERIC STYLING FOR DEXINMAG DOCUMENT PAGES
+        Based on DXMP Manual / Axial Probe Styles
+        Version: 1.0 - Adapted for Liquid Nitrogen Cryostat - Atmosphere Type
+        * Provides a consistent layout, color scheme, typography.
+        * Styles common elements like sections, tables, lists, images.
+        * Includes responsive adjustments for different screen sizes.
+        * Includes print-specific styles for better output.
+        * HEADER AND FOOTER specific styling has been REMOVED.
+        ========================================================================== */
+
+        /* --- Base Styles & Color Theme --- */
+        :root {
+            --primary-color: #00447C; /* Dark Blue (From original) */
+            --secondary-color: #4A90E2; /* Lighter Blue (From original) */
+            --bg-light: #f8f9fa; /* Very light grey */
+            --bg-medium: #e9ecef; /* Light grey */
+            --border-color: #dee2e6; /* Grey border */
+            --text-color: #333; /* Dark grey text (From original) */
+            --hover-bg: #e8f4fd; /* Light blue for hover (From original table) */
+            --warning-color: #dc3545; /* Red for warnings */
+            --warning-bg: #f8d7da;
+            --attention-color: #ffc107; /* Yellow for attention */
+            --attention-bg: #fff3cd;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4; /* Light grey background for the page */
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* --- Main Content Container --- */
+        .container {
+            max-width: 1100px; /* Increased from 960px for better use of space */
+            margin: 20px auto;
+            padding: 25px;
+            background-color: #fff; /* White background for content */
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            flex-grow: 1;
+        }
+
+        /* --- Typography --- */
+        h1, h2, h3 {
+            color: var(--primary-color);
+            line-height: 1.3;
+            margin-top: 1em;
+            margin-bottom: 0.75em;
+        }
+        h1:first-child, h2:first-child, h3:first-child {
+            margin-top: 0;
+        }
+
+        /* Styles the main title within the container */
+        .container > h1 {
+            font-size: 1.8em;
+            text-align: center;
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 0.5em;
+            margin-bottom: 1em; /* Add more space below main title */
+            color: var(--primary-color); /* Ensure color is applied */
+        }
+
+        /* Styles section titles */
+        section > h2 {
+            font-size: 1.5em;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.3em;
+            color: var(--primary-color);
+             margin-top: 1.5em;
+        }
+        section > h2:first-of-type {
+             margin-top: 0;
+        }
+
+
+        p {
+            margin-bottom: 1em;
+        }
+
+        ul {
+            list-style: disc;
+            margin: 0 0 1em 25px;
+            padding: 0; /* Reset padding */
+        }
+
+        li {
+            margin-bottom: 0.6em; /* Match original */
+        }
+
+        /* --- Content Sections --- */
+        section {
+            margin-bottom: 1.5em; /* Adjusted spacing */
+            /* Removed bottom border from generic style for cleaner look between sections */
+        }
+        section:last-of-type {
+            margin-bottom: 0;
+        }
+
+        /* --- Product Image --- */
+        .product-image {
+            display: block;
+            max-width: 400px; /* Original size */
+            margin: 20px auto; /* Center the image */
+            border: 1px solid #ddd; /* Original border */
+            border-radius: 4px;
+            padding: 5px;
+            background-color: #f9f9f9; /* Original bg */
+        }
+
+
+        /* --- Tables --- */
+        .table-container {
+            overflow-x: auto; /* Enable horizontal scroll on screen */
+            margin-top: 1em;
+            margin-bottom: 1.5em;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95em;
+            min-width: 600px; /* Prevent excessive squishing on screen */
+        }
+
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 10px 12px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        thead th {
+            background-color: var(--bg-medium);
+            font-weight: bold;
+            color: var(--primary-color);
+            position: sticky; /* Keep header visible on scroll */
+            top: 0;
+            z-index: 1;
+            border-bottom-width: 2px; /* Stronger line below header */
+            border-bottom-color: var(--border-color);
+        }
+
+        /* Specific first-child cell styling from original */
+        tbody td:first-child {
+            font-weight: 600; /* Bold for parameter name */
+            background-color: #f8f9fa; /* Very light grey (matches var(--bg-light)) */
+            min-width: 180px; /* Ensure parameter names have space */
+            white-space: nowrap; /* Prevent wrapping initially */
+        }
+
+
+        /* Zebra striping for table rows (using original logic) */
+        tbody tr:nth-child(even) {
+            background-color: var(--bg-light); /* #f8f9fa */
+        }
+        /* Specific even row first cell color from original */
+        tbody tr:nth-child(even) td:first-child {
+             background-color: #f0f3f5; /* Slightly different even row first cell */
+         }
+
+
+        /* Hover effect for table rows (using original colors) */
+        tbody tr:hover {
+            background-color: var(--hover-bg); /* #e8f4fd */
+        }
+        /* Specific hover for first cell from original */
+         tbody tr:hover td:first-child {
+             background-color: #eaf6ff; /* Slightly different hover for first cell */
+         }
+
+
+        /* --- Selection Note --- */
+        .selection-note {
+            background-color: var(--bg-medium); /* #e9ecef */
+            border-left: 4px solid var(--secondary-color); /* #4A90E2 */
+            padding: 10px 15px;
+            margin-top: 1.5em;
+            font-style: italic;
+            font-size: 0.95em;
+        }
+
+
+        /* --- Alert Boxes (Included from generic, may not be used here) --- */
+        .safety-warning, .attention {
+            border-left-width: 5px;
+            border-left-style: solid;
+            padding: 10px 15px;
+            margin: 1em 0;
+            border-radius: 4px;
+        }
+        .safety-warning {
+            border-left-color: var(--warning-color);
+            background-color: var(--warning-bg);
+            color: #721c24;
+        }
+        .attention {
+            border-left-color: var(--attention-color);
+            background-color: var(--attention-bg);
+            color: #856404;
+        }
+        .safety-warning strong, .attention strong {
+            font-weight: bold;
+        }
+
+        /* ==========================================================================
+        RESPONSIVE ADJUSTMENTS
+        ========================================================================== */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+                margin: 10px; /* Reduce margin on smaller screens */
+            }
+            .container > h1 { font-size: 1.6em; }
+            section > h2 { font-size: 1.3em; }
+            section > h3 { font-size: 1.1em; }
+
+            table { font-size: 0.9em; min-width: 0; } /* Allow table to shrink */
+            th, td { padding: 8px 10px; }
+            tbody td:first-child {
+                white-space: normal; /* Allow parameter names to wrap */
+                min-width: 120px; /* Adjust min-width for smaller screens */
+            }
+
+            .product-image {
+                max-width: 80%; /* Adjust image size */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container > h1 { font-size: 1.4em; }
+            section > h2 { font-size: 1.15em; }
+            section > h3 { font-size: 1.0em; }
+
+            th, td { padding: 6px 8px; font-size: 0.85em; }
+            ul { margin-left: 20px; }
+            .product-image {
+                max-width: 90%; /* Further adjust image size */
+            }
+        }
+
+        /* ==========================================================================
+        PRINT SPECIFIC STYLES
+        * Optimizes layout for printing.
+        * Hides header and footer elements (none structurally present).
+        * Forces display of collapsible content (none currently used).
+        * Adjusts fonts, colors, and spacing for paper.
+        * Allows content (paragraphs, table rows) to break across pages.
+        ========================================================================== */
+        @media print {
+            body {
+                background-color: #fff !important; /* Force white background */
+                color: #000 !important; /* Force black text for readability */
+                font-size: 10pt;
+                -webkit-print-color-adjust: exact !important; /* Try to force color printing in Chrome/Safari */
+                print-color-adjust: exact !important; /* Standard property */
+                box-shadow: none; /* Remove shadows for print */
+            }
+
+            .container {
+                max-width: 100%;
+                margin: 0;
+                padding: 0;
+                box-shadow: none;
+                border: none;
+                border-radius: 0;
+            }
+
+            /* Keep title styling */
+            .container > h1 {
+                color: var(--primary-color) !important;
+                border-bottom: 2px solid var(--secondary-color) !important;
+                font-size: 16pt; /* Adjust size for print */
+                text-align: center;
+                padding-bottom: 8pt;
+                margin-bottom: 12pt;
+            }
+
+            section > h2 {
+                color: var(--primary-color) !important;
+                border-bottom: 1px solid var(--border-color) !important;
+                font-size: 13pt;
+                margin-top: 1.2em;
+                padding-bottom: 4pt;
+                /* Avoid breaking right after a heading */
+                page-break-after: avoid;
+            }
+            section > h2:first-of-type {
+                 margin-top: 0;
+            }
+
+
+            p, li {
+                color: #000 !important; /* Ensure paragraphs/list items are black */
+                /* Allow paragraphs and list items to break */
+                page-break-inside: auto;
+            }
+
+            ul {
+                margin-left: 20pt; /* Adjust indent for print */
+            }
+
+            .product-image {
+                max-width: 50%; /* Reduce image size for print layout */
+                margin: 15px auto;
+                border: 1px solid #ccc !important; /* Lighter border for print */
+                padding: 3px;
+                background-color: #f9f9f9 !important; /* Keep light bg */
+                page-break-inside: avoid; /* Try to keep image from splitting */
+            }
+
+            .table-container {
+                overflow: visible; /* Remove scrollbars for print */
+                margin-top: 1em;
+                margin-bottom: 1.5em;
+            }
+
+            table {
+                width: 100%;
+                font-size: 9pt; /* Slightly smaller font for tables in print */
+                min-width: 0;
+                border-collapse: collapse;
+                /* Allow table to break across pages */
+                page-break-inside: auto;
+            }
+
+            thead {
+               display: table-header-group; /* Ensure header repeats on new pages */
+            }
+
+            thead th {
+                background-color: var(--bg-medium) !important;
+                color: var(--primary-color) !important;
+                border: 1px solid var(--border-color) !important;
+                font-weight: bold;
+                position: static; /* Remove sticky for print */
+            }
+
+            tbody tr {
+                /* Allow rows to break across pages if necessary */
+                page-break-inside: auto;
+            }
+
+            tbody td {
+                 border: 1px solid var(--border-color) !important;
+                 color: #000 !important; /* Black text in cells */
+                 vertical-align: top; /* Keep alignment */
+            }
+
+            /* Maintain specific cell background colors for print */
+             tbody td:first-child {
+                background-color: #f8f9fa !important;
+                font-weight: 600;
+                white-space: normal; /* Allow wrapping in print */
+             }
+            tbody tr:nth-child(even) {
+                background-color: #f8f9fa !important;
+             }
+             tbody tr:nth-child(even) td:first-child {
+                 background-color: #f0f3f5 !important;
+             }
+
+            /* Remove hover effects for print */
+            tbody tr:hover, tbody tr:hover td:first-child {
+                background-color: inherit !important; /* Use inherited/zebra stripe color */
+            }
+
+             .selection-note {
+                background-color: var(--bg-medium) !important;
+                border-left: 4px solid var(--secondary-color) !important;
+                color: #000 !important;
+                font-style: italic;
+                font-size: 9pt;
+                padding: 8px 12px;
+                margin-top: 1em;
+                /* Try to keep note together, but allow break if needed */
+                page-break-inside: avoid;
+            }
+
+            /* Hide elements not suitable for print if any were added (none currently) */
+            /* .no-print { display: none !important; } */
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Liquid Nitrogen Cryostat - Atmosphere Type</h1>
+
+        <p>
+            Atmospheric liquid nitrogen cryostat: The sample can be placed in static helium so that the sample
+            itself can be fully cooled. This design can evenly cool samples with poor thermal conductivity and
+            difficulty in thermal anchoring (eg: liquids, powders, and some irregularly shaped samples).
+        </p>
+
+        <img src="Liquid Nitrogen Cryostat Atmosphere free_page-000.jpg" alt="Liquid Nitrogen Cryostat Atmosphere Type Unit" class="product-image">
+
+        <section id="features">
+            <h2>Features</h2>
+            <ul>
+                <li>Temperature range (80K~325K), (optional 475K) has good cooling effect and the sample is heated evenly;</li>
+                <li>Equipped with funnel attachment, which can quickly refill refrigerant;</li>
+                <li>The sample is placed in a static helium atmosphere, which is suitable for cooling samples with irregular shapes and low thermal conductivity;</li>
+                <li>The temperature sensor uses PT100 platinum resistor with good stability and repeatability, one is installed on the heat exchanger and the sample holder respectively;</li>
+                <li>Top loading allows rapid replacement of samples;</li>
+                <li>Built-in charcoal to improve vacuum;</li>
+                <li>Can be customized according to customer requirements;</li>
+                <li>Equipped with 8 measuring leads as standard, which can be expanded to 32.</li>
+            </ul>
+        </section>
+
+        <section id="technical-parameters">
+            <h2>Technical Parameters</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Specification</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Temperature range</td>
+                            <td>80K-325K (Optional 475K)<br><em>Note: Text on Page 2 mentions 80K-500K and 65K option. Reconcile if necessary. Using Page 1 range first.</em></td>
+                        </tr>
+                         <tr>
+                              <td>Cooling time (room temperature-80K)</td>
+                              <td>about 1h</td>
+                         </tr>
+                         <tr>
+                              <td>Electrical connector</td>
+                              <td>Standard configuration is an 8-pin electrical measurement connector</td>
+                         </tr>
+                         <tr>
+                              <td>Thermometer</td>
+                              <td>2 PT100 thermometers, one each for heat exchanger and sample</td>
+                         </tr>
+                         <tr>
+                              <td>Temperature stability</td>
+                              <td>±0.01K depends on temperature controller</td>
+                         </tr>
+                         <tr>
+                              <td>Heater</td>
+                              <td>2 x 50W heaters</td>
+                         </tr>
+                         <tr>
+                              <td>Vacuum interface</td>
+                              <td>Two KF25 standard interfaces</td>
+                         </tr>
+                         <tr>
+                              <td>Sample rotation angle</td>
+                              <td>Samples can be rotated 360 degrees</td>
+                         </tr>
+                         <tr>
+                              <td>Sample environment</td>
+                              <td>Helium environment</td>
+                         </tr>
+                         <tr>
+                              <td>Required vacuum degree</td>
+                              <td>The vacuum degree of the sandwich layer and the vacuum degree of the sample cavity are ≤1Pa.</td>
+                         </tr>
+                         <tr>
+                              <td>Liquid nitrogen holding time</td>
+                              <td>78K@4h, 100K@3.5h, 200K@2h, 300K@1h</td>
+                         </tr>
+                         <tr>
+                              <td>Liquid nitrogen capacity</td>
+                              <td>About 1.6L</td>
+                         </tr>
+                         <tr>
+                              <td>Window</td>
+                              <td>Fused quartz, infrared silicon material, sapphire, zinc selenide, zinc sulfide, cadmium telluride, germanium, silicon, cadmium fluoride, mylar, kapton, beryllium, etc. The size can be customized according to different usage requirements.</td>
+                         </tr>
+                         <!-- Chamber volume was mentioned but had no value in OCR -->
+                    </tbody>
+                </table>
+            </div>
+            <div class="selection-note">
+                <strong>Selection instructions:</strong> The main samples tested by this type of cryostat are liquids, powders, samples with poor thermal conductivity and irregular shapes.
+            </div>
+        </section>
+
+    </div>
+
+</body>
+</html>

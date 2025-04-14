@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Closed-cycle Cryostat - 4K 6.5K 10K 30K Specifications</title>
+    <style>
+        /* --- START OF NEW GENERIC STYLES (with modifications) --- */
+        /* ==========================================================================
+           GENERIC STYLING FOR DEXINMAG DOCUMENT PAGES
+           Based on DXMP Manual / Axial Probe Styles
+           Version: 1.0
+           MODIFIED: Re-integrated original header/footer styles & specific list styles
+           ========================================================================== */
+
+        /* --- Base Styles & Color Theme --- */
+        :root {
+            --primary-color: #00447C; /* Dark Blue */
+            --secondary-color: #4A90E2; /* Lighter Blue */
+            --bg-light: #f8f9fa; /* Very light grey */
+            --bg-medium: #e9ecef; /* Light grey */
+            --border-color: #dee2e6; /* Grey border */
+            --text-color: #343a40; /* Dark grey text */
+            --hover-bg: #e8f4fd; /* Light blue for hover */
+            --warning-color: #dc3545; /* Red for warnings */
+            --warning-bg: #f8d7da;
+            --attention-color: #ffc107; /* Yellow for attention */
+            --attention-bg: #fff3cd;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4; /* Light grey background for the page */
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* --- Original Header Style --- */
+        header {
+            background-color: var(--primary-color);
+            color: #fff;
+            padding: 1rem 0;
+            text-align: center;
+            margin-bottom: 20px; /* Keep original spacing */
+             -webkit-print-color-adjust: exact; /* Attempt to force print background */
+             print-color-adjust: exact;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2em; /* Keep original size */
+            color: #fff; /* Ensure color is set */
+        }
+
+        /* --- Main Content Container --- */
+        .container {
+            max-width: 1100px;
+            margin: 20px auto;
+            padding: 25px;
+            background-color: #fff; /* White background for content */
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            flex-grow: 1; /* Allows footer (if added back) to stick to bottom */
+        }
+
+        /* --- Typography --- */
+        .container h1, .container h2, .container h3 { /* Adjusted scope */
+            color: var(--primary-color);
+            line-height: 1.3;
+            margin-top: 1em;
+            margin-bottom: 0.75em;
+        }
+        .container h1:first-child, .container h2:first-child, .container h3:first-child {
+            margin-top: 0;
+        }
+
+        /* Styles section titles */
+        section > h2 {
+            font-size: 1.5em;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.3em;
+            color: var(--primary-color);
+        }
+
+        /* Base style for H3, often used for sub-sections or collapsible headers */
+        section > h3 {
+            font-size: 1.2em;
+            color: var(--primary-color);
+            padding-bottom: 0.3em;
+            font-weight: bold;
+        }
+
+        p {
+            margin-bottom: 1em;
+        }
+
+        ul {
+            list-style: disc;
+            margin: 0 0 1em 25px;
+        }
+
+        li {
+            margin-bottom: 0.5em;
+        }
+
+        /* --- Content Sections --- */
+        section {
+            margin-bottom: 2em;
+            padding-bottom: 1em;
+            border-bottom: 1px solid var(--bg-medium); /* Subtle separator */
+        }
+        section:last-of-type {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        /* --- Tables --- */
+        .table-container {
+            overflow-x: auto; /* Enable horizontal scroll on screen */
+            margin-top: 1em;
+            margin-bottom: 1.5em;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95em;
+            min-width: 600px; /* Prevent excessive squishing on screen */
+        }
+
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 10px 12px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        thead th {
+            background-color: var(--bg-medium);
+            font-weight: bold;
+            color: var(--primary-color);
+            position: sticky; /* Keep header visible on scroll */
+            top: 0;
+            z-index: 1;
+            border-bottom-width: 2px; /* Stronger line below header */
+            border-bottom-color: var(--border-color);
+             -webkit-print-color-adjust: exact; /* Attempt to force print background */
+             print-color-adjust: exact;
+        }
+
+        /* Zebra striping for table rows */
+        tbody tr:nth-child(even) {
+            background-color: var(--bg-light);
+             -webkit-print-color-adjust: exact; /* Attempt to force print background */
+             print-color-adjust: exact;
+        }
+
+        /* Hover effect for table rows */
+        tbody tr:hover {
+            background-color: var(--hover-bg);
+        }
+
+        /* --- Image Gallery Styling --- */
+        .image-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 1em;
+            margin-bottom: 1.5em;
+            padding: 15px;
+            background-color: var(--bg-light);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+        }
+
+        .image-gallery figure {
+            margin: 0;
+            text-align: center;
+            flex-basis: calc(33.333% - 20px); /* Aim for 3 columns like original */
+            max-width: 300px; /* Adjust max-width if needed */
+            min-width: 150px; /* Keep original min-width */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .image-gallery img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 8px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .image-gallery figcaption {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: auto; /* Push caption down */
+        }
+
+        /* --- Alert Boxes (example, not used in current HTML) --- */
+        .safety-warning, .attention {
+            border-left-width: 5px;
+            border-left-style: solid;
+            padding: 10px 15px;
+            margin: 1em 0;
+            border-radius: 4px;
+        }
+        .safety-warning {
+            border-left-color: var(--warning-color);
+            background-color: var(--warning-bg);
+            color: #721c24;
+        }
+        .attention {
+            border-left-color: var(--attention-color);
+            background-color: var(--attention-bg);
+            color: #856404;
+        }
+        .safety-warning strong, .attention strong {
+            font-weight: bold;
+        }
+
+        /* --- Collapsible Section Styling --- */
+        section h3.collapsible-header {
+            cursor: pointer;
+            position: relative;
+            padding-right: 25px; /* Space for indicator */
+            margin-bottom: 0; /* Connects header visually to content below */
+            border-bottom: 1px solid var(--border-color); /* Separator line */
+            padding-bottom: 10px; /* Spacing above the line */
+            display: flex; /* Align title and arrow */
+            justify-content: space-between; /* Push arrow to right */
+            align-items: center;
+             user-select: none; /* Prevent text selection on click */
+        }
+
+        section h3.collapsible-header::after {
+            content: '►'; /* Right arrow indicator when collapsed */
+            font-size: 0.8em;
+            color: var(--primary-color);
+            transition: transform 0.3s ease;
+            display: inline-block; /* Needed for transform */
+        }
+
+        section h3.collapsible-header:not(.collapsed)::after {
+             content: '▼'; /* Down arrow indicator */
+             /* transform: rotate(90deg); Optional: use rotate instead of changing content */
+        }
+
+        /* The content DIV immediately following the collapsible-header */
+        .collapsible-content {
+            overflow: hidden;
+            max-height: 5000px; /* Allow ample height when open */
+            transition: max-height 0.4s ease-in-out, padding 0.3s ease, margin 0.3s ease, border 0.3s ease, opacity 0.3s ease;
+            padding-top: 15px; /* Space below header when open */
+            margin-top: 0;
+            border-top: 1px solid var(--bg-light); /* Subtle line separating from header */
+            opacity: 1;
+        }
+
+        .collapsible-content.collapsed {
+            max-height: 0;
+            padding-top: 0;
+            padding-bottom: 0;
+            margin-top: 0;
+            border-top: none; /* Hide border when collapsed */
+            opacity: 0;
+        }
+
+        /* --- Original Footer Style --- */
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 15px;
+            border-top: 1px solid #ccc;
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        /* --- Specific List Styles from Original --- */
+         #notes ol > li {
+            margin-bottom: 15px;
+        }
+        #notes ol ul {
+            margin-top: 5px;
+            margin-bottom: 5px;
+            list-style-type: disc;
+            margin-left: 20px; /* Ensure indentation */
+        }
+        #notes ol ul li {
+            margin-bottom: 3px;
+        }
+
+        /* ==========================================================================
+           RESPONSIVE ADJUSTMENTS
+           ========================================================================== */
+        @media (max-width: 768px) {
+            /* Original Header/Footer Responsive */
+            body { padding: 10px; } /* Keep body padding */
+            header h1 { font-size: 1.6em; }
+
+            .container {
+                padding: 15px;
+                margin: 10px; /* Reduce margin on smaller screens */
+            }
+            section > h2 { font-size: 1.3em; }
+            section > h3 { font-size: 1.1em; } /* Includes collapsible */
+
+            table { font-size: 0.9em; min-width: 0; } /* Allow table to shrink */
+            th, td { padding: 8px 10px; }
+            tbody td:first-child { white-space: normal; } /* Allow wrapping */
+
+            .image-gallery figure {
+                 flex-basis: calc(50% - 15px); /* Keep 2 columns */
+                 max-width: 45%;
+            }
+        }
+
+        @media (max-width: 480px) {
+             /* Original Header/Footer Responsive */
+             header h1 { font-size: 1.4em; }
+
+             .container { padding: 10px; }
+             section > h2 { font-size: 1.15em; }
+             section > h3 { font-size: 1.0em; } /* Includes collapsible */
+
+            th, td { padding: 6px 8px; font-size: 0.85em; }
+            ul { margin-left: 20px; }
+
+            .image-gallery figure {
+                 flex-basis: 100%; /* Stack to single column */
+                 max-width: 90%;
+            }
+             table { font-size: 0.8em; } /* Match original */
+        }
+
+
+        /* ==========================================================================
+           PRINT SPECIFIC STYLES
+           - Uses new generic print styles, adapted slightly.
+           ========================================================================== */
+        @media print {
+            body {
+                background-color: #fff !important; /* Force white background */
+                color: #000 !important; /* Force black text */
+                font-size: 10pt;
+                padding: 0; /* Remove body padding for print */
+                margin: 0;
+                -webkit-print-color-adjust: exact !important; /* Try to force color printing */
+                print-color-adjust: exact !important;
+            }
+
+            /* Keep original header print style */
+            header {
+                background-color: var(--primary-color) !important;
+                color: #fff !important;
+                padding: 0.5rem 0 !important; /* Reduce padding slightly */
+                text-align: center !important; /* Ensure centered */
+                margin-bottom: 15px !important;
+            }
+            header h1 {
+                font-size: 16pt !important;
+                color: #fff !important;
+                margin: 0 !important;
+            }
+
+            .container {
+                max-width: 100% !important;
+                margin: 0 !important;
+                padding: 1cm !important; /* Standard print margin */
+                box-shadow: none !important;
+                border-radius: 0 !important;
+                border: none !important;
+            }
+
+            /* --- Print Typography --- */
+            h2 {
+                color: var(--primary-color) !important;
+                border-bottom: 1px solid #666 !important;
+                font-size: 12pt !important;
+                page-break-after: avoid !important;
+                margin-bottom: 0.5em !important; /* Adjust spacing */
+                padding-bottom: 2px !important;
+            }
+            h3 {
+                color: #000 !important;
+                font-size: 11pt !important;
+                page-break-after: avoid !important;
+                 margin-bottom: 0.3em !important;
+                 font-weight: bold !important;
+            }
+            section h3.collapsible-header {
+                border-bottom: 1px solid #999 !important;
+                padding-bottom: 5px !important;
+                color: var(--primary-color) !important; /* Make stand out */
+            }
+
+            /* --- Print Layout --- */
+            section {
+                border-bottom: 1px solid #ccc !important; /* Use original section border */
+                margin-bottom: 20px !important;
+                padding-bottom: 15px !important;
+                page-break-inside: avoid !important; /* Try to keep sections together */
+            }
+             section:last-of-type { border-bottom: none !important;}
+
+            /* --- Force Collapsible Content Visible --- */
+            .collapsible-header::after { display: none !important; }
+            .collapsible-content {
+                display: block !important;
+                max-height: none !important;
+                opacity: 1 !important;
+                overflow: visible !important;
+                padding-top: 10px !important;
+                padding-bottom: 5px !important;
+                border-top: none !important;
+                background-color: transparent !important;
+                 margin-top: 5px !important; /* Match original */
+            }
+
+            /* --- Print Tables --- */
+            .table-container { overflow: visible !important; }
+            table {
+                width: 100% !important;
+                border-collapse: collapse !important;
+                font-size: 8.5pt !important; /* Smaller font for tables */
+                min-width: 0 !important;
+                page-break-inside: auto; /* Allow tables to break between rows */
+                word-wrap: break-word; /* Allow long words to break */
+            }
+            th, td {
+                border: 1px solid #bbb !important; /* Simple borders */
+                padding: 4px 6px !important; /* Reduced padding */
+                vertical-align: top !important;
+            }
+            thead th {
+                background-color: var(--bg-medium) !important; /* Light grey background */
+                color: #000 !important;
+                font-weight: bold !important;
+                white-space: normal !important; /* Allow header text wrapping */
+                 -webkit-print-color-adjust: exact !important;
+                 print-color-adjust: exact !important;
+            }
+            tr { page-break-inside: avoid !important; } /* Try to keep rows together */
+            tbody tr:nth-child(even) {
+                background-color: var(--bg-light) !important; /* Match original even row color */
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+             tbody tr:hover { background-color: transparent !important; } /* Disable hover */
+
+
+            /* --- Print Image Gallery --- */
+            .image-gallery {
+                background-color: #f8f8f8 !important;
+                border: 1px solid #ccc !important;
+                justify-content: flex-start; /* Align left */
+                gap: 10px; /* Reduce gap */
+                page-break-inside: avoid; /* Allow gallery to break, but avoid inside figure */
+                 margin-bottom: 15px !important;
+            }
+            .image-gallery figure {
+                flex-basis: calc(33% - 10px); /* Three columns in print */
+                max-width: 30%;
+                page-break-inside: avoid !important; /* Keep figure together */
+                text-align: center;
+            }
+            .image-gallery img {
+                border: 1px solid #aaa !important; /* Match original */
+                box-shadow: none !important;
+                max-width: 100% !important; /* Ensure image fits figure */
+                height: auto !important;
+                page-break-inside: avoid !important;
+            }
+
+             /* --- Print Alert Boxes --- */
+             /* Styles copied but no elements use them */
+            .safety-warning, .attention {
+                border: 1px solid #000 !important; /* Simple border */
+                color: #000 !important;
+                background-color: #fff !important; /* White background */
+                page-break-inside: avoid;
+            }
+
+            /* --- Print Links --- */
+            a { text-decoration: none !important; color: #000 !important; }
+            a[href^="mailto:"]::after, a[href^="http"]::after { content: "" !important; } /* Don't show URLs */
+
+            /* Keep original footer print style */
+            footer {
+                  margin-top: 20px !important;
+                  padding-top: 10px !important;
+                  font-size: 8pt !important;
+                  border-top: 1px solid #ccc !important;
+             }
+
+             /* Page Break Control Hints */
+             h1, h2, h3, h4 { page-break-after: avoid !important; }
+             figure, ul, ol, li { page-break-inside: avoid !important; }
+
+        } /* End of @media print */
+        /* --- END OF NEW GENERIC STYLES --- */
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Closed-cycle Cryostat - 4K 6.5K 10K 30K</h1>
+    </header>
+
+    <!-- Added container class -->
+    <main class="container">
+        <section id="overview">
+            <h2>Overview</h2>
+            <p>The closed-cycle cryostat uses the G-M (Gifford-McMahon) thermodynamic cycle principle to compress and expand helium. The compressor provides the high-pressure helium required during the cycle, which is transmitted to the cold head through a flexible metal helium pipeline. The compressed helium gas expands and is cooled in the cold head, and the expanded low-pressure helium returns to the compressor to repeat the cycle.</p>
+            <p>The closed-cycle cryostat provided by Dexinmag is a variable temperature low-temperature platform based on GM refrigerators produced by domestic and foreign companies. When used with a high-precision temperature controller, it can accurately control the temperature of samples within the entire temperature range. Simple operation and low maintenance cost.</p>
+            <p>It is mainly used for magnetic measurement, optical measurement, photoelectric reaction, light reflection, fluorescence and magnetoresistance tests in low temperature and vacuum environments.</p>
+            <p>The closed-cycle cryostat includes two stages of cooling. The first stage is used to cool the thermal radiation shield around the sample, and the second stage is used to cool the sample.</p>
+        </section>
+
+        <section id="images">
+            <h2>Device Images</h2>
+            <div class="image-gallery">
+                <figure>
+                    <img src="Closed circit cryostat_page-000.jpg" alt="Cryostat Cold Head">
+                    <figcaption>Cold Head Component</figcaption>
+                </figure>
+                <figure>
+                    <img src="Closed circit cryostat_page-001.jpg" alt="Cryostat Compressor Unit">
+                    <figcaption>Compressor Unit</figcaption>
+                </figure>
+                <figure>
+                    <img src="Closed circit cryostat_page-002.jpg" alt="Cryostat System Assembly">
+                    <figcaption>System Assembly</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <section id="features">
+            <h2>Features</h2>
+            <ul>
+                <li>Suitable for electrical, optical and magnetic measurements in low temperature environments;</li>
+                <li>Compact structure, high cost performance, no refrigerant consumption at low temperatures, long maintenance-free period, strong scalability, and easy to use;</li>
+                <li>The sample is in a high vacuum environment or atmosphere;</li>
+                <li>Optical windows can be integrated and a variety of optional window materials are available;</li>
+                <li>A variety of gold-plated oxygen-free copper sample holders can meet the measurement needs of different experimental requirements, and the sample holders can be quickly replaced;</li>
+                <li>A silicon diode temperature sensor or Cernox temperature sensor (used in strong magnetic fields) is installed on the cold finger;</li>
+                <li>A variety of options can meet the measurement needs of different experiments.</li>
+            </ul>
+        </section>
+
+        <section id="specifications">
+            <h2>Technical Specifications</h2>
+
+            <!-- Table Group 1: Updated collapsible header class and removed indicator span, added collapsed class -->
+            <h3 class="collapsible-header collapsed">Models: T-101D, T-101DL, T-305D, T-205D, T-408D2, T-415D</h3>
+            <!-- Updated collapsible content class, added collapsed class -->
+            <div class="collapsible-content collapsed">
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Parameter</th>
+                                <th>T-101D</th>
+                                <th>T-101DL</th>
+                                <th>T-305D</th>
+                                <th>T-205D</th>
+                                <th>T-408D2</th>
+                                <th>T-415D</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Temperature range</td><td>4-325K</td><td>3.5-325K</td><td colspan="4">4-325K</td></tr>
+                            <tr><td>Heater</td><td colspan="2">60W, one</td><td colspan="4">70W, one</td></tr>
+                            <tr><td>Cold head model</td><td>101D</td><td>101DL</td><td>305D</td><td>205D</td><td>408D2</td><td>415D</td></tr>
+                            <tr><td>Lowest temperature</td><td>&lt;3K</td><td>&lt;3K</td><td>3.5K</td><td>&lt;3.5K</td><td>&lt;3.5K</td><td>&lt;3.5K</td></tr>
+                            <tr><td>Cooling time</td><td>150min to 4K</td><td>150min to 4K</td><td>120min to 4K</td><td>90min to 4K</td><td>60min to 4K</td><td>60min to 4K</td></tr>
+                            <tr><td>Cooling power</td><td>0.1W@4.2K<br>3W@50K</td><td>0.1W@4.2K<br>3W@50K</td><td>0.4W@4.2K<br>15W@40K</td><td>0.5W@4.2K<br>3W@50K</td><td>1.0W@4.2K<br>40W@43K</td><td>1.5W@4.2K<br>35W@50K</td></tr>
+                            <tr><td>Compressor</td><td colspan="2">CAN-11B/C</td><td>FA40H</td><td>CKW-21A</td><td colspan="2">F50H</td></tr>
+                            <tr><td>Cooling method</td><td colspan="3">Air cooling</td><td colspan="3">Water cooling</td></tr>
+                            <tr><td>Power consumption/h</td><td colspan="2">1.2-1.3KW</td><td>4.0-4.4KW</td><td>2.7-3.3KW</td><td colspan="2">6.5-7.2KW</td></tr>
+                            <tr><td>Power supply requirements</td><td colspan="3">Single phase 220V 50/60Hz</td><td colspan="3">Three-phase 380V 50/60Hz</td></tr>
+                            <tr><td>Cooling water flow</td><td colspan="3">/</td><td>3.0-3.5L/min</td><td colspan="2">7-10L/min</td></tr>
+                             <tr><td>Cooling water temperature</td><td colspan="3">/</td><td colspan="3">4-28°C</td></tr>
+                            <tr><td>Compressor size (mm)</td><td colspan="2">461 * 400 * 450</td><td>532 * 442 * 493</td><td>471 * 401 * 450</td><td colspan="2">591 * 450 * 588</td></tr>
+                            <tr><td>Compressor weight</td><td colspan="2">70Kg</td><td>96Kg</td><td>70Kg</td><td colspan="2">120Kg</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Table Group 2: Updated classes -->
+            <h3 class="collapsible-header collapsed">Models: T-062B, T-082B, T-182B2S, T-204N, T408S2</h3>
+            <div class="collapsible-content collapsed">
+                 <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Parameter</th>
+                                <th>T-062B</th>
+                                <th>T-082B</th>
+                                <th>T-182B2S</th>
+                                <th>T-204N</th>
+                                <th>T408S2</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Temperature range</td><td colspan="3">3.5-325K</td><td colspan="2">7-325K</td></tr>
+                            <tr><td>Heater</td><td colspan="5">70W, one</td></tr>
+                            <tr><td>Cold head model</td><td>062B</td><td>082B</td><td>182B2S</td><td>204N</td><td>408S2</td></tr>
+                            <tr><td>Lowest temperature</td><td>&lt;3.0K</td><td>&lt;3.0K</td><td>&lt;2.8K</td><td>&lt;6.5K</td><td>&lt;7K</td></tr>
+                            <tr><td>Cooling time</td><td>100min to 4K</td><td>80min to 4K</td><td>60min to 4K</td><td colspan="2">60min to 10K</td></tr>
+                            <tr><td>Cooling power</td><td>0.5W@4.2K<br>30W@80K</td><td>1W@4.2K<br>40W@45K</td><td>1.5W@4.2K<br>36W@48K</td><td>13.5W@80K<br>2.5W@10K</td><td>30W@4.5K</td></tr>
+                            <tr><td>Compressor</td><td>F50H</td><td>F70H</td><td>F-100</td><td>HC-4E</td><td>F-50</td></tr>
+                            <tr><td>Cooling method</td><td colspan="5">Water cooling</td></tr>
+                             <tr><td>Power consumption/h</td><td>6.5-7.2KW</td><td>12-13.7KW</td><td>12-13.7KW</td><td>2.6KW</td><td>6.5-7.2KW</td></tr>
+                            <tr><td>Power supply requirements</td><td colspan="3">Three-phase 380V 50/60Hz</td><td>Single phase 220V 50/60Hz</td><td>Three-phase 380V 50/60Hz</td></tr>
+                            <tr><td>Cooling water flow</td><td>7-10L/min</td><td>6-9L/min</td><td>6-10L/min</td><td>2.7L/min</td><td>7-10L/min</td></tr>
+                             <tr><td>Cooling water temperature</td><td colspan="5">4-28°C</td></tr>
+                            <tr><td>Compressor size (mm)</td><td>591 * 450 * 588</td><td>532 * 443 * 493</td><td>1331 * 511 * 512</td><td>504 * 430 * 485</td><td>591 * 450 * 588</td></tr>
+                            <tr><td>Compressor weight</td><td>120Kg</td><td>100Kg</td><td>250Kg</td><td>75Kg</td><td>120Kg</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+             <!-- Table Group 3: Updated classes -->
+            <h3 class="collapsible-header collapsed">Models: TCH202, TCH204, TCH208R, TCH208L, TCH210, TCH210N, TCH210L, TKDE210SA</h3>
+            <div class="collapsible-content collapsed">
+                 <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Parameter</th>
+                                <th>TCH202</th>
+                                <th>TCH204</th>
+                                <th>TCH208R</th>
+                                <th>TCH208L</th>
+                                <th>TCH210</th>
+                                <th>TCH210N</th>
+                                <th>TCH210L</th>
+                                <th>TKDE210SA</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                             <tr><td>Temperature range</td><td colspan="8">10-325K</td></tr>
+                             <tr><td>Heater</td><td colspan="2">50W</td><td colspan="6">70W</td></tr>
+                             <tr><td>Cold head model</td><td>CH-202</td><td>CH-204</td><td>CH208R</td><td>CH208L</td><td>CH210</td><td>CH210N</td><td>CH210L</td><td>KDEZ10SA</td></tr>
+                             <tr><td>Lowest temperature</td><td colspan="8">&lt;10K</td></tr>
+                             <tr><td>Cooling time</td><td>75min to 10K</td><td>40min to 20K</td><td colspan="4">60min to 20K</td><td colspan="2">60min to 10K</td></tr>
+                             <tr><td>Cooling power</td><td>7.5W@20K<br>13.5W@80K</td><td>6W@20K<br>80W@77K</td><td>8W@20K<br>28W@77K</td><td>6W@20K<br>110W@77K</td><td colspan="2">3W@10K<br>20W@35K</td><td>9.5W@20K<br>75W@60K</td><td>5W@10K<br>40W@45K</td></tr>
+                             <tr><td>Compressor</td><td colspan="2">HC-4E</td><td colspan="5">F70H</td><td>KDC6000V</td></tr>
+                             <tr><td>Cooling method</td><td colspan="8">Water cooling</td></tr>
+                              <tr><td>Power consumption/h</td><td colspan="2">2.6kw</td><td colspan="5">12-13.7KW</td><td>6.5KW</td></tr>
+                             <tr><td>Power supply requirements</td><td colspan="2">Single phase 220V 50/60Hz</td><td colspan="6">Three-phase 380V 50/60Hz</td></tr>
+                             <tr><td>Cooling water flow</td><td colspan="2">2.7L/min</td><td colspan="5">6-9L/min</td><td>7-10L/min</td></tr>
+                              <tr><td>Cooling water temperature</td><td colspan="8">(4-28°C)</td></tr>
+                             <tr><td>Compressor size (mm)</td><td colspan="2">504*430*485</td><td colspan="5">532*442*493</td><td>532*443*493</td></tr>
+                             <tr><td>Compressor weight</td><td colspan="2">75Kg</td><td colspan="5">100Kg</td><td>118Kg</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+             </div>
+
+            <!-- Table Group 4: Updated classes -->
+            <h3 class="collapsible-header collapsed">Models: T500B, T400B, TC110LT, TCH110, TCH104, T125D, TKDE40OSX, TKDE535, TKDE400SA</h3>
+            <div class="collapsible-content collapsed">
+                 <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Parameter</th>
+                                <th>T500B</th>
+                                <th>T400B</th>
+                                <th>TC110LT</th>
+                                <th>TCH110</th>
+                                <th>TCH104</th>
+                                <th>T125D</th>
+                                <th>TKDE40OSX</th>
+                                <th>TKDE535</th>
+                                <th>TKDE400SA</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Temperature range</td><td>14-325K</td><td>25-325K</td><td>15-325K</td><td colspan="2">40-325K</td><td>30-325K</td><td>14-325K</td><td>15-325K</td><td>30-325K</td></tr>
+                            <tr><td>Heater</td><td>150W</td><td>150W</td><td></td><td>300W</td><td>150W</td><td>70W</td><td>150W</td><td></td><td>100w</td></tr>
+                            <tr><td>Cold head model</td><td>RDK-500B</td><td>RDK400B</td><td>C110LT</td><td>CH110</td><td>CH104</td><td>RD-125D</td><td>KDE400SX</td><td>KDE535</td><td>KDE400SA</td></tr>
+                            <tr><td>Lowest temperature</td><td>&lt;14K</td><td>&lt;25K</td><td>&lt;15K</td><td>&lt;40K</td><td>&lt;40K</td><td>30K</td><td>&lt;14K</td><td>&lt;15K</td><td>&lt;30K</td></tr>
+                            <tr><td>Cooling time</td><td>70min to 40K</td><td>30min to 40K</td><td>35min to 30K</td><td>30min to 77K</td><td>40min to 77K</td><td>25min to 77K</td><td colspan="2">60min to 20K</td><td></td></tr>
+                            <tr><td>Cooling power</td><td>40W@20K<br>80W@30K</td><td>54W@40K</td><td>80W@40K</td><td>175W@77K</td><td>34W@77K</td><td>30W@77K</td><td>40W@20K<br>80W@30K</td><td>8W@20K<br>35W@77K</td><td>54W@40K</td></tr>
+                            <tr><td>Compressor</td><td colspan="5">F70H</td><td>CNA-11C</td><td colspan="3">KDC6000V</td></tr>
+                            <tr><td>Cooling method</td><td colspan="5">Water cooling</td><td>Air cooling</td><td colspan="3">Water cooling</td></tr>
+                             <tr><td>Power consumption/h</td><td colspan="5">12-13.7KW</td><td>1.2-1.3KW</td><td colspan="3">6.5KW</td></tr>
+                            <tr><td>Power supply requirements</td><td colspan="5">Three-phase 380V 50/60Hz</td><td>Single phase 220V 50/60Hz</td><td colspan="3">Three-phase 380V 50/60Hz</td></tr>
+                            <tr><td>Cooling water flow</td><td colspan="5">6-9L/min</td><td>/</td><td colspan="3">7-10L/min</td></tr>
+                             <tr><td>Cooling water temperature</td><td colspan="5">(4-28°C)</td><td>/</td><td colspan="3">(4-28°C)</td></tr>
+                            <tr><td>Compressor size (mm)</td><td colspan="5">532*442*493</td><td>610*390*450</td><td colspan="3">532*443*493</td></tr>
+                            <tr><td>Compressor weight</td><td colspan="5">100Kg</td><td>75Kg</td><td colspan="3">118Kg</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+             </div>
+        </section>
+
+        <section id="notes">
+            <h2>Notes</h2>
+            <ol>
+                <li><strong>Temperature Sensor:</strong> Silicon diode temperature sensor, iron rhodium temperature sensor, CernoxTM temperature sensor (suitable for magnetic fields);</li>
+                <li><strong>Temperature stability:</strong> ±0.01K depends on DXTC-290 temperature controller;</li>
+                <li><strong>Vacuum evacuation:</strong> No special requirements are KF25;</li>
+                <li><strong>Experiment type:</strong> It can be used in optical and electrical experiments. Except for the pulse tube refrigerator, the other cold heads can be installed at any angle. In addition, when used in conjunction with a spectrometer, the cold head can be equipped with three-level shock absorption, and the sample vibration amount is less than 1 micron;</li>
+                <li><strong>Number of windows:</strong> When conducting electrical experiments, there is no need to open windows. When conducting optical experiments, 1-5 windows can be used;</li>
+                <li><strong>Window selection:</strong> Fused quartz, infrared silicon material, sapphire, zinc selenide, zinc sulfide, cadmium, hoofide(?), germanium, silicon, cadmium fluoride, mylar, kapton, wrinkle(?), etc., the size can be customized.</li>
+                <li><strong>Integrated configuration:</strong>
+                    <ul>
+                        <li>① A set of vacuum cover;</li>
+                        <li>② A temperature sensor and a temperature-controlled heater;</li>
+                        <li>③ A gold-plated oxygen-free copper sample holder;</li>
+                        <li>④ A vacuum suction port KF25;</li>
+                        <li>⑤ A release valve KF16;</li>
+                        <li>⑥ A 8pin Electrical vacuum connector, a temperature sensor and heater share a 6-core connector;</li>
+                        <li>⑦ Supporting compressor, cold head drive line, high-pressure nitrogen pipe and Toolkit;</li>
+                        <li>⑧ A set of standard cold head placement brackets.</li>
+                    </ul>
+                </li>
+            </ol>
+        </section>
+    </main>
+
+    <footer>
+        <p>Specifications subject to change without notice.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Select all elements with the class 'collapsible-header'
+            const collapsibles = document.querySelectorAll('.collapsible-header');
+
+            collapsibles.forEach(header => {
+                header.addEventListener('click', function() {
+                    // Check if the current view is print media
+                    if (window.matchMedia && window.matchMedia('print').matches) {
+                        return; // Do nothing if printing
+                    }
+
+                    // Toggle the 'collapsed' class on the clicked header (this)
+                    this.classList.toggle('collapsed');
+
+                    // Find the next element sibling, which should be the content div
+                    const content = this.nextElementSibling;
+
+                    // Check if the content element exists and has the 'collapsible-content' class
+                    if (content && content.classList.contains('collapsible-content')) {
+                        // Toggle the 'collapsed' class on the content element
+                        content.classList.toggle('collapsed');
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

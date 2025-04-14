@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liquid Nitrogen Cryostat - Electrical</title>
+    <style>
+        /* ==========================================================================
+        GENERIC STYLING FOR DEXINMAG DOCUMENT PAGES
+        Based on DXMP Manual / Axial Probe Styles
+        Version: 1.0 (Adapted for code-2.html)
+        * Provides a consistent layout, color scheme, typography.
+        * Styles common elements like sections, tables, lists, images.
+        * Includes styles for collapsible sections (though not used in this specific HTML).
+        * Includes responsive adjustments for different screen sizes.
+        * Includes print-specific styles for better output.
+        * HEADER AND FOOTER specific styling has been REMOVED.
+        ========================================================================== */
+
+        /* --- Base Styles & Color Theme --- */
+        :root {
+            --primary-color: #00447C; /* Dark Blue */
+            --secondary-color: #4A90E2; /* Lighter Blue */
+            --bg-light: #f8f9fa; /* Very light grey */
+            --bg-medium: #e9ecef; /* Light grey */
+            --border-color: #dee2e6; /* Grey border */
+            --text-color: #343a40; /* Dark grey text */
+            --hover-bg: #e8f4fd; /* Light blue for hover */
+            --warning-color: #dc3545; /* Red for warnings */
+            --warning-bg: #f8d7da;
+            --attention-color: #ffc107; /* Yellow for attention */
+            --attention-bg: #fff3cd;
+            --remark-bg: #fffbeb; /* Light yellow background for remarks */
+            --remark-border: #f0ad4e; /* Amber left border */
+            --remark-text: #8a6d3b; /* Darker yellow text */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, "Microsoft YaHei", "SimSun", sans-serif; /* Added Chinese fonts */
+            line-height: 1.6;
+            background-color: #f4f4f4; /* Light grey background for the page */
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* --- Main Content Container --- */
+        .container {
+            max-width: 1100px;
+            margin: 20px auto;
+            padding: 25px;
+            background-color: #fff; /* White background for content */
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            flex-grow: 1; /* Allows footer (if added back) to stick to bottom */
+        }
+
+        /* --- Typography --- */
+        h1, h2, h3 {
+            color: var(--primary-color);
+            line-height: 1.3;
+            margin-top: 1em;
+            margin-bottom: 0.75em;
+        }
+        h1:first-child, h2:first-child, h3:first-child {
+            margin-top: 0;
+        }
+
+        /* Styles the main title within the container */
+        .container > h1 {
+            font-size: 1.8em;
+            text-align: center;
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 0.5em;
+            margin-bottom: 1em; /* Add more space below main title */
+            color: var(--primary-color); /* Ensure H1 color */
+        }
+
+        /* Styles section titles */
+        section > h2 {
+            font-size: 1.5em;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.3em;
+            color: var(--primary-color);
+            margin-top: 1.5em; /* Keep original spacing */
+        }
+
+        /* Base style for H3, often used for sub-sections or collapsible headers */
+        section > h3 {
+            font-size: 1.2em;
+            color: var(--primary-color);
+            padding-bottom: 0.3em;
+            font-weight: bold;
+        }
+
+        p {
+            margin-bottom: 1em;
+        }
+
+        ul {
+            list-style: disc;
+            margin: 0 0 1em 25px;
+        }
+        ol {
+             margin: 0 0 1em 25px;
+        }
+
+        li {
+            margin-bottom: 0.5em;
+        }
+
+        /* --- Content Sections --- */
+        section {
+            margin-bottom: 2em;
+            padding-bottom: 1em;
+            /* Removed bottom border to match original look more closely */
+            /* border-bottom: 1px solid var(--bg-medium); */
+        }
+        section:last-of-type {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        /* --- Tables --- */
+        .table-container {
+            overflow-x: auto; /* Enable horizontal scroll on screen */
+            margin-top: 1em;
+            margin-bottom: 1.5em;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95em;
+            min-width: 600px; /* Prevent excessive squishing on screen */
+        }
+
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 10px 12px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        thead th {
+            background-color: var(--bg-medium);
+            font-weight: bold;
+            color: var(--primary-color);
+            position: sticky; /* Keep header visible on scroll */
+            top: 0;
+            z-index: 1;
+            border-bottom-width: 2px; /* Stronger line below header */
+            border-bottom-color: var(--border-color);
+        }
+         thead th:first-child {
+            text-align: left; /* Left align first header */
+        }
+
+        /* Specific styling for first column cells */
+        tbody td:first-child {
+            font-weight: 600; /* Bold first column data */
+            background-color: var(--bg-light); /* Very light grey background for first column */
+            white-space: nowrap; /* Prevent wrapping in first column if possible */
+        }
+
+        /* Zebra striping for table rows */
+        tbody tr:nth-child(even) {
+            background-color: var(--bg-light);
+        }
+        /* Adjust first cell background for even rows */
+         tbody tr:nth-child(even) td:first-child {
+             background-color: #f0f3f5; /* Slightly different even row first cell */
+         }
+
+        /* Hover effect for table rows */
+        tbody tr:hover {
+            background-color: var(--hover-bg);
+        }
+        /* Adjust first cell hover background */
+        tbody tr:hover td:first-child {
+             background-color: #eaf6ff; /* Slightly different hover for first cell */
+         }
+
+        /* --- Image Gallery Styling --- */
+        .image-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: space-around; /* Distribute space (original) */
+            margin-top: 1em;
+            margin-bottom: 2em; /* Match original spacing */
+            padding: 15px;
+            background-color: var(--bg-light);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            text-align: center; /* Match original */
+        }
+
+        .image-gallery figure {
+            margin: 10px; /* Match original */
+            padding: 10px; /* Match original */
+            border: 1px solid #ccc; /* Match original */
+            border-radius: 4px; /* Match original */
+            background-color: #fff; /* Match original */
+            flex: 1 1 30%; /* Match original flex behavior */
+            min-width: 250px; /* Match original min-width */
+            max-width: 300px; /* Match original max-width */
+            display: flex; /* Added for better alignment */
+            flex-direction: column; /* Added for better alignment */
+            align-items: center; /* Center content */
+        }
+
+        .image-gallery img {
+            max-width: 100%;
+            height: auto;
+            display: block; /* Match original */
+            margin: 0 auto 10px auto; /* Match original centering */
+            border-radius: 4px; /* Match original */
+            border: none; /* Remove generic border if added */
+            background-color: transparent; /* Ensure no extra background */
+            box-shadow: none; /* Remove generic shadow if added */
+        }
+
+        .image-gallery figcaption {
+            font-size: 0.9em;
+            color: #555; /* Match original */
+            font-weight: bold; /* Match original */
+            margin-top: auto; /* Push caption down */
+        }
+
+        /* --- Alert Boxes --- */
+        .safety-warning, .attention {
+            border-left-width: 5px;
+            border-left-style: solid;
+            padding: 10px 15px;
+            margin: 1em 0;
+            border-radius: 4px;
+        }
+        .safety-warning {
+            border-left-color: var(--warning-color);
+            background-color: var(--warning-bg);
+            color: #721c24;
+        }
+        .attention {
+            border-left-color: var(--attention-color);
+            background-color: var(--attention-bg);
+            color: #856404;
+        }
+        .safety-warning strong, .attention strong {
+            font-weight: bold;
+        }
+
+        /* --- Remark Section Styling (from original) --- */
+        .remark-section {
+             margin-top: 2em;
+             padding: 15px;
+             background-color: var(--remark-bg); /* Use variable */
+             border-left: 4px solid var(--remark-border); /* Use variable */
+             border-radius: 4px;
+         }
+         .remark-section h2 {
+             border-bottom: none;
+             margin-top: 0;
+             color: var(--remark-text); /* Use variable */
+         }
+
+        /* --- Collapsible Section Styling (Included from generic CSS, not used in current HTML) --- */
+        section h3.collapsible-header {
+            cursor: pointer;
+            position: relative;
+            padding-right: 25px; /* Space for indicator */
+            margin-bottom: 0; /* Connects header visually to content below */
+            border-bottom: 1px solid var(--border-color); /* Separator line */
+            padding-bottom: 10px; /* Spacing above the line */
+        }
+
+        section h3.collapsible-header::after {
+            content: '▼'; /* Down arrow indicator */
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.8em;
+            color: var(--primary-color);
+            transition: transform 0.3s ease;
+        }
+
+        section h3.collapsible-header.collapsed::after {
+            content: '►'; /* Right arrow indicator when collapsed */
+        }
+
+        .collapsible-content {
+            overflow: hidden;
+            max-height: 5000px; /* Allow ample height when open */
+            transition: max-height 0.5s ease-in-out, padding 0.3s ease, margin 0.3s ease, border 0.3s ease, opacity 0.3s ease;
+            padding-top: 15px; /* Space below header when open */
+            margin-top: 0;
+            border-top: 1px solid var(--bg-light); /* Subtle line separating from header */
+            opacity: 1;
+        }
+
+        .collapsible-content.collapsed {
+            max-height: 0;
+            padding-top: 0;
+            padding-bottom: 0;
+            margin-top: 0;
+            border-top: none; /* Hide border when collapsed */
+            opacity: 0;
+        }
+
+        /* Ensure Chinese characters display */
+        .chinese-text {
+            font-family: Arial, "Microsoft YaHei", "SimSun", sans-serif;
+        }
+
+        /* ==========================================================================
+        RESPONSIVE ADJUSTMENTS
+        ========================================================================== */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+                margin: 10px; /* Reduce margin on smaller screens */
+            }
+            .container > h1 { font-size: 1.6em; }
+            section > h2 { font-size: 1.3em; }
+            section > h3 { font-size: 1.1em; } /* Includes collapsible */
+
+            table { font-size: 0.9em; min-width: 0; } /* Allow table to shrink */
+            th, td { padding: 8px 10px; }
+            tbody td:first-child {
+                white-space: normal; /* Allow wrapping in first column */
+            }
+
+            .image-gallery figure {
+                flex-basis: calc(50% - 20px); /* Aim for 2 columns, adjust gap */
+                min-width: 200px; /* Match original */
+                max-width: 45%; /* Allow slightly more width */
+            }
+        }
+
+        @media (max-width: 576px) { /* Adjusted breakpoint from 480px */
+             .container > h1 { font-size: 1.4em; } /* Slightly smaller */
+             section > h2 { font-size: 1.15em; } /* Slightly smaller */
+             section > h3 { font-size: 1.0em; } /* Includes collapsible */
+
+             table { font-size: 0.9em; } /* Match original */
+             th, td { padding: 8px; font-size: 0.85em; } /* Match original padding, smaller font */
+             ul, ol { margin-left: 20px; }
+
+             .image-gallery figure {
+                flex-basis: 90%; /* Single column on small screens */
+                min-width: unset; /* Match original */
+                max-width: 90%; /* Allow wider single images */
+            }
+        }
+
+        /* ==========================================================================
+        PRINT SPECIFIC STYLES
+        * Optimizes layout for printing.
+        * Hides header and footer elements (already removed from HTML/CSS).
+        * Forces display of collapsible content (if used).
+        * Adjusts fonts, colors, and spacing for paper.
+        * Allows content (paragraphs, table rows) to break across pages.
+        ========================================================================== */
+        @media print {
+            body {
+                background-color: #fff !important; /* Force white background */
+                color: #000 !important; /* Force black text for base body */
+                font-size: 10pt;
+                -webkit-print-color-adjust: exact !important; /* Try to force color printing in WebKit */
+                print-color-adjust: exact !important; /* Standard property for color printing */
+                margin: 0;
+                padding: 0;
+                box-shadow: none;
+            }
+
+            .container {
+                max-width: 100%;
+                margin: 0;
+                padding: 1cm; /* Add some padding for print margins */
+                box-shadow: none;
+                border: none;
+                border-radius: 0;
+                background-color: #fff !important; /* Ensure container background is white */
+            }
+
+            /* Retain heading colors */
+            h1, h2, h3 {
+                color: var(--primary-color) !important;
+                page-break-after: avoid; /* Avoid breaking page right after a heading */
+            }
+            .container > h1 {
+                 border-bottom-color: var(--secondary-color) !important;
+            }
+             section > h2 {
+                 border-bottom-color: var(--border-color) !important;
+            }
+             .remark-section h2 {
+                 color: var(--remark-text) !important;
+             }
+
+
+            /* Ensure text color is generally black for readability, unless specified otherwise */
+            p, li, td, figcaption {
+                color: #000 !important; /* Default to black text */
+            }
+            /* Override for specific elements if needed, e.g., captions */
+             .image-gallery figcaption {
+                 color: #333 !important; /* Darker grey for captions */
+             }
+
+
+            /* Table styling for print */
+            table {
+                font-size: 9pt; /* Slightly smaller font for print tables */
+                width: 100%;
+                min-width: 0; /* Allow table to fit page */
+                page-break-inside: auto; /* Allow tables to break across pages */
+            }
+            tr {
+                page-break-inside: avoid; /* Try to keep rows together */
+                page-break-after: auto;
+            }
+            th, td {
+                border: 1px solid #ccc !important; /* Lighter border for print */
+                padding: 6px 8px;
+                vertical-align: top;
+            }
+            thead {
+                display: table-header-group; /* Ensure header repeats if table breaks */
+            }
+            thead th {
+                background-color: var(--bg-medium) !important;
+                color: var(--primary-color) !important;
+                border-bottom: 2px solid var(--border-color) !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            /* Retain first column styling */
+            tbody td:first-child {
+                font-weight: 600 !important;
+                background-color: var(--bg-light) !important;
+                color: #000 !important; /* Ensure black text */
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            /* Retain zebra striping */
+            tbody tr:nth-child(even) {
+                background-color: var(--bg-light) !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+             tbody tr:nth-child(even) td:first-child {
+                 background-color: #f0f3f5 !important; /* Slightly different even row first cell */
+                 -webkit-print-color-adjust: exact !important;
+                 print-color-adjust: exact !important;
+             }
+             /* Remove hover effects */
+             tbody tr:hover, tbody tr:hover td:first-child {
+                 background-color: inherit !important;
+             }
+
+
+            /* Image gallery for print */
+            .image-gallery {
+                background-color: var(--bg-light) !important;
+                border: 1px solid var(--border-color) !important;
+                padding: 10px;
+                page-break-inside: avoid; /* Try to keep gallery together */
+                justify-content: flex-start; /* Align left for print */
+                 -webkit-print-color-adjust: exact !important;
+                 print-color-adjust: exact !important;
+            }
+            .image-gallery figure {
+                border: 1px solid #ccc !important;
+                background-color: #fff !important;
+                padding: 5px;
+                margin: 5px;
+                flex-basis: 45%; /* Aim for 2 columns in print */
+                max-width: 45%;
+                page-break-inside: avoid; /* Keep figure content together */
+                 -webkit-print-color-adjust: exact !important;
+                 print-color-adjust: exact !important;
+            }
+            .image-gallery img {
+                max-width: 100%;
+                height: auto;
+                border: none !important;
+                box-shadow: none !important;
+            }
+
+            /* Remark section for print */
+            .remark-section {
+                 background-color: var(--remark-bg) !important;
+                 border-left: 4px solid var(--remark-border) !important;
+                 page-break-inside: avoid; /* Try to keep remarks together */
+                 -webkit-print-color-adjust: exact !important;
+                 print-color-adjust: exact !important;
+             }
+
+            /* Force collapsible content to be visible */
+            .collapsible-content {
+                max-height: none !important;
+                opacity: 1 !important;
+                display: block !important;
+                padding-top: 10px !important;
+                border-top: 1px solid var(--bg-light) !important;
+                 -webkit-print-color-adjust: exact !important;
+                 print-color-adjust: exact !important;
+            }
+            .collapsible-header::after {
+                content: "" !important; /* Hide toggle indicator */
+            }
+
+            /* Hide elements not suitable for print if needed (none identified here) */
+            /* .no-print { display: none !important; } */
+
+            /* Ensure links are visible if needed (not present in this HTML) */
+            /* a { color: #000 !important; text-decoration: underline !important; } */
+            /* a[href^="http"]:after { content: " (" attr(href) ")"; font-size: 90%; } */
+
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Liquid Nitrogen Cryostat - Electrical</h1>
+
+        <section id="introduction">
+            <p>Using liquid nitrogen as the cooling medium, the electronic liquid nitrogen thermostat can quickly cool down to liquid nitrogen temperature (about 20 minutes).</p>
+            <p>It is suitable for use with electromagnets. Complete electromagnetic testing of sample materials, resistivity, magnetoresistance, Hall effect, etc.</p>
+        </section>
+
+        <section id="product-types">
+            <h2>Product Types</h2>
+            <div class="image-gallery">
+                <figure>
+                    <!-- NOTE: Changed src to relative path. Assumes image is in the same folder as HTML -->
+                    <img src="Liquid Nitrogen Cryosta1_page-000.jpg" alt="Electrical Standard Type Cryostat">
+                    <figcaption>Electrical standard type</figcaption>
+                    <!-- <figcaption class="chinese-text">T9015 液氮恒温器--电学</figcaption> -->
+                </figure>
+                <figure>
+                     <!-- NOTE: Changed src to relative path. Assumes image is in the same folder as HTML -->
+                    <img src="Liquid Nitrogen Cryosta1_page-002.jpg" alt="Electrical U-shape Cryostat">
+                    <figcaption>Electrical U-shape</figcaption>
+                </figure>
+                <figure>
+                     <!-- NOTE: Changed src to relative path. Assumes image is in the same folder as HTML -->
+                    <img src="Liquid Nitrogen Cryosta1_page-003.jpg" alt="Electrical Compact Type Cryostat">
+                    <figcaption>Electrical compact type</figcaption>
+                     <!-- <figcaption class="chinese-text">-10020-液氣溫器</figcaption> -->
+                </figure>
+            </div>
+        </section>
+
+        <section id="working-principle">
+            <h2>Working Principle</h2>
+            <p>Put liquid nitrogen into the liquid nitrogen chamber inside the cryostat, keep the heat leakage of the cold finger stable at a certain value by adjusting the gap between the temperature control plug and the cold finger, and then adjust the heating output power through the DXTC-290 temperature controller so that The temperature of the cryostat changes rapidly between 80K-600K and can quickly stabilize to a certain set value; in addition, if the cryostat is equipped with a step-down option, the temperature of the cryostat can be reduced to 65K, and stabilized at 65K.</p>
+        </section>
+
+        <section id="features">
+            <h2>Features</h2>
+            <ul>
+                <li>Temperature range (65K~500K), (optional 700K), high efficiency and fast cooling speed;</li>
+                <li>The sample is placed in a vacuum chamber, providing an ideal and stable experimental environment;</li>
+                <li>The vacuum interlayer is equipped with low-temperature adsorbent, which can increase the vacuum holding time and extend the use time of liquid nitrogen;</li>
+                <li>The temperature sensor uses PT100 platinum resistor with good stability and repeatability;</li>
+                <li>Multiple options to meet different testing needs;</li>
+                <li>It is convenient to add liquid nitrogen during use;</li>
+                <li>The electrical sample holder is equipped with a pluggable sample card and easy-to-use and beautiful binding posts;</li>
+                <li>Can be customized according to customer requirements;</li>
+                <li>Comes with 8 measurement leads as standard and can be expanded to 32.</li>
+            </ul>
+        </section>
+
+        <section id="technical-specifications">
+            <h2>Technical Specifications</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Model</th>
+                            <th>DXT9015</th>
+                            <th>DXT9015H</th>
+                            <th>DXT9020</th>
+                            <th>DXT9020H</th>
+                            <th>DXT9030</th>
+                            <th>DXT9030H</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Temperature range</td>
+                            <td>65-325K</td>
+                            <td>65-500K</td>
+                            <td>65-325K</td>
+                            <td>65-500K</td>
+                            <td>65-325K</td>
+                            <td>65-500K</td>
+                        </tr>
+                        <tr>
+                            <td>Cooling time</td>
+                            <td colspan="6">&le;25min (cool down to 80K); &le;40min (cool down to 65K)</td>
+                        </tr>
+                         <tr>
+                            <td>Electrical connector</td>
+                            <td colspan="6">Standard 8-pin plug (expandable)</td>
+                        </tr>
+                        <tr>
+                             <td>Sample holder size</td>
+                             <td colspan="2">15X25mm</td>
+                             <td colspan="2">20X30mm</td>
+                             <td colspan="2">30X40mm</td>
+                        </tr>
+                        <tr>
+                             <td>Thermometer</td>
+                             <td colspan="6">PT100 platinum resistance thermometer (both calibrated and uncalibrated, the default is uncalibrated)</td>
+                        </tr>
+                         <tr>
+                            <td>Temperature stability</td>
+                            <td colspan="6">&plusmn;0.01K depends on the temperature controller</td>
+                        </tr>
+                        <tr>
+                             <td>Heater</td>
+                             <td>30W</td>
+                             <td>60W</td>
+                             <td>30W</td>
+                             <td>60W</td>
+                             <td>30W</td>
+                             <td>60W</td>
+                         </tr>
+                          <tr>
+                             <td>Vacuum interface</td>
+                             <td colspan="6">Standard KF25</td>
+                         </tr>
+                         <tr>
+                            <td>Sample environment</td>
+                            <td colspan="6">Vacuum</td>
+                        </tr>
+                         <tr>
+                             <td>Required vacuum degree</td>
+                             <td colspan="6">&le;1Pa is enough</td>
+                         </tr>
+                         <tr>
+                             <td>Liquid nitrogen holding time</td>
+                             <td colspan="6">6h@80K; 5h@100K; 3h@200K</td>
+                         </tr>
+                         <tr>
+                             <td>Liquid nitrogen chamber volume</td>
+                             <td colspan="6">Standard 500ml (can be customized)</td>
+                         </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+         <section id="selection-instructions">
+            <h2>Selection Instructions</h2>
+            <p>The electrical measurement liquid nitrogen cryostat is equipped with an electrical 8-core measurement connector, which can be expanded to 32 cores. The wires can be ordinary enameled wire, PTFE wire, low-temperature phosphor bronze wire, low-temperature coaxial wire, etc. In addition, the cryostat has a compact structure and is suitable for use with magnets. Complete electromagnetic testing of sample materials, resistivity, magnetoresistance, Hall effect, etc.</p>
+         </section>
+
+        <section id="sample-holder-options">
+            <h2>Sample Holder Options</h2>
+             <div class="table-container">
+                 <table>
+                    <thead>
+                        <tr>
+                            <th>Model</th>
+                            <th>Specifications and Parameters</th>
+                            <th>Material</th>
+                            <th>Describe</th>
+                         </tr>
+                    </thead>
+                    <tbody>
+                         <tr>
+                             <td>DXT9015</td>
+                             <td>15X25mm</td>
+                             <td>OFHC</td>
+                             <td rowspan="3">Standard electrical sample holder, with 4 binding posts distributed up and down.</td>
+                         </tr>
+                         <tr>
+                             <td>DXT9020</td>
+                             <td>20X30mm</td>
+                             <td>OFHC</td>
+                         </tr>
+                         <tr>
+                             <td>DXT9030</td>
+                             <td>30X40mm</td>
+                             <td>OFHC</td>
+                         </tr>
+                     </tbody>
+                 </table>
+            </div>
+            <p><strong>Remark:</strong></p>
+             <ol>
+                 <li>All standard electrical cryostats are shipped with only one sample holder.</li>
+                 <li>Can be customized according to customer requirements.</li>
+             </ol>
+        </section>
+
+        <section id="connector-options">
+            <h2>Cryostat Electrical Connector Options</h2>
+             <div class="table-container">
+                 <table>
+                    <thead>
+                        <tr>
+                            <th>Electrical connector model</th>
+                            <th>Specifications and Parameters</th>
+                            <th>Describe</th>
+                         </tr>
+                    </thead>
+                    <tbody>
+                         <tr>
+                             <td>DXT90-8P ordinary glass sintering</td>
+                             <td>8pin</td>
+                             <td>Add a quick-plug 8P ordinary electrical connector</td>
+                         </tr>
+                         <tr>
+                             <td>DXT90-12P ordinary glass sintering</td>
+                             <td>12pin</td>
+                             <td>Add a quick-plug 12P ordinary electrical connector</td>
+                         </tr>
+                         <tr>
+                             <td rowspan="2">DXT90-SMA</td>
+                             <td>0-18GHz</td>
+                             <td>With soft cable</td>
+                         </tr>
+                         <tr>
+                             <td>0-12.4GHz</td>
+                             <td>Equipped with semi-rigid and semi-flexible cables</td>
+                         </tr>
+                         <tr>
+                             <td>DXT90-BNC</td>
+                             <td>0-4GHz</td>
+                             <td>With ordinary coaxial cable</td>
+                         </tr>
+                         <tr>
+                             <td>DXT90-TRX</td>
+                             <td>Triax connector</td>
+                             <td>Add a quick-plug triaxial connector</td>
+                         </tr>
+                         <tr>
+                             <td>DXT90-S</td>
+                             <td>Stainless steel junction box</td>
+                             <td>Add a stainless steel junction box</td>
+                         </tr>
+                         <tr>
+                             <td>DXT90-PTEF</td>
+                             <td>PTFE wiring cover</td>
+                             <td>Add a PTFE plate wiring cover to the stainless steel junction box</td>
+                         </tr>
+                     </tbody>
+                 </table>
+            </div>
+         </section>
+
+        <section class="remark-section" id="remarks">
+            <h2>Remarks</h2>
+            <ol>
+                 <li>All electrical cryostats are equipped with two connectors when they leave the factory. One is a connector used for installing the temperature sensor and heater, and the other is an electrical connector prepared for electrical measurements. When more electrical test wiring is needed When necessary, you need to add mounting holes or install one or more Breakout Boxes.</li>
+                 <li>Among the cryostat electrical connector options, there is the T90-S option. This option is the joint box shell installed on the option that is integrally connected together to form a ground. The other is the T90-PTEF option. This option is The shell and the installed connector are connected with PTFE insulation, and the electrical properties of the shell and the connector are independent of each other. This issue should be paid attention to when selecting.</li>
+                 <li>700K high temperature thermostat can be customized.</li>
+                 <li>Pressure reduction accessories option. The standard thermostat itself does not have special pressure reduction means. When a low temperature of 65K is required, corresponding pressure reduction accessories need to be configured.</li>
+             </ol>
+        </section>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DXA-001C Dual Channel Lock-in Amplifier</title>
+    <style>
+        /* ==========================================================================
+        GENERIC STYLING FOR DEXINMAG DOCUMENT PAGES
+        Based on DXMP Manual / Axial Probe Styles
+        Version: 1.0
+        * Provides a consistent layout, color scheme, typography.
+        * Styles common elements like sections, tables, lists, images.
+        * Includes styles for collapsible sections.
+        * Includes responsive adjustments for different screen sizes.
+        * Includes print-specific styles for better output.
+        * HEADER AND FOOTER specific styling has been REMOVED.
+        ========================================================================== */
+        /* --- Base Styles & Color Theme --- */
+        :root {
+            --primary-color: #00447C; /* Dark Blue */
+            --secondary-color: #4A90E2; /* Lighter Blue */
+            --bg-light: #f8f9fa; /* Very light grey */
+            --bg-medium: #e9ecef; /* Light grey */
+            --border-color: #dee2e6; /* Grey border */
+            --text-color: #343a40; /* Dark grey text */
+            /* --header-bg: #343a40; */ /* Header styles removed */
+            /* --header-text: #ffffff; */ /* Header styles removed */
+            /* --footer-bg: #f1f1f1; */ /* Footer styles removed */
+            /* --footer-text: #555; */ /* Footer styles removed */
+            --hover-bg: #e8f4fd; /* Light blue for hover */
+            --warning-color: #dc3545; /* Red for warnings */
+            --warning-bg: #f8d7da;
+            --attention-color: #ffc107; /* Yellow for attention */
+            --attention-bg: #fff3cd;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4; /* Light grey background for the page */
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* --- Main Content Container --- */
+        .container {
+            max-width: 1100px;
+            margin: 20px auto;
+            padding: 25px;
+            background-color: #fff; /* White background for content */
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            flex-grow: 1; /* Allows footer (if added back) to stick to bottom */
+        }
+
+        /* --- Typography --- */
+        h1, h2, h3 {
+            color: var(--primary-color);
+            line-height: 1.3;
+            margin-top: 1em;
+            margin-bottom: 0.75em;
+        }
+        h1:first-child, h2:first-child, h3:first-child {
+            margin-top: 0;
+        }
+
+        /* Styles the main title within the container */
+        .container > h1 {
+            font-size: 1.8em;
+            text-align: center;
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 0.5em;
+            margin-bottom: 1em; /* Add more space below main title */
+        }
+
+        /* Styles section titles */
+        section > h2 {
+            font-size: 1.5em;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.3em;
+            color: var(--primary-color);
+        }
+
+        /* Base style for H3, often used for sub-sections or collapsible headers */
+        section > h3 {
+            font-size: 1.2em;
+            color: var(--primary-color);
+            padding-bottom: 0.3em;
+            font-weight: bold;
+        }
+
+        p {
+            margin-bottom: 1em;
+        }
+
+        ul {
+            list-style: disc;
+            margin: 0 0 1em 25px;
+        }
+
+        li {
+            margin-bottom: 0.5em;
+        }
+
+        sup {
+            vertical-align: super;
+            font-size: smaller;
+        }
+
+        /* --- Content Sections --- */
+        section {
+            margin-bottom: 2em;
+            padding-bottom: 1em;
+            border-bottom: 1px solid var(--bg-medium); /* Subtle separator */
+        }
+        section:last-of-type {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        /* --- Tables --- */
+        .table-container {
+            overflow-x: auto; /* Enable horizontal scroll on screen */
+            margin-top: 1em;
+            margin-bottom: 1.5em;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95em;
+            min-width: 600px; /* Prevent excessive squishing on screen */
+        }
+
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 10px 12px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        thead th {
+            background-color: var(--bg-medium);
+            font-weight: bold;
+            color: var(--primary-color);
+            position: sticky; /* Keep header visible on scroll */
+            top: 0;
+            z-index: 1;
+            border-bottom-width: 2px; /* Stronger line below header */
+            border-bottom-color: var(--border-color);
+        }
+
+        /* Zebra striping for table rows */
+        tbody tr:nth-child(even) {
+            background-color: var(--bg-light);
+        }
+
+        /* Hover effect for table rows */
+        tbody tr:hover {
+            background-color: var(--hover-bg);
+        }
+
+        /* Specific styling for the first column in spec tables */
+        .spec-table td:first-child {
+            font-weight: bold;
+            background-color: #f2f2f2; /* Keep original light grey for parameter names */
+            min-width: 180px; /* Give parameter names some space */
+            white-space: nowrap; /* Prevent parameter names from wrapping if possible */
+        }
+
+        /* --- Image Styling --- */
+        figure {
+             margin: 0; /* Reset default figure margin */
+             text-align: center;
+        }
+
+        figure img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 20px auto; /* Center image */
+            border: 1px solid #ccc; /* Use CSS var */
+            padding: 5px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-radius: 4px;
+        }
+
+        figure figcaption {
+             font-size: 0.9em;
+             color: #555;
+             margin-top: 5px;
+         }
+
+        /* --- Image Gallery Styling --- */
+        .image-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 1em;
+            margin-bottom: 1.5em;
+            padding: 15px;
+            background-color: var(--bg-light);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+        }
+
+        .image-gallery figure {
+            margin: 0;
+            text-align: center;
+            flex-basis: calc(50% - 20px); /* Aim for 2 columns */
+            max-width: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .image-gallery img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 8px; /* Reset margin from figure img */
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 0; /* Reset margin from figure img */
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .image-gallery figcaption {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: auto; /* Push caption down */
+        }
+
+        /* --- Alert Boxes --- */
+        .safety-warning, .attention {
+            border-left-width: 5px;
+            border-left-style: solid;
+            padding: 10px 15px;
+            margin: 1em 0;
+            border-radius: 4px;
+        }
+        .safety-warning {
+            border-left-color: var(--warning-color);
+            background-color: var(--warning-bg);
+            color: #721c24;
+        }
+        .attention {
+            border-left-color: var(--attention-color);
+            background-color: var(--attention-bg);
+            color: #856404;
+        }
+        .safety-warning strong, .attention strong {
+            font-weight: bold;
+        }
+
+        /* --- Collapsible Section Styling --- */
+        /* Apply this class to the H3 (or other element) that triggers the collapse */
+        section h3.collapsible-header {
+            cursor: pointer;
+            position: relative;
+            padding-right: 25px; /* Space for indicator */
+            margin-bottom: 0; /* Connects header visually to content below */
+            border-bottom: 1px solid var(--border-color); /* Separator line */
+            padding-bottom: 10px; /* Spacing above the line */
+        }
+
+        section h3.collapsible-header::after {
+            content: '▼'; /* Down arrow indicator */
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.8em;
+            color: var(--primary-color);
+            transition: transform 0.3s ease;
+        }
+
+        section h3.collapsible-header.collapsed::after {
+            content: '►'; /* Right arrow indicator when collapsed */
+        }
+
+        /* The content DIV immediately following the collapsible-header */
+        .collapsible-content {
+            overflow: hidden;
+            max-height: 5000px; /* Allow ample height when open */
+            transition: max-height 0.5s ease-in-out, padding 0.3s ease, margin 0.3s ease, border 0.3s ease, opacity 0.3s ease;
+            padding-top: 15px; /* Space below header when open */
+            margin-top: 0;
+            border-top: 1px solid var(--bg-light); /* Subtle line separating from header */
+            opacity: 1;
+        }
+
+        .collapsible-content.collapsed {
+            max-height: 0;
+            padding-top: 0;
+            padding-bottom: 0;
+            margin-top: 0;
+            border-top: none; /* Hide border when collapsed */
+            opacity: 0;
+        }
+
+        /* ==========================================================================
+        RESPONSIVE ADJUSTMENTS
+        ========================================================================== */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+                margin: 10px; /* Reduce margin on smaller screens */
+            }
+            .container > h1 { font-size: 1.6em; }
+            section > h2 { font-size: 1.3em; }
+            section > h3 { font-size: 1.1em; } /* Includes collapsible */
+
+            table { font-size: 0.9em; min-width: 0; } /* Allow table to shrink */
+            th, td { padding: 8px 10px; }
+            /* Allow first column text to wrap on smaller screens */
+            .spec-table td:first-child {
+                 white-space: normal;
+                 min-width: 120px; /* Adjust min-width */
+            }
+
+            .image-gallery figure {
+                 flex-basis: calc(50% - 15px); /* Keep 2 columns */
+                 max-width: 45%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container > h1 { font-size: 1.4em; }
+            section > h2 { font-size: 1.15em; }
+            section > h3 { font-size: 1.0em; } /* Includes collapsible */
+
+            th, td { padding: 6px 8px; font-size: 0.85em; }
+            ul { margin-left: 20px; }
+            .spec-table td:first-child {
+                 min-width: 100px; /* Further adjust min-width */
+            }
+
+            .image-gallery figure {
+                 flex-basis: 100%; /* Stack to single column */
+                 max-width: 90%;
+            }
+        }
+
+        /* ==========================================================================
+        PRINT SPECIFIC STYLES
+        * Optimizes layout for printing.
+        * Hides header and footer elements.
+        * Forces display of collapsible content.
+        * Adjusts fonts, colors, and spacing for paper.
+        * Allows content (paragraphs, table rows) to break across pages.
+        ========================================================================== */
+        @media print {
+            body {
+                background-color: #fff !important; /* Force white background */
+                color: #000 !important; /* Force black text */
+                font-size: 10pt;
+                -webkit-print-color-adjust: exact !important; /* Try to force color printing */
+                print-color-adjust: exact !important;
+            }
+
+            .container {
+                max-width: 100%;
+                margin: 0;
+                padding: 0;
+                box-shadow: none;
+                border-radius: 0;
+                border: none;
+            }
+
+            h1, h2, h3, h4, h5, h6 {
+                color: #000 !important; /* Black headings for print */
+                page-break-after: avoid; /* Avoid breaking page right after a heading */
+                page-break-inside: avoid; /* Try to keep heading with following content */
+            }
+
+            .container > h1 {
+                border-bottom: 2px solid #000 !important; /* Black border */
+                color: #000 !important; /* Ensure title is black */
+                 -webkit-print-color-adjust: exact !important;
+                 print-color-adjust: exact !important;
+            }
+            section > h2 {
+                 border-bottom: 1px solid #000 !important; /* Black border */
+                 color: #000 !important; /* Ensure heading is black */
+                 -webkit-print-color-adjust: exact !important;
+                 print-color-adjust: exact !important;
+            }
+             section > h3 {
+                 color: #000 !important; /* Ensure heading is black */
+                 border-bottom: none; /* Remove border from H3 in print */
+                 -webkit-print-color-adjust: exact !important;
+                 print-color-adjust: exact !important;
+            }
+
+
+            section {
+                border-bottom: none; /* Remove section separators */
+                margin-bottom: 1.5em;
+                padding-bottom: 0;
+                page-break-inside: auto; /* Allow sections to break across pages */
+            }
+
+            table {
+                page-break-inside: auto; /* Allow tables to break across pages */
+                margin-top: 0.5em;
+                margin-bottom: 1em;
+            }
+            thead {
+                display: table-header-group; /* Repeat table header on each page */
+            }
+            tbody tr {
+                 page-break-inside: auto; /* Allow rows to break */
+                 page-break-after: auto;
+            }
+            tfoot {
+                display: table-footer-group; /* Repeat footer if exists */
+            }
+            th, td {
+                border: 1px solid #ccc !important; /* Lighter border for print */
+                font-size: 9pt; /* Slightly smaller font for tables */
+                page-break-inside: avoid; /* Try to keep content within a cell together */
+                color: #000 !important; /* Ensure table text is black */
+                background-color: transparent !important; /* Default transparent background */
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            thead th {
+                background-color: #eee !important; /* Light grey header */
+                color: #000 !important;
+                font-weight: bold;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            tbody tr:nth-child(even) {
+                 background-color: #f9f9f9 !important; /* Very light zebra stripe */
+                 -webkit-print-color-adjust: exact !important;
+                 print-color-adjust: exact !important;
+            }
+            /* Retain specific background for first column in spec tables */
+            .spec-table td:first-child {
+                 background-color: #f2f2f2 !important;
+                 font-weight: bold;
+                 color: #000 !important;
+                 white-space: normal; /* Allow wrapping in print */
+                 -webkit-print-color-adjust: exact !important;
+                 print-color-adjust: exact !important;
+            }
+
+            .table-container {
+                overflow-x: visible; /* Don't scroll on print */
+            }
+
+            p, li {
+                color: #000 !important; /* Ensure paragraph/list text is black */
+                orphans: 3; /* Minimum lines at bottom before break */
+                widows: 3; /* Minimum lines at top after break */
+                page-break-inside: auto; /* Allow paragraphs and list items to break */
+            }
+            ul {
+                page-break-inside: auto; /* Allow lists to break */
+            }
+
+            img {
+                max-width: 80% !important; /* Reduce image size slightly */
+                page-break-inside: avoid; /* Avoid breaking images */
+                border: 1px solid #aaa !important;
+            }
+            figure {
+                page-break-inside: avoid; /* Try to keep figure and caption together */
+            }
+
+            .image-gallery {
+                background-color: transparent !important;
+                border: none;
+                gap: 10px;
+                page-break-inside: avoid; /* Try to keep gallery together if small */
+            }
+            .image-gallery figure {
+                 flex-basis: calc(50% - 10px); /* Try to keep 2 columns */
+                 max-width: 48%;
+                 page-break-inside: avoid; /* Avoid breaking individual figures */
+            }
+             .image-gallery img {
+                 box-shadow: none;
+                 border: 1px solid #aaa !important;
+             }
+             .image-gallery figcaption {
+                 color: #333 !important; /* Darker caption for print */
+             }
+
+            /* Ensure collapsible content is visible */
+            .collapsible-content {
+                max-height: none !important;
+                opacity: 1 !important;
+                padding-top: 10px !important;
+                border-top: 1px solid #eee !important;
+                overflow: visible !important;
+                display: block !important; /* Ensure it's displayed */
+            }
+            .collapsible-header::after {
+                content: "" !important; /* Hide arrows */
+            }
+            section h3.collapsible-header {
+                border-bottom: none; /* Remove border from collapsible header */
+                padding-bottom: 0;
+                margin-bottom: 0.5em; /* Add some space below header */
+            }
+
+
+            /* Retain alert box colors if possible */
+            .safety-warning, .attention {
+                 border-left-width: 5px;
+                 border-left-style: solid;
+                 page-break-inside: avoid; /* Avoid breaking alert boxes */
+                 -webkit-print-color-adjust: exact !important;
+                 print-color-adjust: exact !important;
+            }
+            .safety-warning {
+                border-left-color: var(--warning-color) !important;
+                background-color: var(--warning-bg) !important;
+                color: #721c24 !important;
+            }
+            .attention {
+                border-left-color: var(--attention-color) !important;
+                background-color: var(--attention-bg) !important;
+                color: #856404 !important;
+            }
+
+
+            /* Hide elements not suitable for print if any were added */
+            /* .no-print { display: none !important; } */
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <h1>DXA-001C Dual Channel Lock-in Amplifier</h1>
+
+        <p>
+            <strong>Frequency:</strong> 1mHz to 102kHz; <strong>Time constants:</strong> 10µs to 3ks; <strong>Dynamic reserve:</strong> >120 dB; <strong>Full-scale Sensitivity:</strong> 1 nV to 1 V; Multiple-harmonic measurement; FFT spectral analysis; 5.6-inch color display.
+        </p>
+
+        <figure>
+             <img src="Dual Channel Lock in_page-000.jpg" alt="DXA-001C Lock-in Amplifier Front Panel">
+             <figcaption>DXA-001C Front Panel</figcaption>
+        </figure>
+
+        <section id="input-channel">
+            <h2>Input Channel</h2>
+            <p>
+                Two independent input channels have high synchronicity and can be individually configured as a single-ended mode or a differential voltage mode. With the low-noise analog pre-amplifier, the signal input of DXA-001C can be switched to operate in the single-ended or differential voltage mode, and the input noise is 5 nV/√Hz. The input impedance is 10 MΩ and the full-scale input voltage sensitivity ranges from 1 nV to 1V. Besides, DXA-001C can also be used for current measurements with variable current gains of 10<sup>6</sup> or 10<sup>8</sup> V/A. Two line filters (50/60 Hz and 100/120 Hz) are designed to eliminate line related interference. The programmable gain amplifier is provided to adjust the dynamic reserve of the system according to the magnitude of the input signal, so that DXA-001C has an inherently large dynamic reserve up to 100dB. The sampling rate of 312.5KSPS is determined by a precision 24-bit A/D converter and a specific filter is designed to avoid aliasing.
+            </p>
+        </section>
+
+        <section id="reference-channel">
+            <h2>Reference Channel</h2>
+            <p>
+                Two independent reference channels can work in external mode or internal mode. In internal mode, a precise and stable internal oscillator generates sine wave as an internal reference that is multiplied by the input signal. This internal signal is without any phase noise. With the digital phase-shifting technique, the phase resolution of the reference signal is 0.01 deg. DXA-001C can work at any fixed frequency from 1 mHz to 102 kHz in this mode. In external mode, the reference signal can be a sine wave or a TTL pulse or a square wave. The rising or falling edge of the external reference signal triggers the Phase Lock Loop (PLL) to lock the external signal. Based on the frequency of the reference signal, the DXA-001C can detect the harmonics of the input signal. The maximum harmonic signal frequency can reach 32767 times the fundamental frequency, and the maximum harmonic frequency cannot exceed the maximum operating frequency of the instrument by 102 kHz. In addition, the DXA-001C has a single-channel reference mode, in which two independent input channels are locked and measured using the same external reference channel (REF IN A). This mode can further meet the need for higher synchronization requirements.
+            </p>
+        </section>
+
+        <section id="display">
+            <h2>Display</h2>
+            <p>
+                DXA-001C uses the 5.6 inch 640×480 TFT color display as its screen. Data measured by DXA-001C, such as, X, Y, R, θ, is stored in up to four traces. Trace values can be displayed as a bar graph or as a strip chart showing the trace values as a function of time.
+            </p>
+             <div class="image-gallery">
+                <figure>
+                    <img src="Dual Channel Lock in_page-001.png" alt="DXA-001C Display Example 1 - Basic R/Theta and Settings">
+                    <figcaption>Display Example: Basic Measurement & Settings</figcaption>
+                </figure>
+                <figure>
+                     <img src="Dual Channel Lock in_page-002.png" alt="DXA-001C Display Example 2 - Strip Chart">
+                     <figcaption>Display Example: Strip Chart View</figcaption>
+                </figure>
+                <figure>
+                     <img src="Dual Channel Lock in_page-003.png" alt="DXA-001C Display Example 3 - List View">
+                     <figcaption>Display Example: List View</figcaption>
+                 </figure>
+            </div>
+            <p>
+                Besides, DXA-001C can display polar plots, showing phasor composed of in-phase and quadrature components of the signal. All displays can be easily scaled by manual operation, and the auto-scale feature is available to optimize display quickly. The screen can be configured as a single large display or two horizontally-split displays.
+            </p>
+        </section>
+
+        <section id="multi-harmonic">
+            <h2>Simultaneous Multiple-harmonic Measurement</h2>
+            <p>
+                In the traditional lock-in amplifiers, only the fundamental frequency signal or a certain harmonic signal can be measured at one time, so it can not meet the requirement of multiple-harmonic measurement in some occasions. On the contrary, DXA-001C uses a flexible digital framework combining FPGA and ARM, which makes it practicable and efficient to measure 3 harmonic components simultaneously for each input channel, which means that each input channel is equivalent to three traditional lock-in amplifiers. Because of two independent input channels in DXA-001C, DXA-001C can detect 6 harmonics (2 fundamentals and 4 harmonics) at one time. The maximum harmonic signal frequency can reach 32,767 times the fundamental frequency, but the maximum harmonic frequency cannot exceed the maximum operating frequency of the instrument by 102 kHz.
+            </p>
+        </section>
+
+        <section id="remote-operation">
+            <h2>Remote Operation</h2>
+            <p>
+                DXA-001C uses RS-232 and USB 2.0 as standard interfaces. Through communication interfaces, all instrument functions can be controlled and all data can be read in real-time. Meanwhile, all interfaces of DXA-001C are distributed on the front panel and the rear panel.
+            </p>
+        </section>
+
+        <section id="specifications">
+            <h2>Specifications</h2>
+
+            <h3>Signal Channel</h3>
+            <div class="table-container">
+                <table class="spec-table">
+                    <tbody>
+                        <tr><td>Voltage input Mode</td><td>Single-ended or Differential</td></tr>
+                        <tr><td>Full-scale Sensitivity</td><td>1 nV to 1 V in a 1-2-5 sequence</td></tr>
+                        <tr><td>Current input</td><td>1 fA to 1 µA</td></tr>
+                        <tr><td>Gain (Current)</td><td>10<sup>6</sup> or 10<sup>8</sup> V/A</td></tr>
+                        <tr><td>Impedance (Voltage)</td><td>10 MΩ</td></tr>
+                        <tr><td>Impedance (Current)</td><td>1 kΩ to virtual ground</td></tr>
+                        <tr><td>C.M.R.R</td><td>>100 dB to 10 kHz, decreasing</td></tr>
+                        <tr><td>Dynamic reserve</td><td>>120 dB</td></tr>
+                        <tr><td>Gain accuracy</td><td>0.2% typ, 1% max</td></tr>
+                        <tr><td>Voltage Noise</td><td>5 nV/√Hz at 997 Hz</td></tr>
+                        <tr><td>Current Noise</td><td>5 fA/√Hz at 97 Hz<br>13 fA/√Hz at 997 Hz</td></tr>
+                        <tr><td>Line filters</td><td>50/60 Hz and 100/120 Hz</td></tr>
+                        <tr><td>Grounding</td><td>BNC shield can be grounded or floated via 10 kΩ to ground</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Reference Channel</h3>
+            <div class="table-container">
+                <table class="spec-table"> <!-- Added spec-table class -->
+                    <thead>
+                        <tr><th>Parameter</th><th>Specification</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Frequency range</td><td>1 mHz to 102 kHz</td></tr>
+                        <tr><td>Reference input</td><td>TTL or Sine</td></tr>
+                        <tr><td>Input impedance</td><td>1 MΩ</td></tr>
+                        <tr><td>Square reference level</td><td>V<sub>IH</sub>>3V, V<sub>IL</sub><0.5V</td></tr>
+                        <tr><td>Sine reference signal</td><td>> 400 mVpp (>1 Hz)</td></tr>
+                        <tr><td>Phase Resolution</td><td>0.001°</td></tr>
+                        <tr><td>Absolute phase error</td><td><1°</td></tr>
+                        <tr><td>Relative phase error</td><td><1 mdeg</td></tr>
+                        <tr><td>Phase noise (Internal ref.)</td><td>Synthesized, <0.0001 deg at 1 kHz</td></tr>
+                        <tr><td>Phase noise (External ref.)</td><td>0.001 deg at 1 kHz (100 ms time constant, 12 dB/oct)</td></tr>
+                        <tr><td>Drift</td><td><0.01 deg/°C below 10 kHz<br><0.1 deg/°C above 10 kHz</td></tr>
+                        <tr><td>Harmonic detection</td><td>2F, 3F, ...nF to 102 kHz (n<32,767)</td></tr>
+                        <tr><td>Acquisition time (Internal Ref.)</td><td>Instantaneous acquisition</td></tr>
+                        <tr><td>Acquisition time (External Ref.)</td><td>(2 cycles + 5 ms) or 40 ms, whichever is larger</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Demodulator</h3>
+            <div class="table-container">
+                <table class="spec-table"> <!-- Added spec-table class -->
+                    <tbody>
+                        <tr><td>Stability (Digital outputs)</td><td>no zero drift on all sets</td></tr>
+                        <tr><td>Stability (Display)</td><td>no zero drift on all sets</td></tr>
+                        <tr><td>Stability (Analog outputs)</td><td><5 ppm/°C for all dynamic reserve settings</td></tr>
+                        <tr><td>Harmonic rejection</td><td>-90 dB</td></tr>
+                        <tr><td>Time constants</td><td>10 µs to 3 ks (<200 Hz)<br>10 µs to 30 s (>200 Hz)</td></tr>
+                        <tr><td>Synchronous filters</td><td>Available below 200 Hz (18, 24 dB/oct rolloff)</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Internal Oscillator</h3>
+            <div class="table-container">
+                 <table class="spec-table"> <!-- Added spec-table class -->
+                     <tbody>
+                        <tr><td>Frequency Range</td><td>1 mHz to 102 kHz</td></tr>
+                        <tr><td>Accuracy</td><td>2 ppm + 10 µHz</td></tr>
+                        <tr><td>Resolution</td><td>1 mHz (?) (OCR missing explicit resolution, assuming based on range)</td></tr>
+                        <tr><td>Distortion</td><td>-80 dBc (f<10 kHz), -70 dBc (f>10 kHz)</td></tr>
+                        <tr><td>Amplitude</td><td>0.001Vrms to 5 Vrms (Resolution: 1 mVrms)</td></tr>
+                        <tr><td>Accuracy</td><td>1%</td></tr>
+                        <tr><td>Stability</td><td>50 ppm/°C</td></tr>
+                        <tr><td>Sine Outputs</td><td>Sine signal, output impedance 50 Ω</td></tr>
+                        <tr><td>TTL Outputs</td><td>5V TTL/CMOS level, output impedance 200Ω</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Display</h3>
+            <div class="table-container">
+                <table class="spec-table"> <!-- Added spec-table class -->
+                    <tbody>
+                        <tr><td>Screen</td><td>5.6 inch, 640×480 TFT</td></tr>
+                        <tr><td>Screen format</td><td>Single or dual display</td></tr>
+                        <tr><td>Display quantities</td><td>Each display shows one trace, traces can be defined as X, Y, R, θ</td></tr>
+                        <tr><td>Display types</td><td>Numerical form, bar graph, polar plot and strip chart</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>AUX Inputs and Outputs</h3>
+            <div class="table-container">
+                 <table class="spec-table"> <!-- Added spec-table class -->
+                     <tbody>
+                        <tr><td>CH1 and CH2 Outputs Function</td><td>Output X, Y, R, θ</td></tr>
+                        <tr><td>CH1 and CH2 Output Voltage</td><td>±10 V full scale</td></tr>
+                        <tr><td>CH1 and CH2 Output Current</td><td>30 mA max output current</td></tr>
+                        <tr><td>CH1 and CH2 Update Rate</td><td>312.5kHz</td></tr>
+                        <tr><td>AUX Inputs Function</td><td>4 Channel Inputs</td></tr>
+                        <tr><td>AUX Inputs Amplitude</td><td>±10 V, 1 mV resolution ratio</td></tr>
+                        <tr><td>AUX Inputs Impedance</td><td>1 MΩ</td></tr>
+                        <tr><td>AUX Outputs Function</td><td>4 Channel Outputs</td></tr>
+                        <tr><td>AUX Outputs Amplitude</td><td>±10 V, 1 mV resolution ratio</td></tr>
+                        <tr><td>AUX Outputs Drive current</td><td>±25mA max</td></tr>
+                        <tr><td>Trigger Input Function</td><td>TTL external trigger is used for data storage</td></tr>
+                        <tr><td>Monitor Output Function</td><td>Analog output of a signal-amplifier</td></tr>
+                        <tr><td>Monitor Output Drive current</td><td>±40mA max</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Interfaces</h3>
+             <div class="table-container">
+                 <table class="spec-table"> <!-- Added spec-table class -->
+                     <tbody>
+                         <tr><td>Standard</td><td>RS-232 to USB interface</td></tr>
+                         <tr><td>Optional</td><td>IEEE-488 interface</td></tr>
+                     </tbody>
+                 </table>
+             </div>
+
+            <h3>General</h3>
+            <div class="table-container">
+                <table class="spec-table"> <!-- Added spec-table class -->
+                    <tbody>
+                        <tr><td>Power requirements Voltage</td><td>220~240 V AC<br>100~120 VAC(optional)</td></tr>
+                        <tr><td>Frequency</td><td>50/60 Hz</td></tr>
+                        <tr><td>Power</td><td>30 W</td></tr>
+                        <tr><td>Power supply rejection</td><td>70dB@1MHz</td></tr>
+                        <tr><td>Weight</td><td>11 KG</td></tr>
+                        <tr><td>Dimensions (Width)</td><td>448 mm</td></tr>
+                        <tr><td>Dimensions (Depth)</td><td>513 mm</td></tr>
+                        <tr><td>Dimensions (Height with feet)</td><td>148 mm</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </div>
+</body>
+</html>

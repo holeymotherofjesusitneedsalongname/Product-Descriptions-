@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F2030 Programmable Power Current Source - Overview</title>
+    <style>
+/* ==========================================================================
+GENERIC STYLING FOR DEXINMAG DOCUMENT PAGES
+Based on DXMP Manual / Axial Probe Styles
+Version: 1.0
+* Provides a consistent layout, color scheme, typography.
+* Styles common elements like sections, tables, lists, images.
+* Includes styles for collapsible sections.
+* Includes responsive adjustments for different screen sizes.
+* Includes print-specific styles for better output.
+* HEADER AND FOOTER specific styling has been REMOVED.
+========================================================================== */
+/* --- Base Styles & Color Theme --- */
+:root {
+    --primary-color: #00447C; /* Dark Blue from original */
+    --secondary-color: #4A90E2; /* Lighter Blue (generic default) */
+    --bg-light: #f9f9f9; /* Original even row color */
+    --bg-medium: #f2f7fc; /* Original th background */
+    --border-color: #ddd; /* Original border color */
+    --text-color: #333; /* Original text color */
+    --hover-bg: #e8f4fd; /* Light blue for hover */
+    --warning-color: #dc3545; /* Red for warnings */
+    --warning-bg: #f8d7da;
+    --attention-color: #ffc107; /* Yellow for attention */
+    --attention-bg: #fff3cd;
+    --category-header-bg: #e2eafc; /* Original category header color */
+    --h3-color: #0056b3; /* Original h3 color */
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    /* background-color: #f4f4f4;  Removed page background for cleaner print */
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0; /* Ensure no default body margin */
+}
+
+/* --- Main Content Container --- */
+.container {
+    max-width: 900px; /* Adjusted from 1100px to match original */
+    margin: 25px auto; /* Original margin */
+    padding: 20px; /* Original padding */
+    background-color: #fdfdfd; /* Original background */
+    /* box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); */ /* Removed shadow for simpler look */
+    border-radius: 8px; /* Original border radius */
+    border: 1px solid #ccc; /* Original border */
+    flex-grow: 1;
+}
+
+/* --- Typography --- */
+h1, h2, h3 {
+    color: var(--primary-color);
+    line-height: 1.3;
+    margin-top: 1.5em; /* Original margin */
+    margin-bottom: 0.75em;
+}
+h1:first-child, h2:first-child, h3:first-child {
+    margin-top: 0;
+}
+
+/* Styles the main title within the container */
+.container > h1 {
+    font-size: 1.8em; /* Approximated */
+    text-align: center;
+    border-bottom: 2px solid #eee; /* Original color */
+    padding-bottom: 8px; /* Original padding */
+    margin-bottom: 1em;
+    color: var(--primary-color); /* Ensured color */
+}
+
+/* Styles section titles */
+section > h2 {
+    font-size: 1.4em; /* Original size */
+    border-bottom: 1px solid #eee; /* Original color */
+    padding-bottom: 8px; /* Original padding */
+    color: var(--primary-color); /* Ensured color */
+}
+
+/* Base style for H3 */
+section > h3 {
+    font-size: 1.1em; /* Original size */
+    color: var(--h3-color); /* Original color */
+    padding-bottom: 0.3em;
+    font-weight: bold;
+    margin-top: 1.2em; /* Original margin */
+}
+
+p {
+    margin-bottom: 1em;
+}
+
+ul {
+    list-style: disc;
+    margin: 0 0 1em 20px; /* Adjusted margin-left */
+    padding-left: 5px; /* Original padding */
+}
+
+li {
+    margin-bottom: 0.5em; /* Original margin */
+}
+
+code {
+    background-color: #eee;
+    padding: 2px 4px;
+    border-radius: 3px;
+    font-family: monospace;
+}
+
+.note {
+    font-style: italic;
+    color: #555;
+    font-size: 0.9em;
+}
+
+/* --- Content Sections --- */
+section {
+    margin-bottom: 2em;
+    padding-bottom: 1em;
+    /* border-bottom: 1px solid var(--bg-medium); */ /* Removed section separator */
+}
+section:last-of-type {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+/* --- Tables --- */
+.table-container {
+    overflow-x: auto; /* Enable horizontal scroll on screen */
+    margin-top: 1em;
+    margin-bottom: 1.5em;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95em; /* Original size */
+    /* min-width: 600px; */ /* Removed min-width */
+    margin-top: 15px; /* Original margin */
+}
+
+th, td {
+    border: 1px solid var(--border-color);
+    padding: 10px 12px; /* Original padding */
+    text-align: left;
+    vertical-align: top;
+}
+
+thead th { /* General header row style */
+    background-color: var(--bg-medium);
+    font-weight: bold;
+    color: var(--primary-color);
+    /* position: sticky; */ /* Removed sticky header for simplicity/print */
+    /* top: 0; */
+    /* z-index: 1; */
+    border-bottom-width: 1px; /* Adjusted for consistency */
+    border-bottom-color: var(--border-color);
+}
+
+/* Specific style for the first header row */
+table > thead > tr:first-child > th {
+    background-color: var(--bg-medium); /* Re-apply default th background */
+    border-bottom-width: 1px;
+}
+
+/* Category headers in the table body */
+tbody tr.category-header th {
+    background-color: var(--category-header-bg);
+    text-align: center;
+    font-size: 1.1em;
+    font-weight: bold;
+    color: var(--primary-color); /* Consistent header text color */
+    border-top: 2px solid #bbb; /* Original border */
+    border-bottom: 2px solid #bbb; /* Original border */
+}
+
+/* Zebra striping for table rows */
+tbody tr:nth-child(even) {
+    background-color: var(--bg-light);
+}
+
+/* Hover effect for table rows */
+tbody tr:hover {
+    background-color: var(--hover-bg);
+}
+
+/* --- Image Gallery Styling (Included from generic CSS but not used in this HTML) --- */
+.image-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 1em;
+    margin-bottom: 1.5em;
+    padding: 15px;
+    background-color: var(--bg-light);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+}
+
+.image-gallery figure {
+    margin: 0;
+    text-align: center;
+    flex-basis: calc(50% - 20px); /* Aim for 2 columns */
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.image-gallery img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.image-gallery figcaption {
+    font-size: 0.9em;
+    color: #666;
+    margin-top: auto; /* Push caption down */
+}
+
+/* --- Alert Boxes (Included from generic CSS but not used in this HTML) --- */
+.safety-warning, .attention {
+    border-left-width: 5px;
+    border-left-style: solid;
+    padding: 10px 15px;
+    margin: 1em 0;
+    border-radius: 4px;
+}
+.safety-warning {
+    border-left-color: var(--warning-color);
+    background-color: var(--warning-bg);
+    color: #721c24;
+}
+.attention {
+    border-left-color: var(--attention-color);
+    background-color: var(--attention-bg);
+    color: #856404;
+}
+.safety-warning strong, .attention strong {
+    font-weight: bold;
+}
+
+/* --- Collapsible Section Styling (Included from generic CSS but not used in this HTML) --- */
+section h3.collapsible-header {
+    cursor: pointer;
+    position: relative;
+    padding-right: 25px; /* Space for indicator */
+    margin-bottom: 0; /* Connects header visually to content below */
+    border-bottom: 1px solid var(--border-color); /* Separator line */
+    padding-bottom: 10px; /* Spacing above the line */
+}
+
+section h3.collapsible-header::after {
+    content: '▼'; /* Down arrow indicator */
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.8em;
+    color: var(--primary-color);
+    transition: transform 0.3s ease;
+}
+
+section h3.collapsible-header.collapsed::after {
+    content: '►'; /* Right arrow indicator when collapsed */
+}
+
+.collapsible-content {
+    overflow: hidden;
+    max-height: 5000px; /* Allow ample height when open */
+    transition: max-height 0.5s ease-in-out, padding 0.3s ease, margin 0.3s ease, border 0.3s ease, opacity 0.3s ease;
+    padding-top: 15px; /* Space below header when open */
+    margin-top: 0;
+    border-top: 1px solid var(--bg-light); /* Subtle line separating from header */
+    opacity: 1;
+}
+
+.collapsible-content.collapsed {
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-top: 0;
+    border-top: none; /* Hide border when collapsed */
+    opacity: 0;
+}
+
+/* ==========================================================================
+RESPONSIVE ADJUSTMENTS
+========================================================================== */
+@media (max-width: 768px) {
+    body { margin: 15px 0; } /* Adjusted body margin for responsive */
+    .container {
+        padding: 15px;
+        margin: 10px; /* Reduce margin on smaller screens */
+        width: auto; /* Allow container to shrink */
+    }
+    .container > h1 { font-size: 1.6em; }
+    section > h2 { font-size: 1.3em; }
+    section > h3 { font-size: 1.1em; } /* Includes collapsible */
+
+    table { font-size: 0.9em; min-width: 0; } /* Allow table to shrink */
+    th, td { padding: 8px 10px; }
+    /* tbody td:first-child { white-space: normal; } */ /* Allow wrapping - commented out, might cause layout issues */
+
+    .image-gallery figure {
+         flex-basis: calc(50% - 15px); /* Keep 2 columns */
+         max-width: 45%;
+    }
+
+}
+@media (max-width: 480px) {
+    .container > h1 { font-size: 1.4em; }
+    section > h2 { font-size: 1.15em; }
+    section > h3 { font-size: 1.0em; } /* Includes collapsible */
+
+    th, td { padding: 6px 8px; font-size: 0.85em; }
+    ul { margin-left: 20px; }
+
+    .image-gallery figure {
+         flex-basis: 100%; /* Stack to single column */
+         max-width: 90%;
+    }
+
+}
+/* ==========================================================================
+PRINT SPECIFIC STYLES
+* Optimizes layout for printing.
+* Hides header and footer elements.
+* Forces display of collapsible content.
+* Adjusts fonts, colors, and spacing for paper.
+========================================================================== */
+@media print {
+    body {
+        /* background-color: #fff !important; */ /* Keep original background if possible */
+        /* color: #000 !important; */ /* Keep original colors */
+        font-size: 10pt;
+        -webkit-print-color-adjust: exact !important; /* Try to force color printing */
+        print-color-adjust: exact !important;
+        margin: 0; /* Ensure no margins on print */
+        padding: 0;
+    }
+
+    .container {
+        max-width: 100%;
+        margin: 0;
+        padding: 1cm; /* Add padding for print margins */
+        border: none;
+        box-shadow: none;
+        border-radius: 0;
+        background-color: #fff; /* Force white background for container content area */
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        color: var(--primary-color) !important; /* Force title colors */
+        page-break-after: avoid;
+    }
+    h3 { color: var(--h3-color) !important; }
+
+    p, ul, li {
+        color: var(--text-color) !important; /* Force standard text color */
+        orphans: 3; /* Minimum lines at bottom of page */
+        widows: 3;  /* Minimum lines at top of page */
+    }
+
+    table {
+        width: 100%;
+        font-size: 9pt; /* Slightly smaller for print */
+        page-break-inside: auto; /* Allow tables to break across pages */
+        border-collapse: collapse !important; /* Ensure borders are solid */
+    }
+
+    thead { display: table-header-group; } /* Repeat table headers on each page */
+
+    thead th {
+        background-color: var(--bg-medium) !important;
+        color: var(--primary-color) !important;
+        border: 1px solid var(--border-color) !important;
+    }
+
+    tbody tr { page-break-inside: avoid; } /* Try to keep rows together */
+    tbody tr:nth-child(even) {
+        background-color: var(--bg-light) !important; /* Force zebra stripe colors */
+    }
+
+    th, td {
+        border: 1px solid var(--border-color) !important; /* Ensure borders print */
+        padding: 6px 8px; /* Adjust padding for print */
+        vertical-align: top;
+    }
+
+    /* Ensure category headers retain style */
+    tbody tr.category-header th {
+        background-color: var(--category-header-bg) !important;
+        color: var(--primary-color) !important;
+        border-top: 2px solid #bbb !important;
+        border-bottom: 2px solid #bbb !important;
+        text-align: center !important;
+        font-weight: bold !important;
+        font-size: 1.1em !important;
+    }
+
+    ul { page-break-inside: auto; }
+    li { page-break-inside: avoid; }
+
+    /* Force collapsible content to be visible */
+    .collapsible-content {
+        max-height: none !important;
+        opacity: 1 !important;
+        padding-top: 15px !important;
+        border-top: 1px solid var(--bg-light) !important;
+        display: block !important; /* Ensure it's not hidden */
+    }
+    .collapsible-header::after { display: none !important; } /* Hide toggle arrow */
+    .collapsible-header.collapsed::after { display: none !important; }
+
+    .note { color: #555 !important; }
+    code { background-color: #eee !important; }
+
+    /* Hide elements not suitable for print if any were added later */
+    /* .no-print { display: none !important; } */
+}
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <h1>F2030 Programmable Power Current Source - Overview</h1>
+
+    <section id="overview">
+        <h2>Product Overview</h2>
+        <p>The F2030 is a high-performance, programmable DC current source designed for precision applications. It provides a stable and accurate current output from -10A to +10A with high resolution (0.1mA). Key features include its ability to drive inductive loads effectively using a linear current ramp, controlled current direction reversal, and multiple automation interfaces (RS-232 and USB).</p>
+        <p>It incorporates features for operational safety and instrument protection, including voltage compliance limits, internal overpower protection, and controlled output states. The floating output design offers flexibility in grounding configurations.</p>
+    </section>
+
+    <section id="key-features">
+        <h2>Key Features</h2>
+        <ul>
+            <li>Wide Output Range: -10.0000 A to +10.0000 A</li>
+            <li>High Resolution: 0.1 mA</li>
+            <li>Good Accuracy: ±(0.05% setting + 2 mA)</li>
+            <li>Excellent Stability: 0.02% of setting (@ 10A)</li>
+            <li>High Compliance Voltage: Up to 100 V DC during operation</li>
+            <li>Low Noise: &lt; 1 mA RMS typical</li>
+            <li>Floating Output: Flexible grounding options</li>
+            <li>Linear Current Ramp: Adjustable rate (0.01 to 2 A/s) minimizes overshoot</li>
+            <li>Controlled Current Reversal: Relay-based with programmable delays</li>
+            <li>Current Sweep Functionality: 3 modes (SWA, SWB, SWC) up to 10A</li>
+            <li>Inductive Load Handling: Internal compensation network</li>
+            <li>Dual Computer Interfaces: RS-232 and USB (via internal converter)</li>
+            <li>Trigger Output: BNC for synchronization</li>
+            <li>Protection Mechanisms: Voltage compliance, internal overpower (350W), controllable output state</li>
+            <li>Clear Front Panel: LCD display, LED indicators, keypad control</li>
+            <li>Rack Mountable: 3U full rack size</li>
+        </ul>
+    </section>
+
+    <section id="specifications">
+        <h2>Detailed Specifications</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Parameter</th>
+                    <th>Specification</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- INPUT POWER -->
+                <tr class="category-header">
+                    <th colspan="2">AC Line Power Input</th>
+                </tr>
+                <tr>
+                    <td>Line Voltage RMS (Vac)</td>
+                    <td>220V ±5% (Range: 209 - 231 V @ 50Hz)</td>
+                </tr>
+                <tr>
+                    <td>Line Frequency (Fac)</td>
+                    <td>50 - 60 Hz (Range: 48 - 60 Hz)</td>
+                </tr>
+                <tr>
+                    <td>Apparent Power (Papp)</td>
+                    <td>Typ. 1.3 kVA, Max. 1.5 kVA (@ 220V/50Hz)</td>
+                </tr>
+                 <tr>
+                     <td>Input Connection</td>
+                     <td>3-conductor AC power cable (IEC input), center is safety ground connected to chassis.</td>
+                 </tr>
+
+                <!-- ENVIRONMENTAL -->
+                <tr class="category-header">
+                    <th colspan="2">Temperature & Humidity</th>
+                </tr>
+                <tr>
+                    <td>Ambient Temperature (Rated Accuracy)</td>
+                    <td>15°C to 35°C (Typ. 25°C)</td>
+                </tr>
+                <tr>
+                    <td>Operating Temperature (Operational Limit)</td>
+                    <td>5°C to 40°C</td>
+                </tr>
+                <tr>
+                    <td>Storage Temperature (Tst)</td>
+                    <td>0°C to 55°C (Limited by LCD)</td>
+                </tr>
+                <tr>
+                    <td>Relative Humidity (Hamb)</td>
+                    <td>Max. 80% RH up to 31°C, decreasing linearly to 50% RH at 40°C</td>
+                </tr>
+                <tr>
+                    <td>Warm Up Time (Twm)</td>
+                    <td>Min 5 min, Recommended 30 min for rated stability (@ 15-35°C)</td>
+                </tr>
+
+                <!-- DC CURRENT OUTPUT -->
+                <tr class="category-header">
+                    <th colspan="2">DC Current Output</th>
+                </tr>
+                <tr>
+                    <td>Output Range (IRng)</td>
+                    <td>-10.0000 A to +10.0000 A</td>
+                </tr>
+                <tr>
+                    <td>Resolution (IRes)</td>
+                    <td>0.1 mA (1/100000 Full Scale)</td>
+                </tr>
+                <tr>
+                    <td>Accuracy (AI @ 15-35°C)</td>
+                    <td>± (0.05% of setting + 2 mA)</td>
+                </tr>
+                <tr>
+                    <td>Stability (@ 10A)</td>
+                    <td>0.02% of settings</td>
+                </tr>
+                <tr>
+                    <td>Noise & Ripple RMS (NRrms @ 10A, 0-300kHz)</td>
+                    <td>Typ. 0.8 mA, Max. 1 mA</td>
+                </tr>
+                <tr>
+                    <td>Noise & Ripple Peak-to-Peak (NRp-p @ 10A, 0-300kHz)</td>
+                    <td>Typ. 5 mA, Max. 7 mA</td>
+                </tr>
+                <tr>
+                    <td>Temperature Coefficient (IdT @ 15-35°C)</td>
+                    <td>±0.01 %/°C (Typ), ±0.02 %/°C (Max)</td>
+                </tr>
+                <tr>
+                    <td>Output Impedance (RIO)</td>
+                    <td>Minimum 500 k&Omega;</td>
+                </tr>
+                <tr>
+                    <td>Power Supply Regulation (PSRR)</td>
+                    <td>Max. 0.01% (Rated line voltage)</td>
+                </tr>
+                <tr>
+                    <td>Linear Current Ramp Rate (IRR)</td>
+                    <td>0.01 A/s to 2 A/s</td>
+                </tr>
+                <tr>
+                    <td>Leakage Current (Output OFF, High Impedance State)</td>
+                    <td>Max. 1 mA (RL < 500&Omega;)</td>
+                </tr>
+
+                 <!-- OUTPUT FEATURES -->
+                 <tr class="category-header">
+                     <th colspan="2">Output Features & Grounding</th>
+                 </tr>
+                 <tr>
+                     <td>Output Type</td>
+                     <td>Floating Output, isolated from Earth/Safety ground. Max 200V peak isolation.</td>
+                 </tr>
+                 <tr>
+                     <td>Grounding Configuration</td>
+                     <td>Flexible: Connect either Red (+) or Black (-) output terminal to the Green safety ground binding post.<br><span class="note">Do not connect both. Default state is fully floating.</span></td>
+                 </tr>
+                  <tr>
+                     <td>Output Connectors</td>
+                     <td>Rear panel Red (+) and Black (-) Binding Posts, Green Banana Jack for Safety Ground.</td>
+                 </tr>
+                  <tr>
+                     <td>Recommended Output Wiring</td>
+                     <td>>= 4 square mm conductor area for 10A loads.</td>
+                 </tr>
+
+                <!-- CURRENT DIRECTION REVERSAL -->
+                <tr class="category-header">
+                    <th colspan="2">Current Direction Reversal</th>
+                </tr>
+                <tr>
+                    <td>Mechanism</td>
+                    <td>Microcontroller controlled relays</td>
+                </tr>
+                <tr>
+                    <td>Delay Time Combinations (TDF + TDA)</td>
+                    <td>5 options: 1s+1s, 2s+1s, 3s+1s, 4s+2s, 5s+2s <br><span class="note">TDF = Delay before reversal, TDA = Delay after reversal. Longest recommended for highly inductive loads.</span></td>
+                </tr>
+                <tr>
+                    <td>Current Spike on Reversal (IRS @ 15Ω, 5s+2s delay)</td>
+                    <td>Typ. 0.2 mA, Max. 1 mA</td>
+                </tr>
+                 <tr>
+                    <td>Condition</td>
+                    <td>Requires zero current before relay switching (managed automatically by instrument using set ramp rate).</td>
+                </tr>
+
+                <!-- OUTPUT VOLTAGE (COMPLIANCE) -->
+                <tr class="category-header">
+                    <th colspan="2">Output Voltage (Compliance)</th>
+                </tr>
+                <tr>
+                    <td>Available Output Voltage Range (VRng)</td>
+                    <td>0 to 100 V DC (Operational range -100 V to +100 V relative to connected ground)</td>
+                </tr>
+                <tr>
+                    <td>Open Circuit Voltage (Voc, Output ON)</td>
+                    <td>115 V to 125 V (Typ. 120 V ±5V)</td>
+                </tr>
+                <tr>
+                    <td>Voltage Compliance Indicator</td>
+                    <td>Front panel LED flashes when output reaches the ~100V limit.</td>
+                </tr>
+
+                <!-- OUTPUT POWER -->
+                <tr class="category-header">
+                    <th colspan="2">Output Power</th>
+                </tr>
+                <tr>
+                    <td>Maximum Output Power (POM)</td>
+                    <td>1000 W (into 10 &Omega; load at 10A)</td>
+                </tr>
+                <tr>
+                    <td>Internal Power Dissipation Limit (PDISS)</td>
+                    <td>350 W (Triggers OverLoad protection)</td>
+                </tr>
+
+                <!-- LOAD CHARACTERISTICS -->
+                <tr class="category-header">
+                    <th colspan="2">Load Characteristics</th>
+                </tr>
+                <tr>
+                    <td>Load DC Resistance (RLDC @ 10A)</td>
+                    <td>Min. 3 &Omega; recommended (Operates 2 &Omega; - 10 &Omega;)</td>
+                </tr>
+                <tr>
+                    <td>Load Time Constant (L/R)</td>
+                    <td>Internal output compensation network suitable up to 2 s. <br><span class="note">External compensation (e.g., >=10µF/250V parallel capacitor) recommended for > 2s.</span></td>
+                </tr>
+
+                <!-- PROTECTION -->
+                <tr class="category-header">
+                    <th colspan="2">Protection</th>
+                </tr>
+                <tr>
+                    <td>Output State Control</td>
+                    <td>Output ON / High Impedance OFF (via front panel or command)</td>
+                </tr>
+                <tr>
+                    <td>Overpower Protection</td>
+                    <td>Hardware protection at 350W internal dissipation.<br>
+                    <span class="note">Action: Output High-Z, current set to zero, "OverLoad" LED ON. Manual reset required (ESC key or command).</span></td>
+                </tr>
+                <tr>
+                    <td>Voltage Compliance</td>
+                    <td>Limits output voltage to ~100V; prevents damage but may limit current into high resistance loads.</td>
+                </tr>
+
+                <!-- CURRENT SWEEPING -->
+                <tr class="category-header">
+                    <th colspan="2">Current Sweeping</th>
+                </tr>
+                <tr>
+                    <td>Sweep Modes</td>
+                    <td>3 modes: SWA (Quad I), SWB (Quad I & III), SWC (Quad I -> III -> I)</td>
+                </tr>
+                <tr>
+                    <td>Sweep Ramp Rate (ISRR)</td>
+                    <td>Uses the set main current ramp rate (0.01 A/s to 2 A/s)</td>
+                </tr>
+                <tr>
+                    <td>Maximum Sweep Current (ISMAX)</td>
+                    <td>0.0001 A to 10 A</td>
+                </tr>
+                 <tr>
+                    <td>Sweep Reversal Delay</td>
+                    <td>Uses the set main current direction reversal delay times.</td>
+                </tr>
+
+                <!-- INTERFACES & CONTROL -->
+                <tr class="category-header">
+                    <th colspan="2">Interfaces & Control</th>
+                </tr>
+                <tr>
+                    <td>Front Panel</td>
+                    <td>128x64 FSTN LCD, LED Indicators, 12-key Keypad, Power Switch</td>
+                </tr>
+                <tr>
+                    <td>Computer Interfaces</td>
+                    <td>RS-232 (DB9 Female) <br> USB (Type B, internally converted, requires Prolific driver installation)</td>
+                </tr>
+                <tr>
+                    <td>Baud Rates</td>
+                    <td>300, 600, 1200, 2400, 9600 bps</td>
+                </tr>
+                 <tr>
+                     <td>Data Format</td>
+                     <td>8 Data Bits, No Parity, 1 Stop Bit (8N1)</td>
+                 </tr>
+                <tr>
+                    <td>Trigger Output</td>
+                    <td>Rear panel BNC, TTL compatible, Falling Edge Active (+5V Idle High, 0V Active Low)</td>
+                </tr>
+                <tr>
+                    <td>Trigger Config (Normal)</td>
+                    <td>Mode (Off/On/On+Audio), Delay (0 - 5.0s)</td>
+                </tr>
+                 <tr>
+                    <td>Trigger Config (Sweep)</td>
+                    <td>Mode (Off/On/On+Audio), Interval (0.1 - 2.0s)</td>
+                </tr>
+
+                <!-- PHYSICAL -->
+                <tr class="category-header">
+                    <th colspan="2">Physical Dimensions & Weight</th>
+                </tr>
+                <tr>
+                    <td>Form Factor</td>
+                    <td>3U Full Rack / Desktop Instrument</td>
+                </tr>
+                <tr>
+                    <td>Dimensions (W×H×D, approx.)</td>
+                    <td>435mm × 133mm × 501mm</td>
+                </tr>
+                <tr>
+                    <td>Weight (Instrument only)</td>
+                    <td>Approx. 25 - 30 kg</td>
+                </tr>
+                <tr>
+                    <td>Cooling</td>
+                    <td>Fan cooled. Inlet: Front/Top. Outlet: Rear.<br><span class="note">Requires clearance: Min. 100mm front/top, Min. 200mm rear.</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section id="operational-notes">
+        <h2>Important Operational Notes</h2>
+        <ul>
+            <li><strong>High Voltage Hazard:</strong> Output voltage can reach 100V during operation and up to 125V open circuit. Exercise caution when connecting/disconnecting loads. Use the High Impedance output state for safety.</li>
+            <li><strong>Load Matching:</strong> Ensure load resistance is appropriate for the desired current, respecting the 100V compliance limit (e.g., < 10Ω for 10A). Minimum recommended resistance is 3Ω.</li>
+            <li><strong>Inductive Loads:</strong> Use appropriate (often slower) ramp rates and sufficient reversal delay times to prevent overshoot and protect the instrument. Consider external compensation for loads with time constants > 2 seconds.</li>
+            <li><strong>Grounding:</strong> The output is floating. For defined voltage reference and safety, connect *one* output terminal (either Red or Black) to the green safety ground terminal.</li>
+            <li><strong>Output Wiring:</strong> Use heavy gauge wire (at least 4 sq mm recommended) for the output terminals, especially at higher currents (near 10A), to prevent cable overheating.</li>
+            <li><strong>Cooling:</strong> Ensure adequate ventilation space around the unit as specified. Do not block air inlets or outlets.</li>
+            <li><strong>USB Connection:</strong> Requires installation of the provided Prolific USB-to-Serial driver on the control computer.</li>
+            <li><strong>Warm-Up:</strong> Allow 30 minutes for the instrument to stabilize for optimal performance and accuracy.</li>
+            <li><strong>Weight:</strong> The unit is heavy (25-30 kg). Use appropriate lifting techniques (2 persons recommended) and ensure the support surface (desk/rack) can handle the weight.</li>
+        </ul>
+    </section>
+
+    <section id="included-items">
+        <h2>Standard Included Items (Typical)</h2>
+         <p><span class="note">Based on manual references. Verify actual contents upon receipt.</span></p>
+        <ul>
+            <li>F2030 Instrument</li>
+            <li>AC Power Cord (3-conductor)</li>
+            <li>RS-232 Cable (Accessory CAB-232DEC-3)</li>
+            <li>USB A-B Cable (Accessory CAB-USB-AB-2)</li>
+            <li>User Manual / Product CD (likely includes drivers)</li>
+        </ul>
+    </section>
+
+    <hr>
+    <!-- Removed final "End of F2030 Overview" paragraph as requested -->
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DX-1000T High and Low Temperature Hall Effect Test System</title>
+    <style>
+        /* ==========================================================================
+        GENERIC STYLING FOR DEXINMAG DOCUMENT PAGES
+        Based on DXMP Manual / Axial Probe Styles
+        Version: 1.0
+        * Provides a consistent layout, color scheme, typography.
+        * Styles common elements like sections, tables, lists, images.
+        * Includes styles for collapsible sections.
+        * Includes responsive adjustments for different screen sizes.
+        * Includes print-specific styles for better output.
+        * HEADER AND FOOTER specific styling has been REMOVED.
+        ========================================================================== */
+        /* --- Base Styles & Color Theme --- */
+        :root {
+            --primary-color: #00447C; /* Dark Blue */
+            --secondary-color: #4A90E2; /* Lighter Blue */
+            --bg-light: #f8f9fa; /* Very light grey */
+            --bg-medium: #e9ecef; /* Light grey */
+            --border-color: #dee2e6; /* Grey border */
+            --text-color: #343a40; /* Dark grey text */
+            --hover-bg: #e8f4fd; /* Light blue for hover */
+            --warning-color: #dc3545; /* Red for warnings */
+            --warning-bg: #f8d7da;
+            --attention-color: #ffc107; /* Yellow for attention */
+            --attention-bg: #fff3cd;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4; /* Light grey background for the page */
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* --- Main Content Container --- */
+        .container {
+            max-width: 1100px; /* Adjusted from original 960px */
+            margin: 20px auto;
+            padding: 25px;
+            background-color: #fff; /* White background for content */
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            flex-grow: 1; /* Allows footer (if added back) to stick to bottom */
+        }
+
+        /* --- Typography --- */
+        h1, h2, h3 {
+            color: var(--primary-color);
+            line-height: 1.3;
+            margin-top: 1em;
+            margin-bottom: 0.75em;
+        }
+        h1:first-child, h2:first-child, h3:first-child {
+            margin-top: 0;
+        }
+
+        /* Styles the main title within the container */
+        .container > h1 {
+            font-size: 1.8em;
+            text-align: center;
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 0.5em;
+            margin-bottom: 1em; /* Add more space below main title */
+            color: #00447C; /* Retain original H1 color */
+        }
+
+        /* Styles section titles */
+        .section > h2 { /* Target h2 within .section */
+            font-size: 1.5em;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.3em;
+            color: var(--primary-color);
+            margin-top: 1.5em; /* Add space above H2 */
+            margin-bottom: 0.75em;
+        }
+         .section > h2:first-of-type { /* Remove top margin for the first H2 in a section */
+             margin-top: 0;
+         }
+
+
+        /* Base style for H3, often used for sub-sections or collapsible headers */
+        .section > h3 { /* Target h3 within .section */
+            font-size: 1.2em;
+            color: #555; /* Retain original H3 color */
+            padding-bottom: 0.3em;
+            font-weight: bold; /* Make H3 bold */
+            margin-top: 1.2em;
+            margin-bottom: 0.5em;
+        }
+
+        p {
+            margin-bottom: 1em;
+            color: #333; /* Retain original paragraph color */
+        }
+
+        ul, ol {
+            list-style: disc; /* Default to disc */
+            margin: 0 0 1em 30px; /* Match original indentation */
+        }
+        ol {
+            list-style: decimal; /* Ensure ordered lists use numbers */
+        }
+
+        li {
+            margin-bottom: 0.5em;
+        }
+        .component-list li { /* Retain specific list style */
+             margin-bottom: 0.2em;
+        }
+
+        /* --- Content Sections --- */
+        .section {
+            margin-bottom: 2em;
+            padding-bottom: 1em;
+            /* Removed border-bottom from generic section style */
+        }
+        .section:last-of-type {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        /* --- Figure/Image Styling (Standalone) --- */
+        figure {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure img {
+            max-width: 80%; /* Keep original constraint */
+            height: auto;
+            border: 1px solid var(--border-color); /* Use variable */
+            border-radius: 4px;
+            background-color: var(--bg-light); /* Use variable */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Add subtle shadow */
+        }
+        figcaption {
+            font-size: 0.9em;
+            color: #666; /* Keep original color */
+            margin-top: 8px; /* Slightly more space */
+        }
+
+
+        /* --- Tables --- */
+        .table-container {
+            overflow-x: auto; /* Enable horizontal scroll on screen */
+            margin-top: 1em;
+            margin-bottom: 1.5em;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95em;
+            min-width: 600px; /* Prevent excessive squishing on screen */
+            margin-bottom: 1.5em; /* Add space below tables */
+        }
+
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 10px 12px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        thead th {
+            background-color: var(--bg-medium);
+            font-weight: bold;
+            color: var(--primary-color);
+            position: sticky; /* Keep header visible on scroll */
+            top: 0;
+            z-index: 1;
+            border-bottom-width: 2px; /* Stronger line below header */
+            border-bottom-color: var(--border-color);
+        }
+        /* Style for the parameter column */
+        td:first-child {
+            font-weight: 500; /* Slightly bolder parameter names */
+             white-space: nowrap; /* Prevent parameter names from wrapping */
+        }
+
+        /* Zebra striping for table rows */
+        tbody tr:nth-child(even) {
+            background-color: var(--bg-light);
+        }
+
+        /* Hover effect for table rows */
+        tbody tr:hover {
+            background-color: var(--hover-bg);
+        }
+
+        /* --- Image Gallery Styling --- */
+        .image-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 1em;
+            margin-bottom: 1.5em;
+            padding: 15px;
+            background-color: var(--bg-light);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+        }
+
+        .image-gallery figure {
+            margin: 0;
+            text-align: center;
+            flex-basis: calc(50% - 20px); /* Aim for 2 columns */
+            max-width: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .image-gallery img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 8px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .image-gallery figcaption {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: auto; /* Push caption down */
+        }
+
+        /* --- Alert Boxes --- */
+        .safety-warning, .attention {
+            border-left-width: 5px;
+            border-left-style: solid;
+            padding: 10px 15px;
+            margin: 1em 0;
+            border-radius: 4px;
+        }
+        .safety-warning {
+            border-left-color: var(--warning-color);
+            background-color: var(--warning-bg);
+            color: #721c24;
+        }
+        .attention {
+            border-left-color: var(--attention-color);
+            background-color: var(--attention-bg);
+            color: #856404;
+        }
+        .safety-warning strong, .attention strong {
+            font-weight: bold;
+        }
+
+        /* --- Collapsible Section Styling --- */
+        /* Apply this class to the H3 (or other element) that triggers the collapse */
+        .section h3.collapsible-header {
+            cursor: pointer;
+            position: relative;
+            padding-right: 25px; /* Space for indicator */
+            margin-bottom: 0; /* Connects header visually to content below */
+            border-bottom: 1px solid var(--border-color); /* Separator line */
+            padding-bottom: 10px; /* Spacing above the line */
+        }
+
+        .section h3.collapsible-header::after {
+            content: '▼'; /* Down arrow indicator */
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.8em;
+            color: var(--primary-color);
+            transition: transform 0.3s ease;
+        }
+
+        .section h3.collapsible-header.collapsed::after {
+            content: '►'; /* Right arrow indicator when collapsed */
+        }
+
+        /* The content DIV immediately following the collapsible-header */
+        .collapsible-content {
+            overflow: hidden;
+            max-height: 5000px; /* Allow ample height when open */
+            transition: max-height 0.5s ease-in-out, padding 0.3s ease, margin 0.3s ease, border 0.3s ease, opacity 0.3s ease;
+            padding-top: 15px; /* Space below header when open */
+            margin-top: 0;
+            border-top: 1px solid var(--bg-light); /* Subtle line separating from header */
+            opacity: 1;
+        }
+
+        .collapsible-content.collapsed {
+            max-height: 0;
+            padding-top: 0;
+            padding-bottom: 0;
+            margin-top: 0;
+            border-top: none; /* Hide border when collapsed */
+            opacity: 0;
+        }
+
+        /* ==========================================================================
+        RESPONSIVE ADJUSTMENTS
+        ========================================================================== */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+                margin: 10px; /* Reduce margin on smaller screens */
+            }
+            .container > h1 { font-size: 1.6em; }
+            .section > h2 { font-size: 1.3em; }
+            .section > h3 { font-size: 1.1em; } /* Includes collapsible */
+
+            table { font-size: 0.9em; min-width: 0; } /* Allow table to shrink */
+            th, td { padding: 8px 10px; }
+            /* Allow parameter names to wrap on smaller screens */
+            td:first-child { white-space: normal; }
+
+            .image-gallery figure {
+                 flex-basis: calc(50% - 15px); /* Keep 2 columns */
+                 max-width: 45%;
+            }
+            figure img { max-width: 100%; } /* Adjust standalone figure image */
+        }
+
+        @media (max-width: 480px) {
+            .container > h1 { font-size: 1.4em; }
+            .section > h2 { font-size: 1.15em; }
+            .section > h3 { font-size: 1.0em; } /* Includes collapsible */
+
+            th, td { padding: 6px 8px; font-size: 0.85em; }
+            ul, ol { margin-left: 20px; padding-left: 0; } /* Adjust list indent */
+
+            .image-gallery figure {
+                 flex-basis: 100%; /* Stack to single column */
+                 max-width: 90%;
+            }
+        }
+
+        /* ==========================================================================
+        PRINT SPECIFIC STYLES
+        * Optimizes layout for printing.
+        * Hides header and footer elements (if they existed).
+        * Forces display of collapsible content.
+        * Adjusts fonts, colors, and spacing for paper.
+        ========================================================================== */
+        @media print {
+            body {
+                background-color: #fff !important; /* Force white background */
+                color: #000 !important; /* Force black text */
+                font-size: 10pt;
+                -webkit-print-color-adjust: exact !important; /* Try to force color printing */
+                print-color-adjust: exact !important;
+                display: block; /* Override flex for printing */
+                min-height: auto;
+            }
+
+            .container {
+                max-width: 100%;
+                margin: 0;
+                padding: 0;
+                box-shadow: none;
+                border-radius: 0;
+                border: none;
+            }
+
+            h1, h2, h3, p, li {
+                color: #000 !important; /* Ensure text is black */
+            }
+
+            .container > h1 {
+                color: #000 !important; /* Black title */
+                border-bottom: 2px solid #000 !important; /* Black border */
+                text-align: left; /* Align left for print */
+                font-size: 16pt;
+            }
+            .section > h2 {
+                color: #000 !important;
+                border-bottom: 1px solid #000 !important;
+                font-size: 14pt;
+                margin-top: 1.5em;
+                page-break-after: avoid; /* Try to keep heading with content */
+            }
+            .section > h3 {
+                color: #000 !important;
+                font-size: 12pt;
+                page-break-after: avoid;
+                margin-bottom: 0.5em; /* Ensure space before table */
+            }
+
+            ul, ol {
+                margin-left: 20px; /* Consistent indent */
+                padding-left: 0;
+            }
+
+            figure {
+                page-break-inside: avoid; /* Try to keep figure and caption together */
+                text-align: center; /* Center image on print */
+            }
+            figure img {
+                max-width: 70% !important; /* Reduce image size slightly for print */
+                border: 1px solid #ccc !important; /* Lighter border for print */
+                background-color: #fff !important; /* Ensure white background */
+                box-shadow: none;
+            }
+            figcaption {
+                color: #333 !important; /* Darker grey caption */
+            }
+
+            table {
+                font-size: 9pt;
+                min-width: auto;
+                width: 100%;
+                page-break-inside: auto; /* Allow tables to break across pages */
+                margin-bottom: 1em; /* Space below tables in print */
+            }
+            thead {
+                display: table-header-group; /* Repeat header on new pages */
+                background-color: #eee !important; /* Light grey header */
+                color: #000 !important;
+            }
+            th, td {
+                border: 1px solid #ccc !important; /* Lighter borders */
+                padding: 5px 8px;
+                vertical-align: top; /* Ensure top alignment */
+            }
+             td:first-child {
+                 font-weight: bold; /* Bold parameter names */
+                 white-space: normal; /* Allow wrapping in print */
+             }
+            tbody tr {
+                page-break-inside: avoid; /* Try to keep individual rows together */
+                page-break-after: auto;
+            }
+            tbody tr:nth-child(even) {
+                background-color: #f9f9f9 !important; /* Very light zebra stripe */
+            }
+
+            .section {
+                margin-bottom: 1em; /* Reduce space between sections */
+                padding-bottom: 0;
+                border-bottom: none;
+                page-break-inside: avoid; /* Try to keep sections together */
+            }
+
+            /* Ensure collapsible content is visible */
+            .collapsible-content {
+                max-height: none !important;
+                opacity: 1 !important;
+                padding-top: 10px !important;
+                border-top: 1px solid #eee !important;
+            }
+            .collapsible-header::after {
+                content: "" !important; /* Hide arrows */
+            }
+
+            /* Hide elements not suitable for print if needed */
+            /* .some-class-to-hide { display: none; } */
+
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <h1>DX-1000T High and Low Temperature Hall Effect Test System</h1>
+
+        <div class="section" id="overview">
+            <h2>System Overview</h2>
+            <p>This instrument system consists of:</p>
+            <ul class="component-list">
+                <li>Electromagnet</li>
+                <li>Electromagnet power supply</li>
+                <li>High-precision constant current source</li>
+                <li>High-precision voltmeter</li>
+                <li>Gauss meter</li>
+                <li>Hall effect sample holder</li>
+                <li>Standard sample</li>
+                <li>High and low temperature Dewar</li>
+                <li>Temperature controller</li>
+                <li>System software</li>
+            </ul>
+
+            <figure>
+                <img src="High and low temp HALL effect system_page-000.jpg" alt="DX-1000T Hall Effect Test System Setup">
+                <figcaption>DX-1000T System Components</figcaption>
+            </figure>
+
+            <p>The DX-320 effector specially developed for this instrument system integrates a constant current source, a six and a half microvolt meter and a complex switching relay-switch for Hall measurement, which greatly reduces the connection and operation of the experiment. DX-320 can be used as a constant current source and microvoltmeter alone.</p>
+
+            <p>It is used to measure important parameters such as carrier concentration, mobility, resistivity, and Hall coefficient of semiconductor materials. These parameters must be controlled in advance to understand the electrical properties of semiconductor materials. Therefore, the Hall effect test system is an important tool for understanding and researching semiconductor devices and electrical properties of semiconductor materials.</p>
+
+            <p>The experimental results are automatically calculated by the software, and parameters such as Bulk Carrier Concentration, Sheet Carrier Concentration, Mobility, Resistivity, Hall Coefficient, and Magnetoresistance can be obtained at the same time.</p>
+        </div>
+
+        <div class="section" id="testable-materials">
+            <h2>Testable Materials</h2>
+            <ol>
+                <li><strong>Semiconductor materials:</strong> SiGe, SiC, InAs, InGaAs, InP, AlGaAs, HgCdTe and ferrite materials, etc.;</li>
+                <li><strong>Low impedance materials:</strong> graphene, metals, transparent oxides, weakly magnetic semiconductor materials, TMR materials, etc.;</li>
+                <li><strong>High resistance materials:</strong> semi-insulating GaAs, GaN, CdTe, etc.</li>
+            </ol>
+        </div>
+
+        <div class="section technical-indicators" id="technical-indicators">
+            <h2>Technical Indicators</h2>
+            <!-- Using a table for technical indicators as well for consistency -->
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Magnetic field</td><td>10mm pitch is 2T, 30mm pitch is 1T</td></tr>
+                        <tr><td>Sample current</td><td>0.05uA ~ 50mA (adjust 0.1nA)</td></tr>
+                        <tr><td>Measuring voltage</td><td>0.1uV ~ 30V</td></tr>
+                        <tr><td>Standard materials</td><td>Provide various test standard materials, silicon and gallium arsenide of various levels (different sensitivity and precision)</td></tr>
+                        <tr><td>Minimum resolution (Magnetic Field)</td><td>0.1 Gs</td></tr>
+                        <tr><td>Magnetic field range</td><td>0 - 1T</td></tr>
+                        <tr><td>Communication</td><td>Cooperate with gauss meter or digital acquisition board to communicate with computer</td></tr>
+                        <tr><td>Curve Measurement</td><td>I-V curve and I-R curve measurement, etc.</td></tr>
+                        <tr><td>Temperature Dependence</td><td>Change curves of parameters such as Hall coefficient and carrier concentration with temperature</td></tr>
+                        <tr><td>Resistivity range</td><td>10<sup>-7</sup> ~ 10<sup>12</sup> Ohm*cm</td></tr>
+                        <tr><td>Resistance range</td><td>10 mΩ ~ 6 MΩ</td></tr>
+                        <tr><td>Carrier concentration</td><td>10<sup>3</sup> ~ 10<sup>23</sup> cm<sup>-3</sup></td></tr>
+                        <tr><td>Mobility</td><td>0.1 ~ 10<sup>8</sup> cm²/volt*sec</td></tr>
+                        <tr><td>Temperature adjustment</td><td>0.1K</td></tr>
+                        <tr><td>Temperature zone</td><td>77K - 470K</td></tr>
+                        <tr><td>Operation</td><td>Fully automated testing, one-key processing</td></tr>
+                        <tr><td>Measurement Mode</td><td>Continuous measurement between the same temperature difference can be realized</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="section component-params" id="component-parameters">
+            <h2>Parameters of Each Component</h2>
+
+            <h3>High precision electromagnet</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Pole diameter</td><td>100mm</td></tr>
+                        <tr><td>Max Magnetic Field (10mm N-S distance)</td><td>20000 Gs (2T)</td></tr>
+                        <tr><td>Max Magnetic Field (20mm N-S distance)</td><td>13000 Gs (1.3T)</td></tr>
+                        <tr><td>Max Magnetic Field (30mm N-S distance)</td><td>10000 Gs (1T)</td></tr>
+                        <tr><td>Uniform area</td><td>10mm diameter at 60mm spacing, uniformity range 1%</td></tr>
+                        <tr><td>Weight</td><td>210 kg (including bracket and wheels)</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>High-precision bipolar constant current power supply</h3>
+             <div class="table-container">
+                <table>
+                     <thead>
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Output</td><td>±10A ±80V</td></tr>
+                        <tr><td>Power</td><td>800W</td></tr>
+                        <tr><td>Output Current Change</td><td>Continuous between positive and negative rated maximum current</td></tr>
+                        <tr><td>Zero Crossing</td><td>Current can smoothly cross the zero point and reverse without switching</td></tr>
+                        <tr><td>Operation Quadrants</td><td>Output current and voltage four-quadrant operation (suitable for inductive loads)</td></tr>
+                        <tr><td>Current Change Rate</td><td>Settable in the range of 0.0007 ~ 0.3 F.S./s (F.S. is rated max output current)</td></tr>
+                        <tr><td>Current Stability (Standard)</td><td>Better than ±25ppm/h</td></tr>
+                        <tr><td>Current Stability (High Stability)</td><td>Better than ±5ppm/h</td></tr>
+                        <tr><td>Current Accuracy</td><td>± (0.01% set value + 1mA)</td></tr>
+                        <tr><td>Current Resolution</td><td>20 bit (e.g., 15A power supply, resolution is 0.03mA)</td></tr>
+                        <tr><td>Source Effect</td><td>≤ 2.0×10<sup>-5</sup> F.S. (output current change for 10% power supply voltage change)</td></tr>
+                        <tr><td>Load Effect</td><td>≤ 2.0×10<sup>-5</sup> F.S. (output current change for 10% load change)</td></tr>
+                        <tr><td>Current Ripple (RMS)</td><td>Less than 1mA</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>High precision gauss meter</h3>
+             <div class="table-container">
+                <table>
+                     <thead>
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Accuracy</td><td>±0.30% of reading</td></tr>
+                        <tr><td>Resolution</td><td>0.01mT</td></tr>
+                        <tr><td>Range</td><td>0-3T</td></tr>
+                        <tr><td>Probe Thickness</td><td>1.0mm</td></tr>
+                        <tr><td>Probe Length</td><td>100mm digital</td></tr>
+                        <tr><td>Interface</td><td>Rs-232 interface data reading software equipped with GP3 probe</td></tr>
+                        <tr><td>Probe Bracket</td><td>All-aluminum non-magnetic bracket 5-70mm adjustable</td></tr>
+                        <tr><td>Sample Holder Fixture</td><td>Customized upon request</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>High and low temperature thermostat</h3>
+             <div class="table-container">
+                <table>
+                     <thead>
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Vacuum Vessels</td><td>(80K-470K) high and low temperature</td></tr>
+                        <tr><td>Temperature Controller</td><td>TESTIK301 thermostat temperature control (65K-600K)</td></tr>
+                        <tr><td>Vacuum Pump</td><td>K25 Vacuum Pump</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Constant current source and test table</h3>
+             <div class="table-container">
+                <table>
+                     <thead>
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Constant Current Source Range</td><td>±50nA - ±50mA</td></tr>
+                        <tr><td>Current Source Resolution</td><td>0.1nA, continuously adjustable within the range</td></tr>
+                        <tr><td>Voltage Acquisition Range</td><td>0.1uV - 30V</td></tr>
+                        <tr><td>Voltage Acquisition Accuracy</td><td>0.01%</td></tr>
+                        <tr><td>Switching</td><td>Built-in test matrix conversion card</td></tr>
+                        <tr><td>Ohmic Contact Kit</td><td>Make kits based on Ohmic contacts of different materials</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

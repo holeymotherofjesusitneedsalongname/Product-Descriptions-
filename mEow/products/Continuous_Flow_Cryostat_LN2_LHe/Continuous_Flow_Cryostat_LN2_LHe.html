@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liquid Nitrogen (Helium) Cryostat - Continuous Flow | Dexinmag</title>
+    <style>
+        /* ==========================================================================
+        GENERIC STYLING FOR DEXINMAG DOCUMENT PAGES
+        Based on DXMP Manual / Axial Probe Styles
+        Version: 1.0 (Applied to Continuous Flow Cryostat HTML)
+        * Provides a consistent layout, color scheme, typography.
+        * Styles common elements like sections, tables, lists, images.
+        * Includes styles for collapsible sections.
+        * Includes responsive adjustments for different screen sizes.
+        * Includes print-specific styles for better output.
+        * HEADER AND FOOTER specific styling has been REMOVED.
+        ========================================================================== */
+
+        /* --- Base Styles & Color Theme --- */
+        :root {
+            --primary-color: #00447C; /* Dark Blue */
+            --secondary-color: #4A90E2; /* Lighter Blue */
+            --bg-light: #f8f9fa; /* Very light grey */
+            --bg-medium: #e9ecef; /* Light grey */
+            --border-color: #dee2e6; /* Grey border */
+            --text-color: #343a40; /* Dark grey text */
+            --header-original-bg: #f1f1f1; /* Original header background */
+            --hover-bg: #e8f4fd; /* Light blue for hover */
+            --warning-color: #dc3545; /* Red for warnings */
+            --warning-bg: #f8d7da;
+            --attention-color: #ffc107; /* Yellow for attention */
+            --attention-bg: #fff3cd;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4; /* Light grey background for the page */
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            padding-bottom: 50px; /* Space for potential footer (from original) */
+        }
+
+        /* --- Main Content Container --- */
+        .container {
+            max-width: 1100px; /* Adjusted from 1200px to match generic */
+            margin: 0 auto 20px auto; /* Changed margin to remove top space, header is separate */
+            padding: 25px;
+            background-color: #fff; /* White background for content */
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            flex-grow: 1; /* Allows footer (if added back) to stick to bottom */
+        }
+
+        /* --- Header (Adapted from original code-2.html) --- */
+        header.page-header {
+            background-color: var(--header-original-bg);
+            padding: 15px 20px;
+            margin-bottom: 20px; /* Connects visually with container */
+            border-bottom: 2px solid var(--primary-color);
+            text-align: center;
+            max-width: 1100px; /* Match container width */
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 8px 8px 0 0; /* Rounded top corners */
+        }
+
+        header.page-header h1 {
+            color: var(--primary-color);
+            font-size: 2em; /* Keep original size */
+            margin-bottom: 0.2em;
+            margin-top: 0; /* Reset margin */
+            line-height: 1.3;
+        }
+         header.page-header .subtitle {
+             font-size: 1.1em;
+             color: #555;
+         }
+
+
+        /* --- Typography --- */
+        h1, h2, h3 { /* General rule, specific overrides below */
+            color: var(--primary-color);
+            line-height: 1.3;
+            margin-top: 1em;
+            margin-bottom: 0.75em;
+        }
+        h1:first-child, h2:first-child, h3:first-child {
+            margin-top: 0;
+        }
+
+        /* Styles section titles */
+        section > h2 {
+            font-size: 1.5em; /* Use generic size */
+            border-bottom: 1px solid var(--border-color); /* Use generic border */
+            padding-bottom: 0.3em;
+            color: var(--primary-color);
+            margin-bottom: 0.8em; /* Keep original spacing */
+        }
+
+        /* Base style for H3, often used for sub-sections or collapsible headers */
+        section > h3 {
+            font-size: 1.2em;
+            color: var(--primary-color);
+            padding-bottom: 0.3em;
+            font-weight: bold;
+        }
+
+        p {
+            margin-bottom: 1em;
+        }
+
+        ul {
+            list-style: disc;
+            margin: 0 0 1em 25px;
+        }
+        /* Nested UL styling from original */
+        ul ul {
+            margin-top: 0.5em;
+            margin-bottom: 0.5em;
+        }
+
+        li {
+            margin-bottom: 0.6em; /* Keep original spacing */
+        }
+
+        /* --- Content Sections --- */
+        section {
+            margin-bottom: 2em; /* Use generic spacing */
+            padding-bottom: 1em; /* Use generic spacing */
+            border-bottom: 1px solid var(--bg-medium); /* Subtle separator */
+        }
+        section:last-of-type {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        /* --- Tables --- */
+        .table-container {
+            overflow-x: auto; /* Enable horizontal scroll on screen */
+            margin-top: 1em;
+            margin-bottom: 1.5em;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95em;
+            min-width: 600px; /* Prevent excessive squishing on screen */
+        }
+
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 10px 12px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        thead th {
+            background-color: var(--bg-medium);
+            font-weight: bold;
+            color: var(--primary-color);
+            position: sticky; /* Keep header visible on scroll */
+            top: 0;
+            z-index: 1;
+            border-bottom-width: 2px; /* Stronger line below header */
+            border-bottom-color: var(--border-color);
+        }
+
+        /* Specific styling for first column cells (Adapted from first example) */
+        tbody td:first-child {
+            font-weight: 600; /* Bold first column data */
+            background-color: var(--bg-light); /* Very light grey background for first column */
+            white-space: nowrap; /* Prevent wrapping in first column if possible */
+            min-width: 180px; /* Keep original min-width */
+        }
+
+        /* Zebra striping for table rows */
+        tbody tr:nth-child(even) {
+            background-color: var(--bg-light);
+        }
+        /* Adjust first cell background for even rows */
+         tbody tr:nth-child(even) td:first-child {
+             background-color: #f0f3f5; /* Slightly different even row first cell */
+         }
+
+        /* Hover effect for table rows */
+        tbody tr:hover {
+            background-color: var(--hover-bg);
+        }
+        /* Adjust first cell hover background */
+        tbody tr:hover td:first-child {
+             background-color: #e0f0fc; /* Slightly different hover for first cell (from original) */
+         }
+
+         /* Value/Unit/Note styling from original */
+         .value-unit {
+             font-style: italic;
+             color: #444;
+         }
+         .note {
+             font-size: 0.9em;
+             color: #666;
+             display: block;
+             margin-top: 4px;
+         }
+
+        /* --- Image Row/Column Styles (Kept from original code-2.html) --- */
+        .image-row {
+            display: flex;
+            flex-wrap: wrap;     /* Allows columns to wrap to the next line */
+            justify-content: flex-start; /* Align columns to the start */
+            gap: 15px;           /* Adjust gap between columns */
+            margin-bottom: 15px; /* Space between rows of images */
+            margin-top: 1em; /* Add space above image rows */
+        }
+
+        .image-column {
+            flex: 0 1 calc(33.333% - 10px); /* Don't grow, shrink if needed, basis 1/3 minus gap adjustment */
+            max-width: calc(33.333% - 10px); /* Max width 1/3 minus gap adjustment */
+            box-sizing: border-box;          /* Include padding/border in the width calculation */
+            text-align: center;              /* Center content (like caption) */
+            margin-bottom: 10px; /* Add space below each column if they wrap unevenly */
+            display: flex; /* Use flex for better alignment */
+            flex-direction: column;
+        }
+
+        .image-column figure {
+            margin: 0; /* Remove default figure margins */
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1; /* Allow figure to grow */
+        }
+
+        .image-column img {
+            max-width: 100%; /* Make image responsive within its column */
+            height: auto;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 8px; /* Adjusted spacing */
+            background-color: #fff;
+            display: block;     /* Prevents extra bottom space */
+            margin-left: auto;  /* Center image */
+            margin-right: auto;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Add subtle shadow */
+        }
+
+        .image-column figcaption {
+            font-size: 0.9em;
+            color: #555; /* Match original color */
+            font-style: italic; /* Match original style */
+            line-height: 1.3;
+            margin-top: auto; /* Push caption to bottom */
+        }
+        /* --- End of Image Row/Column Styles --- */
+
+
+        /* --- Alert Boxes --- */
+        .safety-warning, .attention {
+            border-left-width: 5px;
+            border-left-style: solid;
+            padding: 10px 15px;
+            margin: 1em 0;
+            border-radius: 4px;
+        }
+        .safety-warning {
+            border-left-color: var(--warning-color);
+            background-color: var(--warning-bg);
+            color: #721c24;
+        }
+        .attention {
+            border-left-color: var(--attention-color);
+            background-color: var(--attention-bg);
+            color: #856404;
+        }
+        .safety-warning strong, .attention strong {
+            font-weight: bold;
+        }
+
+        /* --- Collapsible Section Styling (Included from generic CSS, not used in current HTML) --- */
+        section h3.collapsible-header {
+            cursor: pointer;
+            position: relative;
+            padding-right: 25px; /* Space for indicator */
+            margin-bottom: 0; /* Connects header visually to content below */
+            border-bottom: 1px solid var(--border-color); /* Separator line */
+            padding-bottom: 10px; /* Spacing above the line */
+        }
+
+        section h3.collapsible-header::after {
+            content: '▼'; /* Down arrow indicator */
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.8em;
+            color: var(--primary-color);
+            transition: transform 0.3s ease;
+        }
+
+        section h3.collapsible-header.collapsed::after {
+            content: '►'; /* Right arrow indicator when collapsed */
+        }
+
+        .collapsible-content {
+            overflow: hidden;
+            max-height: 5000px; /* Allow ample height when open */
+            transition: max-height 0.5s ease-in-out, padding 0.3s ease, margin 0.3s ease, border 0.3s ease, opacity 0.3s ease;
+            padding-top: 15px; /* Space below header when open */
+            margin-top: 0;
+            border-top: 1px solid var(--bg-light); /* Subtle line separating from header */
+            opacity: 1;
+        }
+
+        .collapsible-content.collapsed {
+            max-height: 0;
+            padding-top: 0;
+            padding-bottom: 0;
+            margin-top: 0;
+            border-top: none; /* Hide border when collapsed */
+            opacity: 0;
+        }
+
+        /* ==========================================================================
+        RESPONSIVE ADJUSTMENTS
+        ========================================================================== */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+                margin-left: 10px; /* Reduce margin on smaller screens */
+                margin-right: 10px;
+                max-width: calc(100% - 20px);
+            }
+             header.page-header {
+                 max-width: calc(100% - 20px);
+                 margin-left: 10px;
+                 margin-right: 10px;
+                 border-radius: 8px 8px 0 0;
+             }
+            header.page-header h1 { font-size: 1.7em; }
+            section > h2 { font-size: 1.3em; }
+            section > h3 { font-size: 1.1em; } /* Includes collapsible */
+
+            table { font-size: 0.9em; min-width: 0; } /* Allow table to shrink */
+            th, td { padding: 8px 10px; }
+            tbody td:first-child {
+                white-space: normal; /* Allow wrapping */
+                min-width: 120px; /* Reduce min-width */
+            }
+
+            /* Adjust image columns for medium screens - e.g., 2 columns */
+            .image-column {
+                flex: 0 1 calc(50% - 8px); /* Adjust basis and gap calculation for 2 columns */
+                max-width: calc(50% - 8px);
+            }
+        }
+
+        @media (max-width: 480px) {
+            header.page-header h1 { font-size: 1.5em; }
+            section > h2 { font-size: 1.15em; }
+            section > h3 { font-size: 1.0em; } /* Includes collapsible */
+
+            th, td { padding: 6px 8px; font-size: 0.85em; }
+            ul { margin-left: 20px; }
+
+             /* Adjust image columns for small screens - e.g., 1 column */
+            .image-column {
+                flex: 0 1 100%; /* Full width */
+                max-width: 100%;
+            }
+        }
+
+        /* ==========================================================================
+        PRINT SPECIFIC STYLES (Modified to retain colors/formatting per request)
+        * Optimizes layout for printing.
+        * Hides header and footer elements (already removed from HTML/CSS).
+        * Forces display of collapsible content (if used).
+        * Adjusts fonts, colors, and spacing for paper.
+        * Allows content (paragraphs, table rows) to break across pages.
+        ========================================================================== */
+        @media print {
+            body {
+                background-color: #fff !important; /* Force white background for body */
+                color: #000 !important; /* Force black text for base body */
+                font-size: 10pt;
+                -webkit-print-color-adjust: exact !important; /* Try to force color printing in WebKit */
+                print-color-adjust: exact !important; /* Standard property for color printing */
+                margin: 0;
+                padding: 0;
+                box-shadow: none;
+            }
+
+            .container {
+                max-width: 100% !important;
+                margin: 0 !important;
+                padding: 1cm !important; /* Add some padding for print margins */
+                box-shadow: none !important;
+                border: none !important;
+                border-radius: 0;
+                background-color: #fff !important; /* Ensure container background is white */
+            }
+
+            /* Retain Header appearance */
+            header.page-header {
+                background-color: var(--header-original-bg) !important;
+                border-bottom: 2px solid var(--primary-color) !important;
+                color: var(--primary-color) !important; /* Ensure text color contrasts */
+                text-align: center; /* Keep centered */
+                padding: 10px 0;
+                margin-bottom: 1.5em;
+                border-radius: 0 !important; /* No rounded corners in print */
+                page-break-after: avoid;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+             header.page-header h1 {
+                 color: var(--primary-color) !important;
+                 font-size: 1.5em;
+            }
+             header.page-header .subtitle {
+                 color: #333 !important; /* Darker subtitle text */
+                 font-size: 1em;
+            }
+
+            /* Retain heading colors */
+            h2, h3 {
+                color: var(--primary-color) !important;
+                page-break-after: avoid; /* Avoid breaking page right after a heading */
+            }
+             section > h2 {
+                 border-bottom-color: var(--border-color) !important;
+                 font-size: 1.3em;
+                 margin-bottom: 0.6em;
+                 -webkit-print-color-adjust: exact !important;
+                 print-color-adjust: exact !important;
+            }
+
+            /* Ensure text color is generally black for readability, unless specified otherwise */
+            p, li, td, figcaption, .value-unit, .note {
+                color: #000 !important; /* Default to black text */
+            }
+            /* Override for specific elements if needed */
+             .image-column figcaption {
+                 font-size: 8pt !important;      /* Smaller caption */
+                 font-style: normal !important; /* Non-italic caption */
+                 line-height: 1.2;
+             }
+
+            section {
+                border-bottom: 1px solid var(--bg-medium) !important; /* Keep separator */
+                margin-bottom: 1.5em;
+                page-break-inside: avoid; /* Try to keep sections together */
+                 -webkit-print-color-adjust: exact !important;
+                 print-color-adjust: exact !important;
+            }
+             section:last-of-type { border-bottom: none !important; }
+
+
+            /* Table styling for print - Retain colors */
+            .table-container { overflow: visible !important; }
+            table {
+                width: 100% !important;
+                border-collapse: collapse !important;
+                font-size: 9pt;
+                min-width: 0;
+                page-break-inside: auto; /* Allow tables to break across pages */
+            }
+            tr {
+                page-break-inside: avoid; /* Try to keep rows together */
+                page-break-after: auto;
+            }
+            th, td {
+                border: 1px solid #999 !important; /* Lighter border for print */
+                padding: 4px 6px;
+                vertical-align: top;
+            }
+            thead {
+                display: table-header-group; /* Ensure header repeats if table breaks */
+            }
+            thead th {
+                background-color: var(--bg-medium) !important;
+                color: var(--primary-color) !important;
+                font-weight: bold !important;
+                border-bottom: 2px solid var(--border-color) !important;
+                white-space: normal !important; /* Allow header text to wrap */
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            /* Retain first column styling */
+            tbody td:first-child {
+                font-weight: 600 !important;
+                background-color: var(--bg-light) !important;
+                color: #000 !important; /* Ensure black text */
+                white-space: normal !important; /* Allow wrapping */
+                min-width: 0 !important; /* Remove min-width for print */
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            /* Retain zebra striping */
+            tbody tr:nth-child(even) {
+                background-color: var(--bg-light) !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+             tbody tr:nth-child(even) td:first-child {
+                 background-color: #f0f3f5 !important; /* Slightly different even row first cell */
+                 -webkit-print-color-adjust: exact !important;
+                 print-color-adjust: exact !important;
+             }
+             /* Remove hover effects */
+             tbody tr:hover, tbody tr:hover td:first-child {
+                 background-color: inherit !important;
+             }
+
+
+             /* Image Row/Column for print */
+             .image-row {
+                 gap: 10px !important; /* Explicit print gap */
+                 margin-bottom: 10px !important;
+                 page-break-inside: avoid; /* Try to keep rows together */
+                 justify-content: flex-start; /* Align left */
+             }
+              .image-column {
+                 border: none !important; /* Remove column border if any */
+                 padding: 0 !important;
+                 /* Recalculate basis for print if needed, based on print gap */
+                 flex-basis: calc(33.333% - 7px) !important;
+                 max-width: calc(33.333% - 7px) !important;
+                 margin-bottom: 10px !important; /* Ensure bottom margin for wrapping rows */
+                 page-break-inside: avoid; /* Keep column content together */
+              }
+             .image-column figure {
+                 background-color: transparent !important;
+             }
+             .image-column img {
+                  border: 1px solid #aaa !important; /* Ensure border prints, maybe darker */
+                  box-shadow: none !important;
+                  max-width: 100%;
+                  height: auto;
+             }
+
+            /* Force collapsible content to be visible */
+            .collapsible-content {
+                max-height: none !important;
+                opacity: 1 !important;
+                display: block !important;
+                padding-top: 10px !important;
+                border-top: 1px solid var(--bg-light) !important;
+                 -webkit-print-color-adjust: exact !important;
+                 print-color-adjust: exact !important;
+            }
+            .collapsible-header::after {
+                content: "" !important; /* Hide toggle indicator */
+            }
+
+            /* Hide elements not suitable for print if needed (none identified here) */
+            /* .no-print { display: none !important; } */
+
+        }
+    </style>
+</head>
+<body>
+
+    <header class="page-header">
+        <h1>Liquid Nitrogen (Helium) Cryostat</h1>
+        <div class="subtitle">Continuous Flow - Dexinmag</div>
+    </header>
+
+    <div class="container">
+
+        <section id="overview">
+            <h2>Overview</h2>
+            <p>The Dexinmag continuous flow liquid nitrogen (helium) cryostat is designed primarily for cooling liquids, powders, and samples with poor thermal conductivity or irregular shapes. It is particularly effective for samples that are difficult to thermally anchor.</p>
+            <p>In operation, low-pressure refrigerant (Liquid Nitrogen or Helium) enters the thermostat's interior via the infusion pipe and liquid inlet. It then passes through a pre-laid low-temperature heat leakage capillary to reach the evaporation amplifier. A heater and temperature sensor are installed on the evaporator. The resulting temperature-controlled cold vapor (steam) is injected into the sample chamber to cool the sample.</p>
+            <p>After cooling the sample, the vapor is discharged either to the atmosphere through the air outlet or into a gas recovery system for secondary utilization. This model features top-loading for samples. Its compact overall design facilitates integration with magnets and brackets produced by Dexinmag, allowing for placement within strong magnetic fields while maximizing the usable field strength.</p>
+
+            <div aria-label="Product Views"> <!-- Container for image rows -->
+                <div class="image-row">
+                    <div class="image-column">
+                        <figure>
+                            <img src="Liquid Nitrogen cryostat_page-000.jpg" alt="Continuous Flow Cryostat - Front/Side View">
+                             <figcaption>Cryostat Assembly - Front/Side View</figcaption>
+                        </figure>
+                    </div>
+                    <div class="image-column">
+                         <figure>
+                             <img src="Liquid Nitrogen cryostat_page-001.jpg" alt="Continuous Flow Cryostat - Top/Rear View">
+                             <figcaption>Cryostat Assembly - Top/Rear View</figcaption>
+                         </figure>
+                    </div>
+                    <div class="image-column">
+                         <figure>
+                             <img src="Liquid Nitrogen cryostat_page-002.jpg" alt="Continuous Flow Cryostat - Base View with Interface Ports">
+                             <figcaption>Cryostat Base View with Interface Ports</figcaption>
+                         </figure>
+                    </div>
+                </div> <!-- End image-row 1 -->
+                <div class="image-row">
+                     <div class="image-column">
+                          <figure>
+                             <img src="Liquid Nitrogen cryostat_page-003.jpg" alt="Continuous Flow Cryostat - Angled View">
+                             <figcaption>Cryostat Assembly - Angled View</figcaption>
+                         </figure>
+                     </div>
+                     <!-- Empty columns removed to let flexbox handle alignment -->
+                </div> <!-- End image-row 2 -->
+            </div>
+
+        </section>
+
+        <section id="features">
+            <h2>Functions and Features</h2>
+            <ul>
+                <li>Variable temperature range: (4K-325K), (80K-325K), (optional 475K) with good cooling effect and even sample heating.</li>
+                <li>Suitable for cooling samples with irregular shapes and low thermal conductivity.</li>
+                <li>Temperature Sensors:
+                    <ul>
+                        <li>Silicon diode sensor for 4K-325K range.</li>
+                        <li>PT100 platinum resistance sensor for 80K-325K range (good stability and repeatability).</li>
+                        <li>Cernox™ magnetic field insensitive temperature sensors suitable for use in magnetic fields.</li>
+                    </ul>
+                </li>
+                <li>Top loading enables rapid sample change.</li>
+                <li>Built-in charcoal getter to improve vacuum insulation.</li>
+                <li>Customizable according to customer requirements.</li>
+                <li>Comes standard with 8 measurement leads, expandable up to 32.</li>
+                <li>Detachable stainless steel infusion lines connect the cryostat to the Dewar, featuring a needle valve for flow control.</li>
+            </ul>
+        </section>
+
+        <section id="technical-parameters">
+            <h2>Technical Parameters</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Technical Parameters</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Temperature range</td>
+                            <td>4K-325K, 80K-325K</td>
+                        </tr>
+                        <tr>
+                            <td>Cooling time</td>
+                            <td>
+                                (Room temperature to 80K): approx. <span class="value-unit">20 minutes</span><br>
+                                (Room temperature to 4.2K): approx. <span class="value-unit">30 minutes</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Electrical connector</td>
+                            <td>Standard configuration: 8-pin electrical measurement connector</td>
+                        </tr>
+                        <tr>
+                            <td>Thermometer</td>
+                            <td>PT100 thermometer, Diode thermometer, Cernox thermometer (optional)</td>
+                        </tr>
+                        <tr>
+                            <td>Temperature stability</td>
+                            <td>±0.01K (depends on temperature controller)</td>
+                        </tr>
+                        <tr>
+                            <td>Heater</td>
+                            <td><span class="value-unit">1 x 50W heater</span></td>
+                        </tr>
+                        <tr>
+                            <td>Vacuum interface</td>
+                            <td>KF25 standard interface</td>
+                        </tr>
+                         <tr>
+                            <td>Sample rotation angle</td>
+                            <td>Samples can be rotated <span class="value-unit">360 degrees</span></td>
+                        </tr>
+                        <tr>
+                            <td>Required vacuum degree</td>
+                            <td>
+                                Insulation vacuum (sandwich layer): ≤1Pa<br>
+                                Sample cavity vacuum: ≤1Pa
+                            </td>
+                        </tr>
+                         <tr>
+                            <td>Liquid nitrogen consumption</td> <!-- Corrected label based on context -->
+                            <td><span class="value-unit">1.5 L/h @ 4.2K</span> <span class="note">(Note: This value typically refers to Liquid Helium consumption for 4.2K operation. LN2 consumption for 80K operation will differ.)</span></td>
+                         </tr>
+                        <tr>
+                            <td>Liquid nitrogen chamber volume</td> <!-- Corrected label based on context -->
+                             <td>Approx. <span class="value-unit">1.6L</span> (Sample chamber volume)</td>
+                        </tr>
+                         <tr>
+                             <td>Window selection</td>
+                             <td>Fused quartz, infrared silicon material, sapphire, zinc selenide, zinc sulfide, cadmium telluride, germanium, silicon, cadmium fluoride, mylar, kapton, beryllium, etc.
+                             <span class="note">Size can be customized according to different usage requirements.</span></td>
+                         </tr>
+                        <tr>
+                            <td>Selection instructions</td>
+                            <td>The main samples tested by this type of thermostat are liquids, powders, samples with poor thermal conductivity and irregular shapes.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+         <section id="customization-details">
+              <h2>Customization Example & Details (DXRC-102)</h2>
+              <p>Example of a DXRC-102 customized vacuum continuous flow cryostat configuration and component details.</p>
+
+               <div aria-label="Customization and Detail Views"> <!-- Container for image rows -->
+                   <div class="image-row">
+                       <div class="image-column">
+                             <figure>
+                                 <img src="Liquid Nitrogen cryostat_page-004.jpg" alt="DXRC-102 Customized Cryostat Components Overview">
+                                 <figcaption>DXRC-102 Components Overview</figcaption>
+                             </figure>
+                       </div>
+                       <div class="image-column">
+                              <figure>
+                                  <img src="Liquid Nitrogen cryostat_page-005.jpg" alt="DXRC-102 Cryostat Assembled in Setup">
+                                  <figcaption>DXRC-102 Assembled View</figcaption>
+                             </figure>
+                       </div>
+                       <div class="image-column">
+                              <figure>
+                                  <img src="Liquid Nitrogen cryostat_page-006.jpg" alt="Cryostat Electrical Feedthrough Connectors Panel">
+                                  <figcaption>Electrical Feedthrough Connectors</figcaption>
+                              </figure>
+                       </div>
+                   </div> <!-- End image-row 1 -->
+                   <div class="image-row">
+                       <div class="image-column">
+                             <figure>
+                                 <img src="Liquid Nitrogen cryostat_page-007.jpg" alt="Cryostat Sample Stage Wiring Detail">
+                                 <figcaption>Sample Stage Wiring Detail</figcaption>
+                             </figure>
+                       </div>
+                        <div class="image-column">
+                             <figure>
+                                 <img src="Liquid Nitrogen cryostat_page-008.jpg" alt="Cryostat Flexible Cryogen Transfer Line">
+                                 <figcaption>Flexible Cryogen Transfer Line</figcaption>
+                             </figure>
+                       </div>
+                        <!-- Empty columns removed -->
+                   </div> <!-- End image-row 2 -->
+               </div>
+         </section>
+
+    </div> <!-- /container -->
+
+    <!-- Optional Footer -->
+    <!--
+    <footer class="main-footer">
+        <p>&copy; 2023 Dexinmag. All rights reserved.</p>
+    </footer>
+    -->
+
+</body>
+</html>

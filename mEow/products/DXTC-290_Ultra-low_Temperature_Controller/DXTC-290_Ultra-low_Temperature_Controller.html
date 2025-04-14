@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DXTC-290 Ultra-low Temperature Controller - Dexinmag</title>
+    <style>
+        /* ==========================================================================
+        GENERIC STYLING FOR DEXINMAG DOCUMENT PAGES (Adapted)
+        Based on DXMP Manual / Axial Probe Styles & Original File Styles
+        Version: 1.1
+        * Provides a consistent layout, color scheme, typography.
+        * Styles common elements like sections, tables, lists, images.
+        * Includes responsive adjustments for different screen sizes.
+        * Includes print-specific styles for better output.
+        * HEADER AND FOOTER specific styling has been REMOVED.
+        * Adapted to use original color scheme and table styling preferences.
+        ========================================================================== */
+
+        /* --- Base Styles & Color Theme (Using Original Colors) --- */
+        :root {
+            --primary-color: #0d47a1; /* Darker Blue */
+            --secondary-color: #1976d2; /* Medium Blue */
+            --accent-color: #e57373; /* Red Accent */
+            --bg-light: #f8f9fa;
+            --bg-medium: #e9ecef;
+            --border-color: #dee2e6;
+            --text-color: #343a40;
+            /* Header/Footer colors removed as requested */
+            --hover-bg: #e3f2fd; /* Light blue for hover */
+            --table-header-bg: var(--bg-medium);
+            --table-first-col-bg: var(--bg-light);
+            --table-even-row-bg: var(--bg-light);
+            --table-first-col-even-bg: #f0f3f5;
+            --table-hover-bg: var(--hover-bg);
+            --table-first-col-hover-bg: #eaf6ff;
+            --warning-color: #dc3545; /* Red for warnings */
+            --warning-bg: #f8d7da;
+            --attention-color: #ffc107; /* Yellow for attention */
+            --attention-bg: #fff3cd;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4; /* Light grey background for the page */
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* --- Main Content Container --- */
+        .container {
+            max-width: 1100px;
+            margin: 20px auto;
+            padding: 25px;
+            background-color: #fff; /* White background for content */
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            flex-grow: 1;
+        }
+
+        /* --- Typography --- */
+        h1, h2, h3 {
+            color: var(--primary-color);
+            line-height: 1.3;
+            margin-top: 1em;
+            margin-bottom: 0.75em;
+        }
+        h1:first-child, h2:first-child, h3:first-child {
+            margin-top: 0;
+        }
+
+        /* Styles the main product title within the container */
+        .container > h1 {
+            font-size: 1.8em;
+            text-align: center;
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 0.5em;
+            margin-bottom: 1em; /* Add more space below main title */
+        }
+
+        /* Styles section titles */
+        section > h2 {
+            font-size: 1.5em;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.3em;
+            color: var(--primary-color);
+        }
+
+        /* Base style for H3 */
+        section > h3 {
+            font-size: 1.2em;
+            color: var(--secondary-color); /* Use secondary blue for H3 */
+            padding-bottom: 0.3em;
+            font-weight: bold;
+        }
+
+        p {
+            margin-bottom: 1em;
+        }
+
+        /* Original list styling if needed elsewhere, but main specs are now tables */
+        ul {
+            list-style: none; /* Remove default bullets */
+            margin: 0 0 1em 0;
+            padding-left: 0;
+        }
+
+        li {
+            margin-bottom: 0.6em;
+            padding-left: 1.5em; /* Indentation */
+            position: relative;
+        }
+        li::before {
+             content: "◆"; /* Use diamond symbol */
+             position: absolute;
+             left: 0;
+             color: var(--secondary-color); /* Match H2 color */
+             font-size: 0.9em;
+             top: 0.1em;
+        }
+        /* Nested list styling if needed */
+        ul ul {
+            margin-top: 0.5em;
+            margin-bottom: 0;
+            margin-left: 1.5em; /* Indent nested list */
+        }
+        ul ul li::before {
+            content: "-"; /* Use dash for nested list */
+            font-weight: bold;
+        }
+
+
+        /* --- Content Sections --- */
+        section {
+            margin-bottom: 2em;
+            padding-bottom: 1em;
+            border-bottom: 1px solid var(--bg-medium); /* Subtle separator */
+        }
+        section:last-of-type {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        /* --- Tables (Combining Original & Generic) --- */
+        .table-container {
+            overflow-x: auto; /* Enable horizontal scroll on screen */
+            margin-top: 1em;
+            margin-bottom: 1.5em;
+            border: 1px solid var(--border-color); /* Border around container */
+            border-radius: 4px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95em;
+            min-width: 600px; /* Prevent excessive squishing on screen */
+            margin-bottom: 0; /* Remove margin as container has border */
+        }
+
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 10px 12px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        thead th {
+            background-color: var(--table-header-bg);
+            font-weight: bold;
+            color: var(--primary-color);
+            position: sticky; /* Keep header visible on scroll */
+            top: 0;
+            z-index: 1;
+            border-top: none; /* Remove top border inside container */
+            border-bottom-width: 2px; /* Stronger line below header */
+        }
+         thead th:first-child { border-left: none; }
+         thead th:last-child { border-right: none; }
+
+        /* Style first column cells differently (Original style) */
+        tbody td:first-child.spec-label, /* Add class for spec tables */
+        tbody td:first-child /* Keep original for sensor tables */
+         {
+            font-weight: 600;
+            background-color: var(--table-first-col-bg);
+            min-width: 180px; /* Adjust as needed */
+            white-space: nowrap;
+            border-left: none;
+        }
+        tbody td:last-child { border-right: none; }
+        tbody tr:last-child td { border-bottom: none; }
+
+
+        /* Zebra striping for table rows */
+        tbody tr:nth-child(even) {
+            background-color: var(--table-even-row-bg);
+        }
+        tbody tr:nth-child(even) td:first-child.spec-label,
+        tbody tr:nth-child(even) td:first-child {
+            background-color: var(--table-first-col-even-bg);
+        }
+
+        /* Hover effect for table rows */
+        tbody tr:hover {
+            background-color: var(--table-hover-bg);
+        }
+        tbody tr:hover td:first-child.spec-label,
+        tbody tr:hover td:first-child {
+            background-color: var(--table-first-col-hover-bg);
+        }
+
+        /* Sensor Table Specifics from Original */
+        #sensor-types table th:nth-child(1) { width: 30%; }
+        #sensor-types table th:nth-child(2) { width: 25%; }
+        #sensor-types table th:nth-child(3), #sensor-types table th:nth-child(4) { width: 22.5%; }
+
+        #sensor-performance table th { width: 20%; } /* Equal width columns */
+        #sensor-performance table td { text-align: center; }
+        #sensor-performance table td:first-child { text-align: left; white-space: normal;}
+
+
+        /* Notes below tables */
+        .table-notes {
+             margin-top: 1em;
+             font-size: 0.9em;
+             color: #555;
+        }
+        .table-notes p {
+             margin-bottom: 0.5em;
+        }
+
+
+        /* --- Image Gallery Styling --- */
+        .image-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 1em;
+            margin-bottom: 1.5em;
+            padding: 15px;
+            /* background-color: var(--bg-light); */ /* Optional lighter background */
+            /* border: 1px solid var(--border-color); */ /* Optional border */
+            border-radius: 4px;
+        }
+
+        .image-gallery figure {
+            margin: 0;
+            text-align: center;
+            flex-basis: calc(50% - 20px); /* Aim for 2 columns */
+            max-width: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .image-gallery img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 8px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .image-gallery figcaption {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: auto; /* Push caption down */
+        }
+
+        /* --- Alert Boxes --- */
+        .safety-warning, .attention {
+            border-left-width: 5px;
+            border-left-style: solid;
+            padding: 10px 15px;
+            margin: 1em 0;
+            border-radius: 4px;
+        }
+        .safety-warning {
+            border-left-color: var(--warning-color);
+            background-color: var(--warning-bg);
+            color: #721c24;
+        }
+        .attention {
+            border-left-color: var(--attention-color);
+            background-color: var(--attention-bg);
+            color: #856404;
+        }
+        .safety-warning strong, .attention strong {
+            font-weight: bold;
+        }
+
+        /* ==========================================================================
+        RESPONSIVE ADJUSTMENTS
+        ========================================================================== */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+                margin: 10px; /* Reduce margin on smaller screens */
+            }
+            .container > h1 { font-size: 1.6em; }
+            section > h2 { font-size: 1.3em; }
+            section > h3 { font-size: 1.1em; }
+
+            table { font-size: 0.9em; min-width: 0; } /* Allow table to shrink */
+            th, td { padding: 8px 10px; }
+            tbody td:first-child.spec-label,
+            tbody td:first-child {
+                white-space: normal; /* Allow wrapping in first column */
+                min-width: 120px; /* Adjust min-width for smaller screens */
+            }
+            #sensor-performance table td { font-size: 0.85em;}
+
+
+            .image-gallery figure {
+                 flex-basis: calc(50% - 15px); /* Keep 2 columns if possible */
+                 max-width: 45%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container > h1 { font-size: 1.4em; }
+            section > h2 { font-size: 1.15em; }
+            section > h3 { font-size: 1.0em; }
+
+            th, td { padding: 6px 8px; font-size: 0.85em; }
+            li { padding-left: 1.2em;}
+            ul ul { margin-left: 1.2em;} /* If lists are still used */
+            tbody td:first-child.spec-label,
+            tbody td:first-child { min-width: 100px; }
+            #sensor-performance table td { font-size: 0.8em;}
+
+
+            .image-gallery figure {
+                 flex-basis: 100%; /* Stack to single column */
+                 max-width: 90%;
+            }
+        }
+
+        /* ==========================================================================
+        PRINT SPECIFIC STYLES
+        * Optimizes layout for printing.
+        * Forces display of collapsible content (if used).
+        * Adjusts fonts, colors, and spacing for paper.
+        * Allows page breaks within tables and text.
+        * Retains specified colors.
+        ========================================================================== */
+        @media print {
+            body {
+                background-color: #fff !important; /* Force white background */
+                color: #000 !important; /* Force black text */
+                font-size: 10pt;
+                -webkit-print-color-adjust: exact !important; /* Try to force color printing */
+                print-color-adjust: exact !important;
+            }
+
+            .container {
+                max-width: 100% !important;
+                margin: 0 !important;
+                padding: 1cm !important;
+                box-shadow: none !important;
+                border-radius: 0 !important;
+                border: none !important;
+            }
+
+            /* Header/Footer are removed from HTML, so no need to hide */
+
+            h1, h2, h3 {
+                color: var(--primary-color) !important;
+                margin-top: 0.8em;
+                margin-bottom: 0.5em;
+            }
+            h1:first-child, h2:first-child, h3:first-child { margin-top: 0; }
+
+            .container > h1 {
+                 border-bottom-color: var(--secondary-color) !important;
+                 font-size: 14pt !important;
+                 text-align: center !important;
+            }
+            section > h2 {
+                 border-bottom-color: var(--border-color) !important;
+                 font-size: 12pt !important;
+            }
+             section > h3 {
+                 color: var(--secondary-color) !important;
+                 font-size: 11pt !important;
+             }
+
+            p { font-size: 10pt; margin-bottom: 0.8em;}
+            li::before { color: var(--secondary-color) !important;} /* If lists are used */
+
+
+            section {
+                border-bottom: none !important; /* Remove separators for print */
+                margin-bottom: 1.5em;
+                page-break-inside: auto; /* Allow sections to break */
+            }
+
+            .table-container {
+                overflow: visible !important; /* Don't hide content */
+                border: 1px solid #ccc !important;
+                margin-bottom: 1em;
+                page-break-inside: auto; /* Allow container to break */
+            }
+            table {
+                width: 100% !important;
+                border-collapse: collapse !important;
+                font-size: 9pt;
+                min-width: 0;
+                page-break-inside: auto; /* Allow table content to break across pages */
+            }
+            tr {
+                page-break-inside: auto !important; /* ALLOW rows to break if needed */
+                page-break-after: auto !important;
+            }
+            td, th {
+                page-break-inside: auto !important; /* Allow content within cell to break */
+            }
+
+            th, td {
+                border: 1px solid #aaa !important;
+                padding: 5px 7px;
+                vertical-align: top !important;
+            }
+            thead th {
+                 background-color: var(--table-header-bg) !important;
+                 color: var(--primary-color) !important;
+                 -webkit-print-color-adjust: exact !important;
+                 print-color-adjust: exact !important;
+                 white-space: normal !important; /* Allow header text to wrap */
+                 position: static !important; /* No sticky header for print */
+            }
+
+            tbody td:first-child.spec-label,
+            tbody td:first-child {
+                 font-weight: 600 !important;
+                 background-color: var(--table-first-col-bg) !important;
+                 color: #000 !important;
+                 white-space: normal !important; /* Allow wrapping */
+                 -webkit-print-color-adjust: exact !important;
+                 print-color-adjust: exact !important;
+                 border-left: none !important;
+            }
+            tbody tr:nth-child(even) {
+                 background-color: var(--table-even-row-bg) !important;
+                 -webkit-print-color-adjust: exact !important;
+                 print-color-adjust: exact !important;
+            }
+            tbody tr:nth-child(even) td:first-child.spec-label,
+            tbody tr:nth-child(even) td:first-child {
+                 background-color: var(--table-first-col-even-bg) !important;
+                 -webkit-print-color-adjust: exact !important;
+                 print-color-adjust: exact !important;
+            }
+            tbody tr:hover, tbody tr:hover td:first-child { background-color: transparent !important; } /* No hover effect */
+
+            tbody td:last-child { border-right: none !important; }
+            tbody tr:last-child td { border-bottom: none !important; }
+
+
+            .image-gallery {
+                 background-color: transparent !important; /* No background */
+                 border: none !important;
+                 justify-content: flex-start;
+                 gap: 10mm;
+                 page-break-inside: auto;
+                 margin-top: 0.5em;
+                 margin-bottom: 1em;
+            }
+            .image-gallery figure {
+                 flex-basis: calc(50% - 5mm); /* Adjust basis for gap */
+                 max-width: 48%; /* Ensure fit */
+                 page-break-inside: avoid !important; /* Keep figure and caption together */
+                 border: 1px solid #eee !important; /* Light border around figure */
+                 padding: 5px;
+                 margin-bottom: 10px;
+            }
+            .image-gallery img {
+                 border: 1px solid #999 !important;
+                 box-shadow: none !important;
+                 margin-bottom: 5px;
+                 max-width: 95%; /* Ensure image fits within figure padding */
+            }
+            .image-gallery figcaption { color: #333 !important; font-size: 8pt; }
+
+            .table-notes { color: #333 !important; font-size: 8pt;}
+            .table-notes p { margin-bottom: 0.3em; }
+
+            a { text-decoration: none !important; color: #000 !important; }
+            a[href^="mailto:"]::after, a[href^="http"]::after {
+                 content: "" !important; /* Remove URL display */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Removed As Requested -->
+
+    <div class="container">
+        <h1>DXTC-290 Ultra-low Temperature Controller</h1>
+
+        <section id="overview">
+            <h2>Overview</h2>
+            <p>DXTC-290 ultra-low temperature temperature controller can support diodes, thermocouples, platinum resistors and negative temperature coefficient resistance sensors, and can be connected to up to ten temperature sensors to achieve the experimental purpose of multi-point testing.</p>
+
+            <div class="image-gallery">
+                 <figure>
+                      <img src="Ultra low temp controller_page-000.jpg" alt="DXTC-290 Front View">
+                      <figcaption>DXTC-290 Front Panel</figcaption>
+                 </figure>
+                 <figure>
+                      <img src="Ultra low temp controller_page-001.jpg" alt="DXTC-290 Rear Panel">
+                      <figcaption>DXTC-290 Rear Panel Connections</figcaption>
+                 </figure>
+            </div>
+
+            <p>The DXTC-290 temperature controller has extremely high resolution, accuracy, stability and other characteristics, and is at the advanced level in the industry. At the same time, it has multiple communication methods such as Ethernet, RS-485, and USB, with long data transmission distances and convenient and flexible data collection. The sensor adopts dual constant current source mode with balanced output. The constant current source can automatically shift gears at extremely low temperatures, reducing the energy injected into the sensor and ensuring stable and reliable operation of the sensor.</p>
+            <p>DXTC-290 Ultra-low Temperature Controller has two control loops at the same time. The input of each loop can be associated with any one of the ten sensors. It can be expanded to up to two 100W or one 200W low-noise heater, which can realize various modes. Closed-loop temperature control and self-tuning function make operation simpler and faster.</p>
+        </section>
+
+        <section id="measurement-parameters">
+            <h2>Measurement Parameters</h2>
+            <div class="table-container">
+                 <table>
+                     <thead>
+                         <tr>
+                             <th>Parameter</th>
+                             <th>Specification</th>
+                         </tr>
+                     </thead>
+                     <tbody>
+                         <tr>
+                             <td class="spec-label">Measurement accuracy</td>
+                             <td>Optimal: up to 10mK</td>
+                         </tr>
+                         <tr>
+                             <td class="spec-label">Measurement range</td>
+                             <td>As low as 300mK (with appropriate NTC RTD sensor)</td>
+                         </tr>
+                         <tr>
+                             <td class="spec-label">Input channels</td>
+                             <td>2 standard, expandable up to 10; each with independent temperature curve</td>
+                         </tr>
+                         <tr>
+                             <td class="spec-label">Sensor compatibility</td>
+                             <td>Diode, Cernox, Platinum Resistance (PRT), Thermocouple, NTC RTD, etc.</td>
+                         </tr>
+                         <tr>
+                             <td class="spec-label">Output control</td>
+                             <td>Three independent heater outputs, ±10V analog voltage output, alarm, relay control</td>
+                         </tr>
+                         <tr>
+                             <td class="spec-label">Measurement ADC</td>
+                             <td>24-bit resolution</td>
+                         </tr>
+                          <tr>
+                             <td class="spec-label">Update rate</td>
+                             <td>10 readings per second per channel</td>
+                         </tr>
+                         <tr>
+                             <td class="spec-label">Thermoelectric potential compensation</td>
+                             <td>Supported for resistance sensors</td>
+                         </tr>
+                         <tr>
+                             <td class="spec-label">Network operation</td>
+                             <td>Multiple units networked (up to 247 monitors via RS-485)</td>
+                         </tr>
+                     </tbody>
+                 </table>
+             </div>
+        </section>
+
+        <section id="control-parameters">
+             <h2>Control Parameters</h2>
+             <div class="table-container">
+                 <table>
+                      <thead>
+                           <tr>
+                               <th>Parameter</th>
+                               <th>Specification</th>
+                           </tr>
+                      </thead>
+                      <tbody>
+                           <tr>
+                               <td class="spec-label">Control loop</td>
+                               <td>Dual control loops</td>
+                           </tr>
+                           <tr>
+                               <td class="spec-label">Loop 1 Heater</td>
+                               <td>100W low-noise (upgradeable to 200W)</td>
+                           </tr>
+                           <tr>
+                               <td class="spec-label">Loop 2 Heater</td>
+                               <td>1W low-noise (upgradeable to 100W)</td>
+                           </tr>
+                           <tr>
+                               <td class="spec-label">Signal filtering</td>
+                               <td>Filter window: 1-10% FS; Filter points: 2 to 64</td>
+                           </tr>
+                           <tr>
+                               <td class="spec-label">Control mode</td>
+                               <td>Automatic adjustment, Manual setting, Regional setting</td>
+                           </tr>
+                           <tr>
+                               <td class="spec-label">PID Control - Proportional (P)</td>
+                               <td>0 to 1000 (Resolution: 0.1)</td>
+                           </tr>
+                           <tr>
+                               <td class="spec-label">PID Control - Integral (I)</td>
+                               <td>0 to 1000 (Resolution: 0.1)</td>
+                           </tr>
+                           <tr>
+                               <td class="spec-label">PID Control - Derivative (D)</td>
+                               <td>0 to 200 (Resolution: 0.1)</td>
+                           </tr>
+                           <tr>
+                               <td class="spec-label">Manual Output</td>
+                               <td>0 to 100% (Resolution: 0.01%)</td>
+                           </tr>
+                           <tr>
+                               <td class="spec-label">Regional function</td>
+                               <td>Automatic sensor switching for continuous measurement (e.g., 300mK to 1505K)</td>
+                           </tr>
+                           <tr>
+                               <td class="spec-label">Safety protection</td>
+                               <td>Temperature set point limit, curve temperature limit, heating output slope limit, heating power gear limit, heating off on power-on, heater short circuit protection</td>
+                           </tr>
+                      </tbody>
+                 </table>
+             </div>
+        </section>
+
+        <section id="human-computer-interaction">
+             <h2>Human-computer Interaction</h2>
+              <div class="table-container">
+                 <table>
+                      <thead>
+                           <tr>
+                               <th>Feature</th>
+                               <th>Details</th>
+                           </tr>
+                      </thead>
+                      <tbody>
+                           <tr>
+                               <td class="spec-label">Display</td>
+                               <td>5" color capacitive touch screen</td>
+                           </tr>
+                           <tr>
+                               <td class="spec-label">Display mode</td>
+                               <td>Chinese/English; Units: K, °C, V, Ω</td>
+                           </tr>
+                           <tr>
+                               <td class="spec-label">Temperature display resolution</td>
+                               <td>0.0001K</td>
+                           </tr>
+                           <tr>
+                               <td class="spec-label">Communication interface</td>
+                               <td>Standard: Ethernet, RS-485, USB</td>
+                           </tr>
+                           <tr>
+                               <td class="spec-label">Communication range (RS-485)</td>
+                               <td>Up to 1200 meters</td>
+                            </tr>
+                            <tr>
+                               <td class="spec-label">Communication range (Ethernet)</td>
+                               <td>Basically unlimited</td>
+                           </tr>
+                           <tr>
+                               <td class="spec-label">Communication protocol</td>
+                               <td>ECT custom protocol, Standard MODBUS protocol</td>
+                           </tr>
+                           <tr>
+                               <td class="spec-label">Software support</td>
+                               <td>LabView driver provided</td>
+                           </tr>
+                           <tr>
+                               <td class="spec-label">Data storage</td>
+                               <td>Up to 64 temperature curves (incl. 20 standard curves)</td>
+                           </tr>
+                      </tbody>
+                 </table>
+             </div>
+        </section>
+
+         <section id="sensor-types">
+             <h2>Supported Sensor Types</h2>
+             <div class="table-container">
+                 <table>
+                      <thead>
+                           <tr>
+                                <th>Sensor type</th>
+                                <th>Material</th>
+                                <th>DX model</th>
+                                <th>LS model</th>
+                           </tr>
+                      </thead>
+                      <tbody>
+                           <tr>
+                                <td rowspan="2">Diode</td>
+                                <td>Silicon</td>
+                                <td>DT64 <br>1.4-325K</td>
+                                <td>DT-670 <br>1.4-500K</td>
+                           </tr>
+                           <tr>
+                                <td>Gallium aluminum arsenic</td>
+                                <td></td>
+                                <td>TG-120 <br>1.4-475K</td>
+                           </tr>
+                           <tr>
+                                <td rowspan="2">Positive temperature coefficient Resistance</td>
+                                <td>platinum</td>
+                                <td>PT100 <br>20-500K</td>
+                                <td>PT-100 <br>30-800K</td>
+                           </tr>
+                           <tr>
+                                <td>Rhodium-iron</td>
+                                <td>RF50 <br>1.2-500K</td>
+                                <td>RF-800-4 <br>4-400K</td>
+                           </tr>
+                           <tr>
+                                <td rowspan="5">Negative temperature coefficient Resistance</td>
+                                <td>Germanium</td>
+                                <td></td>
+                                <td>GR-200A-1000 <br>2-100K</td>
+                           </tr>
+                           <tr>
+                                <td>Penetrating Ceramics</td> <!-- Assumed translation for Cernox/similar -->
+                                <td>CC870 <br>4-500K</td>
+                                <td></td> <!-- Cernox listed separately -->
+                           </tr>
+                           <tr>
+                                <td>Glassy carbon</td>
+                                <td></td>
+                                <td>CGR-1-500 <br>3-400K</td>
+                           </tr>
+                           <tr>
+                                <td>Cernox</td>
+                                <td></td>
+                                <td>CX-1030 <br>2-325K</td>
+                           </tr>
+                           <tr>
+                                <td>Oxide nails</td> <!-- Assumed translation for Ruthenium Oxide/similar -->
+                                <td></td>
+                                <td>RX-202A <br>3-300K</td>
+                           </tr>
+                      </tbody>
+                 </table>
+             </div>
+             <div class="table-notes">
+                 <p>Note: DX is the abbreviation of Dexinmag company. LS is the abbreviation of Lakeshore Company.</p>
+             </div>
+        </section>
+
+        <section id="sensor-performance">
+             <h2>Sensor Input Performance</h2>
+             <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Sensor type</th>
+                            <th>Silicon diode</th>
+                            <th>Platinum resistor</th>
+                            <th>Cernox</th>
+                            <th>Carburized ceramics<br>(CC870/similar)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Temperature coefficient</td><td>Negative temperature</td><td>Positive temperature</td><td>Negative temperature</td><td>Positive temperature</td></tr>
+                        <tr><td>Signal category</td><td>Voltage V</td><td>Ohms (Ω)</td><td>Ohms (Ω)</td><td>Ohms (Ω)</td></tr>
+                        <tr><td>Signal range</td><td>0~2.5V</td><td>0~500Ω</td><td>0~7500Ω</td><td>0~4000Ω</td></tr>
+                        <tr><td>Excitation current</td><td>10μΑ±0.01%</td><td>1mA±0.3%</td><td>Automatic shift</td><td>Automatic shift</td></tr>
+                        <tr><td>Display resolution</td><td>0.1μV</td><td>0.1mΩ</td><td>0.1mΩ</td><td>0.1mΩ</td></tr>
+                        <tr><td>Temperature range</td><td>1.4~475K</td><td>20~800K</td><td>2.0~400K</td><td>4~500K</td></tr>
+                        <tr><td>Standard curve</td><td>LS:curve10<br>DX: curve64</td><td>DIN43760</td><td>Requires calibration</td><td>Requires calibration</td></tr>
+                        <tr>
+                             <td>Measurement resolution (Typical)</td>
+                             <td>20μV<br>~1mK@4.2K<br>~11mK@77K<br>~10mK@300K<br>~10mK@475K</td>
+                             <td>2mΩ<br>~10.6mK@30K<br>~10mK@77K<br>~10mK@300K<br>~10mK@675K<br>~10mK@800K</td>
+                             <td>50mΩ<br>~1mK@4.2K<br>~10mK@77K<br>~10mK@300K</td>
+                             <td>50mΩ<br>~1mK@4.2K<br>~33.3mK@77K<br>~500mK@300K</td>
+                        </tr>
+                    </tbody>
+                </table>
+             </div>
+             <div class="table-notes">
+                 <p><strong>Note 1:</strong> Dual constant current source driver with balanced output (centered to ground) effectively suppresses common-mode interference, improving measurement accuracy.</p>
+                 <p><strong>Note 2:</strong> Automatic excitation current shifting for resistance sensors. When sensor voltage exceeds ~10mV, the current automatically downshifts to maintain voltage near 10mV. This minimizes sensor self-heating and ensures stable operation, especially at very low temperatures.</p>
+             </div>
+        </section>
+
+    </div>
+
+    <!-- Footer Removed As Requested -->
+
+</body>
+</html>

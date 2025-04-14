@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liquid Nitrogen Cryostat - Optics</title>
+    <style>
+        /* ==========================================================================
+        GENERIC STYLING FOR DEXINMAG DOCUMENT PAGES
+        Based on DXMP Manual / Axial Probe Styles
+        Version: 1.0 - Applied to Liquid Nitrogen Cryostat - Optics
+        * Provides a consistent layout, color scheme, typography.
+        * Styles common elements like sections, tables, lists, images.
+        * Includes styles for collapsible sections (though not used here).
+        * Includes responsive adjustments for different screen sizes.
+        * Includes print-specific styles for better output.
+        * HEADER AND FOOTER specific styling has been REMOVED.
+        ========================================================================== */
+
+        /* --- Base Styles & Color Theme --- */
+        :root {
+            --primary-color: #00447C; /* Dark Blue */
+            --secondary-color: #4A90E2; /* Lighter Blue */
+            --bg-light: #f8f9fa; /* Very light grey */
+            --bg-medium: #e9ecef; /* Light grey */
+            --border-color: #dee2e6; /* Grey border */
+            --text-color: #343a40; /* Dark grey text */
+            --hover-bg: #e8f4fd; /* Light blue for hover */
+            --warning-color: #dc3545; /* Red for warnings */
+            --warning-bg: #f8d7da;
+            --attention-color: #ffc107; /* Yellow for attention */
+            --attention-bg: #fff3cd;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4; /* Light grey background for the page */
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* --- Main Content Container --- */
+        .container {
+            max-width: 1100px;
+            margin: 20px auto;
+            padding: 25px;
+            background-color: #fff; /* White background for content */
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            flex-grow: 1; /* Allows footer (if added back) to stick to bottom */
+        }
+
+        /* --- Typography --- */
+        h1, h2, h3 {
+            color: var(--primary-color);
+            line-height: 1.3;
+            margin-top: 1em;
+            margin-bottom: 0.75em;
+        }
+        h1:first-child, h2:first-child, h3:first-child {
+            margin-top: 0;
+        }
+
+        /* Styles the main title within the container */
+        .container > h1 {
+            font-size: 1.8em;
+            text-align: center;
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 0.5em;
+            margin-bottom: 1em; /* Add more space below main title */
+            color: var(--primary-color); /* Ensure color is applied */
+        }
+
+        /* Styles section titles (applied to H2 here) */
+        .container > h2 { /* Target H2 directly inside container */
+            font-size: 1.5em;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.3em;
+            color: var(--primary-color);
+            margin-top: 1.5em; /* Add space above H2 */
+        }
+         .container > h2:first-of-type {
+             margin-top: 0; /* Remove top margin only for the first H2 */
+         }
+
+
+        /* Base style for H3 */
+         .container > h3 { /* Target H3 directly inside container */
+            font-size: 1.2em;
+            color: var(--primary-color);
+            padding-bottom: 0.3em;
+            font-weight: bold; /* Make H3 bold as per generic style */
+             margin-top: 1.5em; /* Add consistent top margin */
+             border-bottom: none; /* Ensure no border from original */
+        }
+
+        p {
+            margin-bottom: 1em;
+        }
+
+        ul, ol { /* Combined styling for lists */
+            list-style: disc; /* Default */
+            margin: 0 0 1em 25px;
+            padding: 0; /* Reset padding */
+        }
+        ol {
+             list-style: decimal; /* Specify ordered list style */
+        }
+
+        li {
+            margin-bottom: 0.5em; /* Consistent list item spacing */
+        }
+
+        /* --- Content Sections (implicit sections defined by H2) --- */
+        /* No explicit <section> tags needed if H2 styling is sufficient */
+
+        /* --- Tables --- */
+        .table-container { /* Optional wrapper if needed, not present in HTML */
+            overflow-x: auto; /* Enable horizontal scroll on screen */
+            margin-top: 1em;
+            margin-bottom: 1.5em;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95em;
+            min-width: 600px; /* Prevent excessive squishing on screen */
+            margin-top: 1em; /* Use generic spacing */
+            margin-bottom: 1.5em; /* Use generic spacing */
+        }
+
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 10px 12px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        thead th {
+            background-color: var(--bg-medium);
+            font-weight: bold;
+            color: var(--primary-color);
+            position: sticky; /* Keep header visible on scroll */
+            top: 0;
+            z-index: 1;
+            border-bottom-width: 2px; /* Stronger line below header */
+            border-bottom-color: var(--border-color);
+        }
+
+        /* Zebra striping for table rows */
+        tbody tr:nth-child(even) {
+            background-color: var(--bg-light);
+        }
+
+        /* Hover effect for table rows */
+        tbody tr:hover {
+            background-color: var(--hover-bg);
+        }
+
+        /* --- Image Gallery Styling --- */
+        .image-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 1em;
+            margin-bottom: 1.5em;
+            padding: 15px;
+            background-color: var(--bg-light);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+        }
+
+        .image-gallery figure {
+            margin: 0;
+            text-align: center;
+            /* Adjusted flex-basis and max-width slightly from generic to better match original */
+            flex-basis: calc(33% - 20px); /* Aim for ~3 columns */
+            max-width: 320px; /* Match original max-width */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #fff; /* White background for each figure */
+            padding: 10px; /* Padding inside figure */
+            border: 1px solid var(--border-color); /* Border around figure */
+            border-radius: 4px; /* Rounded corners for figure */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* Subtle shadow */
+        }
+
+        .image-gallery img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ccc; /* Keep original lighter border for image */
+            border-radius: 4px; /* Match figure radius */
+            margin-bottom: 8px;
+            background-color: #fff; /* Ensure image bg is white if transparent */
+        }
+
+        .image-gallery figcaption {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: auto; /* Push caption down */
+        }
+
+        /* --- Alert Boxes / Remarks --- */
+        /* Style .remarks using the generic alert principles */
+        .remarks {
+            border-left-width: 5px; /* Use generic alert border width */
+            border-left-style: solid;
+            padding: 15px 20px; /* Keep original padding */
+            margin: 1.5em 0; /* Use generic margin */
+            border-radius: 4px;
+            border-left-color: var(--secondary-color); /* Use secondary blue like original */
+            background-color: #e9f5ff; /* Keep original light blue bg */
+            color: var(--text-color); /* Ensure default text color */
+        }
+        .remarks h3 {
+            margin-top: 0; /* Remove top margin for h3 inside */
+            margin-bottom: 10px;
+            color: var(--primary-color); /* Blue heading for remarks */
+            font-size: 1.1em; /* Slightly smaller H3 inside remarks */
+            font-weight: bold;
+            border-bottom: none; /* Ensure no border */
+        }
+        .remarks p, .remarks li { /* Consistent margin for text inside remarks */
+            margin-bottom: 8px;
+            font-size: 0.95em; /* Slightly smaller text */
+        }
+        .remarks ol {
+            margin-bottom: 0; /* Remove bottom margin from list itself inside remarks */
+            margin-left: 20px; /* Adjust list indent inside */
+        }
+        .remarks > *:last-child {
+            margin-bottom: 0; /* Remove bottom margin from last element */
+        }
+
+        /* --- Collapsible Section Styling (Included but not used in this HTML) --- */
+        /* Apply this class to the H3 (or other element) that triggers the collapse */
+        h3.collapsible-header {
+            cursor: pointer;
+            position: relative;
+            padding-right: 25px; /* Space for indicator */
+            margin-bottom: 0; /* Connects header visually to content below */
+            border-bottom: 1px solid var(--border-color); /* Separator line */
+            padding-bottom: 10px; /* Spacing above the line */
+        }
+
+        h3.collapsible-header::after {
+            content: '▼'; /* Down arrow indicator */
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.8em;
+            color: var(--primary-color);
+            transition: transform 0.3s ease;
+        }
+
+        h3.collapsible-header.collapsed::after {
+            content: '►'; /* Right arrow indicator when collapsed */
+        }
+
+        /* The content DIV immediately following the collapsible-header */
+        .collapsible-content {
+            overflow: hidden;
+            max-height: 5000px; /* Allow ample height when open */
+            transition: max-height 0.5s ease-in-out, padding 0.3s ease, margin 0.3s ease, border 0.3s ease, opacity 0.3s ease;
+            padding-top: 15px; /* Space below header when open */
+            margin-top: 0;
+            border-top: 1px solid var(--bg-light); /* Subtle line separating from header */
+            opacity: 1;
+        }
+
+        .collapsible-content.collapsed {
+            max-height: 0;
+            padding-top: 0;
+            padding-bottom: 0;
+            margin-top: 0;
+            border-top: none; /* Hide border when collapsed */
+            opacity: 0;
+        }
+
+
+        /* ==========================================================================
+        RESPONSIVE ADJUSTMENTS
+        ========================================================================== */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+                margin: 10px; /* Reduce margin on smaller screens */
+            }
+            .container > h1 { font-size: 1.6em; }
+            .container > h2 { font-size: 1.3em; }
+            .container > h3 { font-size: 1.1em; } /* Includes collapsible and remarks H3 */
+
+            table { font-size: 0.9em; min-width: 0; } /* Allow table to shrink */
+            th, td { padding: 8px 10px; }
+            tbody td:first-child { white-space: normal; } /* Allow wrapping */
+
+            .image-gallery figure {
+                 flex-basis: calc(50% - 15px); /* Keep 2 columns */
+                 max-width: calc(50% - 15px); /* Adjust max-width */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container > h1 { font-size: 1.4em; }
+            .container > h2 { font-size: 1.15em; }
+            .container > h3 { font-size: 1.0em; } /* Includes collapsible and remarks H3 */
+
+            th, td { padding: 6px 8px; font-size: 0.85em; }
+            ul, ol { margin-left: 20px; }
+
+            .image-gallery figure {
+                 flex-basis: 100%; /* Stack to single column */
+                 max-width: 90%;
+            }
+        }
+
+
+        /* ==========================================================================
+        PRINT SPECIFIC STYLES
+        * Optimizes layout for printing.
+        * Hides header and footer elements (none structurally present).
+        * Forces display of collapsible content (none currently used).
+        * Adjusts fonts, colors, and spacing for paper.
+        * Allows content (paragraphs, table rows) to break across pages.
+        ========================================================================== */
+        @media print {
+            body {
+                background-color: #fff !important; /* Force white background */
+                color: #000 !important; /* Force black text for readability */
+                font-size: 10pt;
+                -webkit-print-color-adjust: exact !important; /* Try to force color printing in Chrome/Safari */
+                print-color-adjust: exact !important; /* Standard property */
+                box-shadow: none; /* Remove shadows for print */
+            }
+
+            .container {
+                max-width: 100%;
+                margin: 0;
+                padding: 0;
+                box-shadow: none;
+                border: none;
+                border-radius: 0;
+            }
+
+            /* Keep title styling */
+            .container > h1 {
+                color: var(--primary-color) !important;
+                border-bottom: 2px solid var(--secondary-color) !important;
+                font-size: 16pt; /* Adjust size for print */
+                text-align: center;
+                padding-bottom: 8pt;
+                margin-bottom: 12pt;
+            }
+
+            .container > h2 {
+                color: var(--primary-color) !important;
+                border-bottom: 1px solid var(--border-color) !important;
+                font-size: 13pt;
+                margin-top: 1.2em;
+                padding-bottom: 4pt;
+                /* Avoid breaking right after a heading */
+                page-break-after: avoid;
+            }
+            .container > h2:first-of-type {
+                 margin-top: 0;
+            }
+             .container > h3 {
+                 color: var(--primary-color) !important;
+                 font-size: 11pt;
+                 margin-top: 1.2em;
+                 page-break-after: avoid; /* Avoid break after H3 */
+             }
+
+
+            p, li {
+                color: #000 !important; /* Ensure paragraphs/list items are black */
+                /* Allow paragraphs and list items to break */
+                page-break-inside: auto;
+            }
+
+            ul, ol {
+                margin-left: 20pt; /* Adjust indent for print */
+            }
+
+            .image-gallery {
+                background-color: var(--bg-light) !important;
+                border: 1px solid var(--border-color) !important;
+                padding: 10px !important;
+                gap: 10px;
+                page-break-inside: avoid; /* Try to keep gallery together */
+            }
+
+            .image-gallery figure {
+                background-color: #fff !important;
+                border: 1px solid var(--border-color) !important;
+                box-shadow: none !important;
+                padding: 5px !important;
+                page-break-inside: avoid; /* Try to keep figure/caption together */
+                flex-basis: calc(33% - 10px); /* Maintain layout */
+                max-width: calc(33% - 10px);
+            }
+
+            .image-gallery img {
+                max-width: 100%; /* Ensure images don't overflow */
+                border: 1px solid #ccc !important;
+            }
+            .image-gallery figcaption {
+                color: #333 !important; /* Darker caption for print */
+                font-size: 8pt;
+            }
+
+
+            .table-container { /* Not used, but included for completeness */
+                overflow: visible; /* Remove scrollbars for print */
+            }
+
+            table {
+                width: 100%;
+                font-size: 9pt; /* Slightly smaller font for tables in print */
+                min-width: 0;
+                border-collapse: collapse;
+                /* Allow table to break across pages */
+                page-break-inside: auto;
+                 margin-top: 1em;
+                 margin-bottom: 1.5em;
+            }
+
+            thead {
+               display: table-header-group; /* Ensure header repeats on new pages */
+            }
+
+            thead th {
+                background-color: var(--bg-medium) !important;
+                color: var(--primary-color) !important;
+                border: 1px solid var(--border-color) !important;
+                font-weight: bold;
+                position: static; /* Remove sticky for print */
+            }
+
+            tbody tr {
+                /* Allow rows to break across pages if necessary */
+                page-break-inside: auto;
+            }
+
+            tbody td {
+                 border: 1px solid var(--border-color) !important;
+                 color: #000 !important; /* Black text in cells */
+                 vertical-align: top; /* Keep alignment */
+            }
+
+            /* Maintain zebra striping for print */
+            tbody tr:nth-child(even) {
+                background-color: var(--bg-light) !important;
+            }
+
+            /* Remove hover effects for print */
+            tbody tr:hover {
+                background-color: inherit !important; /* Use inherited/zebra stripe color */
+            }
+
+             .remarks {
+                background-color: #e9f5ff !important;
+                border-left: 4px solid var(--secondary-color) !important;
+                color: #000 !important;
+                font-size: 9pt;
+                padding: 8px 12px;
+                margin: 1em 0; /* Adjust margin slightly for print */
+                /* Try to keep note together, but allow break if needed */
+                page-break-inside: avoid;
+            }
+            .remarks h3 {
+                color: var(--primary-color) !important;
+                font-size: 10pt;
+            }
+
+            /* Force display collapsible content if it were used */
+            .collapsible-content {
+                 max-height: none !important;
+                 opacity: 1 !important;
+                 padding-top: 15px !important;
+                 border-top: 1px solid var(--bg-light) !important;
+            }
+            h3.collapsible-header::after {
+                 content: "" !important; /* Hide arrow */
+            }
+
+            /* Hide elements not suitable for print if any were added (none currently) */
+            /* .no-print { display: none !important; } */
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container"> <!-- Wrap content in a container -->
+
+    <h1>Liquid Nitrogen Cryostat - Optics</h1>
+    <p>Liquid nitrogen thermostat - optics can be applied to spectrum testing, photoelectric reaction, Raman, electroluminescence, photoluminescence, etc.</p>
+
+    <h2>Product Images</h2>
+    <div class="image-gallery">
+        <figure>
+            <!-- Updated image path to be relative -->
+            <img src="Liquid Nitrogen Cryostat-optics_page-000.jpg" alt="Various Liquid Nitrogen Cryostat Models">
+            <figcaption>Various Liquid Nitrogen Cryostat Models (T9030-2W, T9015, T9120)</figcaption>
+        </figure>
+        <figure>
+             <!-- Updated image path to be relative -->
+            <img src="Liquid Nitrogen Cryostat-optics_page-001.jpg" alt="Features and Technical Specifications Overview">
+            <figcaption>Features and Technical Specifications Overview</figcaption>
+        </figure>
+        <figure>
+             <!-- Updated image path to be relative -->
+            <img src="Liquid Nitrogen Cryostat-optics_page-002.jpg" alt="Technical Specifications and Sample Holder Options">
+            <figcaption>Technical Specifications and Sample Holder Options</figcaption>
+        </figure>
+        <figure>
+             <!-- Updated image path to be relative -->
+            <img src="Liquid Nitrogen Cryostat-optics_page-003.jpg" alt="Sample Holder and Connector Options, Remarks">
+            <figcaption>Sample Holder and Connector Options, Remarks</figcaption>
+        </figure>
+    </div>
+
+    <h2>Working Principle</h2>
+    <p>The low-pressure refrigerant is introduced into the cryostat from the liquid inlet, and then introduced into the evaporator at the bottom of the cryostat through the capillary tube inside the cryostat. A heater and a temperature sensor are also installed on the evaporator of the cryostat. The steam whose temperature is controlled by the temperature controller is sprayed into the sample chamber. After cooling the sample, the steam is discharged through the air outlet pipe into the atmosphere or into a gas recovery device. In the design of this type of cryostat, in order to facilitate customers to easily load samples, the sample can be loaded from the top of the cryostat through the sample rod. The bottom of the cryostat uses a compact design with a vacuum cover, has a smaller duty cycle and is more suitable for measurements in magnetic fields.</p>
+
+    <h2>Features</h2>
+    <ul>
+        <li>Temperature range (65K~500K), (optional 700K), high efficiency and fast cooling speed;</li>
+        <li>The sample is in the vacuum chamber, providing an ideal and stable experimental environment;</li>
+        <li>The vacuum interlayer is equipped with low-temperature adsorbent, which can increase the vacuum holding time and extend the use time of liquid nitrogen;</li>
+        <li>The temperature sensor uses PT100 platinum resistor with good stability and repeatability;</li>
+        <li>Multiple options to meet different testing needs;</li>
+        <li>It is convenient to add liquid nitrogen during use;</li>
+        <li>The optical sample holder can be equipped with a pluggable sample card and easy-to-use and beautiful binding posts;</li>
+        <li>Can be customized according to customer requirements;</li>
+        <li>Comes with 8 measuring leads as standard, which can be expanded to 32;</li>
+        <li>The window comes standard with 2 fused quartz windows, which can be expanded to 5, and the window material can be changed according to user requirements;</li>
+        <li>Changing samples is quick and convenient, and can be completed within 5 minutes;</li>
+        <li>The sample holder is available as liquid sample holder, dust sample holder, solid sample holder, and block sample holder.</li>
+    </ul>
+
+    <h2>Technical Specifications</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Model</th>
+                <th>DXT9115-4W</th>
+                <th>DXT9115-4W-H</th>
+                <th>DXT9120-4W</th>
+                <th>DXT9120-4W-H</th>
+                <th>DXT9130-4W</th>
+                <th>DXT9130-4W-H</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Temperature range</td>
+                <td>65-325K</td>
+                <td>65-500K</td>
+                <td>65-325K</td>
+                <td>65-500K</td>
+                <td>65-325K</td>
+                <td>65-500K</td>
+            </tr>
+            <tr>
+                <td>Cooling time</td>
+                <td colspan="6">≤25min</td>
+            </tr>
+            <tr>
+                <td>Optical window</td>
+                <td colspan="2">Four Φ15X1.5</td>
+                <td colspan="2">Four Φ20X1.5</td>
+                <td colspan="2">Four Φ30X1.5</td>
+            </tr>
+             <tr>
+                <td>Test lead connector</td>
+                <td colspan="6">Standard 8-core measurement lead connector, optional coaxial connector and microwave connector.</td>
+            </tr>
+            <tr>
+                <td>Sample holder size</td>
+                <td>15X25mm</td>
+                <td>15X25mm</td>
+                <td>20X30mm</td>
+                <td>20X30mm</td>
+                <td>30X40mm</td>
+                <td>30X40mm</td>
+            </tr>
+             <tr>
+                <td>Thermometer</td>
+                <td colspan="6">PT100 platinum resistance thermometer (both calibrated and uncalibrated, the default is uncalibrated)</td>
+            </tr>
+             <tr>
+                <td>Temperature stability</td>
+                <td colspan="6">±0.01K depends on the DXTC-290 temperature controller</td>
+            </tr>
+            <tr>
+                <td>Heater</td>
+                <td>30W</td>
+                <td>60W</td>
+                <td>30W</td>
+                <td>60W</td>
+                <td>30W</td>
+                <td>60W</td>
+            </tr>
+            <tr>
+                <td>Vacuum interface</td>
+                <td colspan="6">Standard KF25 interface</td>
+            </tr>
+            <tr>
+                <td>Sample environment</td>
+                <td colspan="6">The sample is placed in a vacuum environment</td>
+            </tr>
+            <tr>
+                <td>Vacuum degree</td>
+                <td colspan="6">≤1Pa is enough</td>
+            </tr>
+            <tr>
+                <td>Liquid nitrogen maintenance time</td>
+                <td colspan="6">6h@80K; 5h@100K; 3h@200K</td>
+            </tr>
+             <tr>
+                <td>Liquid nitrogen chamber volume</td>
+                <td colspan="6">Standard 500ml (can be customized)</td>
+            </tr>
+            <tr>
+                <td>Application scope</td>
+                <td colspan="6">Spectral testing, photoelectric reaction, Raman, electroluminescence, photoluminescence, etc.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Sample Holder Options</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Model</th>
+                <th>Specifications and Parameters</th>
+                <th>Material</th>
+                <th>Describe</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>DXT9115-4W</td>
+                <td>15X25mm</td>
+                <td>OFHC</td>
+                <td>Standard optical sample holder</td>
+            </tr>
+            <tr>
+                <td>DXT9115-4W-10LTH</td>
+                <td>15X25mm</td>
+                <td>OFHC</td>
+                <td>Standard optical sample holder with Φ10mm hole in the middle</td>
+            </tr>
+            <tr>
+                <td>DXT9115-4W-H-10LTH</td>
+                <td>15X25mm</td>
+                <td>OFHC</td>
+                <td>Standard optical sample holder with Φ10mm hole in the middle</td>
+            </tr>
+            <tr>
+                <td>DXT9120-4W</td>
+                <td>20X30mm</td>
+                <td>OFHC</td>
+                <td>Standard optical sample holder, no hole in the middle</td>
+            </tr>
+            <tr>
+                <td>DXT9120-4W-15LTH</td>
+                <td>20X30mm</td>
+                <td>OFHC</td>
+                <td>Standard optical sample holder with Φ15mm hole in the middle</td>
+            </tr>
+            <tr>
+                <td>DXT9120-4W-H-15LTH</td>
+                <td>20X30mm</td>
+                <td>OFHC</td>
+                <td>Standard optical sample holder with Φ15mm hole in the middle</td>
+            </tr>
+            <tr>
+                <td>DXT9130-4W</td>
+                <td>30X40mm</td>
+                <td>OFHC</td>
+                <td>Standard optical sample holder, no hole in the middle</td>
+            </tr>
+            <tr>
+                <td>DXT9130-4W-20LTH</td>
+                <td>30X40mm</td>
+                <td>OFHC</td>
+                <td>Standard optical sample holder with Φ20mm hole in the middle</td>
+            </tr>
+            <tr>
+                <td>DXT9130-4W-H-20LTH</td>
+                <td>30X40mm</td>
+                <td>OFHC</td>
+                <td>Standard optical sample holder with Φ20mm hole in the middle</td>
+            </tr>
+            <tr>
+                <td>DXPSC-10</td>
+                <td>Φ10</td>
+                <td>Quartz</td>
+                <td>Powder sample container with 10mm quartz window on one side</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="remarks">
+        <h3>Remark (Sample Holders):</h3>
+        <ol>
+            <li>All standard optical cryostats are shipped from the factory with only one sample holder.</li>
+            <li>If the above standard sample holder cannot meet customer needs, it can be customized according to customer requirements.</li>
+            <li>In order to fix the optical performance sample, all optical cryostats are equipped with a pressing plate to hold the sample. The aperture of the pressing plate is consistent with the size of the light hole.</li>
+        </ol>
+    </div>
+
+    <h2>Cryostat Optical Connector Options</h2>
+     <table>
+        <thead>
+            <tr>
+                <th>Electrical connector model</th>
+                <th>Specifications and Parameters</th>
+                <th>Describe</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>DXT91-8P ordinary glass sintering</td>
+                <td>8pin</td>
+                <td>Add a quick-plug 8P ordinary electrical connector</td>
+            </tr>
+            <tr>
+                <td>DXT91-12P ordinary glass sintering</td>
+                <td>12pin</td>
+                <td>Add a quick-plug 12P ordinary electrical connector</td>
+            </tr>
+            <tr>
+                <td rowspan="2">DXT91-SMA</td>
+                <td>0-18GHz</td>
+                <td>With soft cable</td>
+            </tr>
+            <tr>
+                <td>0-12.4GHz</td>
+                <td>Equipped with semi-rigid and semi-flexible cables</td>
+            </tr>
+            <tr>
+                <td>DXT91-BNC</td>
+                <td>0-4GHz</td>
+                <td>With ordinary coaxial cable</td>
+            </tr>
+            <tr>
+                <td>DXT91-TRX</td>
+                <td>triax connector</td>
+                <td>Add a quick-plug triaxial connector</td>
+            </tr>
+            <tr>
+                <td>DXT91-S</td>
+                <td>Stainless steel junction box</td>
+                <td>Add a stainless steel junction box</td>
+            </tr>
+             <tr>
+                <td>DXT91-PTEF</td>
+                <td>PTFE wiring cover</td>
+                <td>Add a PTFE plate wiring cover to the stainless steel junction box</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="remarks">
+        <h3>Remark (Connectors & Accessories):</h3>
+        <ol>
+            <li>When all cryostats leave the factory, they are equipped with two connectors. One is for the installation of temperature sensors and heaters, and the other is a connector prepared for other performance measurements. When more test lines are needed, you will need Add mounting holes or install one or more Breakout Boxes;</li>
+            <li>There is the DXT91-S option in the above table. The wiring board and the shell of this option are integrally connected to the ground. The other is the DXT91-PTEF option. This option uses PTFE board insulation in the shell and the installed connector. The electrical properties of the housing and connector are independent of each other. This issue should be paid attention to when selecting.</li>
+            <li>Pressure reduction accessory options. The standard cryostat itself does not come with special pressure reduction spare parts. When a low temperature of 65K is required, corresponding pressure reduction accessories need to be configured.</li>
+        </ol>
+    </div>
+
+</div> <!-- End container -->
+
+</body>
+</html>

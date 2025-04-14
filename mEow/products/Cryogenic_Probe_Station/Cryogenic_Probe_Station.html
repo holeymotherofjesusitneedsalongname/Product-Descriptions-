@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cryogenic Probe Station Specifications</title>
+    <style>
+        /* --- Base Styles & Color Theme --- */
+        :root {
+            --primary-color: #00447C; /* Dark Blue */
+            --secondary-color: #4A90E2; /* Lighter Blue */
+            --bg-light: #f8f9fa; /* Very light grey */
+            --bg-medium: #e9ecef; /* Light grey */
+            --border-color: #dee2e6; /* Grey border */
+            --text-color: #343a40; /* Dark grey text */
+            --hover-bg: #e8f4fd; /* Light blue for hover */
+            --warning-color: #dc3545; /* Red for warnings */
+            --warning-bg: #f8d7da;
+            --attention-color: #ffc107; /* Yellow for attention */
+            --attention-bg: #fff3cd;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4; /* Light grey background for the page */
+            color: var(--text-color);
+            display: flex; /* Helps if min-height is used */
+            flex-direction: column; /* Helps if min-height is used */
+            /* min-height: 100vh; Removed as footer is gone */
+        }
+
+        /* --- Main Content Container --- */
+        main { /* Styles applied directly to main instead of .container */
+            max-width: 1100px;
+            margin: 20px auto;
+            padding: 25px;
+            background-color: #fff; /* White background for content */
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            flex-grow: 1; /* Allows content to fill space */
+        }
+
+        /* --- Typography --- */
+         h1, h2, h3 { /* Combined styling */
+            color: var(--primary-color);
+            line-height: 1.3;
+            margin-top: 1em;
+            margin-bottom: 0.75em;
+        }
+         h1:first-child, h2:first-child, h3:first-child {
+             margin-top: 0;
+         }
+
+         /* Styles the main title within the container */
+         main > h1 { /* Style specifically for the main title */
+            font-size: 1.8em;
+            text-align: center;
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 0.5em;
+            margin-bottom: 1em; /* Add more space below main title */
+            color: var(--primary-color); /* Ensure primary color */
+         }
+
+
+        /* Styles section titles */
+        section > h2 {
+            font-size: 1.5em;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.3em;
+            color: var(--primary-color);
+             margin: 0 0 15px 0; /* Adjusted from original */
+        }
+
+        /* Base style for H3, used for sub-sections */
+        section > h3 {
+            font-size: 1.2em;
+            color: var(--primary-color); /* Changed from #333 */
+            padding-bottom: 3px;
+            border-bottom: 1px solid var(--bg-medium); /* Lighter border */
+            font-weight: bold; /* Added */
+            margin: 20px 0 10px 0; /* Retained spacing */
+        }
+
+
+        p {
+            margin-bottom: 1em; /* Adjusted from original */
+        }
+
+        ul { /* General UL styling */
+            list-style: disc;
+            margin: 0 0 1em 25px;
+        }
+        ol { /* General OL styling */
+            list-style: decimal;
+            margin: 0 0 1em 25px;
+        }
+
+         /* Specific list styling adjustments from original if needed */
+         #optional-accessories ul,
+         #pre-purchase ol {
+            /* Keep original indent if preferred over general style */
+            margin-left: 20px;
+         }
+         #optional-accessories ul li,
+         #pre-purchase ol li {
+            margin-bottom: 8px; /* Keep original spacing */
+         }
+
+        li {
+            margin-bottom: 0.5em; /* Consistent spacing */
+        }
+
+
+        /* --- Content Sections --- */
+        section {
+            margin-bottom: 2em; /* Increased spacing */
+            padding-bottom: 1em; /* Spacing before border */
+            border-bottom: 1px solid var(--bg-medium); /* Subtle separator */
+        }
+        section:last-of-type {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        /* --- Image Gallery Styling --- */
+        .image-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px; /* Adjusted gap */
+            /* justify-content: center; /* Center items */
+            justify-content: space-around; /* Or distribute space like original */
+            margin-top: 1em;
+            margin-bottom: 1.5em;
+            padding: 15px;
+            background-color: var(--bg-light);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+        }
+
+        .image-gallery figure {
+            margin: 0;
+            text-align: center;
+            /* flex-basis: calc(50% - 20px); /* Aim for 2 columns default */
+            flex-basis: calc(33.333% - 20px); /* Keep 3 columns like original */
+            /* max-width: 400px; */
+            min-width: 180px; /* Ensure reasonable minimum size */
+            max-width: 30%; /* Prevent overly large images on wide screens */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .image-gallery img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 8px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+             display: block; /* Helps with margin auto centering if needed */
+             margin-left: auto;
+             margin-right: auto;
+        }
+
+        .image-gallery figcaption {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: auto; /* Push caption down */
+        }
+
+        /* --- Table Styling --- */
+        .table-container {
+            overflow-x: auto;
+            margin-top: 1em; /* Added */
+            margin-bottom: 1.5em; /* Adjusted */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95em; /* Slightly larger */
+            min-width: 600px; /* Prevent excessive squishing on screen */
+            /* margin-bottom: 20px; */ /* Handled by container */
+        }
+
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 10px 12px; /* Increased padding */
+            text-align: left;
+            vertical-align: top;
+        }
+
+        thead th {
+            background-color: var(--bg-medium);
+            font-weight: bold;
+            color: var(--primary-color); /* Color from theme */
+            position: sticky;
+            top: 0;
+            z-index: 1;
+             white-space: nowrap; /* Prevent header text wrapping */
+            border-bottom-width: 2px; /* Stronger line */
+             -webkit-print-color-adjust: exact;
+             print-color-adjust: exact;
+        }
+
+        /* Style first column cells differently */
+        tbody td:first-child {
+            font-weight: bold;
+            background-color: var(--bg-light); /* Use theme color */
+            white-space: nowrap; /* Keep parameter names from wrapping */
+             -webkit-print-color-adjust: exact;
+             print-color-adjust: exact;
+        }
+
+        /* Zebra striping */
+        tbody tr:nth-child(even) {
+            background-color: var(--bg-light);
+             -webkit-print-color-adjust: exact;
+             print-color-adjust: exact;
+        }
+         /* Ensure first cell in even rows retains its specific style - Adjusted color */
+        tbody tr:nth-child(even) td:first-child {
+             background-color: #f0f2f4; /* Slightly adjusted theme color for even rows */
+             -webkit-print-color-adjust: exact;
+             print-color-adjust: exact;
+        }
+
+        /* Hover effect */
+        tbody tr:hover {
+            background-color: var(--hover-bg);
+        }
+         /* Override hover for the first cell if desired - Adjusted color */
+        tbody tr:hover td:first-child {
+             background-color: #e6f2ff; /* Slightly different hover for first cell */
+        }
+
+        /* --- Alert Boxes --- */
+        .safety-warning, .attention {
+            border-left-width: 5px;
+            border-left-style: solid;
+            padding: 10px 15px;
+            margin: 1em 0;
+            border-radius: 4px;
+        }
+        .safety-warning {
+            border-left-color: var(--warning-color);
+            background-color: var(--warning-bg);
+            color: #721c24;
+        }
+        .attention {
+            border-left-color: var(--attention-color);
+            background-color: var(--attention-bg);
+            color: #856404;
+        }
+        .safety-warning strong, .attention strong {
+            font-weight: bold;
+        }
+
+        /* ==========================================================================
+           RESPONSIVE ADJUSTMENTS
+           ========================================================================== */
+         @media (max-width: 992px) { /* Original breakpoint */
+            .image-gallery figure {
+                flex-basis: calc(50% - 20px); /* 2 images per row */
+                max-width: 48%;
+            }
+         }
+
+        @media (max-width: 768px) {
+            body { padding: 0; } /* Remove body padding */
+            main {
+                 padding: 15px;
+                 margin: 10px; /* Reduce margin on smaller screens */
+                 width: auto; /* Allow it to shrink */
+            }
+             main > h1 { font-size: 1.6em; } /* Adjust title size */
+            section > h2 { font-size: 1.3em; }
+            section > h3 { font-size: 1.1em; }
+
+            table { font-size: 0.9em; min-width: 0; } /* Allow table to shrink */
+            th, td { padding: 8px 10px; }
+            /* tbody td:first-child { white-space: normal; } /* Allow wrapping - keep nowrap for now */
+            thead th, tbody td:first-child {
+                 white-space: normal; /* Allow wrapping on smaller screens */
+            }
+
+             /* Keep 2 columns for images down to this size */
+            .image-gallery figure {
+                 flex-basis: calc(50% - 15px);
+                 max-width: 48%;
+             }
+        }
+
+        @media (max-width: 576px) { /* Combined styles for smaller devices */
+             main > h1 { font-size: 1.4em; } /* Adjust title size */
+             section > h2 { font-size: 1.2em; }
+             section > h3 { font-size: 1.05em; }
+
+             .image-gallery figure {
+                 flex-basis: 100%; /* Stack to single column */
+                 max-width: 95%; /* Max width within container */
+             }
+             table { font-size: 0.85em; }
+             th, td { padding: 6px 8px; }
+
+             /* Reduce parameter column width slightly but allow wrapping */
+             tbody td:first-child {
+                 min-width: 100px; /* Give it some minimum width */
+                 white-space: normal; /* Ensure wrapping */
+             }
+        }
+
+        @media (max-width: 480px) {
+            /* Further adjustments if needed for very small screens */
+             main > h1 { font-size: 1.3em; } /* Adjust title size */
+            section > h2 { font-size: 1.15em; }
+            section > h3 { font-size: 1.0em; }
+            th, td { padding: 5px 6px; font-size: 0.8em; }
+            ul, ol { margin-left: 20px; }
+        }
+
+        /* ==========================================================================
+           PRINT SPECIFIC STYLES
+           ========================================================================== */
+        @media print {
+            /* Basic print reset and color forcing */
+            body {
+                padding: 0 !important;
+                margin: 0 !important;
+                font-size: 9pt !important; /* Slightly smaller for print */
+                color: #000 !important;
+                background-color: #fff !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            main {
+                max-width: 100% !important;
+                margin: 0 !important;
+                padding: 1cm !important; /* Padding for margins */
+                box-shadow: none !important;
+                border-radius: 0 !important;
+                border: none !important;
+            }
+
+             section {
+                 border-bottom: 1px solid #ccc !important;
+                 margin-bottom: 10mm; /* Space between sections */
+                 padding-bottom: 5mm;
+                 page-break-inside: auto; /* Allow sections to break */
+             }
+            section:last-child { border-bottom: none !important;}
+
+            /* Heading Formatting */
+             /* Main Title for Print */
+            main > h1 {
+                font-size: 16pt !important; /* Larger title for print */
+                text-align: center !important;
+                border-bottom: 2px solid #666 !important; /* Simple border for print */
+                padding-bottom: 0.3em !important;
+                margin-bottom: 0.8em !important;
+                color: #000 !important; /* Black title */
+                page-break-after: avoid !important; /* Avoid break right after title */
+             }
+
+            h2 {
+                font-size: 14pt !important;
+                color: #000 !important; /* Black headings */
+                border-bottom: 1px solid #333 !important; /* Adjusted border */
+                padding-bottom: 3px !important;
+                page-break-after: avoid !important; /* Keep headings with following content */
+                page-break-inside: avoid !important; /* Avoid breaking heading itself */
+            }
+             h3 {
+                font-size: 11pt !important;
+                color: #000 !important;
+                border-bottom: 1px solid #bbb !important;
+                font-weight: bold !important;
+                page-break-after: avoid !important;
+                page-break-inside: avoid !important;
+            }
+
+            p { font-size: 9pt !important; }
+
+            /* Image Scaling and Layout for Print */
+            .image-gallery {
+                justify-content: flex-start; /* Align left */
+                gap: 8mm; /* Space between images */
+                page-break-inside: auto; /* Allow gallery block to break */
+                padding: 0 !important;
+                border: none !important;
+                background-color: transparent !important;
+            }
+             .image-gallery figure {
+                flex-basis: calc(33% - 6mm); /* Aim for 3 across if space allows */
+                max-width: 31%;
+                text-align: center;
+                page-break-inside: avoid !important; /* Keep image+caption together */
+                border: none !important;
+                box-shadow: none !important;
+            }
+             .image-gallery img {
+                 max-width: 100% !important;
+                 height: auto !important;
+                 border: 1px solid #aaa !important;
+                 box-shadow: none !important;
+                 background-color: transparent !important;
+             }
+             .image-gallery figcaption {
+                 font-size: 8pt !important;
+                 color: #333 !important;
+                 margin-top: 3px !important;
+             }
+
+             /* Table Formatting for Print */
+             .table-container {
+                  overflow-x: visible !important; /* No scrollbars */
+                  margin-top: 0.5em !important;
+                  margin-bottom: 1em !important;
+             }
+             table {
+                  width: 100% !important;
+                  font-size: 8pt !important; /* Further reduce font */
+                  border-collapse: collapse !important;
+                  page-break-inside: auto; /* Allow tables to break BETWEEN rows */
+                  word-wrap: break-word;
+                  min-width: 0 !important; /* Allow shrinking */
+             }
+              thead th {
+                  background-color: var(--bg-medium) !important;
+                   color: #000 !important;
+                   white-space: normal !important; /* Allow headers to wrap if needed */
+                   padding: 4px 5px !important;
+                   page-break-inside: avoid !important; /* Keep table header row together */
+                   border-bottom-width: 1px !important; /* Consistent border */
+              }
+               tbody tr {
+                   page-break-inside: avoid !important; /* Prevent individual rows from splitting */
+               }
+               tbody tr:nth-child(even) {
+                   background-color: var(--bg-light) !important;
+               }
+              tbody tr:hover { background-color: transparent !important; } /* No hover */
+
+              /* Ensure first column styles print */
+              tbody td:first-child {
+                  font-weight: bold !important;
+                  background-color: var(--bg-light) !important; /* Consistent light bg */
+                  white-space: normal !important; /* Allow param names to wrap */
+              }
+              tbody tr:nth-child(even) td:first-child {
+                  /* Keep same background as rest of even row for simplicity in print */
+                  background-color: var(--bg-light) !important;
+              }
+              tbody tr:hover td:first-child { background-color: var(--bg-light) !important; } /* Reset hover for first */
+              /* tbody tr:nth-child(even):hover td:first-child { background-color: var(--bg-light) !important; } */
+
+
+             th, td {
+                 padding: 3px 5px !important; /* Reduce padding */
+                 border: 1px solid #bbb !important;
+                 vertical-align: top !important; /* Ensure consistent alignment */
+             }
+
+            /* List formatting */
+            ul, ol {
+                 font-size: 9pt; /* Match body text */
+                 margin-left: 5mm; /* Reduced Indentation for print */
+                 padding-left: 10mm; /* Ensure space for bullets/numbers */
+                 page-break-inside: auto; /* Allow lists to break BETWEEN items */
+                 list-style-position: outside;
+            }
+            li {
+                margin-bottom: 3pt; /* Space between items */
+                page-break-inside: avoid !important; /* Prevent individual list items from splitting */
+            }
+
+             /* Hide unnecessary elements - Header/Footer already removed from HTML */
+
+
+             /* Page Break Control Hints Summary:
+                - Avoid breaks AFTER headings (h1, h2, h3)
+                - Avoid breaks INSIDE headings, list items (li), table rows (tr), figures.
+                - ALLOW breaks inside sections, tables (between rows), lists (between items), image galleries.
+             */
+
+        } /* End of @media print */
+
+    </style>
+</head>
+<body>
+
+    <!-- Header Removed -->
+
+    <main>
+        <h1>Cryogenic Probe Station</h1> <!-- Title Added Here -->
+
+        <section id="overview">
+            <h2>Overview</h2>
+            <p>The Cryogenic Probe Station (optional: high temperature, low temperature, vacuum, magnetic field) is a high-precision experimental platform that is mainly used for testing the electrical and magnetic characteristics of semiconductor materials, micro-nano devices, magnetic materials, spintronic devices and related technical fields.</p>
+             <div class="image-gallery">
+                <figure>
+                    <img src="Cryogenic Probe Station_page-000.jpg" alt="Cryogenic Probe Station Setup 1">
+                    <figcaption>Probe Station Configuration 1</figcaption>
+                </figure>
+                <figure>
+                    <img src="Cryogenic Probe Station_page-001.jpg" alt="Cryogenic Probe Station Setup 2">
+                     <figcaption>Probe Station Configuration 2</figcaption>
+                </figure>
+                <figure>
+                    <img src="Cryogenic Probe Station_page-002.jpg" alt="Cryogenic Probe Station Setup 3">
+                     <figcaption>Probe Station Configuration 3</figcaption>
+                </figure>
+                 <figure>
+                    <img src="Cryogenic Probe Station_page-003.jpg" alt="Cryogenic Probe Station Detail 1">
+                     <figcaption>Probe Station Detail 1</figcaption>
+                </figure>
+                 <figure>
+                    <img src="Cryogenic Probe Station_page-004.jpg" alt="Cryogenic Probe Station Detail 2">
+                     <figcaption>Probe Station Detail 2</figcaption>
+                </figure>
+                  <figure>
+                    <img src="Cryogenic Probe Station_page-005.jpg" alt="Cryogenic Probe Station Detail 3 - Close Up">
+                     <figcaption>Probe Station Close Up</figcaption>
+                </figure>
+             </div>
+            <p>The configuration of the high and low temperature magnetic field probe station is mainly selected and designed according to the needs of users. For example, the required magnetic field value, the size of the uniform area, the size of the uniformity, the size of the sample stage, etc.</p>
+            <ol> <!-- Default OL style applied -->
+                <li>These parameters are related to the magnetic flux density generated by the magnetic field lines in a certain area;</li>
+                <li>The displacement stage can also be matched with the magnetic fluid seal to realize two-dimensional movement in the horizontal direction and 360-degree rotation of the sample stage;</li>
+                <li>In addition, the combination of the probe station and the high-precision bipolar constant current power supply independently developed by our company enables users to achieve high stability of the magnetic field.</li>
+            </ol>
+             <p>The probe station is equipped with 4 (6, 8) probe arms with high-precision displacement, and is equipped with a high-precision electron microscope, which is convenient for the observation operation of tiny samples. The probe can be used to test chips, wafers, packaged devices, etc. through DC or low-frequency AC signals. It is widely used in the semiconductor industry, MEMS, superconductivity, electronics, ferroelectronics, physics, materials science, and biomedicine.</p>
+        </section>
+
+        <section id="applications">
+            <h2>Applications</h2>
+            <p>Magnetic property test, microwave property test, DC, RF property test, MEMS, superconductivity test, optoelectronic property of nano-circuit, quantum dot and wire, chip test under high and low temperature vacuum environment, material test, Hall test, electromagnetic transport properties, etc.</p>
+        </section>
+
+        <section id="optional-accessories">
+            <h2>Optional Accessories</h2>
+             <ul> <!-- Default UL style applied -->
+                <li>Various DC probes, high frequency probes, active probes, cable CCD or C-MOS video imaging devices;</li>
+                <li>Chuck motion device electromagnet system/superconducting magnet system;</li>
+                <li>1Mpa positive pressure system upgrade;</li>
+                <li>Ultra High Temperature Upgrade Options;</li>
+                <li>Ultra High Vacuum Upgrade Options;</li>
+                <li>Various Probe Fixtures;</li>
+                <li>Shielding box anti-vibration table;</li>
+                <li>Adapter;</li>
+                <li>Silent Vacuum Pump.</li>
+            </ul>
+        </section>
+
+        <section id="parameters">
+            <h2>Parameters</h2>
+             <h3>High and low temperature vacuum magnetic field probe station</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Parameter</th>
+                            <th>DXTPS1</th>
+                            <th>DXTPS2</th>
+                            <th>DXTPS3</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Vacuum degree</td><td colspan="3">Maximum vacuum 10<sup>-8</sup>Pa</td></tr>
+                        <tr><td>Cavity Material</td><td colspan="3">Non-magnetic stainless steel or aluminum alloy</td></tr>
+                        <tr><td>Magnetic Field Range</td><td>2000Gs @ 50mm</td><td>5000Gs @ 50mm</td><td>1T @ 50mm</td></tr>
+                        <tr><td>Magnetic Field Direction</td><td colspan="3">horizontal (can be designed according to user requirements in the vertical direction)</td></tr>
+                        <tr><td>Power supply</td><td>Bipolar power supply + 50A</td><td>Bipolar Power Supply + 70A</td><td>Bipolar Power Supply + 90A</td></tr>
+                        <tr><td>Power supply stability</td><td colspan="3">50ppm optional 10ppm</td></tr>
+                        <tr><td>Refrigeration mode</td><td colspan="3">Liquid helium/liquid nitrogen refrigeration/closed cycle refrigerator</td></tr>
+                        <tr><td>Temperature Range (Low)</td><td colspan="3">5 K-325K optional 500K</td></tr>
+                        <tr><td>Temperature Range (High)</td><td colspan="3">65 K-325K optional 600K</td></tr>
+                        <tr><td>Temperature Control Resolution</td><td colspan="3">0.001K temperature controller related</td></tr>
+                        <tr><td>Temperature stability</td><td colspan="3">better than 0.1K depending on the temperature controller</td></tr>
+                        <tr><td>Temperature sensor</td><td colspan="3">silicon diode/PT 100</td></tr>
+                        <tr><td>Sensors</td><td colspan="3">One sample table, one radiation screen and one probe arm.</td></tr>
+                        <tr><td>Sample table size (max)</td><td colspan="3">Φ50mm, flatness ≤ u7m</td></tr>
+                        <tr><td>Sample table fixing method</td><td colspan="3">Vacuum Silicone Grease/Spring Presses</td></tr>
+                        <tr><td>Sample table material</td><td colspan="3">gold-plated oxygen-free copper</td></tr>
+                        <tr><td>Microscope Travel</td><td colspan="3">X, Y plane 2*2inch, accuracy 1um, Z axis travel ≥ 50.8mm</td></tr>
+                        <tr><td>Magnification</td><td colspan="3">16 ~ 100X / 20 ~ 4000X</td></tr>
+                        <tr><td>Vacuum chamber observation window size</td><td>1 inch</td><td>1.5 inch</td><td>2 inch</td></tr>
+                        <tr><td>Window Materials</td><td colspan="3">fused silica (optional K9, calcium fluoride, etc.)</td></tr>
+                        <tr><td>Number of probe arms</td><td colspan="3">2, 4, 6, 8 optional</td></tr>
+                        <tr><td>Probe Arm Travel</td><td colspan="3">25 mm-25mm-12mm replaceable</td></tr>
+                        <tr><td>Mechanical accuracy</td><td colspan="3">10um / 2um / 1um / 0.7um</td></tr>
+                        <tr><td>Interface form</td><td colspan="3">Ordinary vacuum joint/three coaxial joint/BNC/ SMA, etc</td></tr>
+                        <tr><td>Probe diameter</td><td colspan="3">0.51mm</td></tr>
+                        <tr><td>Needle tip diameter</td><td colspan="3">10um / 5um / 1um optional</td></tr>
+                        <tr><td>Probe material</td><td colspan="3">Tungsten/GGB</td></tr>
+                        <tr><td>Supply voltage</td><td>AC220V 50Hz/60Hz</td><td colspan="2">AC380V 50Hz/60Hz</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="pre-purchase">
+            <h2>Parameter Confirmation Before Purchase</h2>
+            <ol> <!-- Default OL style applied -->
+                <li>The maximum number of inches of wafers or devices that need to be tested; whether it is necessary to test fragments or single chips; the smallest single chip size;</li>
+                <li>How high is the mechanical precision requirement of the probe station;</li>
+                <li>The electrode size of spot measurement sample; 100μm*100µm or 60µm*60µm pad, or the mini pad made by FIB, or the metal circuit inside the ic;</li>
+                <li>A maximum of several probes are required for point measurement at the same time;</li>
+                <li>Whether the probe card test will be used;</li>
+                <li>How much is the minimum resolution of the optical microscope required;</li>
+                <li>In terms of microscopy, is it necessary to add a polarizer for LC liquid crystal hotspot detection;</li>
+                <li>Whether the current requirement reaches 100fa or below during the probe spot test! Does the low capacitance requirement need to be 0.1pf; Whether there is a radio frequency requirement;</li>
+                <li>What are the connected test instrument interfaces;</li>
+                <li>Whether heating or cooling is required when testing the environment! Whether a closed cavity is required;</li>
+                <li>What about Chuck's leakage requirements; Do you need to add a low-impedance chuck;</li>
+                <li>Whether an anti-shock table is required;</li>
+                <li>If you add a shockproof table, whether there is compressed air.</li>
+            </ol>
+        </section>
+          <section id="more-images">
+             <h2>More Pictures of the Cryogenic Probe Station</h2>
+             <div class="image-gallery">
+                 <figure>
+                     <img src="Cryogenic Probe Station_page-006.jpg" alt="Cryogenic Probe Station Extra Image 1">
+                     <figcaption>Probe Station Interior 1</figcaption>
+                 </figure>
+                 <figure>
+                     <img src="Cryogenic Probe Station_page-007.jpg" alt="Cryogenic Probe Station Extra Image 2">
+                     <figcaption>Probe Station Interior 2 (Close Up)</figcaption>
+                 </figure>
+                 <figure>
+                     <img src="Cryogenic Probe Station_page-008.jpg" alt="Cryogenic Probe Station Extra Image 3">
+                     <figcaption>Probe Station Interior 3 (Sample Area)</figcaption>
+                 </figure>
+                 <figure>
+                     <img src="Cryogenic Probe Station_page-009.jpg" alt="Cryogenic Probe Station Extra Image 4">
+                      <figcaption>Probe Arms Detail</figcaption>
+                 </figure>
+             </div>
+         </section>
+    </main>
+
+    <!-- Footer Removed -->
+
+    <!-- No JavaScript needed for collapsible sections in this version -->
+
+</body>
+</html>

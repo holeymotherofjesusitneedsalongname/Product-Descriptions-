@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cryogen Free Superconducting Magnet Specifications</title>
+    <style>
+        /* ==========================================================================
+           COMBINED AND REFINED STYLES
+           Based on GENERIC STYLING FOR DEXINMAG + code-2.html specifics
+           Version: 1.1
+           ========================================================================== */
+
+        /* --- Base Styles & Color Theme --- */
+        :root {
+            --primary-color: #0056b3; /* Blue from code-2.html */
+            --secondary-color: #4A90E2; /* Lighter Blue from code-2.html */
+            --bg-light: #f9f9f9;       /* Light grey from code-2.html */
+            --bg-medium: #e9ecef;      /* Medium grey from code-2.html */
+            --border-color: #dee2e6;   /* Border color from code-2.html */
+            --text-color: #343a40;     /* Dark text from code-2.html */
+            --hover-bg: #e8f4fd;       /* Light blue hover from code-2.html */
+            --subtitle-color: #6c757d; /* Subtitle color - adjusted */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f8f9fa; /* Light page background from code-2.html */
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            padding: 0; /* Remove body padding, container will handle it */
+        }
+
+        /* --- Main Content Container --- */
+        .container {
+            max-width: 1100px;
+            margin: 20px auto;
+            padding: 25px;
+            background-color: #fff; /* White background for content */
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08); /* Softer shadow from code-2.html */
+            border-radius: 6px; /* Less pronounced radius from code-2.html */
+            border: 1px solid var(--border-color);
+            flex-grow: 1;
+        }
+
+        /* --- Typography --- */
+        /* Styles the main title within the container */
+        .container > h1 {
+            font-size: 1.8em; /* Slightly smaller H1 from code-2.html */
+            font-weight: 600;
+            color: var(--primary-color);
+            text-align: center;
+            /* border-bottom: 2px solid var(--secondary-color); */ /* Optional: Add border if desired */
+            padding-bottom: 0.5em;
+            margin-bottom: 0.2em; /* Reduced space before subtitle */
+            margin-top: 0;
+        }
+        /* Styles the sub-title within the container */
+         .container > h2 {
+             margin: 0 0 1.5em 0; /* Space below subtitle */
+             font-size: 1.1em;
+             font-weight: 400;
+             color: var(--subtitle-color); /* Adjusted subtitle color */
+             text-align: center;
+             line-height: 1.3;
+         }
+
+
+        /* Styles section titles (using H3 for "Features:") */
+        section > h3 {
+            color: var(--primary-color);
+            padding-bottom: 5px;
+            margin: 0 0 15px 0;
+            font-size: 1.5em;
+            font-weight: 600;
+            line-height: 1.3;
+            border-bottom: 1px solid var(--border-color); /* Add subtle border */
+        }
+        section > h3:first-child {
+             margin-top: 0;
+        }
+
+
+        p {
+             margin: 0 0 10px 0; /* From code-2.html */
+        }
+
+        /* --- Content Sections --- */
+        section {
+            margin-bottom: 30px; /* Spacing from code-2.html */
+            padding-bottom: 25px; /* Spacing from code-2.html */
+            border-bottom: 1px solid #eee; /* Lighter section separator from code-2.html */
+        }
+        section:last-of-type {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        /* --- Image Styling (from code-2.html) --- */
+        .product-image-container {
+            text-align: center; /* Center the image */
+            margin-bottom: 25px;
+            padding: 15px;
+            background-color: #fdfdfd;
+            border: 1px solid #eee;
+            border-radius: 4px;
+        }
+
+        .product-image-container img {
+            max-width: 80%; /* Control image size */
+            height: auto;
+            border-radius: 4px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+        }
+
+        /* --- List styling for features (from code-2.html) --- */
+        .features-list {
+             list-style-type: none; /* Remove default bullets */
+             padding-left: 0;
+             margin-left: 0; /* Reset margin */
+             margin-bottom: 1em; /* Add default bottom margin */
+        }
+        .features-list li {
+            position: relative;
+            padding-left: 30px; /* Space for custom bullet */
+            margin-bottom: 12px; /* More space between items */
+            font-size: 1em;
+        }
+        .features-list li::before {
+            content: counter(list-item) "."; /* Use CSS counter for numbering */
+            counter-increment: list-item;
+            position: absolute;
+            left: 0;
+            top: 0px;
+            font-weight: bold;
+            color: var(--primary-color);
+             width: 20px; /* Ensure space */
+             text-align: right;
+             margin-right: 10px;
+        }
+
+
+        /* ==========================================================================
+           RESPONSIVE ADJUSTMENTS (Combined & Refined)
+           ========================================================================== */
+        @media (max-width: 768px) {
+            body { padding: 0; } /* No body padding */
+            .container {
+                padding: 20px;
+                margin: 10px; /* Reduce margin */
+            }
+            .container > h1 { font-size: 1.6em; }
+            .container > h2 { font-size: 1.0em; }
+            section > h3 { font-size: 1.3em; }
+            .product-image-container img { max-width: 95%; }
+            .features-list li { font-size: 0.95em; }
+        }
+
+        @media (max-width: 576px) { /* Adjusted breakpoint slightly */
+             .container {
+                 padding: 15px;
+                 margin: 5px;
+             }
+             .container > h1 { font-size: 1.4em; }
+             .container > h2 { font-size: 0.9em; }
+             section > h3 { font-size: 1.2em; }
+             .product-image-container img { max-width: 100%; }
+              .features-list li { font-size: 0.9em; padding-left: 25px; }
+              .features-list li::before { width: 18px; margin-right: 7px; }
+        }
+
+        /* ==========================================================================
+           PRINT SPECIFIC STYLES (Combined & Refined)
+           ========================================================================== */
+        @media print {
+            body {
+                padding: 0 !important;
+                margin: 0 !important;
+                font-size: 10pt !important; /* Standard print size */
+                color: #000 !important;
+                background-color: #fff !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .container {
+                max-width: 100% !important;
+                width: 100% !important;
+                margin: 0 !important;
+                padding: 1cm 1.5cm !important; /* Standard print margins */
+                box-shadow: none !important;
+                border-radius: 0 !important;
+                border: none !important;
+                background-color: #fff !important; /* Ensure white background */
+            }
+
+             section {
+                 border-bottom: 1px solid #ccc !important;
+                 margin-bottom: 8mm !important;
+                 padding-bottom: 5mm !important;
+                 page-break-inside: avoid !important; /* Try to keep sections together */
+             }
+            section:last-child {
+                border-bottom: none !important;
+                margin-bottom: 0 !important;
+                padding-bottom: 0 !important;
+            }
+
+            /* Title Formatting */
+            .container > h1 {
+                font-size: 14pt !important;
+                color: var(--primary-color) !important; /* Retain color */
+                text-align: center !important;
+                padding-bottom: 3pt !important;
+                margin-bottom: 2pt !important;
+                border-bottom: none !important; /* Remove border for print */
+                page-break-after: avoid !important;
+            }
+            .container > h2 {
+                font-size: 10pt !important;
+                color: var(--subtitle-color) !important; /* Retain color */
+                text-align: center !important;
+                margin-bottom: 10pt !important;
+                page-break-after: avoid !important;
+            }
+
+             /* Feature heading */
+             section > h3 {
+                font-size: 12pt !important;
+                color: var(--primary-color) !important; /* Retain color */
+                padding-bottom: 3px !important;
+                margin-bottom: 8pt !important;
+                border-bottom: 1px solid #aaa !important; /* Keep subtle border */
+                page-break-after: avoid !important;
+                page-break-inside: avoid !important;
+            }
+
+            /* Image Scaling for Print */
+            .product-image-container {
+                text-align: center !important;
+                padding: 5mm !important;
+                border: 1px solid #ddd !important;
+                background-color: #fdfdfd !important; /* Force background */
+                 -webkit-print-color-adjust: exact !important;
+                 print-color-adjust: exact !important;
+                 page-break-inside: avoid !important; /* Try to keep image section together */
+                 margin-bottom: 8mm !important;
+            }
+             .product-image-container img {
+                 max-width: 70% !important; /* Smaller image for print */
+                 height: auto !important;
+                 box-shadow: none !important;
+                 border: none !important;
+             }
+
+            /* List formatting */
+            .features-list {
+                 font-size: 10pt !important;
+                 margin-left: 0 !important;
+                 padding-left: 0 !important;
+                 page-break-inside: auto; /* Allow list to break between items */
+            }
+            .features-list li {
+                margin-bottom: 3pt !important;
+                padding-left: 25px !important; /* Maintain indent */
+                page-break-inside: avoid !important; /* Prevent individual list items from splitting */
+            }
+             .features-list li::before {
+                color: var(--primary-color) !important; /* Ensure number color prints */
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+             }
+
+            /* Hide elements not suitable for print if any were added */
+            /* .no-print { display: none !important; } */
+
+        } /* End of @media print */
+
+    </style>
+</head>
+<body>
+
+    <!-- Removed the <header> element -->
+
+    <div class="container">
+        <!-- Moved H1 and H2 inside the container -->
+        <h1>Cryogen Free Superconducting Magnet</h1>
+        <h2>1.6K cryogen free superconducting magnet</h2>
+
+        <section id="product-image">
+             <!-- Product image with updated src -->
+             <div class="product-image-container">
+                 <img src="Cryon free Super Conducting magnet_page-000.jpg" alt="Cryogen Free Superconducting Magnet System">
+             </div>
+        </section>
+
+        <section id="features">
+            <h3>Features:</h3>
+            <ol class="features-list">
+                <!-- Content extracted from OCR -->
+                <li>Low vibration system, can be used for AFM;</li>
+                <li>Use 1.5W split pulse tube refrigerator RP182B2S-F100H;</li>
+                <li>Closed cycle system, VTI variable temperature chamber minimum temperature 1.4K;</li>
+                <li>Compatible with 3He and dilution refrigerator plug-ins;</li>
+                <li>Different sample space sizes for you to choose: 26mm, 50mm, 67mm;</li>
+                <li>Match different superconducting magnets according to your requirements: 9T, 12T, 14T, 9T/1T/1T, 3T/3T/3T, ...</li>
+                <li>Magnet excitation speed 35min~60min;</li>
+                <li>Temperature stability: ± 50 mK.</li>
+            </ol>
+        </section>
+
+    </div><!-- /.container -->
+
+    <!-- No footer as requested -->
+
+</body>
+</html>

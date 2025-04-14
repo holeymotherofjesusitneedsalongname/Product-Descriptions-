@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CTM-6W Portable Fluxgate Magnetometer</title>
+    <style>
+        /* ==========================================================================
+        GENERIC STYLING FOR DEXINMAG DOCUMENT PAGES
+        Based on DXMP Manual / Axial Probe Styles
+        Version: 1.0
+        * Provides a consistent layout, color scheme, typography.
+        * Styles common elements like sections, tables, lists, images.
+        * Includes styles for collapsible sections.
+        * Includes responsive adjustments for different screen sizes.
+        * Includes print-specific styles for better output.
+        * HEADER AND FOOTER specific styling has been REMOVED.
+        ========================================================================== */
+        /* --- Base Styles & Color Theme --- */
+        :root {
+            --primary-color: #00447C; /* Dark Blue */
+            --secondary-color: #4A90E2; /* Lighter Blue */
+            --bg-light: #f8f9fa; /* Very light grey */
+            --bg-medium: #e9ecef; /* Light grey */
+            --border-color: #dee2e6; /* Grey border */
+            --text-color: #343a40; /* Dark grey text */
+            /* --header-bg: #343a40; */ /* Header styles removed */
+            /* --header-text: #ffffff; */ /* Header styles removed */
+            /* --footer-bg: #f1f1f1; */ /* Footer styles removed */
+            /* --footer-text: #555; */ /* Footer styles removed */
+            --hover-bg: #e8f4fd; /* Light blue for hover */
+            --warning-color: #dc3545; /* Red for warnings */
+            --warning-bg: #f8d7da;
+            --attention-color: #ffc107; /* Yellow for attention */
+            --attention-bg: #fff3cd;
+            --precaution-border: #f0ad4e; /* Match original border */
+            --precaution-bg: #fffadf; /* Match original background */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4; /* Light grey background for the page */
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* --- Main Content Container --- */
+        .container {
+            max-width: 1100px; /* Increased width slightly */
+            margin: 20px auto;
+            padding: 25px;
+            background-color: #fff; /* White background for content */
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            flex-grow: 1; /* Allows footer (if added back) to stick to bottom */
+        }
+
+        /* --- Typography --- */
+        h1, h2, h3 {
+            /* color: var(--primary-color); */ /* Overridden below for specific cases */
+            line-height: 1.3;
+            margin-top: 1em;
+            margin-bottom: 0.75em;
+        }
+        h1:first-child, h2:first-child, h3:first-child {
+            margin-top: 0;
+        }
+
+        /* Styles the main title within the container */
+        .container > header > h1 { /* Target the h1 inside the header */
+            font-size: 1.8em;
+            text-align: center;
+            border-bottom: 2px solid #0056b3; /* Keep original title color/border */
+            padding-bottom: 0.5em;
+            margin-bottom: 1em; /* Add more space below main title */
+            color: #0056b3; /* Keep original title color */
+        }
+
+        /* Styles section titles */
+        section > h2 {
+            font-size: 1.5em;
+            border-bottom: 1px solid #eee; /* Keep original heading border */
+            padding-bottom: 0.3em;
+            color: #0056b3; /* Keep original heading color */
+            margin-top: 1.5em; /* Keep original spacing */
+            margin-bottom: 1em; /* Keep original spacing */
+        }
+         section > h2:first-of-type {
+             margin-top: 0; /* Keep original spacing */
+         }
+
+
+        /* Base style for H3, often used for sub-sections or collapsible headers */
+        section > h3 {
+            font-size: 1.2em;
+            color: var(--primary-color);
+            padding-bottom: 0.3em;
+            font-weight: bold;
+        }
+
+        p {
+            margin-bottom: 1em;
+        }
+
+        ul, ol {
+            /* list-style: disc; */ /* Keep original list style for ordered/unordered */
+            margin: 0 0 1em 25px; /* Adjusted margin */
+        }
+
+        li {
+            margin-bottom: 0.5em;
+        }
+
+        /* --- Content Sections --- */
+        section {
+            margin-bottom: 2em;
+            padding-bottom: 1em;
+            /* border-bottom: 1px solid var(--bg-medium); */ /* Removed subtle separator */
+        }
+        section:last-of-type {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        /* --- Tables (for Specifications) --- */
+        .table-container {
+            overflow-x: auto; /* Enable horizontal scroll on screen */
+            margin-top: 1em;
+            margin-bottom: 1.5em;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95em;
+            min-width: 600px; /* Prevent excessive squishing on screen */
+            border: 1px solid var(--border-color); /* Add border around table */
+        }
+
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 10px 12px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        /* Style for the first column (Specification Name) */
+        td:first-child {
+            font-weight: bold;
+            /* color: var(--primary-color); */ /* Optional: make spec names blue */
+            width: 35%; /* Give more defined width to first column */
+        }
+
+
+        thead th {
+            background-color: var(--bg-medium);
+            font-weight: bold;
+            color: var(--primary-color);
+            position: sticky; /* Keep header visible on scroll */
+            top: 0;
+            z-index: 1;
+            border-bottom-width: 2px; /* Stronger line below header */
+            border-bottom-color: var(--border-color);
+        }
+
+        /* Zebra striping for table rows */
+        tbody tr:nth-child(even) {
+            background-color: var(--bg-light);
+        }
+
+        /* Hover effect for table rows */
+        tbody tr:hover {
+            background-color: var(--hover-bg);
+        }
+
+        /* --- Image Styling --- */
+        .product-image {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .product-image img {
+            max-width: 80%; /* Adjust as needed */
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 5px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        /* --- Code Block Styling --- */
+         pre {
+            background-color: #e9ecef;
+            padding: 15px;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            overflow-x: auto; /* Handle long lines */
+            font-family: "Courier New", Courier, monospace;
+            font-size: 0.9em;
+            line-height: 1.4;
+            margin-top: 1em; /* Add some space above */
+            margin-bottom: 1em; /* Add some space below */
+        }
+
+        code {
+            font-family: inherit; /* Inherit from pre */
+        }
+
+        /* --- Alert Boxes / Precautions --- */
+        .precautions { /* Match original class name */
+            border-left-width: 5px;
+            border-left-style: solid;
+            padding: 10px 15px;
+            margin: 1.5em 0; /* Keep original margin */
+            border-radius: 4px;
+            border-left-color: var(--precaution-border);
+            background-color: var(--precaution-bg);
+            color: #856404; /* Text color similar to original */
+        }
+        .precautions strong, .attention strong {
+            font-weight: bold;
+        }
+        .precautions ol { /* Ensure list inside precautions looks ok */
+             margin-left: 20px;
+             margin-bottom: 0; /* Remove bottom margin for list inside */
+             padding-left: 5px; /* Add slight padding */
+        }
+         .precautions li {
+             margin-bottom: 0.5em;
+         }
+
+
+        /* --- Collapsible Section Styling --- */
+        /* Apply this class to the H3 (or other element) that triggers the collapse */
+        section h3.collapsible-header {
+            cursor: pointer;
+            position: relative;
+            padding-right: 25px; /* Space for indicator */
+            margin-bottom: 0; /* Connects header visually to content below */
+            border-bottom: 1px solid var(--border-color); /* Separator line */
+            padding-bottom: 10px; /* Spacing above the line */
+        }
+
+        section h3.collapsible-header::after {
+            content: '▼'; /* Down arrow indicator */
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.8em;
+            color: var(--primary-color);
+            transition: transform 0.3s ease;
+        }
+
+        section h3.collapsible-header.collapsed::after {
+            content: '►'; /* Right arrow indicator when collapsed */
+        }
+
+        /* The content DIV immediately following the collapsible-header */
+        .collapsible-content {
+            overflow: hidden;
+            max-height: 5000px; /* Allow ample height when open */
+            transition: max-height 0.5s ease-in-out, padding 0.3s ease, margin 0.3s ease, border 0.3s ease, opacity 0.3s ease;
+            padding-top: 15px; /* Space below header when open */
+            margin-top: 0;
+            border-top: 1px solid var(--bg-light); /* Subtle line separating from header */
+            opacity: 1;
+        }
+
+        .collapsible-content.collapsed {
+            max-height: 0;
+            padding-top: 0;
+            padding-bottom: 0;
+            margin-top: 0;
+            border-top: none; /* Hide border when collapsed */
+            opacity: 0;
+        }
+
+        /* ==========================================================================
+        RESPONSIVE ADJUSTMENTS
+        ========================================================================== */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+                margin: 10px; /* Reduce margin on smaller screens */
+            }
+            .container > header > h1 { font-size: 1.6em; }
+            section > h2 { font-size: 1.3em; }
+            section > h3 { font-size: 1.1em; } /* Includes collapsible */
+
+             .product-image img {
+                max-width: 100%; /* Adjust image size */
+             }
+
+            table { font-size: 0.9em; min-width: 0; } /* Allow table to shrink */
+            th, td { padding: 8px 10px; }
+             /* Stack table cells on small screens if needed */
+             /* Example: */
+             /*
+             th, td { display: block; width: 100%; text-align: left; }
+             thead { display: none; }
+             td { border-bottom: 1px solid #ddd; }
+             td:first-child { background-color: #f0f0f0; font-weight: bold; }
+             */
+             td:first-child { width: auto; } /* Reset width for smaller screens */
+
+        }
+        @media (max-width: 480px) {
+            .container > header > h1 { font-size: 1.4em; }
+            section > h2 { font-size: 1.15em; }
+            section > h3 { font-size: 1.0em; } /* Includes collapsible */
+
+            th, td { padding: 6px 8px; font-size: 0.85em; }
+            ul, ol { margin-left: 20px; }
+
+        }
+        /* ==========================================================================
+        PRINT SPECIFIC STYLES
+        * Optimizes layout for printing.
+        * Hides header and footer elements (none explicitly defined page-wide).
+        * Forces display of collapsible content.
+        * Adjusts fonts, colors, and spacing for paper.
+        ========================================================================== */
+        @media print {
+            body {
+                /* background-color: #fff !important; */ /* Removed to allow original bg colors if possible */
+                /* color: #000 !important; */ /* Removed to allow original text colors */
+                font-size: 10pt;
+                -webkit-print-color-adjust: exact !important; /* Try to force color printing */
+                print-color-adjust: exact !important;
+            }
+
+            .container {
+                max-width: 100%;
+                margin: 0;
+                padding: 1cm; /* Add print margins */
+                box-shadow: none;
+                border-radius: 0;
+                border: none;
+            }
+
+            header, footer { /* Hide generic page header/footer if they existed */
+                 display: none;
+            }
+            /* Ensure the product title header remains visible */
+            .container > header {
+                display: block;
+                text-align: center;
+                 border-bottom: 2px solid #0056b3; /* Ensure title border prints */
+                 padding-bottom: 0.5em;
+                 margin-bottom: 1em;
+            }
+             .container > header > h1 {
+                 color: #0056b3 !important; /* Force title color */
+             }
+
+            section > h2 {
+                color: #0056b3 !important; /* Force heading color */
+                border-bottom: 1px solid #eee !important; /* Force heading border */
+                page-break-after: avoid; /* Try to keep heading with content below */
+            }
+
+            a[href]:after {
+                content: none !important; /* Don't show URLs */
+            }
+
+            img {
+                max-width: 100% !important; /* Ensure images fit */
+                page-break-inside: avoid;
+            }
+             .product-image img {
+                 max-width: 70% !important; /* Make product image slightly smaller for print */
+                 display: block; /* Center image */
+                 margin-left: auto;
+                 margin-right: auto;
+             }
+
+            table {
+                font-size: 9pt;
+                min-width: 0; /* Allow table to fit page */
+                width: 100%;
+                border: 1px solid #ccc !important; /* Use lighter border for print */
+                page-break-inside: auto; /* Allow table rows to break across pages */
+            }
+            thead {
+                display: table-header-group; /* Repeat table header on each page */
+            }
+            th, td {
+                border: 1px solid #ccc !important;
+                padding: 6px 8px;
+                page-break-inside: avoid; /* Try to keep cell content together */
+            }
+             tr {
+                 page-break-inside: avoid; /* Try to keep rows together */
+                 page-break-after: auto;
+             }
+             tbody tr:nth-child(even) {
+                background-color: var(--bg-light) !important; /* Keep zebra stripes */
+            }
+
+
+            pre {
+                background-color: #e9ecef !important; /* Keep code bg color */
+                border: 1px solid #dee2e6 !important;
+                page-break-inside: avoid;
+                white-space: pre-wrap; /* Wrap long code lines */
+                word-wrap: break-word;
+            }
+
+            .precautions {
+                border-left-color: var(--precaution-border) !important;
+                background-color: var(--precaution-bg) !important;
+                page-break-inside: avoid;
+            }
+
+            /* Ensure collapsible content is always visible in print */
+            .collapsible-content {
+                max-height: none !important;
+                opacity: 1 !important;
+                padding-top: 15px !important;
+                border-top: 1px solid var(--bg-light) !important;
+                display: block !important; /* Ensure it's displayed */
+            }
+            section h3.collapsible-header::after {
+                content: "" !important; /* Hide collapse indicators */
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Portable Fluxgate Magnetometer CTM-6W</h1>
+        </header>
+
+        <section id="description">
+             <h2>Description</h2> <!-- Added heading for consistency -->
+            <p>CTM-6W precision portable fluxgate magnetometer is a high-accuracy, low-noise magnetometer developed based on the research of small amorphous fluxgate sensors. It is a high-accuracy magnetometer with a six-digit display and a resolution of 0.1nT.</p>
+        </section>
+
+        <section id="image" class="product-image">
+             <!--
+                IMPORTANT: The 'src' attribute below assumes the image file
+                'Portable Fluxgate Magnetometer_page-000.jpg'
+                is located in the SAME DIRECTORY as this HTML file.
+                Adjust the path if the image is located elsewhere.
+            -->
+            <img src="Portable Fluxgate Magnetometer_page-000.jpg" alt="CTM-6W Portable Fluxgate Magnetometer unit with probe">
+            <!-- <figcaption>CTM-6W Unit and Probe</figcaption> Optional caption -->
+        </section>
+
+        <section id="applications">
+            <h2>Applications and Features</h2>
+            <p>It is suitable for testing weak constant magnetic fields, magnetic fields in magnetic shielding devices, magnetic field values generated by magnetic measuring tool coils, and residual magnetism of materials. It can directly test the earth's magnetic field components and their slight changes with six-digit magnetic field values, and can also be used as a standard magnetometer to calibrate low-precision magnetometers. And it can output data through the RS-232 interface. The instrument is simple to operate, reliable in operation, and easy to carry.</p>
+        </section>
+
+        <section id="specifications">
+            <h2>Main Performance Indicators</h2>
+            <p>The main performance indicators of CTM-6W fluxgate meter are as follows:</p>
+            <div class="table-container">
+                <table>
+                    <!-- Optional thead
+                    <thead>
+                        <tr>
+                            <th>Indicator</th>
+                            <th>Value</th>
+                        </tr>
+                    </thead>
+                     -->
+                    <tbody>
+                        <tr>
+                            <td>Measurement magnetic field range</td>
+                            <td>± 99999.9 nT (1Gs)</td>
+                        </tr>
+                        <tr>
+                            <td>Static noise</td>
+                            <td>&lt;0.2 nT (p-p)</td>
+                        </tr>
+                        <tr>
+                            <td>Residual magnetic bias</td>
+                            <td>&lt;10nT</td>
+                        </tr>
+                        <tr>
+                            <td>Accuracy</td>
+                            <td>0.05% ± 10nT</td>
+                        </tr>
+                        <tr>
+                            <td>Magnetic field display</td>
+                            <td>LED six-digit</td>
+                        </tr>
+                        <tr>
+                            <td>RS232 Output</td>
+                            <td>Optical isolation serial code output</td>
+                        </tr>
+                        <tr>
+                            <td>Zero compensation</td>
+                            <td>No need to adjust compensation current; press zero offset key to set any point in the full range to zero</td>
+                        </tr>
+                        <tr>
+                            <td>Warm-up time</td>
+                            <td>15min</td>
+                        </tr>
+                        <tr>
+                            <td>Power supply</td>
+                            <td>12 V lithium battery inside the machine or an external charger</td>
+                        </tr>
+                        <tr>
+                            <td>Dimensions</td>
+                            <td>Probe Φ8mm×50mm; Chassis 130×170×55mm</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="instructions">
+            <h2>Instructions and Precautions</h2>
+            <ol>
+                <li>Insert the probe into the probe socket on the front panel, press the power switch on the rear panel, and the value displayed on the digital display on the front panel is the magnitude of the axial magnetic field of the probe. For example, "H-98765.4" nT is displayed, and "H" indicates the normal measurement of the magnetic field state. Press the power switch on the rear panel again to turn off the instrument.</li>
+                <li>When the header sign is displayed as a "-" number, it indicates that the direction pointed by the probe is opposite to the projection direction of the magnetic field on the axial direction of the probe. When the header sign is displayed as a positive number (no "+" sign), it indicates that the direction pointed by the probe is the same as the projection direction of the magnetic field on the axial direction of the probe.</li>
+                <li>Press the "Zero" button on the front panel lightly to change the display to "P 00000.0", which is equivalent to offsetting the reading to zero. "P" indicates that it is in a biased state in order to measure small changes in the relative magnetic field base value. Press this button again, and the instrument will cancel the bias and return to the normal measurement state. This method can repeatedly change the working state of the instrument.</li>
+                <li>The instrument has a 9-pin standard RS232 interface on the rear panel. It uses 8-bit asynchronous communication—8 data bits, 1 start bit, 1 stop bit, no parity check, and a baud rate of 19200. Data is output in ASCII code. When using a computer to read magnetic field data, please set the serial port parameters first. Please enter the "s" character when starting data transmission, and enter the "q" character when you need to stop data transmission. The following is an example of BASIC program reading data:
+                    <pre><code>10 OPEN "COM1:19200,N,8,,CSO,DSO" FOR INPUT AS #1
+20 OUTPUT #1, "s"
+30 INPUT #1,S
+30 PRINT S
+40 END</code></pre>
+                </li>
+                <li>The internal battery can work continuously for about 15 hours. When the battery is exhausted, the digital tube will automatically turn off. The charger can be plugged into the rear panel socket to charge the battery, and the charger can also supply power to the instrument. The charger still charges the battery when the power switch is off.</li>
+            </ol>
+        </section>
+
+        <section id="application-example">
+            <h2>Application Example: Measuring Field in Shielding Tube</h2>
+            <p>When using a single-component fluxgate magnetometer to measure the weak magnetic field in a magnetic shielding tube, the magnetometer's display reading is the composite value of the magnetic field in the tube and its own residual magnetism because the magnetometer itself has zero-position residual magnetism. The method to accurately measure the magnetic field in the shielding tube and eliminate the zero-position residual magnetism of the magnetometer is as follows:</p>
+            <p>Place the magnetometer probe in the shielding tube so that the axis of the probe coincides with the axis of the shielding tube, record the magnetometer reading B1 at this time, and then rotate the probe 180°, and record the magnetometer reading B2 at this time. Note that B1 and B2 should contain the sign displayed by the magnetometer. The magnetic field value in the shielding tube is (B1-B2)/2, and the zero-position value of the magnetometer is (B1+B2)/2.</p>
+        </section>
+
+        <section id="precautions-final" class="precautions">
+            <h2>Precautions</h2> <!-- Changed H2 inside precautions to strong tag for better semantics -->
+            <p><strong>Precautions:</strong></p> <!-- Added a lead-in text -->
+            <ol>
+                <li>The probe and the host should be handled with care, and do not squeeze, bump, or drop.</li>
+                <li>Keep the probe away from strong magnetic fields to prevent the probe from being magnetized.</li>
+                <li>The probe and the host are used together and cannot be replaced at will.</li>
+                <li>The charger should use the dedicated charger that comes with the machine.</li>
+                <li>To ensure battery life, charge it at least once a month.</li>
+            </ol>
+        </section>
+
+    </div> <!-- /container -->
+</body>
+</html>

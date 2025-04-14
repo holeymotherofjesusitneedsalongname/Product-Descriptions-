@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DXA-005B-DSP Digital Lock-In Amplifier - Xiamen Dexing Magnet Tech. Co., Ltd</title>
+    <style>
+        /* --- General Styles & Color Theme --- */
+        :root {
+            --primary-color: #00447C; /* Dark Blue */
+            --secondary-color: #4A90E2; /* Lighter Blue */
+            --bg-light: #f8f9fa; /* Very light grey */
+            --bg-medium: #e9ecef; /* Light grey */
+            --border-color: #dee2e6; /* Grey border */
+            --text-color: #343a40; /* Dark grey text */
+            /* Header/Footer colors removed as elements are removed */
+            --hover-bg: #e8f4fd; /* Light blue for hover */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 20px auto;
+            padding: 25px;
+            background-color: #fff;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            flex-grow: 1;
+        }
+
+        /* Header styles removed */
+
+        h1, h2, h3 {
+            margin-bottom: 0.75em;
+            color: var(--primary-color);
+            line-height: 1.3;
+        }
+
+        h1 { /* This H1 uses --primary-color on screen */
+            font-size: 1.8em;
+            text-align: center;
+            margin-bottom: 1em;
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 0.5em;
+            margin-top: 0; /* Ensure no extra top margin if it's the first element */
+        }
+
+        h2 {
+            font-size: 1.5em;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.3em;
+            margin-top: 1.5em;
+            color: var(--primary-color); /* Explicitly set here for screen */
+        }
+         h2:first-of-type {
+            margin-top: 0;
+         }
+
+        h3 {
+            font-size: 1.2em;
+            color: #555; /* H3 uses a different color on screen */
+            margin-top: 1.2em;
+        }
+
+        p {
+            margin-bottom: 1em;
+        }
+
+        ul {
+            list-style: disc;
+            margin: 0 0 1em 25px;
+        }
+
+        li {
+            margin-bottom: 0.5em;
+        }
+
+        /* Section styling */
+        section {
+            margin-bottom: 2em;
+            padding-bottom: 1em;
+            border-bottom: 1px dashed var(--border-color);
+        }
+        section:last-of-type {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+
+        /* Table Styling */
+        .table-container {
+            overflow-x: auto; /* Enable horizontal scrolling on small screens */
+            margin-top: 1em;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1.5em;
+            font-size: 0.95em;
+            min-width: 600px; /* Minimum width before scrolling */
+        }
+
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 10px 12px;
+            text-align: left;
+            vertical-align: top; /* Align content top */
+        }
+
+        thead th {
+            background-color: var(--bg-medium);
+            font-weight: bold;
+            position: sticky; /* Keep headers visible when scrolling */
+            top: 0;
+            z-index: 1;
+        }
+
+        /* Style first column cells differently (Parameter Name) */
+        tbody td:first-child {
+            font-weight: 600; /* Semi-bold */
+            background-color: var(--bg-light);
+            min-width: 200px; /* Give parameter names space */
+            white-space: nowrap; /* Prevent parameter names wrapping initially */
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: var(--bg-light);
+        }
+         tbody tr:nth-child(even) td:first-child {
+             background-color: #f0f3f5; /* Slightly different even row first cell */
+         }
+
+        tbody tr:hover {
+            background-color: var(--hover-bg);
+        }
+         tbody tr:hover td:first-child {
+             background-color: #eaf6ff; /* Slightly different hover for first cell */
+         }
+
+        /* Image Gallery */
+        .image-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center; /* Center images */
+            margin-bottom: 1.5em;
+            padding: 15px;
+            background-color: var(--bg-light);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+        }
+
+        .image-gallery figure {
+            margin: 0;
+            text-align: center;
+            flex-basis: calc(50% - 20px); /* Two columns layout base */
+            max-width: 350px; /* Max width per image */
+        }
+
+        .image-gallery img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 8px;
+            background-color: #fff; /* White background behind image */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .image-gallery figcaption {
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        /* Footer Styling Removed */
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+                margin: 10px;
+            }
+            /* Header responsive styles removed */
+            h1 { font-size: 1.6em; }
+            h2 { font-size: 1.3em; }
+            table { font-size: 0.9em; min-width: 0; } /* Allow table to shrink more */
+            th, td { padding: 8px 10px; }
+            tbody td:first-child { white-space: normal; } /* Allow parameter names to wrap */
+
+            .image-gallery figure {
+                flex-basis: calc(100% - 20px); /* Single column layout */
+                 max-width: 90%;
+            }
+        }
+         @media (max-width: 480px) {
+             h1 { font-size: 1.4em; }
+             h2 { font-size: 1.15em; }
+             th, td { padding: 6px 8px; font-size: 0.85em; }
+             ul { margin-left: 20px; }
+         }
+
+        /* --- Print specific styles --- */
+        @media print {
+            body {
+                background-color: #fff !important; /* Ensure white background */
+                color: #000 !important; /* Default text to black */
+                font-size: 10pt;
+                -webkit-print-color-adjust: exact !important; /* Apply globally */
+                print-color-adjust: exact !important;
+            }
+            .container {
+                max-width: 100% !important;
+                margin: 0 !important;
+                padding: 1cm !important;
+                box-shadow: none !important;
+                border-radius: 0 !important;
+                border: none !important;
+            }
+            /* Header print styles removed */
+
+            /* Force H1 text color blue, keep border black */
+            h1 {
+                color: var(--primary-color) !important;
+                border-bottom: 2px solid #000 !important;
+            }
+            /* Force H2 text color blue, keep border grey */
+            h2 {
+                color: var(--primary-color) !important; /* **** FORCE BLUE TEXT **** */
+                border-bottom: 1px solid #666 !important;
+            }
+            /* Keep H3 black */
+            h3 {
+                 color: #000 !important;
+                 border-bottom: 1px solid #999 !important;
+            }
+
+            section { border: none; margin-bottom: 1.5em; page-break-inside: auto;} /* Allow breaks within sections */
+
+            .table-container { overflow: visible !important; }
+            table { width: 100% !important; border-collapse: collapse !important; font-size: 9pt !important; min-width: 0; page-break-inside: auto; } /* Allow tables to break between rows */
+            th, td { border: 1px solid #999 !important; padding: 5px 7px !important; }
+            thead th {
+                background-color: #ddd !important; /* Force background */
+                color: #000 !important; /* Ensure black text on grey bg */
+                 -webkit-print-color-adjust: exact !important;
+                 print-color-adjust: exact !important;
+                 white-space: normal !important; /* Allow wrapping */
+            }
+             tr { page-break-inside: avoid !important; } /* Try to keep table rows together */
+
+            tbody td:first-child {
+                background-color: #eee !important; /* Force background */
+                color: #000 !important; /* Ensure black text */
+                 white-space: normal !important; /* Allow wrapping */
+                 -webkit-print-color-adjust: exact !important;
+                 print-color-adjust: exact !important;
+            }
+            tbody tr:nth-child(even) {
+                background-color: #f9f9f9 !important; /* Force background */
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+             tbody tr:nth-child(even) td:first-child {
+                 background-color: #f0f0f0 !important; /* Force slightly different background */
+                 -webkit-print-color-adjust: exact !important;
+                 print-color-adjust: exact !important;
+            }
+             tbody tr:hover, tbody tr:hover td:first-child { background-color: transparent !important; } /* Remove hover effect */
+
+
+            .image-gallery {
+                background-color: #f8f8f8 !important; /* Force background */
+                border: 1px solid #ccc !important;
+                justify-content: flex-start;
+                gap: 10mm;
+                 page-break-inside: auto; /* Allow gallery block to break if needed */
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            .image-gallery figure {
+                 flex-basis: calc(50% - 10mm);
+                 max-width: 45%;
+                 page-break-inside: avoid !important; /* Keep image and caption together */
+            }
+            .image-gallery img {
+                 border: 1px solid #999 !important;
+                 box-shadow: none !important;
+                 max-width: 100% !important; /* Ensure images fit */
+             }
+
+            /* Footer print styles removed */
+             a { text-decoration: none !important; color: #000 !important; } /* Ensure links are black */
+             a[href^="mailto:"]::after, a[href^="http"]::after {
+                 content: "" !important; /* Prevent printing URL after links */
+             }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Removed -->
+
+    <div class="container">
+        <h1>Digital Lock-In Amplifier DXA-005B-DSP</h1>
+
+        <section id="overview">
+            <h2>Overview</h2>
+            <p>The DXA-005B digital lock-in amplifier is the latest core technology product launched, with excellent high performance and broadband measurement capabilities. This instrument is based on digital modulation technology and is equipped with a 24 bit high-precision analog-to-digital converter (ADC) and a 16 bit high-speed analog-to-digital converter (DAC). With the newly launched stream architecture, it can accurately, quickly, and flexibly detect effective signal components hidden in strong noise.</p>
+            <p>DXA-005B not only measures the amplitude and phase information of input signals simultaneously, but also achieves international leading levels in key performance indicators such as measurement accuracy, operating frequency range, signal-to-noise ratio, and dynamic reserve. In addition, the newly added multi harmonic measurement, oscilloscope and spectrum analyzer functions, and PID control functions make DXA-005B widely applicable to various needs in scientific research and industrial fields.</p>
+        </section>
+
+        <section id="key-features">
+             <h2>Key Features</h2>
+             <ul>
+                 <li>Measure frequency range from 10 μHz to 250KHz</li>
+                 <li>Input noise as low as 2.5nV/√Hz</li>
+                 <li>Input range 1nV to 5Vrms</li>
+                 <li>The time constant ranges from 100ns to 3ks</li>
+                 <li>Dynamic reserve greater than 130dB</li>
+                 <li>8-channel demodulator synchronous measurement</li>
+                 <li>Spectrum analysis and oscilloscope functions</li>
+                 <li>2-channel PID controller</li>
+             </ul>
+        </section>
+
+        <section id="image-gallery">
+            <h2>Product Images</h2>
+            <div class="image-gallery">
+                 <figure>
+                      <!-- Updated filename for front panel -->
+                      <img src="/Users/Roach/Desktop/ pOCCOS/Product-Descriptions-/mEow/products/Digital_Lock-In_Amplifier-DXA-005B_20250407/Digital Lock-In Amplifier-DXA-005.jpg" alt="DXA-005B Amplifier Unit Front Panel">
+                      <figcaption>DXA-005B Unit Front Panel Detail</figcaption>
+                 </figure>
+                 <figure>
+                      <!-- Updated filename for display screen -->
+                      <img src="Digital Lock-In Amplifier-DXA-005B 20250407_page-007.jpg" alt="DXA-005B Amplifier Display Screen Example">
+                      <figcaption>DXA-005B Example Display Screen</figcaption>
+                 </figure>
+            </div>
+        </section>
+
+        <section id="input-channel">
+            <h2>Input Channel</h2>
+            <p>The DXA-005B is equipped with a low-noise analog front-end amplifier that can efficiently process differential or single ended signals, with equivalent input noise as low as 2.5nV/√Hz. The input impedance of this channel is 10M Ω, and the full-scale sensitivity range is 1nVrms to 5Vrms. In addition, the signal input channel adopts high-precision 24 bit ADC, and the dynamic range can reach over 130dB.</p>
+        </section>
+
+        <section id="output-channel">
+            <h2>Output Channel</h2>
+            <p>DXA-005B is a 16 bit analog-to-digital converter (DAC) based on 32 MSPS, capable of generating high-precision sine wave signals in the frequency range of 10 μHz to 250KHz, and adjustable DC bias. The signal amplitude range is 0.1Vrms to 5Vrms, and the DC bias range is ± 5Vdc. For external devices that require bias voltage, such as electro-optic modulators, DXA-005B, with its excellent driving capability, can directly drive the device without the need for additional level conversion amplifiers. The phase of the output signal is synchronized with the internal oscillator of the instrument, and the phase offset can be independently set. In addition, DXA-005B supports AM/FM/PM modulation function, making it convenient for users to modulate and control the system.</p>
+        </section>
+
+        <section id="reference-channel">
+            <h2>Reference Channel</h2>
+            <p>The reference signal of the lock-in amplifier can be selected as sine wave or square wave signal according to the actual needs of the user, or it can be a reference signal synthesized internally by the instrument. When DXA-005B is set to internal reference signal mode, the high-precision oscillator and digital synthesis algorithm inside the instrument will generate a sine wave signal for multiplication with the input signal, and the internal reference signal is almost unaffected by phase noise. Through digital phase shifting technology, the phase resolution of the internal reference signal can reach 1 µ deg.</p>
+            <p>When DXA-005B operates in external reference signal mode, it can accept sine wave signals or TTL logic levels as external reference signals, which will be locked by an internal digital phase-locked loop. Based on the frequency of the reference signal, DXA-005B can detect signals of the same frequency and its harmonics, up to 10000 harmonics of the fundamental frequency, but the maximum harmonic frequency cannot exceed the upper limit of the instrument's measurement bandwidth.</p>
+        </section>
+
+        <section id="digital-demodulator">
+            <h2>Digital Demodulator</h2>
+            <p>DXA-005B has 8 synchronous decoders, each of which can be independently controlled. The DXA-005B time constant can be flexibly set within the range of 100ns to 3ks, and users can customize the time constant according to their needs. The steep drop rate of the filter can be selected from 6-48 dB/oct, with a total of 8 orders. Using digital modulation technology and advanced filter structure, DXA-005B has higher dynamic reserve (>130dB), more accurate phase (absolute phase error<1°), zero DC drift, and excellent orthogonal performance compared to traditional analog lock-in amplifiers. In addition, DXA-005B provides optional synchronous filters that can quickly eliminate the influence of signal harmonics, ensuring that the instrument can accurately detect low-frequency signals while responding quickly.</p>
+        </section>
+
+         <section id="display-communication">
+            <h2>Display & Communication Interface</h2>
+             <h3>Color Display Screen</h3>
+            <p>The DXA-005B is equipped with a 5.6-inch TFT color display screen with a resolution of 640 × 480, which serves as the main display interface of the instrument and can be independently controlled in all directions through a keyboard. On the display screen, users can flexibly view the X, Y, R, θ and other parameters of the demodulator, and also configure various basic settings such as filter constants, making the operation intuitive and convenient.</p>
+             <h3>Communication Interface</h3>
+             <p>DXA-005B has USB 2.0, 1000Mbps RJ45 Ethernet port, WIFI wireless network interface, RS232 serial port, and GPIB interface. Through various communication interfaces, users can effectively use all testing functions of DXA-005B on the control computer, set reasonable control parameters for the instrument, and read the data measured by the instrument.</p>
+             <ul>
+                 <li>USB 2.0: 480 Mbps high-speed interface</li>
+                 <li>Ethernet: RJ45-1000Mbps wired interface</li>
+                 <li>WIFI wireless network interface</li>
+                 <li>GPIB: IEEE-488.2 interface</li>
+                 <li>RS-232: Standard 9-pin RS-232 female socket</li>
+            </ul>
+         </section>
+
+        <section id="parameters">
+            <h2>Parameters</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Parameter Category</th>
+                            <th>Specification</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Input Signal Channel -->
+                        <tr><td>Input Mode</td><td>Voltage: ended input or differential input<br>Current: ended signal (transimpedance input)</td></tr>
+                        <tr><td>Full Scale Sensitivity</td><td>1 nV to 5 V</td></tr>
+                        <tr><td>Range</td><td>2 mV to 5 V, a total of 7 levels</td></tr>
+                        <tr><td>Input Amplitude Range</td><td>&lt;5 Vrms</td></tr>
+                        <tr><td>Input Coupling Mode</td><td>DC coupling or AC coupling</td></tr>
+                        <tr><td>Input Impedance</td><td>10 MΩ || 25 pF (voltage)<br>100 Ω or 1 kΩ (current)</td></tr>
+                        <tr><td>Input Shield</td><td>grounding or 10 kΩ floating ground</td></tr>
+                        <tr><td>Dynamic Reserve</td><td>&gt;130 dB</td></tr>
+                        <tr><td>Amplitude Accuracy</td><td>0.5% typical value, maximum value is 1%</td></tr>
+                        <tr><td>Equivalent Input Voltage Noise</td><td>3.5nV/√Hz (f ≥ 1 kHz)<br>2.5 nV/√Hz (f ≥ 10 kHz)</td></tr>
+                        <tr><td>Equivalent Input Current Noise</td><td>20 fA/√Hz (f=97Hz)</td></tr>
+                        <tr><td>ADC Bits</td><td>24 bits</td></tr>
+
+                        <!-- Reference Signal Channel -->
+                        <tr><td>Number of Reference Channels</td><td>Two</td></tr>
+                        <tr><td>Input Signal</td><td>Frequency range: 10 μHz – 250KHz<br>Support input waveform: square wave or sine wave</td></tr>
+                        <tr><td>Input Impedance</td><td>1 MΩ</td></tr>
+                        <tr><td>Square Wave Reference Level</td><td>3V&lt;VIH&lt;5V, -0.1V&lt;VIL&lt;0.5V</td></tr>
+                        <tr><td>Sinusoidal Reference Signal</td><td>Frequency&gt;1 Hz: 300 mV &lt; Vpp &lt; 10 V</td></tr>
+                        <tr><td>Phase Resolution</td><td>1.0 µdeg</td></tr>
+                        <tr><td>Phase Error</td><td>Typical ± 0.5deg, maximum ± 1deg</td></tr>
+                        <tr><td>Warm Float</td><td>&lt; 200 ppm/°C</td></tr>
+                        <tr><td>Harmonic Detection</td><td>1-10000F (nF &lt; 1.5 MHz)</td></tr>
+                        <tr><td>Collection Time</td><td>Internal reference: Real time collection<br>External reference: 10 or 100 signal cycles</td></tr>
+
+                        <!-- Oscillator -->
+                        <tr><td>Number of Digital Oscillators</td><td>Two</td></tr>
+                        <tr><td>Accuracy</td><td>0.3 ppm</td></tr>
+                        <tr><td>Temperature Stability</td><td>0.5 ppm/°C</td></tr>
+                        <tr><td>Aging Rate</td><td>&lt; 1 ppm/year</td></tr>
+                        <tr><td>Phase Noise</td><td>-145 dBc/Hz (@1kHz)</td></tr>
+
+                        <!-- Output Signal Channel -->
+                        <tr><td>Frequency Range</td><td>DC – 250KHz</td></tr>
+                        <tr><td>Frequency Accuracy</td><td>2 ppm + 1 μHz</td></tr>
+                        <tr><td>Frequency Resolution</td><td>1 nHz</td></tr>
+                        <tr><td>Sinusoidal Amplitude</td><td>0.1 µVrms to 5 Vrms</td></tr>
+                        <tr><td>Accuracy</td><td>Typical 0.5%, maximum 2%</td></tr>
+                        <tr><td>Resolution</td><td>0.1 µVrms</td></tr>
+                        <tr><td>Driving Ability</td><td>± 80 mA max</td></tr>
+                        <tr><td>Temperature Stability</td><td>&lt; 200 ppm/°C</td></tr>
+                        <tr><td>Output Impedance</td><td>50 Ω</td></tr>
+                        <tr><td>Adjustable DC Bias</td><td>-5 VDC to 5 VDC</td></tr>
+                        <tr><td>Synchronous Output</td><td>3.3V TTL/CMOS level, Output impedance: 50 Ω</td></tr>
+                        <tr><td>Additional Features</td><td>AM/FM/PM modulation output</td></tr>
+                        <tr><td>DAC</td><td>16 bit, 32 MSPS</td></tr>
+
+                        <!-- Demodulator -->
+                        <tr><td>Number of Demodulators</td><td>8</td></tr>
+                        <tr><td>Demodulator Bits</td><td>64 bit</td></tr>
+                        <tr><td>Time Constant</td><td>100ns - 3ks</td></tr>
+                        <tr><td>Measurement Bandwidth</td><td>50 μHz - 1.6 MHz</td></tr>
+                        <tr><td>Filter Steep Drop</td><td>6, 12, 18, 24, 30, 36, 42, 48 dB/oct</td></tr>
+                        <tr><td>Synchronous Filter</td><td>&lt; 1000 Hz effective</td></tr>
+
+                        <!-- Auxiliary Input/Output -->
+                        <tr><td>AUX Inputs Function</td><td>4-channel input</td></tr>
+                        <tr><td>AUX Inputs Amplitude</td><td>± 10V, 0.1 mV resolution</td></tr>
+                        <tr><td>AUX Inputs Impedance</td><td>1 MΩ</td></tr>
+                        <tr><td>AUX Inputs ADC</td><td>16 bit, 150 kSPS</td></tr>
+                        <tr><td>AUX Outputs Function</td><td>4-channel output</td></tr>
+                        <tr><td>AUX Outputs Amplitude</td><td>± 10V, 0.1 mV resolution</td></tr>
+                        <tr><td>AUX Outputs Drive Current</td><td>Maximum ± 30 mA</td></tr>
+                        <tr><td>AUX Outputs ADC</td><td>16 bit, 500 kSPS</td></tr>
+
+                        <!-- Other -->
+                        <tr><td>Power Requirements Voltage</td><td>220~240 V AC (Standard)<br>100~120 V AC (Optional)</td></tr>
+                        <tr><td>Power Consumption</td><td>Typical 50 W, maximum 70 W</td></tr>
+                        <tr><td>Power Noise Suppression</td><td>70dB @ 1MHz</td></tr>
+                        <tr><td>External Dimensions</td><td>448mm × 532mm × 148mm</td></tr>
+                        <tr><td>Weight</td><td>12 kg</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Footer Removed -->
+
+</body>
+</html>

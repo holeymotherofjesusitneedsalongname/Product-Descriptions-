@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Axial Probe Specifications - Dexing Magnet Tech. Co., Ltd</title>
+    <style>
+    /* --- START OF STYLES (Adapted from code-3.html) --- */
+
+    /* --- General Styles & Color Theme --- */
+    :root {
+        --primary-color: #00447C; /* Dark Blue */
+        --secondary-color: #4A90E2; /* Lighter Blue */
+        --bg-light: #f8f9fa; /* Very light grey */
+        --bg-medium: #e9ecef; /* Light grey */
+        --border-color: #dee2e6; /* Grey border */
+        --text-color: #343a40; /* Dark grey text */
+        --header-bg: #343a40; /* Dark header */
+        --header-text: #ffffff; /* White header text */
+        --footer-bg: #f1f1f1; /* Light footer */
+        --footer-text: #555;
+        --hover-bg: #e8f4fd; /* Light blue for hover */
+        --warning-color: #dc3545; /* Red for warnings */
+        --warning-bg: #f8d7da;
+        /* Added from original probe CSS */
+        --accent-color: #D1232A;  /* Original Dexin Red (if needed) */
+        --dark-gray: #333;      /* From original probe CSS (if needed) */
+    }
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+    body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        background-color: #f4f4f4; /* Match container background */
+        color: var(--text-color);
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+    .container {
+        max-width: 1100px;
+        margin: 20px auto;
+        padding: 25px;
+        background-color: #fff;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        flex-grow: 1;
+    }
+    header.main-header {
+        background-color: var(--header-bg);
+        color: var(--header-text);
+        padding: 15px 25px;
+        margin-bottom: 20px;
+        border-radius: 8px 8px 0 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    header.main-header .logo-brand {
+        font-size: 1.8em;
+        font-weight: bold;
+    }
+    header.main-header .company-name {
+        font-size: 0.9em;
+        text-align: right;
+        line-height: 1.3;
+    }
+    /* Removed separate h1, h2, h3 margin-bottom */
+    h1, h2, h3 {
+        color: var(--primary-color);
+        line-height: 1.3;
+        margin-top: 1em; /* Consistent top margin */
+        margin-bottom: 0.75em; /* Consistent bottom margin */
+    }
+     h1:first-child, h2:first-child, h3:first-child {
+        margin-top: 0; /* Remove top margin for first heading */
+     }
+
+    h1 { /* Applied to container > h1 */
+        font-size: 1.8em;
+        text-align: center;
+        border-bottom: 2px solid var(--secondary-color);
+        padding-bottom: 0.5em;
+    }
+    h2 { /* Applied to section > h2 */
+        font-size: 1.5em;
+        border-bottom: 1px solid var(--border-color);
+        padding-bottom: 0.3em;
+        color: var(--primary-color);
+    }
+    h3 { /* Applied to section > h3 - Needs adjustment for collapsible */
+        font-size: 1.2em;
+        color: var(--primary-color); /* Use primary color */
+        /* Remove border from generic h3, apply specifically to non-collapsible if needed */
+        /* border-bottom: 1px solid var(--border-color); */
+        padding-bottom: 0.3em;
+    }
+
+    p {
+        margin-bottom: 1em;
+    }
+    ul {
+        list-style: disc;
+        margin: 0 0 1em 25px;
+    }
+    li {
+        margin-bottom: 0.5em;
+    }
+    section {
+        margin-bottom: 2em;
+        padding-bottom: 1em;
+        /* Use subtle border for sections */
+        border-bottom: 1px solid var(--bg-medium);
+    }
+     section:last-of-type {
+        border-bottom: none;
+        margin-bottom: 0;
+        padding-bottom: 0;
+     }
+
+    .table-container { /* Keep this wrapper for tables */
+        overflow-x: auto;
+        margin-top: 1em;
+        margin-bottom: 1.5em; /* Add bottom margin here */
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        /* margin-bottom removed, handled by container */
+        font-size: 0.95em;
+        min-width: 600px; /* Adjust if needed */
+    }
+    th, td {
+        border: 1px solid var(--border-color);
+        padding: 10px 12px;
+        text-align: left;
+        vertical-align: top; /* Changed from middle */
+    }
+    thead th {
+        background-color: var(--bg-medium);
+        font-weight: bold;
+        color: var(--primary-color); /* Match original probe header color */
+        position: sticky; /* Keeps header visible when scrolling table */
+        top: 0;
+        z-index: 1;
+    }
+     thead th { /* Stronger border below header */
+        border-bottom-width: 2px;
+        border-bottom-color: var(--border-color);
+     }
+
+    /* Zebra striping */
+    tbody tr:nth-child(even) {
+        background-color: var(--bg-light);
+    }
+    /* Removed first-child special background from DXMP style - keep it simple */
+    /* tbody td:first-child { ... } */
+    /* tbody tr:nth-child(even) td:first-child { ... } */
+
+    tbody tr:hover {
+        background-color: var(--hover-bg);
+    }
+    /* tbody tr:hover td:first-child { ... } */
+
+    /* --- Image Gallery Styling (Applied to probe diagrams) --- */
+    .image-gallery {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px; /* Adjust gap between images */
+        justify-content: center; /* Center images horizontally */
+        margin-top: 1em; /* Add some space above */
+        margin-bottom: 1.5em;
+        padding: 15px;
+        background-color: var(--bg-light);
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+    }
+    .image-gallery figure {
+        margin: 0;
+        text-align: center;
+         /* Adjust flex-basis for potentially 2 columns */
+        flex-basis: calc(50% - 20px); /* Make them take up half width minus gap */
+        max-width: 400px; /* Limit max width */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .image-gallery img {
+        max-width: 100%;
+        height: auto;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        margin-bottom: 8px;
+        background-color: #fff;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .image-gallery figcaption {
+        font-size: 0.9em;
+        color: #666;
+        margin-top: auto;
+    }
+
+    /* --- Alert Boxes (If needed later) --- */
+    .safety-warning, .attention {
+        border-left: 5px solid var(--warning-color);
+        background-color: var(--warning-bg);
+        padding: 10px 15px;
+        margin: 1em 0;
+        color: #721c24;
+        border-radius: 4px;
+    }
+     .attention {
+         border-left-color: #ffc107; /* Yellow for attention */
+         background-color: #fff3cd;
+         color: #856404;
+     }
+    .safety-warning strong, .attention strong {
+        font-weight: bold;
+    }
+
+    /* --- Footer --- */
+    footer.main-footer {
+        background-color: var(--footer-bg);
+        color: var(--footer-text);
+        text-align: center;
+        padding: 20px;
+        margin-top: 20px; /* Ensure space above footer */
+        font-size: 0.85em;
+        border-top: 1px solid var(--border-color);
+    }
+    footer.main-footer p {
+        margin-bottom: 0.5em;
+    }
+    footer.main-footer a {
+        color: var(--primary-color);
+        text-decoration: none;
+    }
+    footer.main-footer a:hover {
+        text-decoration: underline;
+    }
+
+    /* --- Collapsible Section Styling (Integrated from original probe CSS) --- */
+    section h3.collapsible-header { /* Target specifically */
+        cursor: pointer;
+        position: relative;
+        padding-right: 25px; /* Space for indicator */
+        margin-bottom: 0; /* Remove bottom margin if content follows directly */
+        border-bottom: 1px solid var(--border-color); /* Add border back */
+        padding-bottom: 10px; /* Restore padding */
+        /* Ensure consistent font size */
+        font-size: 1.2em;
+        font-weight: bold; /* Make it bold like original */
+    }
+
+    section h3.collapsible-header::after {
+        content: '▼'; /* Down arrow */
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 0.8em;
+        color: var(--primary-color); /* Use primary color */
+        transition: transform 0.3s ease;
+    }
+
+    section h3.collapsible-header.collapsed::after {
+        content: '►'; /* Right arrow */
+    }
+
+    .collapsible-content {
+        overflow: hidden;
+        max-height: 5000px; /* Large enough for content */
+        transition: max-height 0.5s ease-in-out, padding 0.3s ease, margin 0.3s ease, border 0.3s ease;
+        padding-top: 15px; /* Space below header when open */
+        margin-top: 0;
+        /* Add a subtle top border when open for separation */
+        border-top: 1px solid var(--bg-light);
+    }
+
+    .collapsible-content.collapsed {
+        max-height: 0;
+        padding-top: 0;
+        padding-bottom: 0;
+        margin-top: 0; /* Adjusted from -1px */
+        border-top: none; /* Hide border when collapsed */
+        opacity: 0;
+        transition: max-height 0.3s ease-out, padding 0.3s ease, margin 0.3s ease, opacity 0.2s ease, border 0.3s ease;
+    }
+
+
+    /* --- Responsive Adjustments (Adapted from code-3.html) --- */
+    @media (max-width: 768px) {
+        .container { padding: 15px; margin: 10px; }
+        header.main-header { padding: 10px 15px; flex-direction: column; text-align: center; }
+        header.main-header .logo-brand { margin-bottom: 5px; font-size: 1.6em; }
+        header.main-header .company-name { text-align: center; font-size: 0.85em; }
+        h1 { font-size: 1.6em; }
+        h2 { font-size: 1.3em; }
+        h3 { font-size: 1.1em; } /* Adjusted */
+         section h3.collapsible-header { font-size: 1.1em; } /* Keep consistent */
+
+        table { font-size: 0.9em; min-width: 0; }
+        th, td { padding: 8px 10px; }
+        tbody td:first-child { white-space: normal; } /* Allow first column text wrap */
+
+         /* Keep 2 columns for images on medium screens */
+         .image-gallery figure {
+             flex-basis: calc(50% - 15px); /* Adjusted gap */
+             max-width: 45%;
+         }
+    }
+    @media (max-width: 480px) {
+        h1 { font-size: 1.4em; }
+        h2 { font-size: 1.15em; }
+        h3 { font-size: 1.0em; } /* Adjusted */
+        section h3.collapsible-header { font-size: 1.0em; } /* Keep consistent */
+
+        th, td { padding: 6px 8px; font-size: 0.85em; }
+        ul { margin-left: 20px; }
+        /* Single column for images on small screens */
+         .image-gallery figure {
+             flex-basis: 100%; /* Full width */
+             max-width: 90%;
+         }
+    }
+
+    /* --- Print specific styles (Adapted from code-3.html, includes collapsible fix) --- */
+    @media print {
+        body {
+            background-color: #fff !important; color: #000 !important; font-size: 10pt;
+            -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important;
+        }
+        .container { max-width: 100% !important; margin: 0 !important; padding: 1cm !important; box-shadow: none !important; border-radius: 0 !important; border: none !important; }
+        header.main-header, footer.main-footer { display: none !important; } /* Hide header AND footer */
+
+        h1 { color: var(--primary-color) !important; border-bottom: 2px solid #000 !important; font-size: 14pt !important; }
+        h2 { color: var(--primary-color) !important; border-bottom: 1px solid #666 !important; font-size: 12pt !important; page-break-after: avoid !important; }
+        h3 { color: #000 !important; font-size: 11pt !important; page-break-after: avoid !important; }
+         /* Ensure collapsible header keeps its border */
+         section h3.collapsible-header { border-bottom: 1px solid #999 !important; }
+
+        section { border: none; margin-bottom: 1.5em; page-break-inside: avoid !important; }
+
+        /* --- Ensure Collapsed Content is Visible --- */
+        .collapsible-header::after { display: none !important; } /* Hide arrow */
+        .collapsible-content {
+            display: block !important;
+            max-height: none !important;
+            opacity: 1 !important;
+            overflow: visible !important;
+            padding-top: 10px !important; /* Adjust padding for print */
+            padding-bottom: 5px !important;
+            border-top: none !important; /* No top border needed in print */
+            background-color: transparent !important; /* Ensure no background */
+        }
+
+        .table-container { overflow: visible !important; }
+        table { width: 100% !important; border-collapse: collapse !important; font-size: 8.5pt; min-width: 0; page-break-inside: auto; }
+        th, td { border: 1px solid #999 !important; padding: 4px 6px; vertical-align: top !important; word-wrap: break-word !important; }
+        thead th {
+            background-color: #ddd !important; color: #000 !important; font-weight: bold !important;
+            -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important;
+            white-space: normal !important;
+        }
+        tr { page-break-inside: avoid !important; }
+        /* Consistent backgrounds for print */
+        tbody td { background-color: #fff !important; }
+        tbody tr:nth-child(even) td { background-color: #f9f9f9 !important; }
+
+        tbody tr:hover, tbody tr:hover td:first-child { background-color: transparent !important; }
+
+        .image-gallery {
+            background-color: #f8f8f8 !important; border: 1px solid #ccc !important; justify-content: flex-start; gap: 10mm; page-break-inside: auto;
+            -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important;
+        }
+        /* Adjust print layout for 2 columns */
+        .image-gallery figure { flex-basis: calc(50% - 10mm); max-width: 45%; page-break-inside: avoid !important; }
+        .image-gallery img { border: 1px solid #999 !important; box-shadow: none !important; max-width: 100% !important; height: auto !important; }
+        .safety-warning, .attention {
+            border: 1px solid #000 !important; color: #000 !important; background-color: #fff !important;
+             -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important;
+             page-break-inside: avoid;
+         }
+        a { text-decoration: none !important; color: #000 !important; }
+        a[href^="mailto:"]::after, a[href^="http"]::after { content: "" !important; }
+    }
+    /* --- END OF STYLES --- */
+    </style>
+</head>
+<body>
+
+   
+
+    <!-- Wrap main content in container -->
+    <div class="container">
+
+        <h1>Axial Probe Specifications</h1> <!-- Moved inside container -->
+
+        <!-- Original Main Content Starts -->
+        <main> <!-- Keep main semantically, but it doesn't do much styling now -->
+            <section class="general-notes">
+                <!-- Make H3 consistent, maybe use H2? Let's keep H3 -->
+                <h3>General Notes</h3>
+                <ul>
+                    <li>Probe length can be customized.</li>
+                    <li>Array probe configurations can be customized.</li>
+                    <li>A temperature sensor can be added inside the probe (explicitly noted for relevant types).</li>
+                    <li>Standard Cable Length: 2.5m</li>
+                    <li>Standard Probe Handle Length: 70mm</li>
+                 </ul>
+                 <!-- Apply image gallery styling to the diagrams -->
+                 <div class="image-gallery">
+                     <figure>
+                          <img src="Axial+probe+2024_page-002.jpg" alt="Axial Probe Dimensions Diagram" class="probe-diagram">
+                          <figcaption>Axial Probe Dimensions</figcaption>
+                     </figure>
+                     <figure>
+                          <img src="Axial+probe+2024_page-008.jpg" alt="Probe Diagram Detail with Active Area View" class="active-area-diagram">
+                           <figcaption>Probe Detail / Active Area</figcaption>
+                      </figure>
+                  </div>
+            </section>
+
+            <!-- Probe Section 1: Ordinary High Precision -->
+            <section>
+                <h3 class="collapsible-header">1. Ordinary High Precision Axial Probe</h3>
+                <div class="collapsible-content">
+                    <p><strong>Recommended Gaussmeters:</strong> DX-130, DX-150, DX-160 etc.</p>
+                    <!-- Wrap table in container for scrolling -->
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>No.</th><th>L (cm)</th><th>D (mm) max</th><th>A (mm)</th><th>Dia. of active area (mm)</th><th>Frequency range</th><th>Full range</th><th>Accuracy (linearity)</th><th>Working temp. zone</th><th>Zero field temp. coefficient (max)</th><th>Temp. coefficient (max)</th><th>Packaging materials</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>1ADX800F</td><td>10/25/50</td><td>5.00</td><td>1±0.1</td><td>0.15</td><td>DC-1kHz</td><td>300kGs</td><td>±0.2% ~ 30kGs</td><td>-10°C ~ +100°C</td><td>±0.08 G/°C</td><td>±0.015%/°C</td><td>Brass</td></tr>
+                                <tr><td>1ADX801F</td><td>10/25/50</td><td>3.00</td><td>1±0.1</td><td>0.15</td><td>DC-1kHz</td><td>300kGs</td><td>±0.2% ~ 30kGs</td><td>-10°C ~ +100°C</td><td>±0.08 G/°C</td><td>±0.015%/°C</td><td>Brass</td></tr>
+                                <tr><td>1ADX802F</td><td>10/25/50</td><td>2.00</td><td>1±0.1</td><td>0.15</td><td>DC-1kHz</td><td>300kGs</td><td>±0.2% ~ 30kGs</td><td>-10°C ~ +100°C</td><td>±0.08 G/°C</td><td>±0.015%/°C</td><td>Brass</td></tr>
+                                <tr><td>1ADX803F</td><td>10/25/50</td><td>1.50</td><td>1±0.1</td><td>0.15</td><td>DC-1kHz</td><td>300kGs</td><td>±0.2% ~ 30kGs</td><td>-10°C ~ +100°C</td><td>±0.08 G/°C</td><td>±0.015%/°C</td><td>Brass</td></tr>
+                                <tr><td>1ADX804F</td><td>10/25/50</td><td>1.20</td><td>0.5±0.1</td><td>0.15</td><td>DC-1kHz</td><td>300kGs</td><td>±0.2% ~ 30kGs</td><td>-10°C ~ +100°C</td><td>±0.08 G/°C</td><td>±0.015%/°C</td><td>Brass</td></tr>
+                                <tr><td>1ADX805F</td><td>10/25/50</td><td>0.90</td><td>0.5±0.1</td><td>0.10</td><td>DC-1kHz</td><td>300kGs</td><td>±0.2% ~ 30kGs</td><td>-10°C ~ +100°C</td><td>±0.08 G/°C</td><td>±0.015%/°C</td><td>Brass</td></tr>
+                                <tr><td>1ADX806F</td><td>10/25/50</td><td>0.75</td><td>0.5±0.1</td><td>0.10</td><td>DC-1kHz</td><td>300kGs</td><td>±0.2% ~ 30kGs</td><td>-10°C ~ +100°C</td><td>±0.08 G/°C</td><td>±0.015%/°C</td><td>Brass</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Probe Section 2: High Precision Temp Comp -->
+            <section>
+                <h3 class="collapsible-header">2. High Precision Temperature Compensation Axial Probe</h3>
+                 <div class="collapsible-content">
+                    <p><em>(Note: Corresponds to probes with "-T" suffix, implicitly includes temperature sensor)</em></p>
+                     <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr><th>No.</th><th>L (cm)</th><th>D (mm) max</th><th>A (mm)</th><th>Dia. of active area (mm)</th><th>Frequency range</th><th>Full range</th><th>Accuracy (linearity)</th><th>Working temp. zone</th><th>Zero field temp. coefficient (max)</th><th>Temp. coefficient (max)</th><th>Packaging materials</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>1ADX800F-T</td><td>10/25/50</td><td>5.00</td><td>1±0.1</td><td>0.15</td><td>DC-1kHz</td><td>300kGs</td><td>±0.2% ~ 30kGs</td><td>-10°C ~ +100°C</td><td>±0.08 G/°C</td><td>±0.01%/°C</td><td>Brass</td></tr>
+                                <tr><td>1ADX801F-T</td><td>10/25/50</td><td>3.00</td><td>1±0.1</td><td>0.15</td><td>DC-1kHz</td><td>300kGs</td><td>±0.2% ~ 30kGs</td><td>-10°C ~ +100°C</td><td>±0.08 G/°C</td><td>±0.01%/°C</td><td>Brass</td></tr>
+                                <tr><td>1ADX802F-T</td><td>10/25/50</td><td>2.00</td><td>1±0.1</td><td>0.15</td><td>DC-1kHz</td><td>300kGs</td><td>±0.2% ~ 30kGs</td><td>-10°C ~ +100°C</td><td>±0.08 G/°C</td><td>±0.01%/°C</td><td>Brass</td></tr>
+                                <tr><td>1ADX803F-T</td><td>10/25/50</td><td>1.50</td><td>1±0.1</td><td>0.15</td><td>DC-1kHz</td><td>300kGs</td><td>±0.2% ~ 30kGs</td><td>-10°C ~ +100°C</td><td>±0.08 G/°C</td><td>±0.01%/°C</td><td>Brass</td></tr>
+                                <tr><td>1ADX804F-T</td><td>10/25/50</td><td>1.20</td><td>0.5±0.1</td><td>0.15</td><td>DC-1kHz</td><td>300kGs</td><td>±0.2% ~ 30kGs</td><td>-10°C ~ +100°C</td><td>±0.08 G/°C</td><td>±0.01%/°C</td><td>Brass</td></tr>
+                                <tr><td>1ADX805F-T</td><td>10/25/50</td><td>0.90</td><td>0.5±0.1</td><td>0.10</td><td>DC-1kHz</td><td>300kGs</td><td>±0.2% ~ 30kGs</td><td>-10°C ~ +100°C</td><td>±0.08 G/°C</td><td>±0.01%/°C</td><td>Brass</td></tr>
+                                <tr><td>1ADX806F-T</td><td>10/25/50</td><td>0.75</td><td>0.5±0.1</td><td>0.10</td><td>DC-1kHz</td><td>300kGs</td><td>±0.2% ~ 30kGs</td><td>-10°C ~ +100°C</td><td>±0.08 G/°C</td><td>±0.01%/°C</td><td>Brass</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Probe Section 3: Ultra High Precision -->
+            <section>
+                <h3 class="collapsible-header">3. Ultra High Precision Axial Probe</h3>
+                 <div class="collapsible-content">
+                    <p><strong>Recommended Gaussmeters:</strong> DX-180, DX-210, DX-360</p>
+                    <div class="table-container">
+                        <table>
+                             <thead>
+                                <tr><th>No.</th><th>L (cm)</th><th>D (mm) max</th><th>A (mm)</th><th>Dia. of active area (mm)</th><th>Frequency range</th><th>Full range</th><th>Accuracy (linearity)</th><th>Working temp. zone</th><th>Zero field temp. coefficient (max)</th><th>Temp. coefficient (max)</th><th>Packaging materials</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>1HADX800F</td><td>10/25/50</td><td>5.00</td><td>1±0.1</td><td>0.15</td><td>DC-1kHz</td><td>300kGs</td><td>±0.05% ~ 30kGs</td><td>-10°C ~ +100°C</td><td>±0.08 G/°C</td><td>±0.007%/°C</td><td>Brass</td></tr>
+                                <tr><td>1HADX801F</td><td>10/25/50</td><td>3.00</td><td>1±0.1</td><td>0.15</td><td>DC-1kHz</td><td>300kGs</td><td>±0.05% ~ 30kGs</td><td>-10°C ~ +100°C</td><td>±0.08 G/°C</td><td>±0.007%/°C</td><td>Brass</td></tr>
+                                <tr><td>1HADX802F</td><td>10/25/50</td><td>2.00</td><td>1±0.1</td><td>0.15</td><td>DC-1kHz</td><td>300kGs</td><td>±0.05% ~ 30kGs</td><td>-10°C ~ +100°C</td><td>±0.08 G/°C</td><td>±0.007%/°C</td><td>Brass</td></tr>
+                                <tr><td>1HADX803F</td><td>10/25/50</td><td>1.50</td><td>1±0.1</td><td>0.15</td><td>DC-1kHz</td><td>300kGs</td><td>±0.05% ~ 30kGs</td><td>-10°C ~ +100°C</td><td>±0.08 G/°C</td><td>±0.007%/°C</td><td>Brass</td></tr>
+                                <tr><td>1HADX804F</td><td>10/25/50</td><td>1.20</td><td>0.5±0.1</td><td>0.15</td><td>DC-1kHz</td><td>300kGs</td><td>±0.05% ~ 30kGs</td><td>-10°C ~ +100°C</td><td>±0.08 G/°C</td><td>±0.007%/°C</td><td>Brass</td></tr>
+                                <tr><td>1HADX805F</td><td>10/25/50</td><td>0.90</td><td>0.5±0.1</td><td>0.10</td><td>DC-1kHz</td><td>300kGs</td><td>±0.2% ~ 30kGs</td><td>-10°C ~ +100°C</td><td>±0.08 G/°C</td><td>±0.007%/°C</td><td>Brass</td></tr>
+                                <tr><td>1HADX806F</td><td>10/25/50</td><td>0.75</td><td>0.5±0.1</td><td>0.10</td><td>DC-1kHz</td><td>300kGs</td><td>±0.2% ~ 30kGs</td><td>-10°C ~ +100°C</td><td>±0.08 G/°C</td><td>±0.007%/°C</td><td>Brass</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Probe Section 4: Ultra-High Precision Temp Comp -->
+             <section>
+                <h3 class="collapsible-header">4. Ultra-High Precision Temperature Compensation Axial Probe</h3>
+                 <div class="collapsible-content">
+                    <p><strong>Recommended Gaussmeters:</strong> DX-180, DX-210, DX-360</p>
+                    <p><em>(Note: Combines Ultra High Precision with Temperature Compensation, suffix "-FT")</em></p>
+                     <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr><th>No.</th><th>L (cm)</th><th>D (mm) max</th><th>A (mm)</th><th>Dia. of active area (mm)</th><th>Frequency range</th><th>Full range</th><th>Accuracy (linearity)</th><th>Working temp. zone</th><th>Zero field temp. coefficient (max)</th><th>Temp. coefficient (max)</th><th>Packaging materials</th></tr>
+                            </thead>
+                             <tbody>
+                                <tr><td>1HADX800FT</td><td>10/25/50</td><td>5.00</td><td>1±0.1</td><td>0.15</td><td>DC-1kHz</td><td>300kGs</td><td>±0.05% ~ 30kGs</td><td>-10°C ~ +100°C</td><td>±0.08 G/°C</td><td>±0.007%/°C</td><td>Brass</td></tr>
+                                <tr><td>1HADX801FT</td><td>10/25/50</td><td>3.00</td><td>1±0.1</td><td>0.15</td><td>DC-1kHz</td><td>300kGs</td><td>±0.05% ~ 30kGs</td><td>-10°C ~ +100°C</td><td>±0.08 G/°C</td><td>±0.007%/°C</td><td>Brass</td></tr>
+                                <tr><td>1HADX802FT</td><td>10/25/50</td><td>2.00</td><td>1±0.1</td><td>0.15</td><td>DC-1kHz</td><td>300kGs</td><td>±0.05% ~ 30kGs</td><td>-10°C ~ +100°C</td><td>±0.08 G/°C</td><td>±0.007%/°C</td><td>Brass</td></tr>
+                                <tr><td>1HADX803FT</td><td>10/25/50</td><td>1.50</td><td>1±0.1</td><td>0.15</td><td>DC-1kHz</td><td>300kGs</td><td>±0.05% ~ 30kGs</td><td>-10°C ~ +100°C</td><td>±0.08 G/°C</td><td>±0.007%/°C</td><td>Brass</td></tr>
+                                <tr><td>1HADX804FT</td><td>10/25/50</td><td>1.20</td><td>0.5±0.1</td><td>0.15</td><td>DC-1kHz</td><td>300kGs</td><td>±0.05% ~ 30kGs</td><td>-10°C ~ +100°C</td><td>±0.08 G/°C</td><td>±0.007%/°C</td><td>Brass</td></tr>
+                                <tr><td>1HADX805FT</td><td>10/25/50</td><td>0.90</td><td>0.5±0.1</td><td>0.10</td><td>DC-1kHz</td><td>300kGs</td><td>±0.2% ~ 30kGs</td><td>-10°C ~ +100°C</td><td>±0.08 G/°C</td><td>±0.007%/°C</td><td>Brass</td></tr>
+                                <tr><td>1HADX806FT</td><td>10/25/50</td><td>0.75</td><td>0.5±0.1</td><td>0.10</td><td>DC-1kHz</td><td>300kGs</td><td>±0.2% ~ 30kGs</td><td>-10°C ~ +100°C</td><td>±0.08 G/°C</td><td>±0.007%/°C</td><td>Brass</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 5: Temp Comp High Precision (with sensor) -->
+            <section>
+                <h3 class="collapsible-header">5. Temperature Compensated High Precision Axial Probe (with temperature sensor)</h3>
+                 <div class="collapsible-content">
+                     <p><em>(Note: Explicitly stating the presence of the temperature sensor)</em></p>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr><th>No.</th><th>L (cm)</th><th>D (mm) max</th><th>A (mm)</th><th>Dia. of active area (mm)</th><th>Frequency range</th><th>Full range</th><th>Accuracy (linearity)</th><th>Working temp. zone</th><th>Zero field temp. coefficient (max)</th><th>Temp. coefficient (max)</th><th>Packaging materials</th></tr>
+                            </thead>
+                            <tbody>
+                                 <tr><td>1ADX800F-T</td><td>10/25/50</td><td>5.00</td><td>1±0.1</td><td>0.15</td><td>DC-1kHz</td><td>300kGs</td><td>±0.2% ~ 30kGs</td><td>-10°C ~ +100°C</td><td>±0.08 G/°C</td><td>±0.01%/°C</td><td>Brass</td></tr>
+                                <tr><td>1ADX801F-T</td><td>10/25/50</td><td>3.00</td><td>1±0.1</td><td>0.15</td><td>DC-1kHz</td><td>300kGs</td><td>±0.2% ~ 30kGs</td><td>-10°C ~ +100°C</td><td>±0.08 G/°C</td><td>±0.01%/°C</td><td>Brass</td></tr>
+                                <tr><td>1ADX802F-T</td><td>10/25/50</td><td>2.00</td><td>1±0.1</td><td>0.15</td><td>DC-1kHz</td><td>300kGs</td><td>±0.2% ~ 30kGs</td><td>-10°C ~ +100°C</td><td>±0.08 G/°C</td><td>±0.01%/°C</td><td>Brass</td></tr>
+                                <tr><td>1ADX803F-T</td><td>10/25/50</td><td>1.50</td><td>1±0.1</td><td>0.15</td><td>DC-1kHz</td><td>300kGs</td><td>±0.2% ~ 30kGs</td><td>-10°C ~ +100°C</td><td>±0.08 G/°C</td><td>±0.01%/°C</td><td>Brass</td></tr>
+                                <tr><td>1ADX804F-T</td><td>10/25/50</td><td>1.20</td><td>0.5±0.1</td><td>0.15</td><td>DC-1kHz</td><td>300kGs</td><td>±0.2% ~ 30kGs</td><td>-10°C ~ +100°C</td><td>±0.08 G/°C</td><td>±0.01%/°C</td><td>Brass</td></tr>
+                                <tr><td>1ADX805F-T</td><td>10/25/50</td><td>0.90</td><td>0.5±0.1</td><td>0.10</td><td>DC-1kHz</td><td>300kGs</td><td>±0.2% ~ 30kGs</td><td>-10°C ~ +100°C</td><td>±0.08 G/°C</td><td>±0.01%/°C</td><td>Brass</td></tr>
+                                <tr><td>1ADX806F-T</td><td>10/25/50</td><td>0.75</td><td>0.5±0.1</td><td>0.10</td><td>DC-1kHz</td><td>300kGs</td><td>±0.2% ~ 30kGs</td><td>-10°C ~ +100°C</td><td>±0.08 G/°C</td><td>±0.01%/°C</td><td>Brass</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 6: Temp Comp High Temp High Precision -->
+            <section>
+                <h3 class="collapsible-header">6. Temperature Compensation High Temperature High Precision Axial Probe (with temperature sensor)</h3>
+                <div class="collapsible-content">
+                    <p><em>(Note: Suffix "-HT", extended high temperature range)</em></p>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr><th>No.</th><th>L (cm)</th><th>D (mm) max</th><th>A (mm)</th><th>Dia. of active area (mm)</th><th>Frequency range</th><th>Full range</th><th>Accuracy (linearity)</th><th>Working temp. zone</th><th>Zero field temp. coefficient (max)</th><th>Temp. coefficient (max)</th><th>Packaging materials</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>1ADX800F-HT</td><td>10/25/50</td><td>5.00</td><td>1±0.1</td><td>0.15</td><td>DC-1kHz</td><td>300kGs</td><td>±0.2% ~ 30kGs</td><td>-10°C ~ +200°C</td><td>±0.08 G/°C</td><td>±0.01%/°C</td><td>Brass</td></tr>
+                                <tr><td>1ADX801F-HT</td><td>10/25/50</td><td>3.00</td><td>1±0.1</td><td>0.15</td><td>DC-1kHz</td><td>300kGs</td><td>±0.2% ~ 30kGs</td><td>-10°C ~ +200°C</td><td>±0.08 G/°C</td><td>±0.01%/°C</td><td>Brass</td></tr>
+                                <tr><td>1ADX802F-HT</td><td>10/25/50</td><td>2.00</td><td>1±0.1</td><td>0.15</td><td>DC-1kHz</td><td>300kGs</td><td>±0.2% ~ 30kGs</td><td>-10°C ~ +200°C</td><td>±0.08 G/°C</td><td>±0.01%/°C</td><td>Brass</td></tr>
+                                <tr><td>1ADX803F-HT</td><td>10/25/50</td><td>1.50</td><td>1±0.1</td><td>0.15</td><td>DC-1kHz</td><td>300kGs</td><td>±0.2% ~ 30kGs</td><td>-10°C ~ +200°C</td><td>±0.08 G/°C</td><td>±0.01%/°C</td><td>Brass</td></tr>
+                                <tr><td>1ADX804F-HT</td><td>10/25/50</td><td>1.20</td><td>0.5±0.1</td><td>0.15</td><td>DC-1kHz</td><td>300kGs</td><td>±0.2% ~ 30kGs</td><td>-10°C ~ +200°C</td><td>±0.08 G/°C</td><td>±0.01%/°C</td><td>Brass</td></tr>
+                                <tr><td>1ADX805F-HT</td><td>10/25/50</td><td>0.90</td><td>0.5±0.1</td><td>0.10</td><td>DC-1kHz</td><td>300kGs</td><td>±0.2% ~ 30kGs</td><td>-10°C ~ +200°C</td><td>±0.08 G/°C</td><td>±0.01%/°C</td><td>Brass</td></tr>
+                                <tr><td>1ADX806F-HT</td><td>10/25/50</td><td>0.75</td><td>0.5±0.1</td><td>0.10</td><td>DC-1kHz</td><td>300kGs</td><td>±0.2% ~ 30kGs</td><td>-10°C ~ +200°C</td><td>±0.08 G/°C</td><td>±0.01%/°C</td><td>Brass</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 7: Temp Comp High/Low Temp High Precision -->
+            <section>
+                <h3 class="collapsible-header">7. Temperature Compensated High and Low Temperature Resistant High Precision Axial Probe (with temperature sensor)</h3>
+                <div class="collapsible-content">
+                    <p><em>(Note: Suffix "-LHT" or "-HT" as listed, very wide temperature range)</em></p>
+                     <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr><th>No.</th><th>L (cm)</th><th>D (mm) max</th><th>A (mm)</th><th>Dia. of active area (mm)</th><th>Frequency range</th><th>Full range</th><th>Accuracy (linearity)</th><th>Working temp. zone</th><th>Zero field temp. coefficient (max)</th><th>Temp. coefficient (max)</th><th>Packaging materials</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>1ADX800F-LHT</td><td>10/25/50</td><td>5.00</td><td>1±0.1</td><td>0.15</td><td>DC-1kHz</td><td>300kGs</td><td>±0.2% ~ 30kGs</td><td>-196°C ~ +200°C</td><td>±0.08 G/°C</td><td>±0.01%/°C</td><td>Brass</td></tr>
+                                <tr><td>1ADX801F-LHT</td><td>10/25/50</td><td>3.00</td><td>1±0.1</td><td>0.15</td><td>DC-1kHz</td><td>300kGs</td><td>±0.2% ~ 30kGs</td><td>-196°C ~ +200°C</td><td>±0.08 G/°C</td><td>±0.01%/°C</td><td>Brass</td></tr>
+                                <tr><td>1ADX802F-LHT</td><td>10/25/50</td><td>2.00</td><td>1±0.1</td><td>0.15</td><td>DC-1kHz</td><td>300kGs</td><td>±0.2% ~ 30kGs</td><td>-196°C ~ +200°C</td><td>±0.08 G/°C</td><td>±0.01%/°C</td><td>Brass</td></tr>
+                                <tr><td>1ADX803F-LHT</td><td>10/25/50</td><td>1.50</td><td>1±0.1</td><td>0.15</td><td>DC-1kHz</td><td>300kGs</td><td>±0.2% ~ 30kGs</td><td>-196°C ~ +200°C</td><td>±0.08 G/°C</td><td>±0.01%/°C</td><td>Brass</td></tr>
+                                <tr><td>1ADX804F-HT</td><td>10/25/50</td><td>1.20</td><td>0.5±0.1</td><td>0.15</td><td>DC-1kHz</td><td>300kGs</td><td>±0.2% ~ 30kGs</td><td>-196°C ~ +200°C</td><td>±0.08 G/°C</td><td>±0.01%/°C</td><td>Brass</td></tr>
+                                <tr><td>1ADX805F-HT</td><td>10/25/50</td><td>0.90</td><td>0.5±0.1</td><td>0.10</td><td>DC-1kHz</td><td>300kGs</td><td>±0.2% ~ 30kGs</td><td>-196°C ~ +200°C</td><td>±0.08 G/°C</td><td>±0.01%/°C</td><td>Brass</td></tr>
+                                <tr><td>1ADX806F-HT</td><td>10/25/50</td><td>0.75</td><td>0.5±0.1</td><td>0.10</td><td>DC-1kHz</td><td>300kGs</td><td>±0.2% ~ 30kGs</td><td>-196°C ~ +200°C</td><td>±0.08 G/°C</td><td>±0.01%/°C</td><td>Brass</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 8: Temp Comp Low Temp High Precision -->
+            <section>
+                <h3 class="collapsible-header">8. Temperature Compensated Low Temperature Resistant High Precision Axial Probe (with temperature sensor)</h3>
+                <div class="collapsible-content">
+                    <p><em>(Note: Suffix "-LT", very low temperature range)</em></p>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr><th>No.</th><th>L (cm)</th><th>D (mm) max</th><th>A (mm)</th><th>Dia. of active area (mm)</th><th>Frequency range</th><th>Full range</th><th>Accuracy (linearity)</th><th>Working temp. zone</th><th>Zero field temp. coefficient (max)</th><th>Temp. coefficient (max)</th><th>Packaging materials</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>1ADX800F-LT</td><td>10/25/50</td><td>5.00</td><td>1±0.1</td><td>0.15</td><td>DC-1kHz</td><td>300kGs</td><td>±0.2% ~ 30kGs</td><td>-269°C ~ +75°C</td><td>±0.08 G/°C</td><td>±0.01%/°C</td><td>Brass</td></tr>
+                                <tr><td>1ADX801F-LT</td><td>10/25/50</td><td>3.00</td><td>1±0.1</td><td>0.15</td><td>DC-1kHz</td><td>300kGs</td><td>±0.2% ~ 30kGs</td><td>-269°C ~ +75°C</td><td>±0.08 G/°C</td><td>±0.01%/°C</td><td>Brass</td></tr>
+                                <tr><td>1ADX802F-LT</td><td>10/25/50</td><td>2.00</td><td>1±0.1</td><td>0.15</td><td>DC-1kHz</td><td>300kGs</td><td>±0.2% ~ 30kGs</td><td>-269°C ~ +75°C</td><td>±0.08 G/°C</td><td>±0.01%/°C</td><td>Brass</td></tr>
+                                <tr><td>1ADX803F-LT</td><td>10/25/50</td><td>1.50</td><td>1±0.1</td><td>0.15</td><td>DC-1kHz</td><td>300kGs</td><td>±0.2% ~ 30kGs</td><td>-269°C ~ +75°C</td><td>±0.08 G/°C</td><td>±0.01%/°C</td><td>Brass</td></tr>
+                                <tr><td>1ADX804F-LT</td><td>10/25/50</td><td>1.20</td><td>0.5±0.1</td><td>0.15</td><td>DC-1kHz</td><td>300kGs</td><td>±0.2% ~ 30kGs</td><td>-269°C ~ +75°C</td><td>±0.08 G/°C</td><td>±0.01%/°C</td><td>Brass</td></tr>
+                                <tr><td>1ADX805F-LT</td><td>10/25/50</td><td>0.90</td><td>0.5±0.1</td><td>0.10</td><td>DC-1kHz</td><td>300kGs</td><td>±0.2% ~ 30kGs</td><td>-269°C ~ +75°C</td><td>±0.08 G/°C</td><td>±0.01%/°C</td><td>Brass</td></tr>
+                                <tr><td>1ADX806F-LT</td><td>10/25/50</td><td>0.75</td><td>0.5±0.1</td><td>0.10</td><td>DC-1kHz</td><td>300kGs</td><td>±0.2% ~ 30kGs</td><td>-269°C ~ +75°C</td><td>±0.08 G/°C</td><td>±0.01%/°C</td><td>Brass</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 9: Temp Comp Low Temp Ultra High Precision -->
+            <section>
+                <h3 class="collapsible-header">9. Temperature Compensated Low Temperature Resistant Ultra High Precision Axial Probe (with temperature sensor)</h3>
+                <div class="collapsible-content">
+                    <p><em>(Note: Suffix "-LT", combines Ultra High Precision with very low temperature range)</em></p>
+                     <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr><th>No.</th><th>L (cm)</th><th>D (mm) max</th><th>A (mm)</th><th>Dia. of active area (mm)</th><th>Frequency range</th><th>Full range</th><th>Accuracy (linearity)</th><th>Working temp. zone</th><th>Zero field temp. coefficient (max)</th><th>Temp. coefficient (max)</th><th>Packaging materials</th></tr>
+                            </thead>
+                             <tbody>
+                                <tr><td>1HADX800F-LT</td><td>10/25/50</td><td>5.00</td><td>1±0.1</td><td>0.15</td><td>DC-1kHz</td><td>300kGs</td><td>±0.05% ~ 30kGs</td><td>-269°C ~ +75°C</td><td>±0.08 G/°C</td><td>±0.01%/°C</td><td>Brass</td></tr>
+                                <tr><td>1HADX801F-LT</td><td>10/25/50</td><td>3.00</td><td>1±0.1</td><td>0.15</td><td>DC-1kHz</td><td>300kGs</td><td>±0.05% ~ 30kGs</td><td>-269°C ~ +75°C</td><td>±0.08 G/°C</td><td>±0.01%/°C</td><td>Brass</td></tr>
+                                <tr><td>1HADX802F-LT</td><td>10/25/50</td><td>2.00</td><td>1±0.1</td><td>0.15</td><td>DC-1kHz</td><td>300kGs</td><td>±0.05% ~ 30kGs</td><td>-269°C ~ +75°C</td><td>±0.08 G/°C</td><td>±0.01%/°C</td><td>Brass</td></tr>
+                                <tr><td>1HADX803F-LT</td><td>10/25/50</td><td>1.50</td><td>1±0.1</td><td>0.15</td><td>DC-1kHz</td><td>300kGs</td><td>±0.05% ~ 30kGs</td><td>-269°C ~ +75°C</td><td>±0.08 G/°C</td><td>±0.01%/°C</td><td>Brass</td></tr>
+                                <tr><td>1HADX804F-LT</td><td>10/25/50</td><td>1.20</td><td>0.5±0.1</td><td>0.15</td><td>DC-1kHz</td><td>300kGs</td><td>±0.05% ~ 30kGs</td><td>-269°C ~ +75°C</td><td>±0.08 G/°C</td><td>±0.01%/°C</td><td>Brass</td></tr>
+                                <tr><td>1HADX805F-LT</td><td>10/25/50</td><td>0.90</td><td>0.5±0.1</td><td>0.10</td><td>DC-1kHz</td><td>300kGs</td><td>±0.05% ~ 30kGs</td><td>-269°C ~ +75°C</td><td>±0.08 G/°C</td><td>±0.01%/°C</td><td>Brass</td></tr>
+                                <tr><td>1HADX806F-LT</td><td>10/25/50</td><td>0.75</td><td>0.5±0.1</td><td>0.10</td><td>DC-1kHz</td><td>300kGs</td><td>±0.05% ~ 30kGs</td><td>-269°C ~ +75°C</td><td>±0.08 G/°C</td><td>±0.01%/°C</td><td>Brass</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 10: High-Frequency High-Precision -->
+            <section>
+                <h3 class="collapsible-header">10. High-Frequency High-Precision Axial Probe</h3>
+                <div class="collapsible-content">
+                     <p><em>(Note: Suffix "-H", higher frequency range, different materials)</em></p>
+                      <div class="table-container">
+                         <table>
+                            <thead>
+                                <tr><th>No.</th><th>L (cm)</th><th>D (mm) max</th><th>A (mm)</th><th>Dia. of active area (mm)</th><th>Frequency range</th><th>Full range</th><th>Accuracy (linearity)</th><th>Working temp. zone</th><th>Zero field temp. coefficient (max)</th><th>Temp. coefficient (max)</th><th>Packaging materials</th></tr>
+                            </thead>
+                             <tbody>
+                                <tr><td>1ADX801F-H</td><td>10/25/50</td><td>4.00</td><td>1±0.1</td><td>0.15</td><td>DC-50kHz</td><td>300kGs</td><td>±0.2% ~ 30kGs</td><td>-10°C ~ +75°C</td><td>±0.08 G/°C</td><td>±0.01%/°C</td><td>Plastic fiber</td></tr>
+                                <tr><td>1ADX802F-H</td><td>10/25/50</td><td>3.00</td><td>1±0.1</td><td>0.15</td><td>DC-50kHz</td><td>300kGs</td><td>±0.2% ~ 30kGs</td><td>-10°C ~ +75°C</td><td>±0.08 G/°C</td><td>±0.01%/°C</td><td>Plastic fiber</td></tr>
+                                <tr><td>1ADX803F-H</td><td>10/25/50</td><td>13.00</td><td>1±0.1</td><td>0.15</td><td>DC-1kHz</td><td>30kGs</td><td>±0.05% ~ 30kGs</td><td>-10°C ~ +75°C</td><td>±0.08 G/°C</td><td>±0.01%/°C</td><td>Carbon fiber</td></tr>
+                                <tr><td>1ADX804F-H</td><td>10/25/50</td><td>10.00</td><td>1±0.1</td><td>0.15</td><td>DC-1kHz</td><td>30kGs</td><td>±0.05% ~ 30kGs</td><td>-10°C ~ +75°C</td><td>±0.08 G/°C</td><td>±0.01%/°C</td><td>Carbon fiber</td></tr>
+                                <tr><td>1ADX805F-H</td><td>10/25/50</td><td>8.00</td><td>1±0.1</td><td>0.15</td><td>DC-1kHz</td><td>30kGs</td><td>±0.05% ~ 30kGs</td><td>-10°C ~ +75°C</td><td>±0.08 G/°C</td><td>±0.01%/°C</td><td>Carbon fiber</td></tr>
+                                <tr><td>1ADX806F-H</td><td>10/25/50</td><td>6.00</td><td>1±0.1</td><td>0.15</td><td>DC-1kHz</td><td>30kGs</td><td>±0.05% ~ 30kGs</td><td>-10°C ~ +75°C</td><td>±0.08 G/°C</td><td>±0.01%/°C</td><td>Carbon fiber</td></tr>
+                                <tr><td>1ADX807F-H</td><td>10/25/50</td><td>5.00</td><td>1±0.1</td><td>0.15</td><td>DC-1kHz</td><td>30kGs</td><td>±0.05% ~ 30kGs</td><td>-10°C ~ +75°C</td><td>±0.08 G/°C</td><td>±0.01%/°C</td><td>Carbon fiber</td></tr>
+                                <tr><td>1ADX808F-H</td><td>10/25/50</td><td>4.00</td><td>1±0.1</td><td>0.15</td><td>DC-1kHz</td><td>30kGs</td><td>±0.05% ~ 30kGs</td><td>-10°C ~ +75°C</td><td>±0.08 G/°C</td><td>±0.01%/°C</td><td>Carbon fiber</td></tr>
+                                <tr><td>1ADX809F-H</td><td>10/25/50</td><td>3.00</td><td>1±0.1</td><td>0.15</td><td>DC-1kHz</td><td>30kGs</td><td>±0.05% ~ 30kGs</td><td>-10°C ~ +75°C</td><td>±0.08 G/°C</td><td>±0.01%/°C</td><td>Carbon fiber</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+        <!-- Original Main Content Ends -->
+
+    </div> <!-- End .container -->
+
+    
+
+
+    <!-- KEEP the original JavaScript for collapsible sections -->
+    <script>
+        // --- START OF embedded script.js ---
+        document.addEventListener('DOMContentLoaded', function() {
+            const headers = document.querySelectorAll('.collapsible-header');
+
+            headers.forEach(header => {
+                // Start all sections collapsed except 'General Notes'
+                const content = header.nextElementSibling;
+                const isGeneralNotes = header.closest('section')?.classList.contains('general-notes');
+
+                // General Notes doesn't collapse, find its content if it exists
+                const generalNotesContent = document.querySelector('.general-notes .collapsible-content'); // Check if GN has collapsible content (it doesn't currently)
+
+                if (!isGeneralNotes && content && content.classList.contains('collapsible-content')) {
+                    // Collapse probe sections by default
+                    header.classList.add('collapsed');
+                    content.classList.add('collapsed');
+                     content.style.maxHeight = '0';
+                     content.style.paddingTop = '0';
+                     content.style.paddingBottom = '0';
+                     // content.style.marginTop = '-1px'; // Removed, border handles separation
+                     content.style.opacity = '0';
+                     content.style.borderTop = 'none'; // Ensure border hidden when collapsed
+
+                } else if (content && content.classList.contains('collapsible-content')) {
+                     // For initially open sections (like General Notes if it were collapsible)
+                     requestAnimationFrame(() => {
+                         content.style.maxHeight = content.scrollHeight + "px";
+                         content.style.borderTop = '1px solid var(--bg-light)'; // Ensure border shown when open
+                     });
+                }
+
+
+                header.addEventListener('click', function() {
+                    const content = this.nextElementSibling;
+
+                    if (content && content.classList.contains('collapsible-content')) {
+                        this.classList.toggle('collapsed');
+                        content.classList.toggle('collapsed');
+
+                        if (content.classList.contains('collapsed')) {
+                            // Collapse
+                            content.style.maxHeight = '0';
+                            content.style.paddingTop = '0';
+                            content.style.paddingBottom = '0';
+                            // content.style.marginTop = '-1px'; // Removed
+                             content.style.opacity = '0';
+                             content.style.borderTop = 'none';
+
+
+                        } else {
+                            // Expand
+                            content.style.maxHeight = content.scrollHeight + "px";
+                             content.style.paddingTop = '15px';
+                             content.style.paddingBottom = '10px'; // Or adjust as needed
+                             // content.style.marginTop = '0'; // Removed
+                             content.style.opacity = '1';
+                             content.style.borderTop = '1px solid var(--bg-light)';
+
+
+                             content.addEventListener('transitionend', function handler() {
+                                 if (!content.classList.contains('collapsed')) {
+                                    // Update max-height after transition completes, in case content size changed
+                                    // Use 'auto' for flexibility or recalculate scrollHeight
+                                    // content.style.maxHeight = 'auto';
+                                    content.style.maxHeight = content.scrollHeight + "px";
+                                 }
+                                 content.removeEventListener('transitionend', handler);
+                             }, { once: true });
+                        }
+                    }
+                });
+            });
+
+             // Adjust max-height on window resize for open sections
+            window.addEventListener('resize', () => {
+                document.querySelectorAll('.collapsible-content:not(.collapsed)').forEach(content => {
+                    requestAnimationFrame(() => {
+                       // Temporarily set to auto to get the natural height, then set back to scrollHeight for animation
+                       // const currentMaxHeight = content.style.maxHeight;
+                       // content.style.maxHeight = 'auto';
+                       // const scrollHeight = content.scrollHeight;
+                       // content.style.maxHeight = currentMaxHeight; // Put it back quickly
+                       // // Now set the calculated height
+                       // content.style.maxHeight = scrollHeight + "px";
+
+                       // Simpler approach: Just recalculate based on current scrollHeight
+                       content.style.maxHeight = content.scrollHeight + "px";
+
+                    });
+                });
+            });
+        });
+        // --- END OF embedded script.js ---
+    </script>
+</body>
+</html>

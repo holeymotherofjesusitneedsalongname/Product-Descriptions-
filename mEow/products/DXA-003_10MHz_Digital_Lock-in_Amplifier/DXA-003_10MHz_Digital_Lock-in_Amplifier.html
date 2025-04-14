@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DXA-003 10MHz Digital Lock-in Amplifier - Xiamen Dexing Magnet Tech. Co., Ltd</title>
+<style>
+/* ==========================================================================
+GENERIC STYLING FOR DEXINMAG DOCUMENT PAGES
+Based on DXMP Manual / Axial Probe Styles
+Version: 1.0
+* Provides a consistent layout, color scheme, typography.
+* Styles common elements like sections, tables, lists, images.
+* Includes styles for collapsible sections.
+* Includes responsive adjustments for different screen sizes.
+* Includes print-specific styles for better output.
+* HEADER AND FOOTER specific styling has been REMOVED.
+========================================================================== */
+/* --- Base Styles & Color Theme --- */
+:root {
+    --primary-color: #00447C; /* Dark Blue */
+    --secondary-color: #4A90E2; /* Lighter Blue */
+    --bg-light: #f8f9fa; /* Very light grey */
+    --bg-medium: #e9ecef; /* Light grey */
+    --border-color: #dee2e6; /* Grey border */
+    --text-color: #343a40; /* Dark grey text */
+    /* --header-bg: #343a40; */ /* Header styles removed */
+    /* --header-text: #ffffff; */ /* Header styles removed */
+    /* --footer-bg: #f1f1f1; */ /* Footer styles removed */
+    /* --footer-text: #555; */ /* Footer styles removed */
+    --hover-bg: #e8f4fd; /* Light blue for hover */
+    --warning-color: #dc3545; /* Red for warnings */
+    --warning-bg: #f8d7da;
+    --attention-color: #ffc107; /* Yellow for attention */
+    --attention-bg: #fff3cd;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4; /* Light grey background for the page */
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* --- Main Content Container --- */
+.container {
+    max-width: 1100px;
+    margin: 20px auto;
+    padding: 25px;
+    background-color: #fff; /* White background for content */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    flex-grow: 1; /* Allows footer (if added back) to stick to bottom */
+}
+
+/* --- Typography --- */
+h1, h2, h3 {
+    color: var(--primary-color);
+    line-height: 1.3;
+    margin-top: 1em;
+    margin-bottom: 0.75em;
+}
+h1:first-child, h2:first-child, h3:first-child {
+    margin-top: 0;
+}
+
+/* Styles the main title within the container */
+.container > h1 {
+    font-size: 1.8em;
+    text-align: center;
+    border-bottom: 2px solid var(--secondary-color);
+    padding-bottom: 0.5em;
+    margin-bottom: 1em; /* Add more space below main title */
+}
+
+/* Styles section titles */
+section > h2 {
+    font-size: 1.5em;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.3em;
+    color: var(--primary-color);
+}
+
+/* Base style for H3, often used for sub-sections or collapsible headers */
+section > h3 {
+    font-size: 1.2em;
+    color: var(--primary-color);
+    padding-bottom: 0.3em;
+    font-weight: bold;
+}
+
+p {
+    margin-bottom: 1em;
+}
+
+ul {
+    list-style: disc;
+    margin: 0 0 1em 25px;
+}
+
+li {
+    margin-bottom: 0.5em;
+}
+
+/* --- Content Sections --- */
+section {
+    margin-bottom: 2em;
+    padding-bottom: 1em;
+    border-bottom: 1px solid var(--bg-medium); /* Subtle separator */
+}
+section:last-of-type {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+/* --- Tables --- */
+.table-container {
+    overflow-x: auto; /* Enable horizontal scroll on screen */
+    margin-top: 1em;
+    margin-bottom: 1.5em;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95em;
+    min-width: 600px; /* Prevent excessive squishing on screen */
+}
+
+th, td {
+    border: 1px solid var(--border-color);
+    padding: 10px 12px;
+    text-align: left;
+    vertical-align: top;
+}
+
+thead th {
+    background-color: var(--bg-medium);
+    font-weight: bold;
+    color: var(--primary-color);
+    position: sticky; /* Keep header visible on scroll */
+    top: 0;
+    z-index: 1;
+    border-bottom-width: 2px; /* Stronger line below header */
+    border-bottom-color: var(--border-color);
+}
+
+/* Zebra striping for table rows */
+tbody tr:nth-child(even) {
+    background-color: var(--bg-light);
+}
+
+/* Hover effect for table rows */
+tbody tr:hover {
+    background-color: var(--hover-bg);
+}
+
+/* --- Image Gallery Styling --- */
+.image-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 1em;
+    margin-bottom: 1.5em;
+    padding: 15px;
+    background-color: var(--bg-light);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+}
+
+.image-gallery figure {
+    margin: 0;
+    text-align: center;
+    flex-basis: calc(50% - 20px); /* Aim for 2 columns */
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.image-gallery img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.image-gallery figcaption {
+    font-size: 0.9em;
+    color: #666;
+    margin-top: auto; /* Push caption down */
+}
+
+/* --- Alert Boxes --- */
+.safety-warning, .attention {
+    border-left-width: 5px;
+    border-left-style: solid;
+    padding: 10px 15px;
+    margin: 1em 0;
+    border-radius: 4px;
+}
+.safety-warning {
+    border-left-color: var(--warning-color);
+    background-color: var(--warning-bg);
+    color: #721c24;
+}
+.attention {
+    border-left-color: var(--attention-color);
+    background-color: var(--attention-bg);
+    color: #856404;
+}
+.safety-warning strong, .attention strong {
+    font-weight: bold;
+}
+
+/* --- Collapsible Section Styling --- */
+/* Apply this class to the H3 (or other element) that triggers the collapse */
+section h3.collapsible-header {
+    cursor: pointer;
+    position: relative;
+    padding-right: 25px; /* Space for indicator */
+    margin-bottom: 0; /* Connects header visually to content below */
+    border-bottom: 1px solid var(--border-color); /* Separator line */
+    padding-bottom: 10px; /* Spacing above the line */
+}
+
+section h3.collapsible-header::after {
+    content: '▼'; /* Down arrow indicator */
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.8em;
+    color: var(--primary-color);
+    transition: transform 0.3s ease;
+}
+
+section h3.collapsible-header.collapsed::after {
+    content: '►'; /* Right arrow indicator when collapsed */
+}
+
+/* The content DIV immediately following the collapsible-header */
+.collapsible-content {
+    overflow: hidden;
+    max-height: 5000px; /* Allow ample height when open */
+    transition: max-height 0.5s ease-in-out, padding 0.3s ease, margin 0.3s ease, border 0.3s ease, opacity 0.3s ease;
+    padding-top: 15px; /* Space below header when open */
+    margin-top: 0;
+    border-top: 1px solid var(--bg-light); /* Subtle line separating from header */
+    opacity: 1;
+}
+
+.collapsible-content.collapsed {
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-top: 0;
+    border-top: none; /* Hide border when collapsed */
+    opacity: 0;
+}
+
+/* ==========================================================================
+RESPONSIVE ADJUSTMENTS
+========================================================================== */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+        margin: 10px; /* Reduce margin on smaller screens */
+    }
+    .container > h1 { font-size: 1.6em; }
+    section > h2 { font-size: 1.3em; }
+    section > h3 { font-size: 1.1em; } /* Includes collapsible */
+
+    table { font-size: 0.9em; min-width: 0; } /* Allow table to shrink */
+    th, td { padding: 8px 10px; }
+    tbody td:first-child { white-space: normal; } /* Allow wrapping */
+
+    .image-gallery figure {
+         flex-basis: calc(50% - 15px); /* Keep 2 columns */
+         max-width: 45%;
+    }
+}
+
+@media (max-width: 480px) {
+    .container > h1 { font-size: 1.4em; }
+    section > h2 { font-size: 1.15em; }
+    section > h3 { font-size: 1.0em; } /* Includes collapsible */
+
+    th, td { padding: 6px 8px; font-size: 0.85em; }
+    ul { margin-left: 20px; }
+
+    .image-gallery figure {
+         flex-basis: 100%; /* Stack to single column */
+         max-width: 90%;
+    }
+}
+
+/* ==========================================================================
+PRINT SPECIFIC STYLES
+* Optimizes layout for printing.
+* Hides header and footer elements.
+* Forces display of collapsible content.
+* Adjusts fonts, colors, and spacing for paper.
+========================================================================== */
+@media print {
+    body {
+        background-color: #fff !important; /* Force white background */
+        color: #000 !important; /* Force black text */
+        font-size: 10pt;
+        -webkit-print-color-adjust: exact !important; /* Try to force color printing */
+        print-color-adjust: exact !important;
+    }
+
+    .container {
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 1cm !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        border: none !important;
+    }
+
+    /* Ensure headings retain specified colors */
+    h1, h2, h3 {
+         color: var(--primary-color) !important;
+         -webkit-print-color-adjust: exact !important;
+         print-color-adjust: exact !important;
+    }
+    /* Keep heading borders black/grey */
+    .container > h1 {
+         border-bottom-color: #000 !important;
+    }
+    section > h2 {
+         border-bottom-color: #666 !important;
+    }
+     section > h3 { /* No border by default in new styles, but add one for print clarity if needed */
+         border-bottom: 1px solid #999 !important;
+         padding-bottom: 0.3em;
+     }
+    /* Collapsible headers in print */
+    section h3.collapsible-header {
+         cursor: default;
+         padding-right: 0;
+         border-bottom: 1px solid #999 !important; /* Ensure border prints */
+         margin-bottom: 0.5em; /* Add space before content */
+     }
+     section h3.collapsible-header::after {
+         display: none; /* Hide arrow indicator */
+     }
+     .collapsible-content, .collapsible-content.collapsed {
+         max-height: none !important; /* Ensure content is visible */
+         overflow: visible !important;
+         opacity: 1 !important;
+         padding: 0 !important; /* Remove padding */
+         margin: 0 !important;
+         border: none !important; /* Remove border */
+         page-break-before: auto; /* Allow break before content if needed */
+     }
+
+
+    section {
+        border: none !important;
+        margin-bottom: 1.5em;
+        padding-bottom: 0;
+        page-break-inside: auto; /* Allow breaks within sections */
+    }
+
+    .table-container {
+        overflow: visible !important;
+        margin-top: 0.5em;
+        margin-bottom: 1em;
+    }
+    table {
+        width: 100% !important;
+        border-collapse: collapse !important;
+        font-size: 9pt;
+        min-width: 0;
+        page-break-inside: auto; /* Allow tables to break between rows */
+    }
+    th, td {
+        border: 1px solid #999 !important;
+        padding: 5px 7px;
+        vertical-align: top !important; /* Ensure consistent alignment */
+    }
+    thead th {
+        background-color: var(--bg-medium) !important; /* Force background */
+        color: var(--primary-color) !important; /* Force text color */
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        white-space: normal !important; /* Allow wrapping */
+        border-bottom-width: 1px !important; /* Standard border */
+        border-bottom-color: #999 !important;
+        position: static !important; /* Not sticky in print */
+    }
+    tr {
+        page-break-inside: avoid !important; /* Try to keep table rows together */
+        page-break-after: auto;
+    }
+    tbody tr:nth-child(even) {
+        background-color: var(--bg-light) !important; /* Force background */
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+    tbody tr:hover {
+        background-color: transparent !important; /* Remove hover effect */
+    }
+
+    .image-gallery {
+        background-color: var(--bg-light) !important; /* Force background */
+        border: 1px solid #ccc !important;
+        justify-content: flex-start;
+        gap: 10mm;
+        page-break-inside: auto; /* Allow gallery block to break if needed */
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+    .image-gallery figure {
+         flex-basis: calc(50% - 10mm);
+         max-width: 45%;
+         page-break-inside: avoid !important; /* Keep image and caption together */
+    }
+    .image-gallery img {
+         border: 1px solid #999 !important;
+         box-shadow: none !important;
+         background-color: #fff !important; /* Ensure white bg behind image */
+          -webkit-print-color-adjust: exact !important;
+          print-color-adjust: exact !important;
+     }
+    .image-gallery figcaption {
+        color: #333 !important; /* Darker caption for print */
+    }
+
+     a { text-decoration: none !important; color: #000 !important; } /* Ensure links are black, no underline */
+     a[href^="mailto:"]::after, a[href^="http"]::after {
+         content: "" !important; /* Prevent printing URL after links */
+     }
+
+     /* Hide any elements explicitly marked as no-print */
+     .no-print {
+        display: none !important;
+     }
+
+     /* Alert boxes print styles */
+    .safety-warning, .attention {
+        border-left-color: #000 !important; /* Black border */
+        background-color: #eee !important; /* Light grey background */
+        color: #000 !important; /* Black text */
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+}
+
+</style>
+
+</head>
+<body>
+      <!-- Header removed as requested -->
+
+<div class="container">
+    <h1>DXA-003 10MHz Digital Lock-in Amplifier</h1>
+
+    <section id="overview">
+        <h2>Overview</h2>
+        <p>The DXA-003 is a high-performance digital lock-in amplifier covering frequencies from DC to 10MHz. It features time constants ranging from 30ns to 4.4ks and offers an exceptional dynamic reserve of over 120 dB. With full-scale sensitivity from 1 nV to 1 V and low input noise down to 6nV/√Hz, it is capable of detecting extremely weak signals. The instrument also incorporates built-in Scope and Spectrum Analyzer functions, a PID controller, and supports AM Modulation, making it a versatile tool for various research and measurement applications.</p>
+    </section>
+
+     <section id="key-features">
+         <h2>Key Features</h2>
+         <ul>
+             <li>Frequency Range: DC to 10MHz</li>
+             <li>Time Constants: 30ns to 4.4ks</li>
+             <li>Dynamic Reserve: >120 dB</li>
+             <li>Full-scale Sensitivity: 1 nV to 1 V</li>
+             <li>Low Noise: Down to 6nV/√Hz</li>
+             <li>Built-in Scope & Spectrum Analyzer</li>
+             <li>Integrated PID Controller</li>
+             <li>AM Modulation Capability</li>
+             <li>Digital Demodulation for High Accuracy</li>
+             <li>Internal and External Reference Modes</li>
+         </ul>
+    </section>
+
+    <section id="image-gallery">
+        <h2>Product Images</h2>
+        <div class="image-gallery">
+             <figure>
+                  <img src="DXA-10MHz%20Lock%20in_page-000.jpg" alt="DXA-003 Lock-in Amplifier Front Cover View">
+                  <figcaption>Front Cover View</figcaption>
+             </figure>
+             <figure>
+                  <img src="DXA-10MHz%20Lock%20in_page-001.jpg" alt="DXA-003 Front Panel Close-up">
+                  <figcaption>Front Panel Close-up</figcaption>
+             </figure>
+             <figure>
+                  <img src="DXA-10MHz%20Lock%20in_page-002.jpg" alt="DXA-003 Control Panel Detail">
+                  <figcaption>Control Panel Detail</figcaption>
+             </figure>
+             <figure>
+                  <img src="DXA-10MHz%20Lock%20in_page-003.jpg" alt="DXA-003 Rear Panel View">
+                  <figcaption>Rear Panel View</figcaption>
+             </figure>
+             <figure>
+                  <img src="DXA-10MHz%20Lock%20in_page-004.jpg" alt="DXA-003 Rear Panel Connections Close-up">
+                  <figcaption>Rear Panel Connections Close-up</figcaption>
+             </figure>
+             <figure>
+                  <img src="DXA-10MHz%20Lock%20in_page-005.png" alt="DXA-003 Display Screen Example">
+                  <figcaption>Display Screen Example</figcaption>
+             </figure>
+        </div>
+    </section>
+
+    <section id="input-channel">
+        <h2>Input Channel</h2>
+        <p>With its low-noise analog pre-amplifier, the signal input of DXA-003 can be switched to operate in single-ended or differential voltage mode. The input noise is exceptionally low at 6 nV/√Hz (@100 kHz). Users can select between 50 Ω or 10 MΩ input impedance, and the full-scale input voltage sensitivity covers a wide range from 1 nV to 1V. Two built-in line filters (50/60 Hz and 100/120 Hz) effectively eliminate line-related interference. A programmable gain amplifier adjusts the dynamic reserve according to the input signal magnitude, achieving an inherently large dynamic reserve up to 120dB. Signal digitization is performed by a precision 14-bit A/D converter sampling at 250MSPS, coupled with a specific filter designed to prevent aliasing.</p>
+    </section>
+
+    <section id="reference-channel">
+        <h2>Reference Channel</h2>
+        <p>The DXA-003 can utilize an externally applied sine or square wave, or its own internally synthesized reference source. In internal reference mode, a high-precision stabilized oscillator and digital synthesis algorithm generate a sinewave output for multiplication with the input signal, resulting in virtually no reference phase noise. The digital phase-shifting technique allows phase adjustment with 0.001° resolution. The internal reference operates at a fixed frequency from 1 mHz to 10 MHz. The instrument also accepts external references, including sinewave and TTL logic signals. Both rising and trailing edges can trigger the internal Phase Locking Loop (PLL). Harmonic detection is supported based on the reference frequency, capable of measuring harmonics up to 32767 times the basic frequency, provided the harmonic frequency remains below the 10 MHz operational limit.</p>
+    </section>
+
+    <section id="digital-demodulator">
+        <h2>Digital Demodulator and Output Filter</h2>
+        <p>The core component is the digital demodulator, which effectively rejects measurement errors caused by DC drift and offset commonly found in traditional analog lock-in amplifiers. Optimized multiplication within the digital demodulator minimizes calculation errors, enabling accurate detection of weak input signals. Selectable time constants for the output low-pass filter range from 30 ns to 4.4 ks, with roll-off options of 6, 12, 18, 24, 30, 36, 42, and 48 dB/oct. This filter is implemented using a high-performance digital filter sampled at 250 MHz. The combination of digital demodulation and the low-pass filter ensures a high dynamic reserve (>120dB) and accurate phase measurement (absolute phase error <1 deg). Furthermore, for input signal frequencies below 200 Hz, an optional synchronous filter can eliminate harmonic influences from the reference signal, allowing rapid and effective detection of low-frequency signals.</p>
+        <p><em>Note: OCR page 2 specified 10ns as minimum time constant, while page 4 specified 30ns. Using 30ns based on page 4 specification table.</em></p>
+    </section>
+
+    <section id="display-remote">
+        <h2>Display & Remote Operation</h2>
+        <h3>Display</h3>
+        <p>DXA-003 features a 5.6-inch 640 x 480 color TFT-LCD. Measurement results like X, Y, R, and θ are displayed numerically and via bar graphs. An X-Y chart mode shows measurement trends over time, with a knob-controlled cursor for value checking.</p>
+        <h3>Remote Operation</h3>
+        <p>Users can control the DXA-003 via PC using various communication interfaces. This allows setting parameters and reading measurement data remotely. The instrument comes with a free LabVIEW program, simplifying its integration into complex scientific experiments.</p>
+     </section>
+
+    <section id="parameters">
+        <h2>Specifications</h2>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Parameter Category</th>
+                        <th>Specification</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Signal Channel -->
+                    <tr><td>Voltage Input Mode</td><td>Single-ended or Differential</td></tr>
+                    <tr><td>Full-scale Sensitivity</td><td>1 nV to 1 V in a 1-2-5 sequence</td></tr>
+                    <tr><td>Input Impedance (Voltage)</td><td>50 Ω // 5pF or 10 MΩ // 5pF, AC or DC coupled</td></tr>
+                    <tr><td>C.M.R.R</td><td>>70 dB to 100 Hz<br>>50 dB to 100 kHz</td></tr>
+                    <tr><td>Dynamic Reserve</td><td>>120 dB</td></tr>
+                    <tr><td>Gain Accuracy</td><td>0.5% typ (<1MHz), 3% max</td></tr>
+                    <tr><td>Voltage Noise</td><td>14 nV/√Hz at 997 Hz<br>6 nV/√Hz at 99.99 kHz</td></tr>
+                    <tr><td>Line Filters</td><td>50/60 Hz and 100/120 Hz</td></tr>
+                    <tr><td>Grounding</td><td>BNC shield can be grounded or floated via 10 kΩ to ground</td></tr>
+
+                    <!-- Reference Channel -->
+                    <tr><td>Frequency Range</td><td>1 mHz to 10 MHz</td></tr>
+                    <tr><td>Reference Input</td><td>TTL or Sine</td></tr>
+                    <tr><td>Input Impedance</td><td>1 MΩ</td></tr>
+                    <tr><td>Square Reference Level</td><td>VIH > 3V, VIL < 0.5V</td></tr>
+                    <tr><td>Sine Reference Signal</td><td>>1 Hz, > 400 mVpp</td></tr>
+                    <tr><td>Phase Resolution</td><td>0.001°</td></tr>
+                    <tr><td>Absolute Phase Error</td><td>< 1°</td></tr>
+                    <tr><td>Relative Phase Error</td><td>< 1 mdeg</td></tr>
+                    <tr><td>Phase Noise (Internal Ref.)</td><td>Synthesized, <0.0001 deg at 1 kHz</td></tr>
+                    <tr><td>Phase Noise (External Ref.)</td><td>0.001 deg at 1 kHz (100 ms time constant, 12 dB/oct)</td></tr>
+                    <tr><td>Phase Drift</td><td><0.01 deg/°C below 100 kHz<br><0.1 deg/°C above 100 kHz</td></tr>
+                    <tr><td>Harmonic Detection</td><td>2F, 3F, ...nF to 30 MHz (n < 32,767)</td></tr>
+                    <tr><td>Acquisition Time (Internal Ref.)</td><td>Instantaneous acquisition</td></tr>
+                    <tr><td>Acquisition Time (External Ref.)</td><td>(2 cycles + 5 ms) or 40 ms, whichever is larger</td></tr>
+
+                    <!-- Demodulator -->
+                    <tr><td>Stability (Digital/Display/Analog Outputs)</td><td>No zero drift on all sets</td></tr>
+                    <tr><td>Analog Output Stability</td><td>< 5 ppm/°C for all dynamic reserve settings</td></tr>
+                    <tr><td>Harmonic Rejection</td><td>-90 dB</td></tr>
+                    <tr><td>Time Constants</td><td>30 ns to 4.4 ks</td></tr>
+                    <tr><td>Filter Roll-off</td><td>6, 12, 18, 24, 30, 36, 42, 48 dB/oct</td></tr>
+                    <tr><td>Synchronous Filters</td><td>Available below 200 Hz (18, 24, 30, 36, 42, 48 dB/oct roll off)</td></tr>
+
+                    <!-- Internal Oscillator -->
+                    <tr><td>Frequency Range</td><td>1 mHz to 10 MHz</td></tr>
+                    <tr><td>Accuracy</td><td>2 ppm + 10 μHz</td></tr>
+                    <tr><td>Resolution</td><td>1 mHz</td></tr>
+                    <tr><td>Distortion</td><td>-80 dBc (f<10 kHz), -60 dBc (f>1 MHz)</td></tr>
+                    <tr><td>Amplitude</td><td>1 uVrms to 1 Vrms (Resolution: 1 uVrms)</td></tr>
+                    <tr><td>Amplitude Accuracy</td><td>0.5%</td></tr>
+                    <tr><td>Stability</td><td>50 ppm/°C</td></tr>
+                    <tr><td>Sine Outputs</td><td>Sine signal, output impedance 50 Ω</td></tr>
+                    <tr><td>TTL Outputs</td><td>5V TTL/CMOS level, output impedance 50 Ω</td></tr>
+
+                    <!-- Display -->
+                    <tr><td>Screen</td><td>5.6 inch, 640×480 TFT</td></tr>
+                    <tr><td>Screen Format</td><td>Single or dual display</td></tr>
+                    <tr><td>Display Quantities</td><td>Each display shows one trace (X, Y, R, θ)</td></tr>
+                    <tr><td>Display Types</td><td>Numerical form, bar graph</td></tr>
+
+                    <!-- AUX Inputs and Outputs -->
+                    <tr><td>AUX Inputs Function</td><td>4 Channel Inputs</td></tr>
+                    <tr><td>AUX Inputs Amplitude</td><td>±10 V, 1 mV resolution ratio</td></tr>
+                    <tr><td>AUX Inputs Impedance</td><td>1 MΩ</td></tr>
+                    <tr><td>AUX/CH Outputs Function</td><td>4 Channel Outputs</td></tr>
+                    <tr><td>AUX/CH Outputs Amplitude</td><td>±10 V, 0.1 mV resolution ratio</td></tr>
+                    <tr><td>AUX/CH Outputs Drive Current</td><td>30mA max</td></tr>
+
+                    <!-- Interfaces -->
+                    <tr><td>Interfaces</td><td>USB2.0, RS-232 (DB-9), 1000Mbps Ethernet (LAN)</td></tr>
+
+                    <!-- General -->
+                    <tr><td>Power Requirements Voltage</td><td>220~240 V AC (Standard)<br>100~120 VAC (optional)</td></tr>
+                    <tr><td>Power Requirements Frequency</td><td>50/60 Hz</td></tr>
+                    <tr><td>Power Consumption</td><td>30 W</td></tr>
+                    <tr><td>Power Supply Rejection</td><td>70dB @ 1MHz</td></tr>
+                    <tr><td>Weight</td><td>12 KG</td></tr>
+                    <tr><td>Dimensions (W x D x H)</td><td>448 mm × 513 mm × 148 mm (with feet)</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+</div>
+
+<!-- Footer removed as requested -->
+
+</body>
+</html>
