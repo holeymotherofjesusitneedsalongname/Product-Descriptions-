@@ -3,47 +3,40 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Product Categories - Dexinmag</title> <!-- More specific title -->
+<title>Product Categories - Dexinmag</title>
 <style>
-    :root {
+    /* --- Paste your FULL CSS rules here --- */
+    /* Includes: :root variables, body, leaves-container, leaf animation, */
+    /* #productTreeWrapper, h2, ul, #productTree, li, .caret styles, */
+    /* .nested & .active styles, .product-link styles (for <a> tag now), */
+    /* .category-name styles, etc. */
+
+    /* --- Minimal Example CSS (REPLACE WITH YOUR FULL STYLES) --- */
+     :root {
         --leaf-green-dark: #2e7d32;
         --leaf-green-light: #689f38;
-        --wood-brown: #5d4037;
-        --bg-gradient-start: #a5d6a7; /* Light green */
-        --bg-gradient-end: #e8f5e9;   /* Very light green/off-white */
-        --item-bg: rgba(255, 255, 255, 0.7); /* Semi-transparent white */
+        --bg-gradient-start: #a5d6a7;
+        --bg-gradient-end: #e8f5e9;
+        --item-bg: rgba(255, 255, 255, 0.7);
         --item-hover-bg: rgba(255, 255, 255, 0.9);
-        --text-color: #1b5e20; /* Dark green text */
-        --link-color: #0d47a1; /* Dark blue for links */
+        --text-color: #1b5e20;
+        --link-color: #0d47a1;
         --link-hover-color: #1565c0;
         --caret-color: var(--leaf-green-dark);
-        --border-radius: 12px; /* Rounded corners */
+        --border-radius: 12px;
         --transition-speed: 0.3s;
-    }
-
-    /* ... (Keep all the CSS from the previous version: body, leaves, wrapper, lists, caret, etc.) ... */
-     body {
+     }
+    body {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
-        margin: 0;
-        padding: 20px;
-        min-height: 100vh;
-        overflow-x: hidden;
-        position: relative;
-     }
-    .leaves-container{ /* Simplified for brevity - keep your full leaf CSS */
-        position: absolute; top:0; left:0; width: 100%; height: 100%; z-index:0; pointer-events: none; overflow: hidden;
+        margin: 0; padding: 20px; min-height: 100vh; overflow-x: hidden; position: relative;
     }
-    .leaf { /* Simplified - keep your full leaf CSS & animation */
-         position: absolute; top: -50px; width: 30px; height: 30px; background: var(--leaf-green-light); opacity: 0.7; border-radius: 0 50% 0 50%; animation: fall 15s linear infinite;
-    }
-    @keyframes fall { 0% {transform: translateY(0) rotate(0deg);} 100% {transform: translateY(110vh) rotate(360deg); opacity: 0;} } /* Keep your detailed keyframes */
+     /* --- Include your full .leaves-container, .leaf, and @keyframes fall styles --- */
+    .leaves-container { position: absolute; top:0; left:0; width: 100%; height: 100%; z-index:0; pointer-events: none; overflow: hidden; }
+    .leaf { position: absolute; top: -50px; width: 30px; height: 30px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50,0 C75,10 90,40 90,60 C90,80 70,100 50,100 C30,100 10,80 10,60 C10,40 25,10 50,0 Z' fill='%23689f38'/%3E%3C/svg%3E"); background-size: contain; background-repeat: no-repeat; opacity: 0.7; animation: fall 15s linear infinite; } /* Add more leaf rules */
+     @keyframes fall { 0% { transform: translateY(0) rotateZ(0deg) rotateX(0deg); opacity: 0.7; } 25% { transform: translateX(20px) rotateZ(30deg); } 50% { transform: translateX(-15px) rotateZ(-20deg); } 75% { transform: translateX(10px) rotateZ(15deg); } 100% { transform: translateY(calc(100vh + 50px)) rotateZ(70deg) rotateX(90deg); opacity: 0; } }
 
-     #productTreeWrapper {
-       position: relative; z-index: 1; max-width: 800px; margin: 20px auto;
-       background: rgba(255, 255, 255, 0.2); padding: 20px; border-radius: var(--border-radius);
-       box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-     }
+     #productTreeWrapper { position: relative; z-index: 1; max-width: 800px; margin: 20px auto; background: rgba(255, 255, 255, 0.2); padding: 20px; border-radius: var(--border-radius); box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
      h2 { text-align: center; color: var(--leaf-green-dark); margin-bottom: 25px; font-weight: 600; }
      ul, #productTree { list-style-type: none; padding-left: 0; margin: 0; }
      #productTree ul { padding-left: 25px; overflow: hidden; transition: max-height var(--transition-speed) ease-in-out, opacity var(--transition-speed) ease-in-out, margin-top var(--transition-speed) ease-in-out; }
@@ -54,54 +47,24 @@
      .caret-down::before { content: '−'; transform: rotate(180deg); background-color: var(--caret-color); color: white; }
      .nested { max-height: 0; opacity: 0; margin-top: 0; padding-left: 25px; }
      .active { max-height: 1500px; opacity: 1; margin-top: 8px; }
-
-    /* Style for product links (using <a> tag now) */
-    .product-link { /* Changed class name */
-       cursor: pointer;
-       color: var(--link-color);
-       text-decoration: none; /* Remove default underline */
-       display: inline-block;
-       padding: 5px 0;
-       transition: color var(--transition-speed) ease;
-       position: relative; /* For underline effect */
-    }
-     .product-link::after { /* Add underline on hover effect */
-        content: '';
-        position: absolute;
-        width: 0;
-        height: 1px;
-        display: block;
-        margin-top: 2px;
-        right: 0;
-        background: var(--link-hover-color);
-        transition: width .2s ease;
-        -webkit-transition: width .2s ease;
-     }
-     .product-link:hover::after {
-        width: 100%;
-        left: 0;
-        background: var(--link-hover-color);
-     }
-    .product-link:hover {
-        color: var(--link-hover-color);
-         /* text-decoration: underline; standard underline */
-    }
-
-    /* Keep other styles: category-name, nested li styling, tooltip etc. */
+    .product-link { cursor: pointer; color: var(--link-color); text-decoration: none; display: inline-block; padding: 5px 0; transition: color var(--transition-speed) ease; position: relative; }
+     .product-link::after { content: ''; position: absolute; width: 0; height: 1px; display: block; margin-top: 2px; right: 0; background: var(--link-hover-color); transition: width .2s ease; -webkit-transition: width .2s ease; }
+     .product-link:hover::after { width: 100%; left: 0; background: var(--link-hover-color); }
+    .product-link:hover { color: var(--link-hover-color); }
     .category-name { font-weight: 600; color: var(--leaf-green-dark); font-size: 1.05em; }
      #productTree ul li { background-color: rgba(232, 245, 233, 0.8); border-left: 3px solid var(--leaf-green-light); }
      #productTree ul li:hover { background-color: rgba(232, 245, 233, 1); }
-     li[title] { /* No specific style needed unless you want custom tooltips */ }
+     li[title] {} /* Tooltips handled by browser */
 
+    /* --- End Minimal CSS --- */
 </style>
 </head>
 <body>
 
 <!-- Falling Leaves Container -->
 <div class="leaves-container">
-    <!-- Add 10 leaf divs as before -->
-    <div class="leaf"></div><div class="leaf"></div><div class="leaf"></div><div class="leaf"></div><div class="leaf"></div>
-    <div class="leaf"></div><div class="leaf"></div><div class="leaf"></div><div class="leaf"></div><div class="leaf"></div>
+     <div class="leaf"></div><div class="leaf"></div><div class="leaf"></div><div class="leaf"></div><div class="leaf"></div>
+     <div class="leaf"></div><div class="leaf"></div><div class="leaf"></div><div class="leaf"></div><div class="leaf"></div>
 </div>
 
 <div id="productTreeWrapper">
@@ -111,48 +74,69 @@
       <li> <!-- Category 1 -->
         <span class="caret category-name">All cryogenic and low temperature products</span>
         <ul class="nested">
-          <!-- *** IMPORTANT: Update data-product-folder to your URL-friendly folder names *** -->
-          <li title="Self-contained closed-cycle cryostat systems...">
-            <a href="#" class="product-link" data-product-folder="Closed_Circuit_Cryostat">Closed Circuit Cryostat</a>
-          </li>
-          <li title="Integrated Cryogenic Probe Station systems...">
-            <a href="#" class="product-link" data-product-folder="Cryogenic_Probe_Station">Cryogenic Probe Station</a>
-          </li>
-          <li title="Cryogen-free superconducting magnet systems...">
-            <a href="#" class="product-link" data-product-folder="Cryon_Free_Superconducting_Magnet">Cryon Free Superconducting Magnet</a>
-          </li>
-           <li title="The DX-1000T is a comprehensive Hall Effect Test System...">
-               <a href="#" class="product-link" data-product-folder="DX-1000T_High_and_Low_Temperature_Hall_Effect_Test_System">DX-1000T High and Low Temperature Hall Effect Test System</a>
+            <!-- ========== ACTION NEEDED: ========== -->
+            <!-- For EACH product link below: -->
+            <!-- 1. RENAME the corresponding folder under `mEow/products/` to remove spaces (use underscores). -->
+            <!--    Example: `mEow/products/Closed Circuit Cryostat/` -> `mEow/products/Closed_Circuit_Cryostat/` -->
+            <!-- 2. RENAME the .html file INSIDE that folder to MATCH the folder name. -->
+            <!--    Example: `mEow/products/Closed_Circuit_Cryostat/SomeFile.html` -> `mEow/products/Closed_Circuit_Cryostat/Closed_Circuit_Cryostat.html` -->
+            <!-- 3. UPDATE the `data-product-folder` value here to EXACTLY MATCH the RENAMED folder name. -->
+            <!-- ===================================== -->
+
+            <li title="Self-contained closed-cycle cryostat systems...">
+              <!-- Example: Update if folder renamed to Closed_Circuit_Cryostat -->
+              <a href="#" class="product-link" data-product-folder="Closed_Circuit_Cryostat">Closed Circuit Cryostat</a>
             </li>
-           <li title="This Liquid Nitrogen Cryostat system...">
-               <a href="#" class="product-link" data-product-folder="Liquid_Nitrogen_Cryostat-Electrical">Liquid Nitrogen Cryostat - Electrical</a>
+            <li title="Integrated Cryogenic Probe Station systems...">
+              <!-- Example: Update if folder renamed to Cryogenic_Probe_Station -->
+              <a href="#" class="product-link" data-product-folder="Cryogenic_Probe_Station">Cryogenic Probe Station</a>
             </li>
-           <li title="The Dexinmag Continuous Flow Cryostat...">
-               <a href="#" class="product-link" data-product-folder="Continuous_Flow_Cryostat_LN2_LHe">Continuous Flow Cryostat (Liquid Nitrogen / Helium)</a>
-           </li>
-           <li title="The Atmosphere Type Liquid Nitrogen Cryostat...">
-               <a href="#" class="product-link" data-product-folder="Liquid_Nitrogen_Cryostat-Atmosphere">Liquid Nitrogen Cryostat - Atmosphere Type</a>
-           </li>
-           <li title="The Liquid Nitrogen Cryostat - Optics model...">
-               <a href="#" class="product-link" data-product-folder="Liquid_Nitrogen_Cryostat-Optics">Liquid Nitrogen Cryostat - Optics</a>
-           </li>
-           <li title="The Dexinmag Variable Temperature Liquid Nitrogen Cryostat...">
-               <a href="#" class="product-link" data-product-folder="Variable_Temperature_Liquid_Nitrogen_Cryostat">Variable Temperature Liquid Nitrogen Cryostat</a>
+            <li title="Cryogen-free superconducting magnet systems...">
+               <!-- Example: Update if folder renamed to Cryon_Free_Superconducting_Magnet -->
+              <a href="#" class="product-link" data-product-folder="Cryon_Free_Superconducting_Magnet">Cryon Free Superconducting Magnet</a>
             </li>
-           <li title="The DX-1000L Low Temperature Hall Effect Test System...">
-               <a href="#" class="product-link" data-product-folder="DX-1000L_Low_Temperature_Hall_Effect_Test_System">DX-1000L Low Temperature Hall Effect Test System</a>
+            <li title="The DX-1000T is a comprehensive Hall Effect Test System...">
+                <!-- Example: Update if folder renamed to DX-1000T_High_and_Low_Temperature_Hall_Effect_Test_System -->
+                <a href="#" class="product-link" data-product-folder="DX-1000T_High_and_Low_Temperature_Hall_Effect_Test_System">DX-1000T High and Low Temperature Hall Effect Test System</a>
             </li>
-           <li title="This 4K Closed-cycle Cryostat system...">
-               <a href="#" class="product-link" data-product-folder="4K_Closed-cycle_Cryostat">4K Closed-cycle Cryostat</a>
+            <li title="This Liquid Nitrogen Cryostat system...">
+                 <!-- Example: Update if folder renamed to Liquid_Nitrogen_Cryostat-Electrical -->
+                <a href="#" class="product-link" data-product-folder="Liquid_Nitrogen_Cryostat-Electrical">Liquid Nitrogen Cryostat - Electrical</a>
             </li>
-           <li title="The DXTC-290 is a versatile ultra-low temperature controller...">
-               <a href="#" class="product-link" data-product-folder="DXTC-290_Ultra-low_Temperature_Controller">DXTC-290 Ultra-low Temperature Controller</a>
+            <li title="The Dexinmag Continuous Flow Cryostat...">
+                <!-- Example: Update if folder renamed to Continuous_Flow_Cryostat_LN2_LHe -->
+                <a href="#" class="product-link" data-product-folder="Continuous_Flow_Cryostat_LN2_LHe">Continuous Flow Cryostat (Liquid Nitrogen / Helium)</a>
+            </li>
+            <li title="The Atmosphere Type Liquid Nitrogen Cryostat...">
+                <!-- Example: Update if folder renamed to Liquid_Nitrogen_Cryostat-Atmosphere -->
+                <a href="#" class="product-link" data-product-folder="Liquid_Nitrogen_Cryostat-Atmosphere">Liquid Nitrogen Cryostat - Atmosphere Type</a>
+            </li>
+            <li title="The Liquid Nitrogen Cryostat - Optics model...">
+                <!-- Example: Update if folder renamed to Liquid_Nitrogen_Cryostat-Optics -->
+                <a href="#" class="product-link" data-product-folder="Liquid_Nitrogen_Cryostat-Optics">Liquid Nitrogen Cryostat - Optics</a>
+            </li>
+            <li title="The Dexinmag Variable Temperature Liquid Nitrogen Cryostat...">
+                <!-- Example: Update if folder renamed to Variable_Temperature_Liquid_Nitrogen_Cryostat -->
+                <a href="#" class="product-link" data-product-folder="Variable_Temperature_Liquid_Nitrogen_Cryostat">Variable Temperature Liquid Nitrogen Cryostat</a>
+            </li>
+            <li title="The DX-1000L Low Temperature Hall Effect Test System...">
+                <!-- Example: Update if folder renamed to DX-1000L_Low_Temperature_Hall_Effect_Test_System -->
+                <a href="#" class="product-link" data-product-folder="DX-1000L_Low_Temperature_Hall_Effect_Test_System">DX-1000L Low Temperature Hall Effect Test System</a>
+            </li>
+            <li title="This 4K Closed-cycle Cryostat system...">
+                 <!-- CRITICAL EXAMPLE: Ensure folder IS 4K_Closed-cycle_Cryostat (or rename) AND data-product-folder MATCHES -->
+                <a href="#" class="product-link" data-product-folder="4K_Closed-cycle_Cryostat">4K Closed-cycle Cryostat</a>
+            </li>
+            <li title="The DXTC-290 is a versatile ultra-low temperature controller...">
+                 <!-- Example: Update if folder renamed to DXTC-290_Ultra-low_Temperature_Controller -->
+                <a href="#" class="product-link" data-product-folder="DXTC-290_Ultra-low_Temperature_Controller">DXTC-290 Ultra-low Temperature Controller</a>
             </li>
         </ul>
       </li>
        <li> <!-- Category 2: All probes -->
         <span class="caret category-name">All probes</span>
         <ul class="nested">
+            <!-- ========== ACTION NEEDED (Same as above for this category) ========== -->
              <li title="Axial Hall effect probes...">
                  <a href="#" class="product-link" data-product-folder="Axial_Probe_Specs">Axial Probe Specs</a>
             </li>
@@ -170,6 +154,7 @@
         <li> <!-- Category 3: All fluxgate Magnetometers -->
          <span class="caret category-name">All fluxgate Magnetometers</span>
          <ul class="nested">
+             <!-- ========== ACTION NEEDED (Same as above for this category) ========== -->
               <li title="Dexinmag Fluxgate Magnetometers are high-precision instruments...">
                   <a href="#" class="product-link" data-product-folder="Fluxgate_Magnetometer">Fluxgate Magnetometer</a>
               </li>
@@ -181,7 +166,8 @@
         <li> <!-- Category 4: All lock in amplifiers -->
          <span class="caret category-name">All lock in amplifiers</span>
          <ul class="nested">
-              <li title="DXA-005 is a high-performance digital lock-in amplifier...">
+              <!-- ========== ACTION NEEDED (Same as above for this category) ========== -->
+            <li title="DXA-005 is a high-performance digital lock-in amplifier...">
                   <a href="#" class="product-link" data-product-folder="Digital_Lock_in_Amplifier_DXA_005">Digital Lock in Amplifier DXA 005</a>
              </li>
               <li title="DXA-005B is a high-performance digital lock-in amplifier...">
@@ -201,8 +187,9 @@
         <li> <!-- Category 5: Other Instruments & Power Supplies -->
          <span class="caret category-name">Other Instruments & Power Supplies</span>
          <ul class="nested">
+              <!-- ========== ACTION NEEDED (Same as above for this category) ========== -->
               <li title="Precision 3-axis (XYZ) digital Gauss meter...">
-                 <!-- Example: Ensure folder is named '3D_Gauss_Meter' -->
+                 <!-- CRITICAL EXAMPLE: Ensure FOLDER is 3D_Gauss_Meter -->
                  <a href="#" class="product-link" data-product-folder="3D_Gauss_Meter">3d Gauss Meter</a>
               </li>
               <li title="The F2030 is a high-performance, programmable bipolar DC current source...">
@@ -217,53 +204,74 @@
 </div><!-- end productTreeWrapper -->
 
 <script>
-    // --- Caret Toggle Logic (No change needed) ---
+    // --- Caret Toggle Logic ---
     const toggler = document.getElementsByClassName("caret");
-    for (let i = 0; i < toggler.length; i++) {
-        toggler[i].addEventListener("click", function(event) {
-            let parentLi = this.parentElement;
-            if (!parentLi) return;
-            let nestedList = parentLi.querySelector(".nested");
-            if (nestedList && nestedList.tagName === 'UL' && nestedList.classList.contains('nested')) {
-                nestedList.classList.toggle("active");
-                this.classList.toggle("caret-down");
-            } else {
-                console.warn("Could not find the nested list for caret:", this);
-            }
-            event.stopPropagation();
-        });
+    if (toggler.length > 0) {
+        for (let i = 0; i < toggler.length; i++) {
+            toggler[i].addEventListener("click", function(event) {
+                let parentLi = this.parentElement;
+                if (!parentLi) return;
+                let nestedList = parentLi.querySelector(".nested");
+                if (nestedList && nestedList.tagName === 'UL' && nestedList.classList.contains('nested')) {
+                    nestedList.classList.toggle("active");
+                    this.classList.toggle("caret-down");
+                }
+                event.stopPropagation();
+            });
+        }
+    } else {
+        console.warn("Script could not find elements with class 'caret'. Expansion may not work.");
     }
 
-    // --- Product Link Logic (Updated for Relative Paths) ---
-    const productLinks = document.querySelectorAll('.product-link'); // Updated selector
-    const productsBaseUrl = 'products/'; // Base directory for product pages
+    // --- Product Link Logic ---
+    const productLinks = document.querySelectorAll('.product-link');
+    console.log(`Found ${productLinks.length} product links.`);
 
-    productLinks.forEach(link => {
-        link.addEventListener('click', function(event) {
-            event.preventDefault(); // Prevent default link behavior (navigating to '#')
+    // **** CORE FIX 1: Base directory path includes 'mEow/' because products are inside it ****
+    // This path is relative to THIS index.html file (which is at the repository root)
+    const productsBaseDir = 'mEow/products/';
+    console.log("Using products base directory:", productsBaseDir);
 
-            const productFolder = this.dataset.productFolder; // Read from data-product-folder
+    if (productLinks.length > 0) {
+        productLinks.forEach(link => {
+            link.addEventListener('click', function(event) {
+                event.preventDefault(); // Prevent default link behavior
 
-            if (!productFolder) {
-                console.error("Product folder data attribute missing for:", this.textContent);
-                alert("Error: Could not determine the link for this product.");
-                return;
-            }
+                const productFolder = this.dataset.productFolder; // Read from data-product-folder
 
-            // Construct the relative URL to the product's folder
-            // The server will automatically serve index.html from that folder
-            const relativeUrl = `${productsBaseUrl}${productFolder}/`;
+                if (!productFolder) {
+                    console.error("Product folder data attribute ('data-product-folder') missing for:", this.textContent);
+                    alert(`Error: Link configuration issue for "${this.textContent}". Check data-product-folder in index.html.`);
+                    return; // Stop if attribute is missing
+                }
 
-            console.log("Navigating to:", relativeUrl);
+                // ASSUMPTION: The HTML filename is EXACTLY the same as the productFolder name + '.html'
+                const productFileName = `${productFolder}.html`;
 
-            // Open the product page in a new tab
-            window.open(relativeUrl, '_blank', 'noopener,noreferrer');
+                // Construct the relative URL to the specific product HTML file
+                // **** CORE FIX 2: Make sure 'productsBaseDir' variable is used here ****
+                const relativeUrl = `${productsBaseDir}${productFolder}/${productFileName}`;
 
-            // OR: Navigate in the same tab:
-            // window.location.href = relativeUrl;
+                console.log(`Attempting to navigate to: ${relativeUrl}`);
+
+                // Try to open in a new tab
+                const newWindow = window.open(relativeUrl, '_blank', 'noopener,noreferrer');
+
+                // Check if window.open was blocked (especially relevant for local 'file:///' testing)
+                 if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
+                     console.warn(`Opening link '${relativeUrl}' might have been blocked by browser pop-up blocker.`);
+                     // Provide feedback for local testing issue
+                     if (window.location.protocol === 'file:') {
+                         alert(`Opening links might be blocked when running locally due to browser security or pop-up blockers.\n\nTry uploading to GitHub Pages and testing there.\n\nAttempted path: ${relativeUrl}`);
+                     } else {
+                         alert(`Could not open link. Please check if your browser blocked a pop-up.\n\nPath: ${relativeUrl}`);
+                     }
+                 }
+            });
         });
-    });
-
+    } else {
+         console.error("Script did not find any elements with class 'product-link'. Links will not work.");
+    }
 </script>
 
 </body>
