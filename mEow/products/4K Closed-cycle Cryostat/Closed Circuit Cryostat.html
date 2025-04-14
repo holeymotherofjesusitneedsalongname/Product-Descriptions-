@@ -1,0 +1,518 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4K Closed-cycle Cryostat - Xiamen Dexing Magnet Tech. Co., Ltd</title>
+    <style>
+        /* ==========================================================================
+        GENERIC STYLING FOR DEXINMAG DOCUMENT PAGES
+        Based on DXMP Manual / Axial Probe Styles
+        Version: 1.1 (Header/Footer Removed as per request)
+        * Provides a consistent layout, color scheme, typography.
+        * Styles common elements like sections, tables, lists, images.
+        * Includes responsive adjustments for different screen sizes.
+        * Includes print-specific styles for better output.
+        ========================================================================== */
+        /* --- Base Styles & Color Theme --- */
+        :root {
+            --primary-color: #00447C; /* Dark Blue */
+            --secondary-color: #4A90E2; /* Lighter Blue */
+            /* Colors kept from original document styling */
+            --dexinmag-red: #E31B23;
+            --dexinmag-header-blue: #003366;
+            --bg-light: #f8f9fa; /* Very light grey */
+            --bg-medium: #e9ecef; /* Light grey */
+            --border-color: #dee2e6; /* Grey border */
+            --text-color: #343a40; /* Dark grey text */
+            --hover-bg: #e8f4fd; /* Light blue for hover */
+            /* --header-bg: #f8f9fa; */ /* Header styles removed */
+            /* --footer-bg: #f1f1f1; */ /* Footer styles removed */
+            --warning-color: #dc3545; /* Red for warnings */
+            --warning-bg: #f8d7da;
+            --attention-color: #ffc107; /* Yellow for attention */
+            --attention-bg: #fff3cd;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4; /* Light grey background for the page */
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* --- Main Content Container --- */
+        .container {
+            max-width: 1000px; /* Keep original width */
+            margin: 20px auto;
+            padding: 25px;
+            background-color: #fff; /* White background for content */
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            flex-grow: 1;
+        }
+
+        /* --- HEADER REMOVED --- */
+
+        /* --- Typography --- */
+        h1, h2, h3 {
+           /* color: var(--primary-color); */ /* Overridden below */
+            line-height: 1.3;
+            margin-top: 1em;
+            margin-bottom: 0.75em;
+        }
+        h1:first-child, h2:first-child, h3:first-child {
+            margin-top: 0;
+        }
+
+        /* Styles the main product title within the container */
+        .container > h1 {
+            font-size: 1.8em;
+            color: var(--dexinmag-header-blue); /* Use original title color */
+            text-align: center;
+            margin-bottom: 1.5em; /* Keep original spacing */
+            padding-top: 0.5em; /* Add some space above title now header is gone */
+            padding-bottom: 0.5em;
+            border-bottom: 2px solid var(--dexinmag-header-blue); /* Use original title border */
+        }
+
+        /* Styles section titles */
+        section > h2 { /* Section Titles like 1. Introduction */
+            font-size: 1.4em;
+            color: var(--dexinmag-header-blue); /* Use original title color */
+            margin-top: 1.5em; /* Keep original spacing */
+            margin-bottom: 0.8em; /* Keep original spacing */
+            padding-bottom: 0.3em;
+            border-bottom: 1px solid var(--border-color); /* Use generic border color */
+        }
+         section:first-of-type h2 {
+             margin-top: 0;
+         }
+
+
+        /* Base style for H3, often used for sub-sections */
+        section > h3 {
+            font-size: 1.2em;
+            color: var(--primary-color);
+            padding-bottom: 0.3em;
+            font-weight: bold;
+        }
+
+        p {
+            margin-bottom: 1em;
+        }
+
+        ul {
+            /* list-style: disc; */ /* Keep original list style (numbered text) */
+            list-style: none;
+            margin: 0 0 1em 0; /* Adjusted margin/padding */
+            padding-left: 0;
+        }
+
+        li {
+            margin-bottom: 0.6em; /* Keep original spacing */
+            padding-left: 1.5em; /* Indent text (Original) */
+            position: relative;
+        }
+        /* Keep original list numbering style via text content */
+         /* li::before removed as numbering is in the text */
+
+        /* --- Content Sections --- */
+        section {
+            margin-bottom: 2em;
+            padding-bottom: 1em;
+            /* border-bottom: 1px solid var(--bg-medium); */ /* Subtle separator removed */
+        }
+        section:last-of-type {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        /* --- Tables --- */
+        .table-container {
+            overflow-x: auto; /* Enable horizontal scroll on screen */
+            margin-top: 1em;
+            margin-bottom: 1.5em;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95em;
+            min-width: 650px; /* Keep original min-width */
+        }
+
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 10px 12px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        thead th {
+            background-color: var(--bg-medium);
+            font-weight: bold;
+            color: var(--primary-color); /* Use generic heading color */
+            position: sticky; /* Keep header visible on scroll */
+            top: 0;
+            z-index: 1;
+            border-bottom-width: 2px; /* Stronger line below header */
+            border-bottom-color: var(--border-color);
+            white-space: nowrap; /* Keep original nowrap */
+        }
+
+        /* Zebra striping for table rows */
+        tbody tr:nth-child(even) {
+            background-color: var(--bg-light);
+        }
+
+        /* Hover effect for table rows */
+        tbody tr:hover {
+            background-color: var(--hover-bg);
+        }
+
+        /* Specific column widths (Original) */
+        th:nth-child(1), td:nth-child(1) { width: 5%; } /* Item */
+        th:nth-child(2), td:nth-child(2) { width: 15%; white-space: nowrap; } /* Model */
+        th:nth-child(3), td:nth-child(3) { width: 80%; } /* Description */
+
+
+        /* --- Image Gallery Styling (Using original image section styles) --- */
+        .image-section {
+            text-align: center;
+            margin: 2em 0;
+            padding: 15px;
+            background-color: var(--bg-light);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+        }
+        .image-section figure {
+             margin: 0;
+        }
+
+        .image-section img {
+            max-width: 80%; /* Control image size (Original) */
+            height: auto;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            background-color: #fff;
+            margin-bottom: 10px;
+        }
+        .image-section figcaption {
+             font-size: 0.9em;
+             color: #666;
+             margin-top: 5px;
+        }
+
+        /* --- Alert Boxes (From Generic CSS, not used often) --- */
+        .safety-warning, .attention {
+            border-left-width: 5px;
+            border-left-style: solid;
+            padding: 10px 15px;
+            margin: 1em 0;
+            border-radius: 4px;
+        }
+        .safety-warning {
+            border-left-color: var(--warning-color);
+            background-color: var(--warning-bg);
+            color: #721c24;
+        }
+        .attention {
+            border-left-color: var(--attention-color);
+            background-color: var(--attention-bg);
+            color: #856404;
+        }
+        .safety-warning strong, .attention strong {
+            font-weight: bold;
+        }
+
+        /* --- FOOTER REMOVED --- */
+
+
+        /* ==========================================================================
+        RESPONSIVE ADJUSTMENTS (Combined from Generic and Original)
+        ========================================================================== */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+                margin: 10px; /* Reduce margin on smaller screens */
+            }
+
+            .container > h1 { font-size: 1.6em; }
+            section > h2 { font-size: 1.3em; }
+            section > h3 { font-size: 1.1em; }
+
+            table { font-size: 0.9em; min-width: 0; } /* Allow table to shrink */
+            th, td { padding: 8px 10px; }
+            /* Allow Model column to wrap */
+             th:nth-child(2), td:nth-child(2) { white-space: normal; }
+
+            /* Original Image Responsive */
+            .image-section img { max-width: 95%; }
+        }
+
+        @media (max-width: 480px) {
+            .container > h1 { font-size: 1.4em; }
+            section > h2 { font-size: 1.15em; }
+            section > h3 { font-size: 1.0em; }
+
+            th, td { padding: 6px 8px; font-size: 0.85em; }
+            ul { margin-left: 0px; } /* Adjust list indent */
+            li { padding-left: 1em; } /* Reduce indent (Original) */
+        }
+        /* ==========================================================================
+        PRINT SPECIFIC STYLES (Combined and refined)
+        * Optimizes layout for printing.
+        * Hides header/footer (removed from HTML).
+        * Adjusts fonts, colors, and spacing for paper.
+        * Allows content/tables to break across pages as requested.
+        * Forces color printing.
+        ========================================================================== */
+        @media print {
+            body {
+                background-color: #fff !important; /* Use white background for print */
+                color: var(--text-color) !important; /* Use default text color */
+                font-size: 10pt;
+                -webkit-print-color-adjust: exact !important; /* FORCE COLOR PRINTING */
+                print-color-adjust: exact !important; /* FORCE COLOR PRINTING */
+            }
+
+            .container {
+                max-width: 100% !important;
+                margin: 0 !important;
+                padding: 1cm !important; /* Standard print margin */
+                box-shadow: none !important;
+                border-radius: 0 !important;
+                border: none !important;
+            }
+
+            /* --- HEADER / FOOTER ARE REMOVED --- */
+
+            /* --- Print Typography --- */
+            h1 { /* Product Title */
+                color: var(--dexinmag-header-blue) !important; /* Keep title color */
+                border-bottom: 2px solid var(--dexinmag-header-blue) !important; /* Keep title border color */
+                font-size: 16pt !important;
+                text-align: center !important;
+                padding-top: 0 !important; /* Adjust top padding for print */
+                margin-top: 0 !important;
+                margin-bottom: 1cm !important;
+                page-break-after: avoid !important; /* Try keep title near first content */
+            }
+            h2 { /* Section Titles */
+                color: var(--dexinmag-header-blue) !important; /* Keep heading color */
+                border-bottom: 1px solid var(--border-color) !important; /* Keep heading border */
+                font-size: 13pt !important;
+                margin-top: 1.2cm;
+                page-break-after: avoid !important; /* Keep heading with content */
+                page-break-inside: avoid !important;
+            }
+             h3 {
+                color: var(--primary-color) !important;
+                font-size: 11pt !important;
+                page-break-after: avoid !important;
+                page-break-inside: avoid !important;
+             }
+            p {
+                 page-break-inside: auto !important; /* ALLOW paragraphs to split across pages */
+                 orphans: 3; /* Keep at least 3 lines at bottom */
+                 widows: 3; /* Keep at least 3 lines at top */
+            }
+            ul, ol {
+                 page-break-inside: auto !important; /* ALLOW lists to split across pages */
+            }
+            li {
+                page-break-inside: avoid !important; /* Try keep individual list items together */
+            }
+
+            section {
+                 border: none !important;
+                 padding-bottom: 0 !important;
+                 margin-bottom: 1cm !important;
+                 page-break-inside: auto !important; /* ALLOW sections to split across pages */
+             }
+
+            /* --- Print Image Styling --- */
+            .image-section {
+                 background-color: var(--bg-light) !important; /* Keep light background */
+                 border: 1px solid var(--border-color) !important; /* Keep border */
+                 padding: 10px !important;
+                 page-break-inside: avoid !important; /* Try to keep image section together */
+                 margin: 1cm 0 !important;
+            }
+            .image-section img {
+                 max-width: 60% !important; /* Make image smaller for print (Original) */
+                 border: 1px solid var(--border-color) !important; /* Keep border color */
+            }
+            .image-section figcaption {
+                 color: #666 !important; /* Keep caption color */
+                 font-size: 8pt !important;
+            }
+
+            /* --- Print Table Styling --- */
+            .table-container { overflow: visible !important; }
+            table {
+                width: 100% !important;
+                border-collapse: collapse !important;
+                font-size: 9pt !important;
+                min-width: 0 !important;
+                page-break-inside: auto !important; /* ALLOW table rows to break across pages */
+                border: 1px solid #aaa !important; /* Lighter border */
+            }
+            thead {
+                display: table-header-group !important; /* Repeat table header on each page */
+            }
+            thead th {
+                background-color: var(--bg-medium) !important; /* Keep header background */
+                color: var(--primary-color) !important; /* Keep header text color */
+                font-weight: bold !important;
+                white-space: normal !important; /* Allow header wrap */
+                border: 1px solid #aaa !important;
+                padding: 4px 6px !important;
+            }
+            tbody tr {
+                 page-break-inside: avoid !important; /* TRY to keep rows together */
+                 page-break-after: auto !important; /* ALLOW breaks BETWEEN rows */
+            }
+            tbody tr:nth-child(even) {
+                background-color: var(--bg-light) !important; /* Keep zebra stripes */
+            }
+             tbody tr:hover { background-color: inherit !important; } /* Disable hover */
+
+            td {
+                 border: 1px solid #aaa !important;
+                 padding: 4px 6px !important;
+                 word-wrap: break-word !important;
+                 page-break-inside: auto !important; /* ALLOW cell content to break */
+                 vertical-align: top !important;
+            }
+             /* Allow Model column to wrap in print */
+             td:nth-child(2) { white-space: normal !important; }
+
+            /* --- Hide Links --- */
+            a { text-decoration: none !important; color: inherit !important; } /* Keep text color, remove underline */
+            a[href]:after { content: "" !important; } /* Don't show URLs */
+
+        }
+
+    </style>
+</head>
+<body>
+    <!-- HEADER REMOVED -->
+
+    <div class="container">
+        <h1>The Introduction of 4K Closed-cycle Cryostat</h1>
+
+        <section class="image-section">
+             <figure>
+                  <!-- IMPORTANT: Using the absolute path provided. This will ONLY work if the HTML file is viewed on the specific machine where this path exists. For web deployment, a relative path is needed. Example Relative Path: <img src="images/Cryostat.jpg" alt="..."> -->
+                  <img src="/Users/Roach/Desktop/ pOCCOS/Finished Pdfs/4K Closed-cycle Cryostat/The Introduction of 4K Closed-cycle Cryostat model DX408D2_page-002.jpg" alt="4K Closed-cycle Cryostat Unit">
+                  <figcaption>4K Closed-cycle Cryostat</figcaption>
+             </figure>
+        </section>
+
+        <section id="introduction">
+            <h2>1. Introduction</h2>
+            <p>The closed-cycle cryostat provided by Dexing Magnet is a variable-temperature cryogenic platform based on SHI 4K chiller in Japan, which is used for magnetic, optical and electrical measurements in low-temperature environments. Users can choose to match or special order, introduce optical window, special bench, special length, etc., combine with the user's experimental system, and complete magneto-optic, photoelectric, optical reflection, light transmission, fluorescence and magnetoresistance experiments.</p>
+            <p>Main features: high cost-effectiveness, compact structure, no consumption of refrigerants, strong expansibility.</p>
+        </section>
+
+        <section id="performance">
+            <h2>2. Performance and Characteristic</h2>
+            <ul>
+                <li>2.1. Without the need to consume liquid helium, it is easy to achieve a low-temperature environment of 4K.</li>
+                <li>2.2. The sample has an ideal stable environment in a vacuum.</li>
+                <li>2.3. There are a variety of options for cooling power, which can be used to cool large-size samples.</li>
+                <li>2.4. Compact structure, convenient movement, simple operation.</li>
+                <li>2.5. The optical sample holder can install the sample quickly. The electrical sample holder has a beautiful and easy-to-use wiring terminal.</li>
+                <li>2.6. A variety of options can meet the measurement needs of different experiments.</li>
+            </ul>
+        </section>
+
+        <section id="parameters">
+            <h2>3. Parameters</h2>
+            <div class="table-container">
+                <table> <!-- Specs are in tabular format -->
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Model</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1.</td>
+                            <td colspan="2"><strong>4K Closed-cycle cryostat</strong></td>
+                        </tr>
+                        <tr>
+                            <td>1.1</td>
+                            <td>DX408D/F50</td>
+                            <td>
+                                <strong>DX408D/F50 Closed-cycle refrigerator, including electrical measurement accessories.</strong><br><br>
+                                <strong>Main indicators:</strong><br>
+                                1. Temperature range: 4K-325K<br>
+                                2. Cooling time: 3 hours to the lowest temperature<br>
+                                3. Temperature stability: ±0.1K, the display resolution of temperature: 0.0001K below 10K, 0.001K above 10K.<br>
+                                4. Second stage cooling capacity: 1.0W@4.2K<br>
+                                   First stage cooling capacity: 40W@43K<br>
+                                5. Gold Plated sample holder, sample size is customized, sample in the vacuum surrounding<br><br>
+                                <strong>System configuration:</strong><br>
+                                1. Vacuum cover and thermal radiation shield, the vacuum can reach 10-4 pa<br>
+                                2. Vacuum valve and safety pressure relief valve<br>
+                                3. DT64 standard curve diode thermometer has been installed in the system<br>
+                                4. Two electrical connectors, one for the temperature controller and one for the test system<br>
+                                5. Helium compressor and 6m long helium connecting pipe, 6m cold head power supply cable
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>1.2</td>
+                            <td>DX-290</td>
+                            <td>
+                                <strong>Model DX-290, with connecting cable and other accessories</strong><br>
+                                1. Provide two PID temperature control, the maximum output power is 100W<br>
+                                2. For temperature measurement and control of 0.1k grade<br>
+                                3. Two transmitter input channels, which can be expanded to 10 inputs<br>
+                                4. Two temperature control loops, 100W for the first loop and 1W for the second loop<br>
+                                5. The instrument interface includes: network port, USB<br>
+                                6. Touch screen, users can set it by themselves
+                            </td>
+                        </tr>
+                        <tr>
+                             <td>1.3</td>
+                             <td>Molecular pump</td>
+                             <td>
+                                 1. Molecular pump pumping speed 42L/s<br>
+                                 2. The front stage pump is a dry pump with a pumping speed of 1.2m3/hr<br>
+                                 3. Ultimate pressure 5 × 10-8mbar
+                             </td>
+                        </tr>
+                        <tr>
+                             <td>1.4</td>
+                             <td>DXRG05</td>
+                             <td>
+                                 <strong>Split type water chiller</strong><br>
+                                 1. Outlet temperature: 5-35 °C<br>
+                                 2. Refrigeration power: 12KW<br>
+                                 3. Temperature control accuracy ± 1 °C
+                             </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </div> <!-- /container -->
+
+    <!-- FOOTER REMOVED -->
+
+
+</body></html>

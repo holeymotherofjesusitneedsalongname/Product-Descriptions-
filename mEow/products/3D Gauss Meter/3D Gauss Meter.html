@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DX-350 3D Gauss Meter Specifications</title>
+    <style>
+        /* --- General Styles & Color Theme --- */
+        :root {
+            --primary-color: #00447C; /* Dark Blue */
+            /* --accent-color: #D1232A; */ /* Red - Not used explicitly, but kept for potential future use */
+            --bg-light: #f8f8f8;
+            --bg-medium: #e0e0e0;
+            --border-color: #ccc;
+            --text-color: #333;
+            --hover-bg: #e8f4fd; /* Light blue for hover */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #fff; /* White background for the page */
+            padding: 20px;
+        }
+
+        main {
+            max-width: 900px;
+            margin: 20px auto;
+            background-color: #fff; /* Keep main content area white */
+            padding: 20px;
+            border-radius: 5px;
+           /* Optional subtle shadow: box-shadow: 0 2px 5px rgba(0,0,0,0.1); */
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid var(--primary-color);
+        }
+
+        h1 {
+            color: var(--primary-color);
+            font-size: 2em;
+        }
+
+        h3 {
+            color: var(--primary-color);
+            margin-top: 25px;
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid var(--bg-medium);
+            font-size: 1.4em;
+        }
+
+        h4 {
+             color: var(--primary-color);
+             margin-top: 20px;
+             margin-bottom: 10px;
+             font-size: 1.1em;
+        }
+
+        p {
+            margin-bottom: 10px;
+        }
+
+        ul {
+            list-style-position: inside;
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        li {
+            margin-bottom: 5px;
+        }
+
+        sup {
+            font-size: 0.7em;
+            vertical-align: super;
+            padding: 0 2px;
+        }
+
+        /* --- General Notes & Images --- */
+        .general-notes {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px dashed var(--border-color);
+        }
+
+        .image-container {
+            display: flex;
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+            gap: 20px; /* Space between images */
+            justify-content: center; /* Center images horizontally */
+            margin: 20px 0;
+        }
+
+        figure {
+            margin: 0; /* Reset default figure margin */
+            text-align: center;
+        }
+
+        figcaption {
+            font-size: 0.9em;
+            color: #555;
+            margin-top: 5px;
+        }
+
+        .general-notes img {
+            max-width: 350px; /* Default screen size */
+            height: auto;
+            display: block;
+            margin: 0 auto 10px auto; /* Center within figure */
+            border: 1px solid var(--border-color);
+            border-radius: 3px;
+        }
+
+        /* Specific wider image handling for screen if needed */
+        img[alt="DX-350 Software Interface"] {
+            max-width: 700px; /* Allow software screenshot to be wider on screen */
+        }
+
+
+        /* --- Table Styling --- */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 10px 12px;
+            text-align: left;
+            vertical-align: top; /* Align content to top for consistency */
+        }
+
+        thead th {
+            background-color: var(--bg-medium);
+            color: var(--text-color);
+            font-weight: bold;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: var(--bg-light);
+        }
+
+        tbody tr:hover {
+            background-color: var(--hover-bg);
+        }
+
+        /* --- Collapsible Sections --- */
+        .collapsible {
+            cursor: pointer;
+            display: flex; /* Use flexbox to align text and indicator */
+            justify-content: space-between; /* Push indicator to the right */
+            align-items: center; /* Vertically center items */
+            user-select: none; /* Prevent text selection on click */
+        }
+
+        .collapsible .indicator {
+            font-size: 0.8em;
+            margin-left: 10px;
+            transition: transform 0.3s ease-out;
+            display: inline-block; /* Needed for transform */
+        }
+
+        .collapsible-content {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: max-height 0.4s ease-out, opacity 0.3s ease-out, margin-top 0.4s ease-out, margin-bottom 0.4s ease-out;
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+
+        .collapsible-content.expanded {
+            max-height: 2000px; /* Adjust if content is very long */
+            opacity: 1;
+            margin-top: 15px; /* Add space when expanded */
+            margin-bottom: 15px;
+        }
+
+        /* Rotate indicator when expanded */
+        .collapsible.active .indicator {
+             transform: rotate(90deg);
+        }
+        /* Initial indicator state (matches default collapsed state) */
+        .collapsible:not(.active) .indicator::before {
+            content: '►';
+        }
+        /* Indicator state when expanded */
+        .collapsible.active .indicator::before {
+             content: '▼';
+        }
+
+        /* Note about printing backgrounds */
+        .print-note {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #fffadc; /* Light yellow background */
+            border: 1px solid #fce87e;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+
+
+        /* --- Responsive Design --- */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            main {
+                padding: 15px;
+            }
+            h1 {
+                font-size: 1.6em;
+            }
+            h3 {
+                font-size: 1.2em;
+            }
+            th, td {
+                padding: 8px 10px;
+            }
+
+             /* Allow wrapping and reduce padding more */
+             th, td {
+                 white-space: normal; /* Allow wrapping */
+                 font-size: 0.9em;
+             }
+
+            .image-container {
+                flex-direction: column; /* Stack images vertically */
+                align-items: center;
+            }
+             .general-notes img, img[alt="DX-350 Software Interface"] {
+                max-width: 90%; /* Ensure images fit screen */
+            }
+        }
+
+        @media (max-width: 480px) {
+             h1 {
+                font-size: 1.4em;
+            }
+             th, td {
+                 font-size: 0.85em;
+                 padding: 6px 8px;
+             }
+             /* Make tables fully block for horizontal scroll on very small screens */
+            .collapsible-content table {
+                 display: block;
+                 overflow-x: auto;
+                 white-space: nowrap;
+             }
+             .collapsible-content table tbody,
+             .collapsible-content table thead,
+             .collapsible-content table tr,
+             .collapsible-content table th,
+             .collapsible-content table td {
+                 display: block; /* Needed for block layout */
+             }
+             .collapsible-content table thead {
+                 display: none; /* Hide header row in block layout */
+             }
+            .collapsible-content table tr {
+                border-bottom: 2px solid var(--primary-color);
+                margin-bottom: 10px;
+            }
+             .collapsible-content table td {
+                 border: none;
+                 border-bottom: 1px solid var(--bg-light);
+                 position: relative;
+                 padding-left: 50%; /* Make space for the label */
+                 white-space: normal; /* Allow wrapping again */
+                 text-align: right;
+             }
+            .collapsible-content table td::before {
+                content: attr(data-label); /* Use data-label attribute for header */
+                position: absolute;
+                left: 6px;
+                width: 45%;
+                padding-right: 10px;
+                white-space: nowrap;
+                font-weight: bold;
+                text-align: left;
+                color: var(--primary-color); /* Make labels stand out */
+            }
+        }
+
+
+        /* --- Print Styles --- */
+        @media print {
+            /* --- CRITICAL: Force Background Printing --- */
+            print-color-adjust: exact;
+            -webkit-print-color-adjust: exact;
+
+            body {
+                padding: 0;
+                font-size: 10pt;
+                color: #000;
+                background-color: #fff !important;
+            }
+
+            header {
+                border-bottom: 2px solid var(--primary-color);
+                text-align: left;
+            }
+
+            main {
+                max-width: 100%;
+                margin: 0;
+                padding: 0;
+                box-shadow: none;
+                border-radius: 0;
+            }
+
+            /* Ensure collapsible content is ALWAYS visible */
+            .collapsible-content {
+                max-height: none !important;
+                opacity: 1 !important;
+                overflow: visible !important;
+                margin-top: 10px !important;
+                margin-bottom: 10px !important;
+            }
+
+            /* Hide interactive elements */
+            .collapsible .indicator { display: none !important; }
+            .collapsible { cursor: default; }
+            .print-note { display: none !important; }
+
+            /* Table styling for print */
+            table {
+                width: 100% !important;
+                font-size: 9pt;
+                display: table !important;
+                overflow-x: visible !important;
+                white-space: normal !important;
+            }
+            thead {
+                display: table-header-group !important;
+                background-color: var(--bg-medium) !important;
+            }
+            tbody tr:nth-child(even) {
+                background-color: var(--bg-light) !important;
+            }
+             tbody tr:hover { background-color: inherit !important; }
+             th, td {
+                border: 1px solid var(--border-color) !important;
+                padding: 5px 8px;
+                display: table-cell !important;
+                position: static !important;
+                text-align: left !important;
+                padding-left: 8px !important;
+             }
+             td::before { display: none !important; }
+
+
+            /* --- START: Modified Image handling for Print --- */
+            figure {
+                text-align: center; /* Center the potentially smaller image within the figure */
+                page-break-inside: avoid !important;
+                margin-bottom: 15px; /* Space below figure */
+            }
+
+            img {
+                /* --- KEY CHANGE: Constrain image size significantly for print --- */
+                /* Adjust these values as needed for desired 'quarter page' feel */
+                max-width: 9cm !important;  /* Approx 3.5 inches */
+                max-height: 12cm !important; /* Approx 4.7 inches */
+
+                /* Maintain aspect ratio and override screen/inline styles */
+                width: auto !important;
+                height: auto !important;
+
+                /* Ensure block display, centering, border */
+                display: block !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
+                border: 1px solid var(--border-color) !important;
+                page-break-inside: avoid !important;
+            }
+
+            /* Ensure specific overrides for potentially wider images are also constrained */
+            img[alt="DX-350 Software Interface"] {
+                max-width: 9cm !important;  /* Apply same constraint */
+                max-height: 12cm !important; /* Apply same constraint */
+            }
+
+            /* Ensure image container doesn't interfere */
+            .image-container {
+                display: block; /* Override flex display for print */
+            }
+            /* --- END: Modified Image handling for Print --- */
+
+
+            /* Page Break Control */
+            h1, h3, h4 { page-break-after: avoid !important; }
+            section, table, figure, ul, li { page-break-inside: avoid !important; }
+            tr { page-break-inside: avoid !important; }
+            main > section:not(.general-notes) {
+                page-break-before: auto !important;
+                /* page-break-before: always !important; */ /* Use if 'auto' isn't working well */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>3D Gauss Meter Specifications (Model: DX-350)</h1>
+    </header>
+
+    <main>
+        <section class="general-notes">
+            <h3>Overview</h3>
+            <p>The DX-350 3D Gauss Meter adopts advanced ARM microprocessing technology and uses multi-channel synchronous acquisition and processing technology to simultaneously display the magnetic induction intensity in the x, y, and z directions, and automatically calculate and display the Bxyz vector superposition value.</p>
+            <p>It is a three-channel high-precision digital gaussmeter developed for magnetic material production, scientific research institutes, aerospace and other units.</p>
+
+            <h3>Device Images</h3>
+            <div class="image-container">
+                <figure>
+                    <!-- Updated Image Source -->
+                    <img src="3D Gauss meter_page-000.jpg" alt="DX-350 Front View">
+                    <figcaption>Front View</figcaption>
+                </figure>
+                <figure>
+                    <!-- Updated Image Source -->
+                    <img src="3D Gauss meter_page-001.jpg" alt="DX-350 Back View">
+                    <figcaption>Back View</figcaption>
+                </figure>
+                 <figure>
+                    <!-- Updated Image Source -->
+                    <img src="3D Gauss meter_page-002.jpg" alt="DX-350 Probe">
+                    <figcaption>Measurement Probe</figcaption>
+                </figure>
+            </div>
+
+            <h3>Key Features</h3>
+            <ul>
+                <li>With 3.5-inch TFT true color screen, 7-digit display, the minimum resolution reaches 0.01G under the 30000G range.</li>
+                <li>Automatically displays the N/S polarity of the magnetic field.</li>
+                <li>Switch to mT, Gs, KA/m, Oe, T with one click.</li>
+                <li>One-click clearing function, no manual adjustment required.</li>
+                <li>Automatic peak measurement and hold functions.</li>
+                <li>Standard USB communication interface, optional software to form an automatic measurement system.</li>
+                <li>Optional automation interface (can be designed to match customer needs), suitable for secondary development.</li>
+            </ul>
+        </section>
+
+        <section class="spec-section">
+            <!-- Add data-label attributes for mobile table view -->
+            <h3 class="collapsible">Technical Parameters <span class="indicator">►</span></h3>
+            <div class="collapsible-content">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td data-label="Parameter">Input power</td>
+                            <td data-label="Value">AC 200~240V 50/60Hz 1A</td>
+                        </tr>
+                        <tr>
+                            <td data-label="Parameter">Display Mode</td>
+                            <td data-label="Value">3.5 inch TFT True Color LCD Screen, Seven-digit display</td>
+                        </tr>
+                        <tr>
+                            <td data-label="Parameter">Dimensions</td>
+                            <td data-label="Value">307 mm x 260mm x 120mm (wide*deep*high)</td>
+                        </tr>
+                        <tr>
+                            <td data-label="Parameter">Instrument weight</td>
+                            <td data-label="Value">about 3.5kg</td>
+                        </tr>
+                        <tr>
+                            <td data-label="Parameter">Use environment</td>
+                            <td data-label="Value">Temperature: 0°C-50°C; Humidity: 40%RH~85%RH</td>
+                        </tr>
+                         <tr>
+                            <td data-label="Parameter">Thermal equilibrium time</td>
+                            <td data-label="Value">10 minutes</td>
+                        </tr>
+                         <tr>
+                            <td data-label="Parameter">Temperature coefficient</td>
+                            <td data-label="Value">-0.06%/°C</td>
+                        </tr>
+                         <tr>
+                            <td data-label="Parameter">Measurement frequency</td>
+                            <td data-label="Value">DC</td>
+                        </tr>
+                        <tr>
+                            <td data-label="Parameter">Unit Display</td>
+                            <td data-label="Value">Gs, mT, Oe, kA/m (one-click switch)</td>
+                        </tr>
+                         <tr>
+                            <td data-label="Parameter">Special functions</td>
+                            <td data-label="Value">Automatic one-key zero adjustment, non-linear correction</td>
+                        </tr>
+                        <tr>
+                            <td data-label="Parameter">Range and Resolution (X-direction)</td>
+                            <td data-label="Value">±30000G<sup>①</sup> range, minimum resolution: 0.01Gs</td>
+                        </tr>
+                         <tr>
+                            <td data-label="Parameter">Range and Resolution (Y-direction)</td>
+                             <td data-label="Value">±30000G<sup>①</sup> range, minimum resolution: 0.01Gs</td>
+                        </tr>
+                         <tr>
+                            <td data-label="Parameter">Range and Resolution (Z-direction)</td>
+                             <td data-label="Value">±30000G<sup>①</sup> range, minimum resolution: 0.01Gs</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="spec-section">
+            <h3 class="collapsible">Probe Specifications <span class="indicator">►</span></h3>
+            <div class="collapsible-content">
+                <table>
+                     <thead>
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td data-label="Parameter">Probe sensing area</td>
+                            <td data-label="Value">Three-dimensional Hall chip is 2.0mm × 2.0mm × 0.8mm</td>
+                        </tr>
+                        <tr>
+                            <td data-label="Parameter">Probe Type</td>
+                            <td data-label="Value">XYZ-combined three-dimensional hall chip</td>
+                        </tr>
+                        <tr>
+                            <td data-label="Parameter">Accuracy</td>
+                            <td data-label="Value">±(0.45%RD<sup>②</sup> + 0.005%RG<sup>③</sup>)</td>
+                        </tr>
+                        <tr>
+                            <td data-label="Parameter">Probe interface</td>
+                            <td data-label="Value">Standard 15-core DB male plug</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="spec-section">
+            <h3 class="collapsible">Connectivity and Software <span class="indicator">►</span></h3>
+            <div class="collapsible-content">
+                 <table>
+                     <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                     <tbody>
+                        <tr>
+                            <td data-label="Feature">Communication Interface</td>
+                            <td data-label="Details">B-type USB Interface</td>
+                        </tr>
+                        <tr>
+                            <td data-label="Feature">Sorting function</td>
+                            <td data-label="Details">Manually set upper and lower limit sorting parameters, NG/ OK indication</td>
+                        </tr>
+                         <tr>
+                            <td data-label="Feature">Measurement Software OS</td>
+                            <td data-label="Details">Windows XP, Windows 7, and Windows 10 (32/64 bit) operating systems supported</td>
+                        </tr>
+                         <tr>
+                            <td data-label="Feature">Measurement Software Data</td>
+                            <td data-label="Details">Measurement data is saved as text on the hard disk, viewable with standard office software (e.g., Excel, Word, Notepad)</td>
+                        </tr>
+                     </tbody>
+                </table>
+
+                 <h4>Software Interface Preview</h4>
+                 <figure>
+                    <!-- Updated Image Source -->
+                    <img src="3D Gauss meter_page-003.png" alt="DX-350 Software Interface" style="max-width: 700px;">
+                    <figcaption>Measurement Software Interface</figcaption>
+                 </figure>
+            </div>
+        </section>
+
+        <section class="spec-section">
+            <h3 class="collapsible">Notes and Remarks <span class="indicator">►</span></h3>
+            <div class="collapsible-content">
+                <p><sup>①</sup> The actual calibration only covers 2.5T (25000G).</p>
+                <p><sup>②</sup> RD is the reading value.</p>
+                <p><sup>③</sup> RG is the current range value.</p>
+                <p><strong>Remarks:</strong> In view of the continuous upgrading and transformation of products, if this technical specification is subject to change, the actual contract shall prevail.</p>
+                <p class="print-note"><strong>Note for Printing:</strong> To ensure colors and backgrounds are printed correctly, please enable the "Print Backgrounds" or "Background Graphics" option in your browser's print settings.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- Collapsible Section Logic ---
+            var collapsibles = document.querySelectorAll('.collapsible');
+
+            collapsibles.forEach(function(coll) {
+                coll.addEventListener('click', function() {
+                    this.classList.toggle('active'); // Toggle active class on the header (for indicator rotation)
+                    var content = this.nextElementSibling; // Get the collapsible content div
+
+                    // Toggle the 'expanded' class which controls visibility and animation via CSS
+                    content.classList.toggle('expanded');
+
+                    // Optional: Explicitly set max-height for JS-driven animation (CSS handles it here)
+                    /*
+                    if (content.style.maxHeight && content.style.maxHeight !== '0px') {
+                        content.style.maxHeight = null; // Collapse
+                        content.style.opacity = 0;
+                    } else {
+                        content.style.maxHeight = content.scrollHeight + "px"; // Expand
+                        content.style.opacity = 1;
+                    }
+                    */
+                });
+            });
+
+            // --- Add data-label attributes for mobile table view (CSS @media (max-width: 480px)) ---
+            // This ensures the CSS ::before pseudo-element can display the header text
+            var tables = document.querySelectorAll('.collapsible-content table');
+            tables.forEach(function(table) {
+                var headers = [];
+                // Get headers text
+                table.querySelectorAll('thead th').forEach(function(th) {
+                    headers.push(th.textContent.trim());
+                });
+
+                // Add data-label to each cell in the body
+                table.querySelectorAll('tbody tr').forEach(function(tr) {
+                    tr.querySelectorAll('td').forEach(function(td, index) {
+                        if (headers[index]) { // Check if header exists for this column
+                            td.setAttribute('data-label', headers[index]);
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
